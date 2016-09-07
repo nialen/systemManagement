@@ -42,10 +42,11 @@ angular
             })
             if (!isHas) {
                 view = view || title + "Content View";
-                tabs.push({
+                var index = tabs.push({
                     title: title,
                     url: view
                 });
+                $scope.changeTab(index-1);
             } else {
                 console.log("该标签已经存在！");
             }
