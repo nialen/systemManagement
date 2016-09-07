@@ -33,12 +33,18 @@ angular
             // selected = tabs[current];
         });
         $scope.addTab = function(title, view) {
-            view = view || title + "Content View";
-            tabs.push({
-                title: title,
-                url: view,
-                disabled: false
-            });
+            var isHas = tabs.some(function(item, index) {
+                return item.title === title
+            })
+            if (!isHas) {
+                view = view || title + "Content View";
+                tabs.push({
+                    title: title,
+                    url: view
+                });
+            } else {
+                console.log("该标签已经存在！");
+            }
         };
         $scope.removeTab = function(index) {
             tabs.splice(index, 1);
