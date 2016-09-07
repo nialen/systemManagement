@@ -46,16 +46,25 @@ angular
                     title: title,
                     url: view
                 });
-                $scope.changeTab(index-1);
+                $scope.changeTab(index - 1);
             } else {
-                console.log("该标签已经存在！");
+                var selectedIndex;
+                tabs.map(function(item, index) {
+                    if (item.title == title) {
+                        selectedIndex = index;
+                    }
+                })
+                $scope.changeTab(selectedIndex);
             }
         };
         $scope.removeTab = function(index) {
+            if (index <= $scope.selectedIndex) {
+                $scope.changeTab($scope.selectedIndex - 1);
+            }
             tabs.splice(index, 1);
         };
-        $scope.changeTab = function(index) {
-            $scope.selectedIndex = index;
+        $scope.changeTab = function(selectedIndex) {
+            $scope.selectedIndex = selectedIndex;
         }
     })
     // 左侧菜单
@@ -139,10 +148,10 @@ angular
     .directive('tabsContentDirective', function() {
         return {
             restrict: 'E',
-            template: '<div class="tabs-content">'+
-                '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">'+
-                '<iframe src="{{tab.url}}" frameborder="0"></iframe>'+
-                '</div>'+
+            template: '<div class="tabs-content">' +
+                '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">' +
+                '<iframe src="{{tab.url}}" frameborder="0"></iframe>' +
+                '</div>' +
                 '</div>',
             link: function($scope, iElm, iAttrs, controller) {
                 // element.text('this is the tabs directive');
