@@ -140,7 +140,6 @@ angular
             restrict: 'E',
             template: '<div class="tabs-content">'+
                 '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">'+
-                '<p>{{tab.url}}</p>'+
                 '<iframe src="{{tab.url}}" frameborder="0"></iframe>'+
                 '</div>'+
                 '</div>',
