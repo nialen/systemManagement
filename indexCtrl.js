@@ -122,11 +122,6 @@ angular
             }
         };
     })
-    /**
-     * TODO 打开Tab窗口过多，展示BUG；
-     * 解决方案：1、设定打开最多tabs窗口数目；2、左右箭头切换；
-     * TODO 每一个tab标签只能容许存在一个，其后必须关闭才能再点击打开；
-     */
     .directive('tabsTitleDirective', function() {
         return {
             restrict: 'E',
