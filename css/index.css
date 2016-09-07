@@ -1,0 +1,226 @@
+/* 头部 */
+header {
+	height: 60px;
+	background-color: #ff8c19;
+}
+.header-logo {
+	width: 200px;
+	height: 60px;
+	background: url(../images/line.png) no-repeat right bottom;
+}
+.logo {
+	display: block;
+	width: 158px;
+	height: 35px;
+	margin-top: 12px;
+	margin-left: 20px;
+}
+.header-topbar {
+	position: relative;
+	width: 1000px;
+	height: 60px;
+}
+.header-topbar .remind {
+	width: 140px;
+	height: 30px;
+	margin-left: 24px;
+	margin-top: 20px;
+	line-height: 30px;
+}
+.header-topbar .remind .remind-item {
+	position: relative;
+	display: inline-block;
+	width: 20px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.header-topbar .remind .iconfont {
+	color: #fff419;
+	font-size: 18px;
+}
+.header-topbar .remind .remind-item .drogue {
+	position: absolute;
+	top: 0;
+	left: 16px;
+	max-width: 24px;
+	height: 16px;
+	padding: 0 5px;
+	background-color: #ff403d;
+	border-radius: 8px;
+	line-height: 16px;
+	color: #fff;
+	font-size: 12px;
+	overflow: hidden;
+}
+.header-topbar .search {
+	width: 200px;
+	height: 34px;
+	margin-top: 15px;
+	margin-left: 460px;
+}
+.header-topbar .search-input {
+	width: 200px;
+	height: 30px;
+	padding-left: 26px;
+	border: 1px solid #fff;
+	border-radius: 16px;
+}
+.header-topbar .search-icon {
+	position: absolute;
+	left: 10px;
+	top: 8px;
+	color: #99b3c2;
+}
+.header-topbar .user {
+	width: 150px;
+	height: 40px;
+	margin-top: 10px;
+	line-height: 40px;
+}
+.header-topbar .user .photo {
+	display: block;
+	width: 39px;
+	height: 39px;
+	margin-right: 6px;
+	border: 1px solid #da730b;
+	border-radius: 20px;
+}
+.header-topbar .user .name {
+	color: #ac4a00;
+	font-size: 14px;
+	cursor: pointer;
+}
+/* 手风琴 */
+.accordion-list {
+	width: 200px;
+	height: 720px;
+	background-color: #353130;
+	color: #fff;
+}
+.accordion-list .accordion-title {
+	height: 52px;
+	padding-left: 32px;
+	line-height: 52px;
+	color: #ccc7c6;
+	font-size: 14px;
+	font-weight: 800;
+}
+.accordion-list .iconfont {
+	margin-right: 10px;
+}
+.icon-601:before {
+	content: "\e601";
+}
+.icon-602:before {
+	content: "\e602";
+}
+.icon-603:before {
+	content: "\e603";
+}
+.icon-604:before {
+	content: "\e604";
+}
+.icon-605:before {
+	content: "\e605";
+}
+.icon-606:before {
+	content: "\e606";
+}
+.accordion-tabs {
+	line-height: 30px;
+}
+.accordion-tabs label .iconfont {
+	color: #ccc7c6;
+}
+.accordion-tabs input[type=checkbox]:checked + label .iconfont {
+	color: #ffac55;
+}
+.accordion-tabs input[type=checkbox] {
+	display: none;
+}
+.accordion-tabs label {
+	width: 100%;
+	height: 40px;
+	padding: 0 20px 0 32px;
+	background-color: #302c2b;
+	line-height: 40px;
+	color: #ccc7c6;
+	font-size: 14px;
+	cursor: pointer;
+}
+.accordion-tabs input[type=checkbox]:checked + label {
+	border-bottom: 1px solid #262322;
+}
+.accordion-tabs label::after {
+	font-family: 'iconfont';
+	content: '\e608';
+	float: right;
+	width: 14px;
+	height: 40px;
+	line-height: 40px;
+	color: #ddd;
+	text-align: center;
+}
+.accordion-tabs input[type=checkbox]:checked + label::after {
+	content: '\e607';
+}
+.accordion-tabs-list {
+	height: 28px;
+	margin-left: 38px;
+	padding-left: 20px;
+	background: url(../images/icon1.png) no-repeat 0 0;
+	line-height: 46px;
+}
+.accordion-tabs-list:hover {
+	color: #ff8c19;
+}
+.accordion-tabs-list:last-of-type {
+	margin-bottom: 16px;
+}
+/* tab主体 */
+.tab-container {
+	width: 1000px;
+	height: 720px;
+}
+.tabs-title {
+	width: 1000px;
+	height: 40px;
+	padding-left: 1px;
+	background-color: #f7f5f0;
+	border-bottom: 1px solid #ddd;
+	overflow: hidden;
+}
+.tabs-title ul {
+	width: 9999px;
+}
+.tabs-title .title {
+	position: relative;
+	display: inline-block;
+	height: 40px;
+	padding: 0 30px 0 10px;
+	border-right: 1px solid #ddd;
+	line-height: 40px;
+	color: #666;
+	font-size: 14px;
+}
+.tabs-title .title.current {
+	color: #4795e7;
+}
+.tabs-title .title-line {
+	position: absolute;
+	left: -1px;
+	top: 0;
+	display: block;
+	width: calc(100% + 2px);
+	height: 3px;
+	background-color: #65aefc;
+}
+.tabs-title .title .close {
+	position: absolute;
+	top: 14px;
+	right: 10px;
+	color: #ccc;
+}
+.tabs-title .title.current .close {
+	color: #4795e7;
+}
