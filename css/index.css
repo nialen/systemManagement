@@ -224,3 +224,7 @@ header {
 .tabs-title .title.current .close {
 	color: #4795e7;
 }
+.iframe-box {
+	width: 1000px;
+	height: 680px;
+}

@@ -4,14 +4,14 @@
  */
 
 angular
-    .module('tabsDemoDynamicTabs', [])
+    .module('indexModule', [])
     // 搜索
-    .controller('searchCtrl', function($scope) {
+    .controller('searchCtrl', ['$scope', function($scope) {
         $scope.value = '';
         $scope.searchFn = function() {
             console.log($scope.value)
         };
-    })
+    }])
     .directive('searchDirective', function() {
         return {
             restrict: 'EA',
@@ -26,16 +26,9 @@ angular
     })
     // tabs
     .controller('tabsCtrl', function($scope, $log) {
-        var tabs = [],
-            selected = null,
-            previous = null;
+        var tabs = [];
         $scope.tabs = tabs;
         $scope.selectedIndex = 0;
-        $scope.$watch('selectedIndex', function(current, old, scope) {
-            // debugger
-            // previous = selected;
-            // selected = tabs[current];
-        });
         $scope.addTab = function(title, view) {
             var isHas = tabs.some(function(item, index) {
                 return item.title === title
@@ -59,7 +52,7 @@ angular
         };
         $scope.removeTab = function(index) {
             if (index <= $scope.selectedIndex) {
-                $scope.changeTab($scope.selectedIndex - 1);
+                $scope.changeTab($scope.selectedIndex ? $scope.selectedIndex - 1 : $scope.selectedIndex);
             }
             tabs.splice(index, 1);
         };
@@ -68,7 +61,7 @@ angular
         }
     })
     // 左侧菜单
-    .controller('accordionCtrl', function($scope) {
+    .controller('accordionCtrl', ['$scope', function($scope) {
         $scope.tabsTitle = {
             title: '菜单导航',
             icon: 'icon-602'
@@ -110,7 +103,7 @@ angular
                 url: 'page/userPrivilege/userPrivilege.html'
             }]
         }];
-    })
+    }])
     .directive('accordionListDirective', function() {
         return {
             template: '<p class="accordion-title"><i class="iconfont {{tabsTitle.icon}}"></i><span ng-bind="tabsTitle.title"></span></p>' +
@@ -150,7 +143,7 @@ angular
             restrict: 'E',
             template: '<div class="tabs-content">' +
                 '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">' +
-                '<iframe src="{{tab.url}}" frameborder="0"></iframe>' +
+                '<iframe src="{{tab.url}}" class="iframe-box" frameborder="0"></iframe>' +
                 '</div>' +
                 '</div>',
             link: function($scope, iElm, iAttrs, controller) {
