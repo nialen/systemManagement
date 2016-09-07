@@ -1,6 +1,10 @@
-// Include app dependency on ngMaterial 
+/**
+ * Auth 丁少华
+ * Date 2016-09-06
+ */
+
 angular
-    .module('tabsDemoDynamicTabs', ['ngMaterial'])
+    .module('tabsDemoDynamicTabs', [])
     // 搜索
     .controller('searchCtrl', function($scope) {
         $scope.value = '';
@@ -64,36 +68,36 @@ angular
             'groupIcon': 'icon-604',
             'groupList': [{
                 title: '权限类型配置',
-                url: '1.html'
+                url: '/page/privilegeType/privilegeType.html'
             }, {
                 title: '业务模块配置',
-                url: '2.html'
+                url: '/page/sysModular/sysModular.html'
             }, {
                 title: '权限规格配置',
-                url: '3.html'
+                url: '/page/operateSpec/operateSpec.html'
             }, {
                 title: '角色定义',
-                url: '4.html'
+                url: '/page/postRole/postRole.html'
             }, {
                 title: '系统菜单设置',
-                url: '5.html'
+                url: '/page/systemMenu/systemMenu.html'
             }]
         }, {
             'groupName': '员工管理',
             'groupIcon': 'icon-603',
             'groupList': [{
                 title: '员工管理',
-                url: '6.html'
+                url: '/page/staffMan/staffMan.html'
             }]
         }, {
             'groupName': '系统用户',
             'groupIcon': 'icon-606',
             'groupList': [{
                 title: '用户管理',
-                url: '7.html'
+                url: 'page/userMan/userMan.html'
             }, {
                 title: '用户授权管理',
-                url: '8.html'
+                url: 'page/userPrivilege/userPrivilege.html'
             }]
         }];
     })
@@ -135,10 +139,13 @@ angular
         return {
             restrict: 'E',
             template: '<div class="tabs-content">'+
-                '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">{{tab.url}}</div>'+
+                '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">'+
+                '<p>{{tab.url}}</p>'+
+                '<iframe src="{{tab.url}}" frameborder="0"></iframe>'+
+                '</div>'+
                 '</div>',
             link: function($scope, iElm, iAttrs, controller) {
                 // element.text('this is the tabs directive');
             }
         };
-    })
+    });
