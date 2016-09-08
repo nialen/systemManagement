@@ -1,5 +1,5 @@
 /* 头部 */
-header {
+.header {
 	height: 60px;
 	background-color: #ff8c19;
 }
@@ -170,6 +170,7 @@ header {
 	padding-left: 20px;
 	background: url(../images/icon1.png) no-repeat 0 0;
 	line-height: 46px;
+	cursor: pointer;
 }
 .accordion-tabs-list:hover {
 	color: #ff8c19;
