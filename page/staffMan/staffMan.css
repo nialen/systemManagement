@@ -102,3 +102,15 @@
 	background-color: #ff9f19;
 	border-color: #ff9f19;
 }
+/* 弹出框 */
+.modal-content {
+	border-radius: 0;
+}
+.modal-header {
+	background-color: #ffb319;
+}
+.modal-title {
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
