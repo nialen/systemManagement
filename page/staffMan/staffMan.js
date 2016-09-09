@@ -8,6 +8,8 @@ angular
 	.run(['$rootScope', function($rootScope) {
 		$rootScope.staffManResultList = []; // 查询员工列表
 		$rootScope.modifiedStaffMan = {}; // 待修改的员工信息
+		$rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
+		$rootScope.areaList = ['南京', '镇江', '丹阳']; // 地区列表
 	}])
 	// 查询控制器
 	.controller('queryStaffFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
@@ -15,7 +17,7 @@ angular
 		$scope.queryStaffForm = {
 			staffId: '',
 			staffName: '',
-			staffArea: '',
+			staffArea: null,
 		};
 		$scope.queryStaffFormSubmit = function() {
 			// TODO $http发送请求，获取数据，写入$rootScope；
@@ -56,31 +58,34 @@ angular
 			$log.log($scope.queryStaffForm.staffId);
 		}
 		$scope.$watch('queryStaffForm', function(current, old, scope) {
-			if (queryStaffForm.staffId.value || queryStaffForm.staffName.value || queryStaffForm.staffArea.value) {
+			if (scope.queryStaffForm.staffId || scope.queryStaffForm.staffName || scope.queryStaffForm.staffArea) {
 				scope.isForbid = false;
 			} else {
 				scope.isForbid = true;
 			}
-		}, true)
+		}, true);
 	}])
 	// 查询结果控制器
 	.controller('staffManResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		// 修改
-		var modifiedStaffMan = {};
 		$scope.editStaffMan = function(index) {
 			$rootScope.modifiedStaffMan = $rootScope.staffManResultList[index];
-			// 向弹出框控制器发送$emit事件
-			$scope.$emit('openEditStaffManModal', 'lg');
+			$scope.$emit('openEditStaffManModal');
+		}
+		// 新建
+		$scope.addStaffMan = function() {
+			$rootScope.modifiedStaffMan = {};
+			$scope.$emit('openEditStaffManModal');
 		}
 	}])
 	// 弹出框控制器
 	// TODO 删除冗余代码
 	// TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
 	.controller('editStaffManModalCtrl', function($scope, $rootScope, $uibModal, $log) {
+		var $ctrl = this;
 		$scope.$on('openEditStaffManModal', function(d, data) {
 			$ctrl.open(data);
 		});
-		var $ctrl = this;
 		$ctrl.items = ['item1', 'item2', 'item3'];
 
 		$ctrl.animationsEnabled = true;
@@ -129,7 +134,7 @@ angular
 			$ctrl.animationsEnabled = !$ctrl.animationsEnabled;
 		};
 	})
-	.controller('ModalInstanceCtrl', function($uibModalInstance, items) {
+	.controller('ModalInstanceCtrl', function($uibModalInstance, $scope, items) {
 		var $ctrl = this;
 		$ctrl.items = items;
 		$ctrl.selected = {
@@ -138,6 +143,7 @@ angular
 
 		$ctrl.ok = function() {
 			$uibModalInstance.close($ctrl.selected.item);
+			$scope.$broadcast('submitStaffManModal');
 		};
 
 		$ctrl.cancel = function() {
@@ -175,9 +181,20 @@ angular
 		}
 	})
 	// 编辑员工信息控制器
-	.controller('editStaffManFormCtrl', ['$scope', '$log', function($scope, $log) {
-		$scope.editStaffManFormSubmit = function() {
-			$log.log('编辑员工信息表单提交', modifiedStaffMan);
+	.controller('editStaffManFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+		$scope.$on('submitStaffManModal', function(d, data) {
+			$scope.editStaffManFormSubmit(data);
+		});
+		$scope.$watch('modifiedStaffMan', function(current, old, scope) {
+			if (scope.modifiedStaffMan.staffJobId && scope.modifiedStaffMan.staffName && scope.modifiedStaffMan.staffArea) {
+				$rootScope.isForbidSubmit = false;
+			} else {
+				$rootScope.isForbidSubmit = true;
+			}
+		}, true);
+		$scope.editStaffManFormSubmit = function(data) {
+			// TODO 获取更改之后的员工信息$rootScope.modifiedStaffMan提交接口；
+			$log.log('弹出框表单提交', data, $rootScope.modifiedStaffMan);
 		}
 	}])
 	// 分页控制器
