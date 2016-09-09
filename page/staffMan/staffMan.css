@@ -13,7 +13,6 @@
 	height: 30px;
 }
 .btn-query {
-	margin-top: 10px;
 	margin-right: 16px;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -113,4 +112,44 @@
 	color: #fff;
 	font-size: 14px;
 	font-weight: bold;
+}
+.modal-title .iconfont {
+	margin-right: 6px;
+}
+.edit-label {
+	width: 100px !important;
+	text-align: right;
+}
+.edit-input {
+	width: 200px !important;
+}
+.mb10 {
+	margin-bottom: 10px;
+}
+.modal-footer {
+	text-align: center !important;
+}
+.btn-submit {
+    background-color: #ffaa00;
+    color: #fff;
+}
+.btn-submit:focus, .btn-submit.focus {
+	background-color: #dc9609;
+	color: #fff;
+}
+.btn-submit:hover {
+    background-color: #dc9609;
+    color: #fff;
+}
+.btn-cancel {
+    background-color: #e6e6e6;
+    color: #333;
+}
+.btn-cancel:focus, .btn-cancel.focus {
+	background-color: #d9d9d9;
+	color: #333;
+}
+.btn-cancel:hover {
+    background-color: #d9d9d9;
+    color: #333;
 }
