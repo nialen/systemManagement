@@ -1,3 +1,104 @@
-.style1 {
+.operate-spec {
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 10px;
+}
+/* 查询 */
+.operate-spec-query {
+	padding: 10px 15px;
+	border: 1px solid #ddd;
+}
+.query-input {
+	width: 225px !important;
+	height: 30px;
+}
+.btn-query {
+	margin-top: 10px;
+	margin-right: 16px;
+	padding-left: 15px;
+	padding-right: 15px;
+    background-color: #ff9f19;
+    border-color: #ff9f19;
+    color: #fff;
+    font-size: 12px;
+}
+.btn-query:focus, .btn-query.focus {
+	background-color: #d1800e;
+	border-color: #d1800e;
+	color: #fff;
+}
+.btn-query:hover {
+    background-color: #d1800e;
+    border-color: #d1800e;
+    color: #fff;
+}
+/* 结果 */
+.operate-spec-result {
+	margin-top: 10px;
+}
+.result-header {
+	height: 48px;
+	margin: 0;
+	line-height: 46px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+}
+.btn-set {
+	margin-left: 10px;
+	padding-left: 15px;
+	padding-right: 15px; 
+    background-color: #ffc619;
+    border-color: #ffc619;
+    color: #fff;
+    font-size: 12px;
+}
+.btn-set:focus, .btn-set.focus {
+	background-color: #e4ae0c;
+	border-color: #e4ae0c;
+	color: #fff;
+}
+.btn-set:hover {
+    background-color: #e4ae0c;
+    border-color: #e4ae0c;
+    color: #fff;
+}
+.result-table table th {
+	background-color: #f5fafa;
+	border-bottom-width: 1px !important;
 	color: #333;
+	font-weight: 800;
+	text-align: center;
+}
+.result-table table td {
+	padding: 6px !important;
+	text-align: center;
+}
+.result-table table td p {
+	height: 25px;
+	line-height: 25px;
+}
+.btn-edit {
+    background-color: #b1cc00;
+    color: #fff;
+}
+.btn-edit:focus, .btn-edit.focus {
+	background-color: #a4bc04;
+	color: #fff;
+}
+.btn-edit:hover {
+    background-color: #a4bc04;
+    color: #fff;
+}
+.pagination {
+	margin: 0;
+}
+.pagination > li > a, .pagination > li > span {
+	color: #666;
+}
+.pagination-sm > li > a, .pagination-sm > li > span {
+	padding: 6px 20px;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	background-color: #ff9f19;
+	border-color: #ff9f19;
 }

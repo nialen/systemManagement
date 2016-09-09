@@ -10,8 +10,86 @@
     <link rel="stylesheet" href="privilegeType.css">
 </head>
 
-<body>
-	<p>权限类型管理</p>
+<body ng-app="privilegeTypeModule">
+     <div class="privilege-type">
+        <!-- 查询 -->
+        <div class="privilege-type-query">
+            <form name="queryTypeForm" ng-submit="queryTypeFormSubmit()" ng-controller="queryTypeFormCtrl" class="form-inline" role="form">
+                <div class="row ">
+                    <div class="col-xs-5">
+                        <div class="form-group">
+                            <label class="control-label" for="TypeId">权限类型编码：</label>
+                            <input name="input" id="typeId" class="form-control query-input" ng-model="queryTypeForm.typeId">
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="form-group">
+                            <label class="control-label" for="TypeName">权限类型名称：</label>
+                            <input name="input" id="typeName" class="form-control query-input" ng-model="queryTypeForm.typeName">
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                         <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- 结果 -->
+        <div class="privilege-type-result" ng-controller="privilegeTypeResultCtrl">
+            <div class="tabtop">
+                <div class="left">
+                    <img src="../../images/icon_typeSetup.png">
+                    <div class="wrds">
+                        <p class="p1">权限类型配置</p>
+                        <p class="p2">Jurisdiction</p>
+                    </div>
+                </div>
+                <div class="right"> 
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&&#xe610;</i> 删除</button>
+                </div>
+            </div>
+            <div class="result-table">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="12%">选择</th>
+                            <th width="15%">权限类型编码</th>
+                            <th width="15%">权限类型名称</th>
+                            <th width="15%">权限规格编码前缀</th>
+                            <th width="30%">描述</th>
+                            <th width="13%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in privilegeTypeResultList">
+                            <td>
+                                <input type="checkbox" name="checkbox{{$index}}">
+                            </td>
+                            <td>
+                                <p ng-bind="item.typeId"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.typeName"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.typeRuleCode"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.description"></p>
+                            </td>
+                            <td>
+                                <button ng-click="" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-controller="PaginationDemoCtrl" class="text-center">
+                <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+            </div>
+        </div>
+    </div>
     <script src="../../lib/angular.min.js"></script>
     <script src="../../lib/angular-touch.min.js"></script>
     <script src="../../lib/angular-animate.min.js"></script>
@@ -19,7 +97,7 @@
     <script src="../../lib/jquery.min.js"></script>
     <script src="../../lib/bootstrap.min.js"></script>
     <script src="../../lib/ui-bootstrap.js"></script>
-
+    <script src="../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
     <script src="privilegeType.js"></script>
 </body>
 

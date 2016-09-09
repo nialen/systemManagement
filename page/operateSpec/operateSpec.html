@@ -10,8 +10,108 @@
     <link rel="stylesheet" href="operateSpec.css">
 </head>
 
-<body>
-	<p>权限规格配置</p>
+<body ng-app="operateSpec">
+	<div class="operate-spec">
+        <!-- 查询 -->
+        <div class="operate-spec-query">
+            <form name="queryOperateForm" ng-submit="queryOperateFormSubmit()" ng-controller="queryOperateFormCtrl" class="form-inline" role="form">
+                <div class="row ">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label class="control-label" for="operateId">权限规格编码：</label>
+                            <input name="input" id="operateId" class="form-control query-input" ng-model="queryOperateForm.operateId">
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label class="control-label" for="operateName">权限规格名称：</label>
+                            <input name="input" id="operateName" class="form-control query-input" ng-model="queryOperateForm.operateName">
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label class="control-label" for="operateType">权限类型：</label>
+                            <input name="input" id="operateType" class="form-control query-input" ng-model="queryOperateForm.operateType">
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                </div>
+            </form>
+        </div>
+        <!-- 结果 -->
+        <div class="operate-spec-result" ng-controller="operateSpecResultCtrl">
+             <div class="tabtop">
+                <div class="left">
+                    <img src="../../images/icon_typeSetup.png">
+                    <div class="wrds">
+                        <p class="p1">权限规格列表</p>
+                        <p class="p2">Jurisdiction</p>
+                    </div>
+                </div>
+                 <div class="col-xs-8 text-right">
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60f;</i> Excel批量导入</button>
+                </div>
+            </div>
+            <div class="result-table">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th width＝“5%”>选择</th>
+                            <th width＝“10%”>权限规格ID</th>
+                            <th width＝“10%”>权限规格名称</th>
+                            <th width＝“10%”>权限规格编码</th>
+                            <th width＝“10%”>权限类型</th>
+                            <th width＝“5%”>状态</th>
+                            <th width＝“10%”>创建时间</th>
+                            <th width＝“10%”>最后修改时间</th>
+                            <th width＝“15%”>描述</th>
+                            <th width＝“15%”>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in operateSpecResultList">
+                            <td>
+                                <input type="checkbox" name="checkbox{{$index}}">
+                            </td>
+                            <td>
+                                <p ng-bind="item.operateId"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.operateName"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.operateRuleCode"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.operateType"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.status"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.creatDate"></p>
+                            </td>
+                            <td>
+                                <p ng-bind="item.lastModifiedDate"></p>
+                            </td>
+                            <td>
+                                <button ng-click="" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-controller="PaginationDemoCtrl" class="text-center">
+                <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+            </div>
+        </div>
+    </div>
     <script src="../../lib/angular.min.js"></script>
     <script src="../../lib/angular-touch.min.js"></script>
     <script src="../../lib/angular-animate.min.js"></script>
