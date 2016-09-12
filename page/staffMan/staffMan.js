@@ -77,6 +77,11 @@ angular
 			$rootScope.modifiedStaffMan = {};
 			$scope.$emit('openEditStaffManModal');
 		}
+		// 子iframe调用父iframe控制器内方法；
+		$scope.demo = function() {
+			parent.angular.element(parent.$('#tabs')).scope().addTab('新建员工', '/page/privilegeType/privilegeType.html');
+			// $log.log(parent.angular.element($('#tabs')).abbTabs, '父层iframe');
+		}
 	}])
 	// 弹出框控制器
 	// TODO 删除冗余代码
