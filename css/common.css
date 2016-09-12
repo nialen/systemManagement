@@ -2,14 +2,13 @@
  * Auth 丁少华
  * Date 2016-09-06
  */
-
 @font-face {
 	font-family: 'iconfont';
-	src: url('http://at.alicdn.com/t/font_1473230643_818154.eot'); /* IE9*/
-	src: url('http://at.alicdn.com/t/font_1473230643_818154.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-	url('http://at.alicdn.com/t/font_1473230643_818154.woff') format('woff'), /* chrome、firefox */
-	url('http://at.alicdn.com/t/font_1473230643_818154.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-	url('http://at.alicdn.com/t/font_1473230643_818154.svg#iconfont') format('svg'); /* iOS 4.1- */
+	src: url('http://at.alicdn.com/t/font_1473693683_3360572.eot'); /* IE9*/
+	src: url('http://at.alicdn.com/t/font_1473693683_3360572.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('http://at.alicdn.com/t/font_1473693683_3360572.woff') format('woff'), /* chrome、firefox */
+	url('http://at.alicdn.com/t/font_1473693683_3360572.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+	url('http://at.alicdn.com/t/font_1473693683_3360572.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
 .iconfont {
 	font-family: "iconfont";
