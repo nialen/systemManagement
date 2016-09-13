@@ -29,7 +29,7 @@ angular
         var tabs = [];
         $scope.tabs = tabs;
         $scope.selectedIndex = 0;
-        $scope.addTab = function(title, view) {
+        $scope.addTab = function(title, view, id, data) {
             var isHas = tabs.some(function(item, index) {
                 return item.title === title
             })
@@ -37,7 +37,9 @@ angular
                 view = view || title + "Content View";
                 var index = tabs.push({
                     title: title,
-                    url: view
+                    url: view,
+                    id: id || '',
+                    data: data || ''
                 });
                 $scope.changeTab(index - 1);
             } else {
@@ -73,18 +75,23 @@ angular
             'groupName': '基础配置',
             'groupIcon': 'icon-604',
             'groupList': [{
+                id: 'privilegeType',
                 title: '权限类型配置',
                 url: '/page/privilegeType/privilegeType.html'
             }, {
+                id: 'sysModular',
                 title: '业务模块配置',
                 url: '/page/sysModular/sysModular.html'
             }, {
+                id: 'operateSpec',
                 title: '权限规格配置',
                 url: '/page/operateSpec/operateSpec.html'
             }, {
+                id: 'postRole',
                 title: '角色定义',
                 url: '/page/postRole/postRole.html'
             }, {
+                id: 'systemMenu',
                 title: '系统菜单设置',
                 url: '/page/systemMenu/systemMenu.html'
             }]
@@ -92,6 +99,7 @@ angular
             'groupName': '员工管理',
             'groupIcon': 'icon-603',
             'groupList': [{
+                id: 'staffMan',
                 title: '员工管理',
                 url: '/page/staffMan/staffMan.html'
             }]
@@ -99,9 +107,11 @@ angular
             'groupName': '系统用户',
             'groupIcon': 'icon-606',
             'groupList': [{
+                id: 'userMan',
                 title: '用户管理',
                 url: 'page/userMan/userMan.html'
             }, {
+                id: 'userPrivilege',
                 title: '用户授权管理',
                 url: 'page/userPrivilege/userPrivilege.html'
             }]
@@ -115,7 +125,7 @@ angular
                 '<input type="checkbox" name="group-{{$index}}" id="group-{{$index}}">' +
                 '<label for="group-{{$index}}"><i class="iconfont {{item.groupIcon}}"></i><span ng-bind="item.groupName"></span></label>' +
                 '<ul style="display:none">' +
-                '<li class="accordion-tabs-list" ng-repeat="i in item.groupList" ng-click="addTab(i.title, i.url)">{{i.title}}</li>' +
+                '<li class="accordion-tabs-list" ng-repeat="i in item.groupList" ng-click="addTab(i.title, i.url, i.id, i.data)">{{i.title}}</li>' +
                 '</ul></li></ul>',
             restrict: 'E',
             link: function postLink(scope, element, attrs) {
@@ -146,7 +156,7 @@ angular
             restrict: 'E',
             template: '<div class="tabs-content">' +
                 '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">' +
-                '<iframe src="{{tab.url}}" class="iframe-box" frameborder="0"></iframe>' +
+                '<iframe src="{{tab.url}}" id="{{tab.id}}" data="{{tab.data}}" class="iframe-box" frameborder="0"></iframe>' +
                 '</div>' +
                 '</div>',
             link: function($scope, iElm, iAttrs, controller) {
