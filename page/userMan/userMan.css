@@ -3,6 +3,7 @@
 	margin: 0 auto;
 	padding-top: 10px;
 }
+
 /* 查询 */
 .staff-man-query {
 	padding: 10px 15px;
@@ -15,10 +16,10 @@
 .btn-query {
 	padding-left: 15px;
 	padding-right: 15px;
-    background-color: #ff9f19;
-    border-color: #ff9f19;
-    color: #fff;
-    font-size: 12px;
+	background-color: #ff9f19;
+	border-color: #ff9f19;
+	color: #fff;
+	font-size: 12px;
 }
 .btn-query:focus, .btn-query.focus {
 	background-color: #d1800e;
@@ -26,10 +27,11 @@
 	color: #fff;
 }
 .btn-query:hover {
-    background-color: #d1800e;
-    border-color: #d1800e;
-    color: #fff;
+	background-color: #d1800e;
+	border-color: #d1800e;
+	color: #fff;
 }
+
 /* 结果 */
 .staff-man-result {
 	margin-top: 10px;
@@ -41,14 +43,33 @@
 	border: 1px solid #ddd;
 	border-bottom: none;
 }
+.result-header .title {
+	position: relative;
+	padding-top: 9px;
+	padding-left: 32px;
+	line-height: 16px;
+}
+.result-header .title img {
+	position: absolute;
+	top: 9px;
+	left: 0;
+}
+.result-header .title .title-cn {
+	color: #4c9ef5;
+	font-size: 14px;
+}
+.result-header .title .title-en {
+	color: #ddd;
+	font-size: 12px;
+}
 .btn-set {
 	margin-left: 10px;
 	padding-left: 15px;
-	padding-right: 15px; 
-    background-color: #ffc619;
-    border-color: #ffc619;
-    color: #fff;
-    font-size: 12px;
+	padding-right: 15px;
+	background-color: #ffc619;
+	border-color: #ffc619;
+	color: #fff;
+	font-size: 12px;
 }
 .btn-set:focus, .btn-set.focus {
 	background-color: #e4ae0c;
@@ -56,9 +77,9 @@
 	color: #fff;
 }
 .btn-set:hover {
-    background-color: #e4ae0c;
-    border-color: #e4ae0c;
-    color: #fff;
+	background-color: #e4ae0c;
+	border-color: #e4ae0c;
+	color: #fff;
 }
 .result-table table th {
 	background-color: #f5fafa;
@@ -76,16 +97,16 @@
 	line-height: 25px;
 }
 .btn-edit {
-    background-color: #b1cc00;
-    color: #fff;
+	background-color: #b1cc00;
+	color: #fff;
 }
 .btn-edit:focus, .btn-edit.focus {
 	background-color: #a4bc04;
 	color: #fff;
 }
 .btn-edit:hover {
-    background-color: #a4bc04;
-    color: #fff;
+	background-color: #a4bc04;
+	color: #fff;
 }
 .pagination {
 	margin: 0;
@@ -100,6 +121,7 @@
 	background-color: #ff9f19;
 	border-color: #ff9f19;
 }
+
 /* 弹出框 */
 .modal-content {
 	border-radius: 0;
@@ -129,26 +151,26 @@
 	text-align: center !important;
 }
 .btn-submit {
-    background-color: #ffaa00;
-    color: #fff;
+	background-color: #ffaa00;
+	color: #fff;
 }
 .btn-submit:focus, .btn-submit.focus {
 	background-color: #dc9609;
 	color: #fff;
 }
 .btn-submit:hover {
-    background-color: #dc9609;
-    color: #fff;
+	background-color: #dc9609;
+	color: #fff;
 }
 .btn-cancel {
-    background-color: #e6e6e6;
-    color: #333;
+	background-color: #e6e6e6;
+	color: #333;
 }
 .btn-cancel:focus, .btn-cancel.focus {
 	background-color: #d9d9d9;
 	color: #333;
 }
 .btn-cancel:hover {
-    background-color: #d9d9d9;
-    color: #333;
+	background-color: #d9d9d9;
+	color: #333;
 }

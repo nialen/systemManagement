@@ -42,6 +42,25 @@
 	border: 1px solid #ddd;
 	border-bottom: none;
 }
+.result-header .title {
+	position: relative;
+	padding-top: 9px;
+	padding-left: 32px;
+	line-height: 16px;
+}
+.result-header .title img {
+	position: absolute;
+	top: 9px;
+	left: 0;
+}
+.result-header .title .title-cn {
+	color: #4c9ef5;
+	font-size: 14px;
+}
+.result-header .title .title-en {
+	color: #ddd;
+	font-size: 12px;
+}
 .btn-set {
 	margin-left: 10px;
 	padding-left: 15px;
