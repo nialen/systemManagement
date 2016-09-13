@@ -25,7 +25,7 @@ angular
         };
     })
     // tabs
-    .controller('tabsCtrl', function($scope, $log) {
+    .controller('tabsCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
         var tabs = [];
         $scope.tabs = tabs;
         $scope.selectedIndex = 0;
@@ -49,6 +49,9 @@ angular
                 })
                 $scope.changeTab(selectedIndex);
             }
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
         };
         $scope.removeTab = function(index) {
             if (index <= $scope.selectedIndex) {
@@ -59,7 +62,7 @@ angular
         $scope.changeTab = function(selectedIndex) {
             $scope.selectedIndex = selectedIndex;
         }
-    })
+    }])
     // 左侧菜单
     .controller('accordionCtrl', ['$scope', function($scope) {
         $scope.tabsTitle = {

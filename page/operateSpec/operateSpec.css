@@ -1,15 +1,21 @@
-.operate-spec {
+.operate-spec{
 	width: 960px;
 	margin: 0 auto;
 	padding-top: 10px;
 }
 /* 查询 */
+.col-xs-4{
+	width:35%;
+}
+.col-xs-3{
+	width:30%;
+}
 .operate-spec-query {
 	padding: 10px 15px;
 	border: 1px solid #ddd;
 }
 .query-input {
-	width: 225px !important;
+	width: 180px !important;
 	height: 30px;
 }
 .btn-query {
@@ -33,6 +39,14 @@
     color: #fff;
 }
 /* 结果 */
+.tabtop{margin:12px 0 0 0px;width:960px;height:48px;border:1px solid #ddd;border-bottom:0;}
+.tabtop .left{float:left;margin:10px 0 0 9px;overflow: hidden;}
+.tabtop .left img{float:left;margin-right: 7px;}
+.tabtop .left .wrds{float:left;}
+.tabtop .left .wrds .p1{color:#4c9ef5;font-size:14px;}
+.tabtop .left .wrds .p2{color:#ddd;font-size:12px;margin-top:3px;}
+.tabtop .right{float: right;margin:11px 15px 0 0;}
+
 .operate-spec-result {
 	margin-top: 10px;
 }
@@ -101,4 +115,16 @@
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
 	background-color: #ff9f19;
 	border-color: #ff9f19;
+}
+/* 弹出框 */
+.modal-content {
+	border-radius: 0;
+}
+.modal-header {
+	background-color: #ffb319;
+}
+.modal-title {
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
 }

@@ -28,7 +28,7 @@ angular
 				staffName: '李明浩', //员工姓名
 				staffArea: '南京', //归属地区
 				status: '在用', //状态
-				creatDate: '2016-01-12', //创建时间
+				createDate: '2016-01-12', //创建时间
 				lastModifiedDate: '2016-01-30', //最后修改时间
 			}, {
 				staffId: '20306', //员工ID
@@ -36,7 +36,7 @@ angular
 				staffName: '张晓东', //员工姓名
 				staffArea: '南京', //归属地区
 				status: '在用', //状态
-				creatDate: '2016-02-22', //创建时间
+				createDate: '2016-02-22', //创建时间
 				lastModifiedDate: '2016-02-28', //最后修改时间
 			}, {
 				staffId: '10101', //员工ID
@@ -44,7 +44,7 @@ angular
 				staffName: '李明浩', //员工姓名
 				staffArea: '南京', //归属地区
 				status: '在用', //状态
-				creatDate: '2016-01-12', //创建时间
+				createDate: '2016-01-12', //创建时间
 				lastModifiedDate: '2016-01-30', //最后修改时间
 			}, {
 				staffId: '20306', //员工ID
@@ -52,7 +52,7 @@ angular
 				staffName: '张晓东', //员工姓名
 				staffArea: '南京', //归属地区
 				status: '在用', //状态
-				creatDate: '2016-02-22', //创建时间
+				createDate: '2016-02-22', //创建时间
 				lastModifiedDate: '2016-02-28', //最后修改时间
 			}];
 			$log.log($scope.queryStaffForm.staffId);
@@ -76,6 +76,11 @@ angular
 		$scope.addStaffMan = function() {
 			$rootScope.modifiedStaffMan = {};
 			$scope.$emit('openEditStaffManModal');
+		}
+		// 子iframe调用父iframe控制器内方法；
+		$scope.demo = function() {
+			parent.angular.element(parent.$('#tabs')).scope().addTab('新建员工', '/page/privilegeType/privilegeType.html');
+			// $log.log(parent.angular.element($('#tabs')).abbTabs, '父层iframe');
 		}
 	}])
 	// 弹出框控制器
