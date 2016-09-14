@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="col-xs-8 text-right"> 
-                        <button ng-click="addQueryType()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
+                        <button ng-click="addQueryType('新增权限类型')" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
                         <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                                     <p ng-bind="item.description"></p>
                                 </td>
                                 <td>
-                                    <button ng-click="editQueryType($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
+                                    <button ng-click="editQueryType('修改权限类型',$index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -93,7 +93,7 @@
             <script type="text/ng-template" id="myModalContent.html">
                 <div class="modal-header">
                     <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
-                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe614;</i>修改权限类型</h3>
+                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe614;</i>{{modalTitle}}</h3>
                 </div>
                 <div class="modal-body" id="modal-body">
                     <form name="editQueryTypeForm" ng-submit="editQueryTypeFormSubmit()" ng-controller="editQueryTypeFormCtrl" class="form-inline" role="form">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
-                    <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
+                    <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>      
                 </div>
             </script>
         </div>

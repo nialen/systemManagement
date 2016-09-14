@@ -50,13 +50,15 @@ angular
 	// 查询结果控制器
     .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
         // 修改
-        $scope.editQueryType = function(index) {
+        $scope.editQueryType = function(title,index) {
             $rootScope.modifiedQueryType = $rootScope.queryTypeResultList[index];
+            $rootScope.modalTitle = title;
             $scope.$emit('openEditQueryTypeModal');
         }
         // 新建
-        $scope.addQueryType = function() {
+        $scope.addQueryType = function(title) {
             $rootScope.modifiedQueryType = {};
+            $rootScope.modalTitle = title;
             $scope.$emit('openEditQueryTypeModal');
         }
     }])

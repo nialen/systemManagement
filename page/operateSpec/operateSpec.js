@@ -29,6 +29,7 @@ angular
 	            creatDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
+               
 			},{
 				operateId: '10102', //权限规格ID
 	            operateName: '采购入库', //权限规格名称
@@ -77,7 +78,6 @@ angular
 
 		//详情
 		$scope.infoQueryOperate = function(index) {
-			debugger
 			$rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
 			$scope.$emit('openDetailQueryOperateModal');
 		}
@@ -94,7 +94,6 @@ angular
 	.controller('detailQueryOperateModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
 		$scope.$on('openDetailQueryOperateModal', function(d, data) {
-			debugger
 			$ctrl.open(data);
 		});
 		$ctrl.items = ['item1', 'item2', 'item3'];
