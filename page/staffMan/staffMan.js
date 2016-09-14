@@ -68,13 +68,15 @@ angular
 	// 查询结果控制器
 	.controller('staffManResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		// 修改
-		$scope.editStaffMan = function(index) {
+		$scope.editStaffMan = function(title, index) {
 			$rootScope.modifiedStaffMan = $rootScope.staffManResultList[index];
+			$rootScope.modalTitle = title;
 			$scope.$emit('openEditStaffManModal');
 		}
 		// 新建
-		$scope.addStaffMan = function() {
+		$scope.addStaffMan = function(title) {
 			$rootScope.modifiedStaffMan = {};
+			$rootScope.modalTitle = title;
 			$scope.$emit('openEditStaffManModal');
 		}
 		// 子iframe调用父iframe控制器内方法；
