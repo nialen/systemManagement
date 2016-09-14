@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col-xs-8 text-right">
-                        <button ng-click="addStaffMan()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
+                        <button ng-click="addStaffMan('新建员工')" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
                         <button ng-click="demo()" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
                         <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
                         <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
@@ -104,7 +104,7 @@
                                     <p ng-bind="item.lastModifiedDate"></p>
                                 </td>
                                 <td>
-                                    <button ng-click="editStaffMan($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
+                                    <button ng-click="editStaffMan('修改员工', $index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -117,7 +117,7 @@
             <script type="text/ng-template" id="myModalContent.html">
                 <div class="modal-header">
                     <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
-                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>修改员工</h3>
+                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>{{modalTitle}}</h3>
                 </div>
                 <div class="modal-body" id="modal-body">
                     <form name="editStaffManForm" ng-submit="editStaffManFormSubmit()" ng-controller="editStaffManFormCtrl" class="form-inline" role="form">
