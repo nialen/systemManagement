@@ -4,6 +4,13 @@
 	padding-top: 10px;
 }
 
+.sys_left{ 
+	float: left;
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+}
+
 .title {
     position: relative;
     padding-top: 9px;
@@ -153,30 +160,7 @@
 .modal-footer {
 	text-align: center !important;
 }
-.btn-submit {
-    background-color: #ffaa00;
-    color: #fff;
-}
-.btn-submit:focus, .btn-submit.focus {
-	background-color: #dc9609;
-	color: #fff;
-}
-.btn-submit:hover {
-    background-color: #dc9609;
-    color: #fff;
-}
-.btn-cancel {
-    background-color: #e6e6e6;
-    color: #333;
-}
-.btn-cancel:focus, .btn-cancel.focus {
-	background-color: #d9d9d9;
-	color: #333;
-}
-.btn-cancel:hover {
-    background-color: #d9d9d9;
-    color: #333;
-}
+
 
 .pr3{
 	padding-right:14px;
@@ -191,4 +175,18 @@
 	appearance:none;
 	-moz-appearance:none;
 	-webkit-appearance:none;
+}
+.sys_label{
+	width: 84px!important;
+	text-align: right;
+}
+.sys_detail{
+	display: block;
+	width:200px;
+	height:34px;
+	line-height:34px;
+	color:#555;
+	border-bottom: 1px solid #ccc;
+	float: left;
+
 }
