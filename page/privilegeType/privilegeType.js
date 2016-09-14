@@ -60,7 +60,7 @@ angular
             $scope.$emit('openEditQueryTypeModal');
         }
     }])
-	  // 弹出框控制器
+	// 弹出框控制器
     // TODO 删除冗余代码
     // TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
     .controller('editQueryTypeModalCtrl', function($scope, $rootScope, $uibModal, $log) {
@@ -68,7 +68,6 @@ angular
         $scope.$on('openEditQueryTypeModal', function(d,data) {  
 	        $ctrl.open(data); 
 	    });
-        var $ctrl = this;
         $ctrl.items = ['item1', 'item2', 'item3'];
 
         $ctrl.animationsEnabled = true;

@@ -7,7 +7,7 @@ angular
 	.module('operateSpecModule', ['ui.bootstrap'])
 	.run(['$rootScope', function($rootScope) {
 		$rootScope.queryOperateResultList = []; // 查询员工列表
-		$rootScope.modifiedQueryOperate = {}; // 待修改的员工信息
+		$rootScope.detailQueryOperate = {}; // 待修改的员工信息
 	}])
 	// 查询控制器
 	.controller('queryOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
@@ -76,9 +76,10 @@ angular
 		// }
 
 		//详情
-		$scope.detailQueryOperate = function(index) {
-			$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
-			$scope.$emit('opendetailQueryOperateModal');
+		$scope.infoQueryOperate = function(index) {
+			debugger
+			$rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
+			$scope.$emit('openDetailQueryOperateModal');
 		}
 
 		// 新建
@@ -93,6 +94,7 @@ angular
 	.controller('detailQueryOperateModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
 		$scope.$on('openDetailQueryOperateModal', function(d, data) {
+			debugger
 			$ctrl.open(data);
 		});
 		$ctrl.items = ['item1', 'item2', 'item3'];
@@ -152,7 +154,6 @@ angular
 
 		$ctrl.ok = function() {
 			$uibModalInstance.close($ctrl.selected.item);
-			$scope.$broadcast('submitQueryOperateModal');
 		};
 
 		$ctrl.cancel = function() {
@@ -189,12 +190,6 @@ angular
 			};
 		}
 	})
-	// 编辑员工信息控制器
-	// .controller('detailQueryOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-	// 	$scope.$on('submitQueryOperateModal', function(d, data) {
-	// 		$scope.detailQueryOperateFormSubmit(data);
-	// 	});
-	// }])
 	// 分页控制器
 	.controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {
 		$scope.totalItems = 64;
