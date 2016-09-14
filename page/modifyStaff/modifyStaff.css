@@ -78,22 +78,6 @@
     border-color: #e4ae0c;
     color: #fff;
 }
-.btn-submit {
-	margin-right: 16px;
-    background-color: #ff9f19;
-    border-color: #ff9f19;
-    color: #fff;
-}
-.btn-submit:focus, .btn-submit.focus {
-	background-color: #d1800e;
-	border-color: #d1800e;
-	color: #fff;
-}
-.btn-submit:hover {
-    background-color: #d1800e;
-    border-color: #d1800e;
-    color: #fff;
-}
 
 /* 弹出框 */
 .btn-query {
@@ -140,30 +124,6 @@
 }
 .modal-footer {
 	text-align: center !important;
-}
-.btn-submit {
-	background-color: #ffaa00;
-	color: #fff;
-}
-.btn-submit:focus, .btn-submit.focus {
-	background-color: #dc9609;
-	color: #fff;
-}
-.btn-submit:hover {
-	background-color: #dc9609;
-	color: #fff;
-}
-.btn-cancel {
-	background-color: #e6e6e6;
-	color: #333;
-}
-.btn-cancel:focus, .btn-cancel.focus {
-	background-color: #d9d9d9;
-	color: #333;
-}
-.btn-cancel:hover {
-	background-color: #d9d9d9;
-	color: #333;
 }
 
 .result-header {
