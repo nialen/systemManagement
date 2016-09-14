@@ -50,17 +50,19 @@ angular
 	// 查询结果控制器
     .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
         // 修改
-        $scope.editQueryType = function(index) {
+        $scope.editQueryType = function(title,index) {
             $rootScope.modifiedQueryType = $rootScope.queryTypeResultList[index];
+            $rootScope.modalTitle = title;
             $scope.$emit('openEditQueryTypeModal');
         }
         // 新建
-        $scope.addQueryType = function() {
+        $scope.addQueryType = function(title) {
             $rootScope.modifiedQueryType = {};
+            $rootScope.modalTitle = title;
             $scope.$emit('openEditQueryTypeModal');
         }
     }])
-	  // 弹出框控制器
+	// 弹出框控制器
     // TODO 删除冗余代码
     // TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
     .controller('editQueryTypeModalCtrl', function($scope, $rootScope, $uibModal, $log) {
@@ -68,7 +70,6 @@ angular
         $scope.$on('openEditQueryTypeModal', function(d,data) {  
 	        $ctrl.open(data); 
 	    });
-        var $ctrl = this;
         $ctrl.items = ['item1', 'item2', 'item3'];
 
         $ctrl.animationsEnabled = true;
@@ -126,7 +127,7 @@ angular
 
         $ctrl.ok = function() {
             $uibModalInstance.close($ctrl.selected.item);
-            $scope.$broadcast('submitStaffManModal');
+            $scope.$broadcast('submitQueryTypeModal');
         };
 
         $ctrl.cancel = function() {
