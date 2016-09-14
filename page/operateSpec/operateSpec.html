@@ -14,7 +14,7 @@
     <div class="operate-spec">
         <!-- 查询 -->
         <div class="operate-spec-query">
-            <form name="queryOperateForm" ng-submit="queryOperateFormSubmit()" ng-controller="operateSpecFormCtrl" class="form-inline" role="form">
+            <form name="queryOperateForm" ng-submit="queryOperateFormSubmit()" ng-controller="queryOperateFormCtrl" class="form-inline" role="form">
                 <div class="row mb10">
                     <div class="col-xs-4">
                         <div class="form-group">
@@ -28,7 +28,7 @@
                             <input type="input" id="operateName" class="form-control query-input" ng-model="queryOperateForm.operateName">
                         </div>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-4">
                         <div class="form-group">
                             <label class="control-label" for="operateType">权限类型：</label>
                             <input type="input" id="operateType" class="form-control query-input" ng-model="queryOperateForm.operateType">
@@ -41,18 +41,18 @@
             </form>
         </div>
         <!-- 弹出 -->
-        <div ng-controller="editQueryOperateModalCtrl as $ctrl">
+        <div ng-controller="detailQueryOperateModalCtrl as $ctrl">
             <!-- 结果 -->
             <div class="operate-spec-result" ng-controller="queryOperateResultCtrl">
-                <div class="tabtop">
-                    <div class="left">
-                        <img src="../../images/icon_typeSetup.png">
-                        <div class="wrds">
-                            <p class="p1">权限类型配置</p>
-                            <p class="p2">Jurisdiction</p>
+                <div class="row result-header"> 
+                    <div class="col-xs-4">
+                        <div class="title">
+                            <img src="../../images/icon_typeSetup.png">
+                            <p class="title-cn">权限规格配置</p>
+                            <p class="title-en">Jurisdiction</p>
                         </div>
                     </div>
-                    <div class="right"> 
+                    <div class="col-xs-8 text-right"> 
                         <button ng-click="addQueryOperate()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
                         <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
                         <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
@@ -64,20 +64,20 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th width="5%">选择</th>
-                                <th width="10%">权限规格ID</th>
-                                <th width="10%">权限规格名称</th>
-                                <th width="10%">权限规格编码</th>
-                                <th width="10%">权限类型</th>
-                                <th width="5%">状态</th>
-                                <th width="10%">创建时间</th>
-                                <th width="10%">最后修改时间</th>
-                                <th width="15%">描述</th>
-                                <th width="15%">操作</th>
+                                <th>选择</th>
+                                <th>权限规格ID</th>
+                                <th>权限规格名称</th>
+                                <th>权限规格编码</th>
+                                <th>权限类型</th>
+                                <th>状态</th>
+                                <th>创建时间</th>
+                                <th>最后修改时间</th>
+                                <th>描述</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in operateSpecResultList">
+                            <tr ng-repeat="item in queryOperateResultList">
                                 <td>
                                     <input type="checkbox" name="checkbox{{$index}}">
                                 </td>
@@ -106,8 +106,8 @@
                                     <p ng-bind="item.description"></p>
                                 </td>
                                 <td>
-                                    <button ng-click="editQueryOperate($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
-                                    <button ng-click="" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60b;</i> 详情</button>
+                                    <button ng-click="" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
+                                    <button ng-click="detailQueryOperate($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60b;</i> 详情</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -120,36 +120,40 @@
             <script type="text/ng-template" id="myModalContent.html">
                 <div class="modal-header">
                     <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
-                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>修改员工</h3>
+                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>权限信息</h3>
                 </div>
                 <div class="modal-body" id="modal-body">
-                    <form name="editQueryOperateForm" ng-submit="editQueryOperateFormSubmit()" ng-controller="editQueryOperateFormCtrl" class="form-inline" role="form">
+                    <form name="detailQueryOperateForm" ng-submit="detailQueryOperateFormSubmit()" ng-controller="detailQueryOperateFormCtrl" class="form-inline" role="form">
                         <div class="row mb10">
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <div class="form-group">
-                                    <label class="control-label edit-label" for="operateId">员工ID：</label>
-                                    <input type="input" id="operateId" class="form-control edit-input" ng-model="modifiedQueryOperate.operateId" disabled>
+                                    <label class="control-label edit-label" for="operateId">权限ID：</label>
+                                    <label id="operateId" class="control-label edit-label" ng-model="detailQueryOperate.operateId">
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <div class="form-group">
-                                    <label class="control-label edit-label" for="operateName">员工工号：</label>
-                                    <input type="input" id="operateName" class="form-control edit-input" ng-model="modifiedQueryOperate.operateName">
+                                    <label class="control-label edit-label" for="operateName">权限名称：</label>
+                                    <label id="operateName" class="control-label edit-label" ng-model="detailQueryOperate.operateName">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="operateCode">权限编码：</label>
+                                    <label id="operateCode" class="form-control edit-label" ng-model="detailQueryOperate.operateCode">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="operateType">权限类型：</label>
+                                    <label class="form-control edit-label" id="operateType" ng-model="detailQueryOperate.operateType"></select>
                                 </div>
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label class="control-label edit-label" for="operateType">员工姓名：</label>
-                                    <input type="input" id="operateType" class="form-control edit-input" ng-model="modifiedQueryOperate.operateType">
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label class="control-label edit-label" for="status">归属地区：</label>
-                                    <select class="form-control edit-input" id="status" ng-model="modifiedQueryOperate.status" ng-options="opt for opt in areaList"></select>
-                                </div>
+                        <div class="row mb10">
+                            <div class="form-group">
+                                <label class="control-label edit-label" for="description">描述：</label>
+                                <label class="form-control edit-label" id="description" ng-model="detailQueryOperate.description"></select>
                             </div>
                         </div>
                     </form>
@@ -169,7 +173,7 @@
     <script src="../../lib/bootstrap.min.js"></script>
     <script src="../../lib/ui-bootstrap.js"></script>
     <script src="../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
-
+    <script src="operateSpec.js"></script>
 </body>
 
 </html>

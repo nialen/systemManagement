@@ -24,6 +24,7 @@
     border-color: #ff9f19;
     color: #fff;
     font-size: 12px;
+    margin-left: 56px;
 }
 .btn-query:focus, .btn-query.focus {
 	background-color: #d1800e;
@@ -35,13 +36,7 @@
     border-color: #d1800e;
     color: #fff;
 }
-.tabtop{margin:12px 0 0 0px;width:960px;height:48px;border:1px solid #ddd;border-bottom:0;}
-.tabtop .left{float:left;margin:10px 0 0 9px;overflow: hidden;}
-.tabtop .left img{float:left;margin-right: 7px;}
-.tabtop .left .wrds{float:left;}
-.tabtop .left .wrds .p1{color:#4c9ef5;font-size:14px;}
-.tabtop .left .wrds .p2{color:#ddd;font-size:12px;margin-top:3px;}
-.tabtop .right{float: right;margin:11px 15px 0 0;}
+/* 结果 */
 .privilege-type-result {
 	margin-top: 10px;
 }
@@ -51,6 +46,25 @@
 	line-height: 46px;
 	border: 1px solid #ddd;
 	border-bottom: none;
+}
+.result-header .title {
+	position: relative;
+	padding-top: 9px;
+	padding-left: 32px;
+	line-height: 16px;
+}
+.result-header .title img {
+	position: absolute;
+	top: 9px;
+	left: 0;
+}
+.result-header .title .title-cn {
+	color: #4c9ef5;
+	font-size: 14px;
+}
+.result-header .title .title-en {
+	color: #ddd;
+	font-size: 12px;
 }
 .btn-set {
 	margin-left: 10px;

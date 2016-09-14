@@ -32,7 +32,7 @@ angular
 				createPerson: '', //创建人
 				createDate: '2016-01-12', //创建时间
 				lastModifiedDate: '2016-01-30', //最后修改时间
-				remark: '', //备注
+				remark: '备注备注备注备注', //备注
 			}];
 			$log.log($scope.queryStaffForm.staffId);
 		}

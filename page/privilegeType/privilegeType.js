@@ -126,7 +126,7 @@ angular
 
         $ctrl.ok = function() {
             $uibModalInstance.close($ctrl.selected.item);
-            $scope.$broadcast('submitStaffManModal');
+            $scope.$broadcast('submitQueryTypeModal');
         };
 
         $ctrl.cancel = function() {

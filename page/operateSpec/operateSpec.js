@@ -6,11 +6,11 @@
 angular
 	.module('operateSpecModule', ['ui.bootstrap'])
 	.run(['$rootScope', function($rootScope) {
-		$rootScope.operateSpecResultList = []; // 查询员工列表
+		$rootScope.queryOperateResultList = []; // 查询员工列表
 		$rootScope.modifiedQueryOperate = {}; // 待修改的员工信息
 	}])
 	// 查询控制器
-	.controller('operateSpecFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+	.controller('queryOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		$scope.isForbid = true;
 		$scope.queryOperateForm = {
 			operateId: '',
@@ -20,7 +20,7 @@ angular
 		$scope.queryOperateFormSubmit = function() {
 			// TODO $http发送请求，获取数据，写入$rootScope；
 			// TODO查询结果
-			$rootScope.operateSpecResultList = [{
+			$rootScope.queryOperateResultList = [{
 				operateId: '10101', //权限规格ID
 	            operateName: '采购入库', //权限规格名称
 	            operateCode: '前台页面', //权限规格编码
@@ -29,7 +29,7 @@ angular
 	            creatDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
-			}, {
+			},{
 				operateId: '10102', //权限规格ID
 	            operateName: '采购入库', //权限规格名称
 	            operateCode: '前台页面', //权限规格编码
@@ -38,7 +38,7 @@ angular
 	            creatDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
-			}, {
+			},{
 				operateId: '10103', //权限规格ID
 	            operateName: '采购入库', //权限规格名称
 	            operateCode: '前台页面', //权限规格编码
@@ -47,7 +47,7 @@ angular
 	            creatDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
-			}, {
+			},{
 				operateId: '10104', //权限规格ID
 	            operateName: '采购入库', //权限规格名称
 	            operateCode: '前台页面', //权限规格编码
@@ -70,22 +70,29 @@ angular
 	// 查询结果控制器
 	.controller('queryOperateResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		// 修改
-		$scope.editQueryOperate = function(index) {
+		// $scope.editQueryOperate = function(index) {
+		// 	$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
+		// 	$scope.$emit('openEditQueryOperateModal');
+		// }
+
+		//详情
+		$scope.detailQueryOperate = function(index) {
 			$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
-			$scope.$emit('openEditQueryOperateModal');
+			$scope.$emit('opendetailQueryOperateModal');
 		}
+
 		// 新建
-		$scope.addQueryOperate = function() {
-			$rootScope.modifiedQueryOperate = {};
-			$scope.$emit('openEditQueryOperateModal');
-		}
+		// $scope.addQueryOperate = function() {
+		// 	$rootScope.modifiedQueryOperate = {};
+		// 	$scope.$emit('openEditQueryOperateModal');
+		// }
 	}])
 	// 弹出框控制器
 	// TODO 删除冗余代码
 	// TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
-	.controller('editQueryOperateModalCtrl', function($scope, $rootScope, $uibModal, $log) {
+	.controller('detailQueryOperateModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
-		$scope.$on('openEditQueryOperateModal', function(d, data) {
+		$scope.$on('openDetailQueryOperateModal', function(d, data) {
 			$ctrl.open(data);
 		});
 		$ctrl.items = ['item1', 'item2', 'item3'];
@@ -183,22 +190,11 @@ angular
 		}
 	})
 	// 编辑员工信息控制器
-	.controller('editQueryOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-		$scope.$on('submitQueryOperateModal', function(d, data) {
-			$scope.editQueryOperateFormSubmit(data);
-		});
-		$scope.$watch('modifiedQueryOperate', function(current, old, scope) {
-			if (scope.modifiedQueryOperate.operateId && scope.modifiedQueryOperate.operateName && scope.modifiedQueryOperate.operateType) {
-				$rootScope.isForbidSubmit = false;
-			} else {
-				$rootScope.isForbidSubmit = true;
-			}
-		}, true);
-		$scope.editQueryOperateFormSubmit = function(data) {
-			// TODO 获取更改之后的员工信息$rootScope.modifiedQueryOperate
-			$log.log('弹出框表单提交', data, $rootScope.modifiedQueryOperate);
-		}
-	}])
+	// .controller('detailQueryOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+	// 	$scope.$on('submitQueryOperateModal', function(d, data) {
+	// 		$scope.detailQueryOperateFormSubmit(data);
+	// 	});
+	// }])
 	// 分页控制器
 	.controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {
 		$scope.totalItems = 64;
