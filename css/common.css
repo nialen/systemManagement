@@ -40,3 +40,40 @@ body {
 	width: 1200px;
 	margin: 0 auto;
 }
+
+.btn-submit, .btn-cancel {
+	border: none;
+	font-weight: normal;
+	border-radius: 5px;
+	padding: 10px 20px;
+	margin: 0 5px;
+	cursor: pointer;
+	line-height: normal;
+}
+
+.btn-submit {
+	background-color: #ffaa00;
+	color: #fff;
+	box-shadow: rgba(255, 170, 0, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset; background-color: rgb(255, 170, 0);
+}
+.btn-submit:focus, .btn-submit.focus {
+	background-color: #dc9609;
+	color: #fff;
+}
+.btn-submit:hover {
+	background-color: #dc9609;
+	color: #fff;
+}
+.btn-cancel {
+	background-color: #c1c1c1;
+	color: #fff;
+	box-shadow: none;
+}
+.btn-cancel:focus, .btn-cancel.focus {
+	background-color: #b9b9b9;
+	color: #fff;
+}
+.btn-cancel:hover {
+	background-color: #b9b9b9;
+	color: #fff;
+}
