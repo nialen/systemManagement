@@ -28,8 +28,7 @@ angular
 	            status: '在用', //状态
 	            creatDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
-                description:'',//描述
-               
+                description:'',//描述              
 			},{
 				operateId: '10102', //权限规格ID
 	            operateName: '采购入库', //权限规格名称
@@ -38,7 +37,7 @@ angular
 	            status: '在用', //状态
 	            creatDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
-                description:'',//描述
+                description:'',//描述                
 			},{
 				operateId: '10103', //权限规格ID
 	            operateName: '采购入库', //权限规格名称
@@ -75,11 +74,15 @@ angular
 		// 	$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
 		// 	$scope.$emit('openEditQueryOperateModal');
 		// }
+		$scope.editQueryOperate = function(index) {
+			$rootScope.modifiedOperaSpec = $rootScope.queryOperateResultList[index];
+			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifyOperateSpec));
+		}
 
 		//详情
 		$scope.infoQueryOperate = function(index) {
 			$rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
-			$scope.$emit('openDetailQueryOperateModal');
+			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailOperateSpec));
 		}
 
 		// 新建
@@ -88,107 +91,6 @@ angular
 		// 	$scope.$emit('openEditQueryOperateModal');
 		// }
 	}])
-	// 弹出框控制器
-	// TODO 删除冗余代码
-	// TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
-	.controller('detailQueryOperateModalCtrl', function($scope, $rootScope, $uibModal, $log) {
-		var $ctrl = this;
-		$scope.$on('openDetailQueryOperateModal', function(d, data) {
-			$ctrl.open(data);
-		});
-		$ctrl.items = ['item1', 'item2', 'item3'];
-
-		$ctrl.animationsEnabled = true;
-
-		$ctrl.open = function() {
-			var modalInstance = $uibModal.open({
-				animation: $ctrl.animationsEnabled,
-				ariaLabelledBy: 'modal-title',
-				ariaDescribedBy: 'modal-body',
-				templateUrl: 'myModalContent.html',
-				controller: 'ModalInstanceCtrl',
-				controllerAs: '$ctrl',
-				size: 'lg',
-				resolve: {
-					items: function() {
-						return $ctrl.items;
-					}
-				}
-			});
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('Modal dismissed at: ' + new Date());
-			});
-		};
-
-		$ctrl.openComponentModal = function() {
-			var modalInstance = $uibModal.open({
-				animation: $ctrl.animationsEnabled,
-				component: 'modalComponent',
-				resolve: {
-					items: function() {
-						return $ctrl.items;
-					}
-				}
-			});
-
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('modal-component dismissed at: ' + new Date());
-			});
-		};
-
-		$ctrl.toggleAnimation = function() {
-			$ctrl.animationsEnabled = !$ctrl.animationsEnabled;
-		};
-	})
-	.controller('ModalInstanceCtrl', function($uibModalInstance, $scope, items) {
-		var $ctrl = this;
-		$ctrl.items = items;
-		$ctrl.selected = {
-			item: $ctrl.items[0]
-		};
-
-		$ctrl.ok = function() {
-			$uibModalInstance.close($ctrl.selected.item);
-		};
-
-		$ctrl.cancel = function() {
-			$uibModalInstance.dismiss('cancel');
-		};
-	})
-	.component('modalComponent', {
-		templateUrl: 'myModalContent.html',
-		bindings: {
-			resolve: '<',
-			close: '&',
-			dismiss: '&'
-		},
-		controller: function() {
-			var $ctrl = this;
-
-			$ctrl.$onInit = function() {
-				$ctrl.items = $ctrl.resolve.items;
-				$ctrl.selected = {
-					item: $ctrl.items[0]
-				};
-			};
-
-			$ctrl.ok = function() {
-				$ctrl.close({
-					$value: $ctrl.selected.item
-				});
-			};
-
-			$ctrl.cancel = function() {
-				$ctrl.dismiss({
-					$value: 'cancel'
-				});
-			};
-		}
-	})
 	// 分页控制器
 	.controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {
 		$scope.totalItems = 64;
