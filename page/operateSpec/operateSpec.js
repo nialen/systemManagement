@@ -26,7 +26,7 @@ angular
 	            operateCode: '前台页面', //权限规格编码
 	            operateType: '进销存管理', //权限类型
 	            status: '在用', //状态
-	            creatDate: '2016-01-12', //创建时间
+	            createDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
                
@@ -36,7 +36,7 @@ angular
 	            operateCode: '前台页面', //权限规格编码
 	            operateType: '进销存管理', //权限类型
 	            status: '在用', //状态
-	            creatDate: '2016-01-12', //创建时间
+	            createDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
 			},{
@@ -45,7 +45,7 @@ angular
 	            operateCode: '前台页面', //权限规格编码
 	            operateType: '进销存管理', //权限类型
 	            status: '在用', //状态
-	            creatDate: '2016-01-12', //创建时间
+	            createDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
 			},{
@@ -54,7 +54,7 @@ angular
 	            operateCode: '前台页面', //权限规格编码
 	            operateType: '进销存管理', //权限类型
 	            status: '在用', //状态
-	            creatDate: '2016-01-12', //创建时间
+	            createDate: '2016-01-12', //创建时间
 	            lastModifiedDate: '2016-01-30', //最后修改时间
                 description:'',//描述
 			}];

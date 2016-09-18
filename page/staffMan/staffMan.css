@@ -106,19 +106,7 @@
     background-color: #a4bc04;
     color: #fff;
 }
-.pagination {
-	margin: 0;
-}
-.pagination > li > a, .pagination > li > span {
-	color: #666;
-}
-.pagination-sm > li > a, .pagination-sm > li > span {
-	padding: 6px 20px;
-}
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-	background-color: #ff9f19;
-	border-color: #ff9f19;
-}
+
 /* 弹出框 */
 .modal-content {
 	border-radius: 0;
