@@ -32,7 +32,7 @@
                 <uib-tab index="0" heading="分配权限">
                     <!-- 弹出 -->
                     <div ng-controller="addAuthorityModalCtrl as $ctrl">
-                        <!-- 结果 -->
+                        <!-- 已分配权限列表 -->
                         <div class="staff-man-result" ng-controller="assignedAuthorityListCtrl">
                             <div class="row result-header">
                                 <div class="col-xs-4">
@@ -95,7 +95,7 @@
                                 <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
                             </div>
                         </div>
-                        <script type="text/ng-template" id="myModalContent.html">
+                        <script type="text/ng-template" id="addAuthorityModal.html">
                             <div class="modal-header">
                                 <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
                                 <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>新增权限</h3>
@@ -182,6 +182,70 @@
                                         <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                                <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit" ng-click="$ctrl.ok()">确定</button>
+                            </div>
+                        </script>
+                    </div>
+                    <!-- 弹出 -->
+                    <div ng-controller="authorityDimensionModalCtrl as $ctrl">
+                        <!-- 权限维度列表 -->
+                        <div class="staff-man-result" ng-controller="authorityDimensionListCtrl">
+                            <div class="row result-header">
+                                <div class="col-xs-12">
+                                    <div class="title">
+                                        <img src="../../images/icon_typeSetup.png">
+                                        <p class="title-cn">权限维度列表</p>
+                                        <p class="title-en">Authority dimension list</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-table">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>权限维度编码</th>
+                                            <th>权限维度名称</th>
+                                            <th>动态SQL</th>
+                                            <th>维度值</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in authorityDimensionList">
+                                            <td>
+                                                <p ng-bind="item.dimensionCode"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.dimensionName"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.dynamicSQL"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.dimensionValue"></p>
+                                            </td>
+                                            <td>
+                                                <button ng-click="setDimension()" class="btn btn-xs btn-edit"><i class="iconfont">&#xe601;</i> 设置</button>
+                                                <button ng-click="" class="btn btn-xs btn-edit"><i class="iconfont">&#xe61c;</i> 查看</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-controller="paginationCtrl" class="text-center">
+                                <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                            </div>
+                        </div>
+                        <script type="text/ng-template" id="setDimensionModalContent.html">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                                <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>权限维度设置</h3>
+                            </div>
+                            <div class="modal-body" id="modal-body">
+                                <p>维度设置</p>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
