@@ -32,7 +32,7 @@
                     <div class="col-xs-4">
                         <div class="form-group">
                             <label class="control-label sys_label" for="sysType">业务模块类型：</label>
-                            <select class="form-control query-input query-select"" id="sysType" ng-model="querySysForm.sysSystem" ng-options="opt for opt in sysType"></select>
+                            <select class="form-control query-input" id="sysType" ng-model="querySysForm.sysSystem" ng-options="opt for opt in sysType"></select>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                     <div class="col-xs-4">
                         <div class="form-group">
                             <label class="control-label sys_label" for="sysSystem">所属系统：</label>
-                            <select class="form-control query-input query-select"" id="sysSystem" ng-model="querySysForm.sysSystem" ng-options="opt for opt in systemList"></select>
+                            <select class="form-control query-input" id="sysSystem" ng-model="querySysForm.sysSystem" ng-options="opt for opt in systemList"></select>
                         </div>
                     </div>
                     <div class="text-right">
@@ -153,8 +153,8 @@
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label class="control-label edit-label sys_left" for="sysType">业务模块类型：</label>
-                                    <select ng-if="syeTitle === '新建模块'" class="form-control query-input query-select" id="sysType" ng-model="modifiedSys.sysType" ng-options="opt for opt in sysType"></select>
-                                    <select ng-if="syeTitle === '修改模块'" ng-if="syeTitle === '新建模块'" class="form-control query-input query-select" id="sysType" ng-model="modifiedSys.sysType" ng-options="opt for opt in sysType"></select>
+                                    <select ng-if="syeTitle === '新建模块'" class="form-control query-input" id="sysType" ng-model="modifiedSys.sysType" ng-options="opt for opt in sysType"></select>
+                                    <select ng-if="syeTitle === '修改模块'" ng-if="syeTitle === '新建模块'" class="form-control query-input" id="sysType" ng-model="modifiedSys.sysType" ng-options="opt for opt in sysType"></select>
                                     <span ng-if="syeTitle === '模块详情'" id="sysType" class="edit-input sys_detail" ng-bind="modifiedSys.sysType"></span>
 
                                 </div>
@@ -162,8 +162,8 @@
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label class="control-label edit-label sys_left" for="sysSystem">所属系统：</label>
-                                    <select ng-if="syeTitle === '新建模块'" class="form-control query-input query-select" id="sysSystem" ng-model="modifiedSys.sysSystem" ng-options="opt for opt in systemList"></select>
-                                    <select ng-if="syeTitle === '修改模块'" ng-if="syeTitle === '新建模块'" class="form-control query-input query-select" id="sysSystem" ng-model="modifiedSys.sysSystem" ng-options="opt for opt in systemList"></select>
+                                    <select ng-if="syeTitle === '新建模块'" class="form-control query-input" id="sysSystem" ng-model="modifiedSys.sysSystem" ng-options="opt for opt in systemList"></select>
+                                    <select ng-if="syeTitle === '修改模块'" ng-if="syeTitle === '新建模块'" class="form-control query-input" id="sysSystem" ng-model="modifiedSys.sysSystem" ng-options="opt for opt in systemList"></select>
                                     <span ng-if="syeTitle === '模块详情'" id="sysSystem" class="edit-input sys_detail" ng-bind="modifiedSys.sysSystem"></span>
                                 </div>
                             </div>
