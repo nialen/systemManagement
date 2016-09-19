@@ -52,8 +52,8 @@ angular
         $log.log($rootScope.staffManInformation, '$rootScope.staffManInformation');
     }])
     .controller('assignedAuthorityListCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
-    	// 入参
-    	var obj = {
+        // 入参
+        var obj = {
             'operationSpecTypeCd': '1', // 类型编码
             'operationSpecTypeName': '', // 权限类型名称
             'requirePaging': 'true', // 是否需要分页
@@ -89,13 +89,39 @@ angular
             $scope.$emit('openAddAuthorityModal');
         }
     }])
-    // 弹出框控制器
+    .controller('authorityDimensionListCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+        // 入参
+        var obj = {
+            'operationSpecTypeCd': '1', // 类型编码
+            'operationSpecTypeName': '', // 权限类型名称
+            'requirePaging': 'true', // 是否需要分页
+            'currentPage': '1', // 当前页
+            'rowNumPerPage': '10', // 每页展示行数
+            'totalRowNum': '0' // 总行数
+        };
+        // 获取已有角色列表
+        var roleList = httpMethod.getRole(obj);
+        $log.log(roleList, 'roleList');
+
+        // TODO 等待接口
+        $scope.authorityDimensionList = [{
+            dimensionCode: '10101', //权限维度编码
+            dimensionName: '仓库', //权限维度名称
+            dynamicSQL: '', //动态SQL
+            dimensionValue: ['仓库1', '仓库2'], //维度值
+        }];
+
+        // 权限维度设置
+        $scope.setDimension = function() {
+            $scope.$emit('openSetDimensionModal');
+        }
+    }])
+    // 添加权限弹框
     .controller('addAuthorityModalCtrl', function($scope, $rootScope, $uibModal, $log) {
         var $ctrl = this;
         $scope.$on('openAddAuthorityModal', function(d, data) {
             $ctrl.open(data);
         });
-        $ctrl.items = ['item1', 'item2', 'item3'];
 
         $ctrl.animationsEnabled = true;
 
@@ -104,38 +130,10 @@ angular
                 animation: $ctrl.animationsEnabled,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                templateUrl: 'addAuthorityModal.html',
+                controller: 'ModalAuthorityCtrl',
                 controllerAs: '$ctrl',
-                size: 'lg',
-                resolve: {
-                    items: function() {
-                        return $ctrl.items;
-                    }
-                }
-            });
-            modalInstance.result.then(function(selectedItem) {
-                $ctrl.selected = selectedItem;
-            }, function() {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
-
-        $ctrl.openComponentModal = function() {
-            var modalInstance = $uibModal.open({
-                animation: $ctrl.animationsEnabled,
-                component: 'modalComponent',
-                resolve: {
-                    items: function() {
-                        return $ctrl.items;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function(selectedItem) {
-                $ctrl.selected = selectedItem;
-            }, function() {
-                $log.info('modal-component dismissed at: ' + new Date());
+                size: 'lg'
             });
         };
 
@@ -143,51 +141,54 @@ angular
             $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
         };
     })
-    .controller('ModalInstanceCtrl', function($uibModalInstance, $scope, items) {
+    .controller('ModalAuthorityCtrl', function($uibModalInstance, $scope) {
         var $ctrl = this;
-        $ctrl.items = items;
-        $ctrl.selected = {
-            item: $ctrl.items[0]
-        };
 
         $ctrl.ok = function() {
-            $uibModalInstance.close($ctrl.selected.item);
-            $scope.$broadcast('submitAddAuthorityModal');
+            $uibModalInstance.close();
+            $scope.$broadcast('submitSetDimensionModal');
         };
 
         $ctrl.cancel = function() {
             $uibModalInstance.dismiss('cancel');
         };
     })
-    .component('modalComponent', {
-        templateUrl: 'myModalContent.html',
-        bindings: {
-            resolve: '<',
-            close: '&',
-            dismiss: '&'
-        },
-        controller: function() {
-            var $ctrl = this;
+    // 权限维度设置弹框
+    .controller('authorityDimensionModalCtrl', function($scope, $rootScope, $uibModal, $log) {
+        var $ctrl = this;
+        $scope.$on('openSetDimensionModal', function(d, data) {
+            $ctrl.open(data);
+        });
 
-            $ctrl.$onInit = function() {
-                $ctrl.items = $ctrl.resolve.items;
-                $ctrl.selected = {
-                    item: $ctrl.items[0]
-                };
-            };
+        $ctrl.animationsEnabled = true;
 
-            $ctrl.ok = function() {
-                $ctrl.close({
-                    $value: $ctrl.selected.item
-                });
-            };
+        $ctrl.open = function() {
+            var modalInstance = $uibModal.open({
+                animation: $ctrl.animationsEnabled,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'setDimensionModalContent.html',
+                controller: 'ModalSetDimensionCtrl',
+                controllerAs: '$ctrl',
+                size: 'lg'
+            });
+        };
 
-            $ctrl.cancel = function() {
-                $ctrl.dismiss({
-                    $value: 'cancel'
-                });
-            };
-        }
+        $ctrl.toggleAnimation = function() {
+            $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
+        };
+    })
+    .controller('ModalSetDimensionCtrl', function($uibModalInstance, $scope) {
+        var $ctrl = this;
+
+        $ctrl.ok = function() {
+            $uibModalInstance.close();
+            $scope.$broadcast('submitAddAuthorityModal');
+        };
+
+        $ctrl.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
     })
     // 查询控制器
     .controller('queryAuthorityFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
