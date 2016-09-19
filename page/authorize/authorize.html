@@ -229,7 +229,7 @@
                                             </td>
                                             <td>
                                                 <button ng-click="setDimension()" class="btn btn-xs btn-edit"><i class="iconfont">&#xe601;</i> 设置</button>
-                                                <button ng-click="" class="btn btn-xs btn-edit"><i class="iconfont">&#xe61c;</i> 查看</button>
+                                                <button ng-click="viewDimension()" class="btn btn-xs btn-edit"><i class="iconfont">&#xe61c;</i> 查看</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -246,6 +246,19 @@
                             </div>
                             <div class="modal-body" id="modal-body">
                                 <p>维度设置</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                                <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit" ng-click="$ctrl.ok()">确定</button>
+                            </div>
+                        </script>
+                        <script type="text/ng-template" id="viewDimensionModalContent.html">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                                <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>权限维度详情</h3>
+                            </div>
+                            <div class="modal-body" id="modal-body">
+                                <p>维度详情</p>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
