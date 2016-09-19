@@ -7,7 +7,8 @@ angular
 	.module('operateSpecModule', ['ui.bootstrap'])
 	.run(['$rootScope', function($rootScope) {
 		$rootScope.queryOperateResultList = []; // 查询员工列表
-		$rootScope.detailQueryOperate = {}; // 待修改的员工信息
+		$rootScope.modifiedQueryOperate = {}; // 待修改的员工信息
+		$rootScope.detailQueryOperate = {};
 	}])
 	// 查询控制器
 	.controller('queryOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
@@ -69,27 +70,20 @@ angular
 	}])
 	// 查询结果控制器
 	.controller('queryOperateResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-		// 修改
-		// $scope.editQueryOperate = function(index) {
-		// 	$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
-		// 	$scope.$emit('openEditQueryOperateModal');
-		// }
-		$scope.editQueryOperate = function(index) {
-			$rootScope.modifiedOperaSpec = $rootScope.queryOperateResultList[index];
-			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifyOperateSpec));
-		}
-
 		//详情
 		$scope.infoQueryOperate = function(index) {
 			$rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
-			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailOperateSpec));
+			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
 		}
-
+		// 修改
+		$scope.editQueryOperate = function(index) {
+			$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
+			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
+		}
 		// 新建
-		// $scope.addQueryOperate = function() {
-		// 	$rootScope.modifiedQueryOperate = {};
-		// 	$scope.$emit('openEditQueryOperateModal');
-		// }
+		$scope.addQueryOperate = function() {
+			parent.angular.element(parent.$('#tabs')).scope().addTab('新建用户', '/page/modifyOperate/modifyOperate.html', 'addQueryOperate');
+		}
 	}])
 	// 分页控制器
 	.controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {

@@ -138,10 +138,16 @@
 .mb10 {
 	margin-bottom: 10px;
 }
+.mt20 {
+	margin-top: 20px;
+}
 .modal-footer {
 	text-align: center !important;
 }
-
+.operate-label{
+	width: 84px!important;
+    text-align: right;
+}
 .result-header {
 	height: 48px;
 	margin: 0;
