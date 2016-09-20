@@ -8,21 +8,23 @@ angular
 	.run(['$rootScope', '$parse', '$log', function($rootScope, $parse, $log) {
 		var id = window.frameElement && window.frameElement.id || '',
 			obj = parent.$('#' + id).attr('data');
-		$rootScope.modifiedOperateSpec = obj ? JSON.parse(obj) : {}; // 待修改的员工信息
-		$rootScope.operateType = ['进销存管理', '系统管理']; // 地区列表
+		$rootScope.modifiedOperateSpec = obj ? JSON.parse(obj) : {}; // 待修改的权限规格信息
+		$rootScope.operateType = ['进销存管理', '系统管理']; // 规格类型
 
+		$rootScope.preveligeDimensionResultList = [];//权限维度列表
+		$rootScope.preveligeDoneResultList = [];//权限可操作列表
 		$rootScope.ownerSys = ['1', '2']; 
 		$rootScope.businessModuleType = ['3', '4']; 
 		
 	}])
-	// 修改基本信息控制器
+	// 修改权限规格基本信息控制器
 	.controller('modifyOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		$scope.isForbid = true;
 		$scope.modifyOperateForm = $.extend(true, {
-			operateId: '10101', //权限规格ID
-            operateName: '采购入库', //权限规格名称
-            operateType: '进销存管理', //权限类型
-            operateCode: '前台页面', //权限规格编码
+			operateId: '', //权限规格ID
+            operateName: '', //权限规格名称
+            operateType: '', //权限类型
+            operateCode: '', //权限规格编码
             description:'',//地区描述
 		}, $rootScope.modifiedOperateSpec);
 
@@ -40,6 +42,7 @@ angular
 		}, true);
 	}])
 
+
 	// 权限维度查询控制器
 	.controller('preveligeDimensionFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		$scope.isForbid = false;	
@@ -56,62 +59,62 @@ angular
        		moveSql:'',
        		remark:'可操作',
 		}];
-        // 新建
-        $scope.addPreveligeDimension = function(title) {
-            $rootScope.addPreveligeDimension = {};
-            $rootScope.modalTitle = title;
-            $scope.$emit('openAddPreveligeDimensionModal');
+        // 新建权限维度
+        $scope.addDimension = function() {
+            $scope.$emit('openAddDimensionModal');
+        }
+        // 权限维度详情
+        $scope.dimensionInfo = function(index, title) {
+            $rootScope.dimensionInfo = $rootScope.preveligeDimensionResultList[index];
+            $rootScope.syeTitle = title;
+            $scope.$emit('openDimensionInfoModal');
         }
 	}])
 
 	// 权限维度弹出框控制器
 	// TODO 删除冗余代码
-	.controller('addPreveligeDimensionModalCtrl', function($scope, $rootScope, $uibModal, $log) {
+	.controller('preveligeDimensionModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
-		$scope.$on('openAddPreveligeDimensionModal', function(d, data) {
-			$ctrl.open(data);
-		});
-		$ctrl.items = ['item1', 'item2', 'item3'];
+        $scope.$on('openAddDimensionModal', function(d, data) {
+            $ctrl.addDimensionModal(data);
+        });
 
-		$ctrl.animationsEnabled = true;
+        $scope.$on('openDimensionInfoModal', function(d, data) {
+            $ctrl.dimensionInfoModal(data);
+        });
 
-		$ctrl.open = function() {
+        $ctrl.animationsEnabled = true;
+
+		$ctrl.addDimensionModal = function() {
 			var modalInstance = $uibModal.open({
 				animation: $ctrl.animationsEnabled,
 				ariaLabelledBy: 'modal-title',
 				ariaDescribedBy: 'modal-body',
-				templateUrl: 'dimensionContent.html',
-				controller: 'ModalDimensionCtrl',
+				templateUrl: 'addDimensionModal.html',
+				controller: 'ModalAddDimensionCtrl',
 				controllerAs: '$ctrl',
-				size: 'lg',
+				size: 'lg',	
 				resolve: {
 					items: function() {
 						return $ctrl.items;
 					}
 				}
-			});
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('Modal dismissed at: ' + new Date());
 			});
 		};
-
-		$ctrl.openComponentModal = function() {
+		$ctrl.dimensionInfoModal = function() {
 			var modalInstance = $uibModal.open({
 				animation: $ctrl.animationsEnabled,
-				component: 'modalComponent',
+				ariaLabelledBy: 'modal-title',
+				ariaDescribedBy: 'modal-body',
+				templateUrl: 'dimensionInfoModal.html',
+				controller: 'ModalDimensionInfoCtrl',
+				controllerAs: '$ctrl',
+				size: 'lg',	
 				resolve: {
 					items: function() {
 						return $ctrl.items;
 					}
 				}
-			});
-
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('modal-component dismissed at: ' + new Date());
 			});
 		};
 
@@ -119,12 +122,8 @@ angular
 			$ctrl.animationsEnabled = !$ctrl.animationsEnabled;
 		};
 	})
-	.controller('ModalDimensionCtrl', function($uibModalInstance, $scope, items) {
+	.controller('ModalAddDimensionCtrl', function($uibModalInstance, $scope, items) {
 		var $ctrl = this;
-		$ctrl.items = items;
-		$ctrl.selected = {
-			item: $ctrl.items[0]
-		};
 
 		$ctrl.ok = function() {
 			$uibModalInstance.close($ctrl.selected.item);
@@ -135,37 +134,13 @@ angular
 			$uibModalInstance.dismiss('cancel');
 		};
 	})
-	.component('modalComponent', {
-		templateUrl: 'dimensionContent.html',
-		bindings: {
-			resolve: '<',
-			close: '&',
-			dismiss: '&'
-		},
-		controller: function() {
-			var $ctrl = this;
-
-			$ctrl.$onInit = function() {
-				$ctrl.items = $ctrl.resolve.items;
-				$ctrl.selected = {
-					item: $ctrl.items[0]
-				};
-			};
-
-			$ctrl.ok = function() {
-				$ctrl.close({
-					$value: $ctrl.selected.item
-				});
-			};
-
-			$ctrl.cancel = function() {
-				$ctrl.dismiss({
-					$value: 'cancel'
-				});
-			};
-		}
+	.controller('ModalDimensionInfoCtrl', function($uibModalInstance, $scope, items) {
+		var $ctrl = this;
+		$ctrl.cancel = function() {
+			$uibModalInstance.dismiss('cancel');
+		};
 	})
-	// 查询控制器
+	// 维度查询控制器
 	.controller('queryDimensionFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		$scope.isForbid = true;
 		$scope.queryDimensionForm = {
@@ -204,7 +179,7 @@ angular
 	}])
 	// 查询结果控制器
 	.controller('queryDimensionResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {   
-        $scope.$on('submitQueryDimensionModal', function(d, data) {
+        $scope.$on('submitPreveligeDimensionModal', function(d, data) {
             $scope.addQueryDimensionFormSubmit(data);
         });
         $scope.addQueryDimensionFormSubmit = function(data) {
@@ -212,46 +187,52 @@ angular
             $log.log('弹出框表单提交', data, $rootScope.addPreveligeDimension);
         }
 	}])
-
-
-
+	
 	// 权限可操作查询控制器
 	.controller('preveligeDoneFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		$scope.isForbid = false;	
 		$rootScope.preveligeDoneResultList = [{
 			businessModuleId:'10101',
        		businessModuleName:'地区',
-       		remark:'可操作',
+       		doneDescription:'可操作',
 		}, {
-			businessModuleId:'10101',
+			businessModuleId:'10103',
        		businessModuleName:'地区',
-       		remark:'可操作',
+       		doneDescription:'可操作',
 		}];
-        // 新建
-        $scope.addPreveligeDone = function(title) {
-            $rootScope.addPreveligeDone = {};
-            $rootScope.modalTitle = title;
+        
+        // 新建业务模块
+        $scope.addPreveligeDone = function() {
             $scope.$emit('openAddPreveligeDoneModal');
+        }
+        // 业务模块详情
+        $scope.businessModuleInfo = function(index, title) {
+            $rootScope.businessModuleInfo = $rootScope.preveligeDoneResultList[index];
+            $rootScope.syeTitle = title;
+            $scope.$emit('openBusinessModuleInfoModal');
         }
 	}])
 	// 权限可操作的模块弹出框控制器
 	// TODO 删除冗余代码
-	.controller('addPreveligeDoneModalCtrl', function($scope, $rootScope, $uibModal, $log) {
+	.controller('preveligeDoneModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
 		$scope.$on('openAddPreveligeDoneModal', function(d, data) {
-			$ctrl.open(data);
+			$ctrl.addPreveligeDoneModal(data);
 		});
-		$ctrl.items = ['item1', 'item2', 'item3'];
+
+		$scope.$on('openBusinessModuleInfoModal', function(d, data) {
+			$ctrl.businessModuleInfoModal(data);
+		});
 
 		$ctrl.animationsEnabled = true;
 
-		$ctrl.open = function() {
+		$ctrl.addPreveligeDoneModal = function() {
 			var modalInstance = $uibModal.open({
 				animation: $ctrl.animationsEnabled,
 				ariaLabelledBy: 'modal-title',
 				ariaDescribedBy: 'modal-body',
 				templateUrl: 'doneModalContent.html',
-				controller: 'ModalDoneCtrl',
+				controller: 'ModalAddPreveligeDoneCtrl',
 				controllerAs: '$ctrl',
 				size: 'lg',
 				resolve: {
@@ -260,28 +241,21 @@ angular
 					}
 				}
 			});
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('Modal dismissed at: ' + new Date());
-			});
 		};
-
-		$ctrl.openComponentModal = function() {
+		$ctrl.businessModuleInfoModal = function() {
 			var modalInstance = $uibModal.open({
 				animation: $ctrl.animationsEnabled,
-				component: 'modalComponent',
+				ariaLabelledBy: 'modal-title',
+				ariaDescribedBy: 'modal-body',
+				templateUrl: 'businessModuleInfoModal.html',
+				controller: 'ModalBusinessModuleInfoCtrl',
+				controllerAs: '$ctrl',
+				size: 'lg',
 				resolve: {
 					items: function() {
 						return $ctrl.items;
 					}
 				}
-			});
-
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('modal-component dismissed at: ' + new Date());
 			});
 		};
 
@@ -289,51 +263,21 @@ angular
 			$ctrl.animationsEnabled = !$ctrl.animationsEnabled;
 		};
 	})
-	.controller('ModalDoneCtrl', function($uibModalInstance, $scope, items) {
+	.controller('ModalAddPreveligeDoneCtrl', function($uibModalInstance, $scope, items) {
 		var $ctrl = this;
-		$ctrl.items = items;
-		$ctrl.selected = {
-			item: $ctrl.items[0]
-		};
-
 		$ctrl.ok = function() {
 			$uibModalInstance.close($ctrl.selected.item);
 			$scope.$broadcast('submitPreveligeDoneModal');
 		};
-
 		$ctrl.cancel = function() {
 			$uibModalInstance.dismiss('cancel');
 		};
 	})
-	.component('modalComponent', {
-		templateUrl: 'doneModalContent.html',
-		bindings: {
-			resolve: '<',
-			close: '&',
-			dismiss: '&'
-		},
-		controller: function() {
-			var $ctrl = this;
-
-			$ctrl.$onInit = function() {
-				$ctrl.items = $ctrl.resolve.items;
-				$ctrl.selected = {
-					item: $ctrl.items[0]
-				};
-			};
-
-			$ctrl.ok = function() {
-				$ctrl.close({
-					$value: $ctrl.selected.item
-				});
-			};
-
-			$ctrl.cancel = function() {
-				$ctrl.dismiss({
-					$value: 'cancel'
-				});
-			};
-		}
+	.controller('ModalBusinessModuleInfoCtrl', function($uibModalInstance, $scope, items) {
+		var $ctrl = this;
+		$ctrl.cancel = function() {
+			$uibModalInstance.dismiss('cancel');
+		};
 	})
 	// 查询控制器
 	.controller('queryDoneFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
@@ -341,8 +285,8 @@ angular
 		$scope.queryDoneForm = {
 			businessModuleId: '',
 			businessModuleName: '',
-			ownerSys: '',
-			businessModuleType: '',
+			ownerSys: 'null',
+			businessModuleType: 'null',
 		};
 		$scope.queryDoneFormSubmit = function() {
 			// TODO $http发送请求，获取数据，写入$rootScope查询结果
@@ -376,7 +320,7 @@ angular
 			}];
 		}
 		$scope.$watch('queryDoneForm', function(current, old, scope) {
-			if (scope.queryDoneForm.businessModuleId || scope.queryDoneForm.businessModuleName) {
+			if (scope.queryDoneForm.businessModuleId || scope.queryDoneForm.businessModuleName||scope.queryDoneForm.ownerSys||scope.queryDoneForm.businessModuleType) {
 				scope.isForbid = false;
 			} else {
 				scope.isForbid = true;
@@ -393,9 +337,7 @@ angular
             $log.log('弹出框表单提交', data, $rootScope.modifiedQueryType);
         }
 	}])
-
-
-
+	
 	// 分页控制器
 	.controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {
 		$scope.totalItems = 64;

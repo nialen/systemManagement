@@ -6,7 +6,6 @@
 angular
 	.module('modifyStaff', ['ui.bootstrap'])
 	.run(['$rootScope', '$parse', '$log', function($rootScope, $parse, $log) {
-		debugger
 		var id = window.frameElement && window.frameElement.id || '',
 			obj = parent.$('#' + id).attr('data');
 		$rootScope.modifiedStaffMan = obj ? JSON.parse(obj) : {}; // 待修改的员工信息

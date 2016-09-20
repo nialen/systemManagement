@@ -70,20 +70,20 @@ angular
 	}])
 	// 查询结果控制器
 	.controller('queryOperateResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+		// 新建
+		$scope.addQueryOperate = function() {
+			parent.angular.element(parent.$('#tabs')).scope().addTab('新建权限规格', '/page/modifyOperate/modifyOperate.html', 'addQueryOperate');
+		}
 		//详情
 		$scope.infoQueryOperate = function(index) {
 			$rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
-			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
+			parent.angular.element(parent.$('#tabs')).scope().addTab('权限规格详情', '/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
 		}
 		// 修改
 		$scope.editQueryOperate = function(index) {
 			$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
-			parent.angular.element(parent.$('#tabs')).scope().addTab('权限信息', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
-		}
-		// 新建
-		$scope.addQueryOperate = function() {
-			parent.angular.element(parent.$('#tabs')).scope().addTab('新建用户', '/page/modifyOperate/modifyOperate.html', 'addQueryOperate');
-		}
+			parent.angular.element(parent.$('#tabs')).scope().addTab('修改权限规格', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
+		}		
 	}])
 	// 分页控制器
 	.controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {
