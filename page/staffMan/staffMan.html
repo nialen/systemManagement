@@ -30,8 +30,8 @@
                     </div>
                     <div class="col-xs-4">
                         <div class="form-group">
-                            <label class="control-label" for="areaId">归属地区：</label>
-                            <select class="form-control query-input" id="areaId" ng-model="queryStaffForm.areaId" ng-options="item as item.areaName for item in areaList track by item.areaId"></select>
+                            <label class="control-label" for="areaItem">归属地区：</label>
+                            <select class="form-control query-input" id="areaItem" ng-model="queryStaffForm.areaItem" ng-options="item as item.areaName for item in areaList track by item.areaId"></select>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                                     <p ng-bind="item.name"></p>
                                 </td>
                                 <td>
-                                    <p>{{item.areaId | areaIdConversionName:areaList}}</p>
+                                    <p>{{item.areaName}}</p>
                                 </td>
                                 <td>
                                     <p>{{item.state | stateConversionText}}</p>
@@ -144,8 +144,8 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label class="control-label edit-label" for="areaId">归属地区：</label>
-                                    <select class="form-control edit-input" id="areaId" ng-model="modifiedStaffMan.areaId" ng-options="item as item.areaName for item in areaList track by item.areaId"></select>
+                                    <label class="control-label edit-label" for="areaItem">归属地区：</label>
+                                    <select class="form-control edit-input" id="areaItem" ng-model="modifiedStaffMan.areaItem" ng-options="item as item.areaName for item in areaList track by item.areaId"></select>
                                 </div>
                             </div>
                         </div>

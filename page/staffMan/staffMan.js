@@ -32,13 +32,32 @@ angular
         };
 
         // 查询员工信息
-        httpMethod.queryStaffManager = function(obj) {
+        httpMethod.queryStaffManager = function(param) {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/staff/profile/queryStaffManager.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'param=' + JSON.stringify(obj)
+                data: 'param=' + JSON.stringify(param)
+            }).success(function(data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function(data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 新建员工信息
+        httpMethod.insertStaff = function(param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/staff/profile/insertStaff.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'param=' + JSON.stringify(param)
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -69,9 +88,10 @@ angular
 	.filter('areaIdConversionName', function(){
 	    return function(areaId, areaList){
 	    	var output = '';
+	    	debugger
 	    	if (areaList.length) {
 	    		areaList.map(function(item, index) {
-					if (item.areaId === areaId) {
+					if (item.areaId == areaId) {
 						output = item.areaName;
 					}
 				})
@@ -80,89 +100,102 @@ angular
 	    }
 	})
     .run(['$rootScope', function($rootScope) {
+    	$rootScope.isMock = true;
         $rootScope.staffManResultList = []; // 查询员工列表
         $rootScope.modifiedStaffMan = {}; // 待修改的员工信息
         $rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
-        $rootScope.areaList = [{
-            'areaId': '1', //地区ID
-            'areaName': '南京市', //地区名称
-            'areaCode': '025', //地区编码
-            'areaIdParent': null, //上级地区ID
-            'areaTier': '3', //地区级别
-            'areaDesc': '南京市', //地区描述
-            'commonRegionId': null,
-            'state': null, //地区状态
-            'areaNameParent': null //上级地区名称
-        }, {
-            'areaId': '2',
-            'areaName': '无锡市',
-            'areaCode': '0510',
-            'areaIdParent': null,
-            'areaTier': '3',
-            'areaDesc': '无锡市',
-            'commonRegionId': null,
-            'state': null,
-            'areaNameParent': null
-        }]; // 地区列表
+        $rootScope.areaList = []; // 地区列表
     }])
     // 查询控制器
     .controller('queryStaffFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
 
         // 获取地区列表
-        httpMethod.queryArea().then(function(data) {
-            console.log('获取地区接口成功..');
-            $scope.areaList = data.object;
-        }, function(data) {
-            console.log('获取地区接口失败..');
+        httpMethod.queryArea().then(function(rsp) {
+            $log.log('调用获取地区接口成功.');
+            $rootScope.areaList = rsp.data;
+        }, function() {
+            $log.log('调用获取地区接口失败.');
         });
+
+        if ($rootScope.isMock) {
+        	$rootScope.areaList = [{
+	            'areaId': '1', //地区ID
+	            'areaName': '南京市', //地区名称
+	            'areaCode': '025', //地区编码
+	            'areaIdParent': null, //上级地区ID
+	            'areaTier': '3', //地区级别
+	            'areaDesc': '南京市', //地区描述
+	            'commonRegionId': null,
+	            'state': null, //地区状态
+	            'areaNameParent': null //上级地区名称
+	        }, {
+	            'areaId': '2',
+	            'areaName': '无锡市',
+	            'areaCode': '0510',
+	            'areaIdParent': null,
+	            'areaTier': '3',
+	            'areaDesc': '无锡市',
+	            'commonRegionId': null,
+	            'state': null,
+	            'areaNameParent': null
+	        }];
+        }
 
         $scope.isForbid = true;
         $scope.queryStaffForm = {
             name: '', // 员工姓名
             staffNumber: '', // 员工工号
-            areaId: '', // 地区Id
-            requirePaging: true, // 是否需要分页
-            currentPage: 1, // 当前页
-            rowNumPerPage: 5 // 每页显示行数
+            areaItem: '', // 地区
         };
         $scope.queryStaffFormSubmit = function() {
+        	var param = {
+        		// name: '', // 员工姓名
+	            // staffNumber: '', // 员工工号
+	            // areaId: '', // 地区Id
+            	requirePaging: true, // 是否需要分页
+	            currentPage: '1', // 当前页
+	            rowNumPerPage: '5' // 每页显示行数
+        	};
+        	$scope.queryStaffForm.name ? param.name = $scope.queryStaffForm.name : '';
+        	$scope.queryStaffForm.staffNumber ? param.staffNumber = $scope.queryStaffForm.staffNumber : '';
+        	$scope.queryStaffForm.areaItem.areaId ? param.areaId = $scope.queryStaffForm.areaItem.areaId : '';
 
             // 查询员工信息
-            httpMethod.queryStaffManager($scope.queryStaffForm).then(function(data) {
-                console.log('查询员工信息接口成功..');
-                $rootScope.staffManResultList = data.object;
-            }, function(data) {
-                console.log('查询员工信息接口失败..');
+            httpMethod.queryStaffManager(param).then(function(rsp) {
+                $log.log('调用查询员工信息接口成功.');
+                $rootScope.staffManResultList = rsp.data.list;
+            }, function() {
+                $log.log('调用查询员工信息接口失败.');
             });
-
-            $rootScope.staffManResultList = [{
-                'partyId': '1', // 参与人ID
-                'name': '测试员A', // 中文正式名称
-                'staffName': '大王', // 员工名称
-                'areaId': '1', // 地区ID
-                'areaName': null, // 地区名称
-                'partyTypeCd': '1', // 参与人类型编码，取值范围：1－个人，2－组织'
-                'staffStatusCd': '1002', // 员工状态1000 有效 1001 停用 1002 无效
-                'identidiesTypeCd': '1', // 证件类型
-                'primaryIdentifyNum': null, // '默认证件号码'
-                'addressStr': null, // 所在地址
-                'linkTeleNumber': null, // party参与人联系电话
-                'createDt': 1427990400000, // 创建时间
-                'creator': null, // 创建人
-                'version': 1427990400000, // 最后修改时间
-                'state': '0', // '状态，取值范围：0－生效，1－失效'
-                'staffId': '1', // '员工ID，
-                'staffNumber': 'test1', // '员工工号
-                'fixedTel': null, // 固定电话
-                'mobileTel': null, // 员工移动电话 默认与party参与人联系电话相同
-                'email': null, // 电子邮箱地址
-                'remarks': null, // 备注
-                'linkNbr': null //员工电话
-            }];
-            $log.log($scope.queryStaffForm.staffNumber);
+            if ($rootScope.isMock) {
+            	$rootScope.staffManResultList = [{
+	                'partyId': '1', // 参与人ID
+	                'name': '测试员A', // 中文正式名称
+	                'staffName': '大王', // 员工名称
+	                'areaId': '1', // 地区ID
+	                'areaName': '南京市', // 地区名称
+	                'partyTypeCd': '1', // 参与人类型编码，取值范围：1－个人，2－组织'
+	                'staffStatusCd': '1002', // 员工状态1000 有效 1001 停用 1002 无效
+	                'identidiesTypeCd': '1', // 证件类型
+	                'primaryIdentifyNum': null, // '默认证件号码'
+	                'addressStr': null, // 所在地址
+	                'linkTeleNumber': null, // party参与人联系电话
+	                'createDt': 1427990400000, // 创建时间
+	                'creator': null, // 创建人
+	                'version': 1427990400000, // 最后修改时间
+	                'state': '0', // '状态，取值范围：0－生效，1－失效'
+	                'staffId': '1', // '员工ID，
+	                'staffNumber': 'test1', // '员工工号
+	                'fixedTel': null, // 固定电话
+	                'mobileTel': null, // 员工移动电话 默认与party参与人联系电话相同
+	                'email': null, // 电子邮箱地址
+	                'remarks': null, // 备注
+	                'linkNbr': null //员工电话
+	            }];
+            }
         }
         $scope.$watch('queryStaffForm', function(current, old, scope) {
-            if (scope.queryStaffForm.staffNumber || scope.queryStaffForm.name || scope.queryStaffForm.areaId) {
+            if (scope.queryStaffForm.staffNumber || scope.queryStaffForm.name || scope.queryStaffForm.areaItem) {
                 scope.isForbid = false;
             } else {
                 scope.isForbid = true;
@@ -174,8 +207,14 @@ angular
         // 修改
         $scope.editStaffMan = function(title, index) {
             $rootScope.modifiedStaffMan = $rootScope.staffManResultList[index];
+    		$rootScope.areaList.map(function(item, index) {
+				if (item.areaId == $rootScope.modifiedStaffMan.areaId) {
+					$rootScope.modifiedStaffMan.areaItem = item;
+				}
+			})
+
             $rootScope.modalTitle = title;
-            $log.log($rootScope.modifiedStaffMan, '待修改员工信息 TODO 归属地区');
+            $log.log($rootScope.modifiedStaffMan, '待修改员工信息');
             $scope.$emit('openEditStaffManModal');
         }
         // 新建
@@ -226,20 +265,38 @@ angular
         };
     })
     // 编辑员工信息控制器
-    .controller('editStaffManFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+    .controller('editStaffManFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
         $scope.$on('submitStaffManModal', function(d, data) {
             $scope.editStaffManFormSubmit(data);
         });
         $scope.$watch('modifiedStaffMan', function(current, old, scope) {
-            if (scope.modifiedStaffMan.staffJobId && scope.modifiedStaffMan.name && scope.modifiedStaffMan.areaId) {
+            if (scope.modifiedStaffMan.staffNumber && scope.modifiedStaffMan.name && scope.modifiedStaffMan.areaItem) {
                 $rootScope.isForbidSubmit = false;
             } else {
                 $rootScope.isForbidSubmit = true;
             }
         }, true);
         $scope.editStaffManFormSubmit = function(data) {
-            // TODO 获取更改之后的员工信息$rootScope.modifiedStaffMan提交接口；
-            $log.log('弹出框表单提交', data, $rootScope.modifiedStaffMan);
+            var param = {
+            	staffNumber: '', // 员工工号
+				name: '', // 名称
+				areaId: '' // 地区
+            };
+            param.staffNumber = $rootScope.modifiedStaffMan.staffNumber;
+            param.name = $rootScope.modifiedStaffMan.name;
+            param.areaId = $rootScope.modifiedStaffMan.areaItem.areaId;
+
+            // 新建员工信息
+            httpMethod.insertStaff(param).then(function(rsp) {
+                $log.log('调用新建员工信息接口成功.');
+                if (rsp.data) {
+                	$log.log('新建员工信息成功.');
+                } else {
+                	$log.log('新建员工信息失败.');
+                }
+            }, function() {
+                $log.log('调用新建员工信息接口失败.');
+            });
         }
     }])
     // 分页控制器
