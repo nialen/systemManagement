@@ -57,7 +57,26 @@ angular
                 url: httpConfig.siteUrl + '/staff/profile/insertStaff.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'param=' + JSON.stringify(param)
+                data: 'data=' + JSON.stringify(param)
+            }).success(function(data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function(data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 编辑员工信息
+        httpMethod.alertStaff = function(param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/staff/profile/alertStaff.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'data=' + JSON.stringify(param)
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -88,7 +107,6 @@ angular
 	.filter('areaIdConversionName', function(){
 	    return function(areaId, areaList){
 	    	var output = '';
-	    	debugger
 	    	if (areaList.length) {
 	    		areaList.map(function(item, index) {
 					if (item.areaId == areaId) {
@@ -100,7 +118,7 @@ angular
 	    }
 	})
     .run(['$rootScope', function($rootScope) {
-    	$rootScope.isMock = true;
+    	$rootScope.isMock = false;
         $rootScope.staffManResultList = []; // 查询员工列表
         $rootScope.modifiedStaffMan = {}; // 待修改的员工信息
         $rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
@@ -215,13 +233,13 @@ angular
 
             $rootScope.modalTitle = title;
             $log.log($rootScope.modifiedStaffMan, '待修改员工信息');
-            $scope.$emit('openEditStaffManModal');
+            $scope.$emit('openEditStaffManModal', 'alertStaff');
         }
         // 新建
         $scope.addStaffMan = function(title) {
             $rootScope.modifiedStaffMan = {};
             $rootScope.modalTitle = title;
-            $scope.$emit('openEditStaffManModal');
+            $scope.$emit('openEditStaffManModal', 'insertStaff');
         }
 
         $scope.afterFilter = $filter('stateConversionText')('newVal',2);
@@ -236,7 +254,7 @@ angular
 
         $ctrl.animationsEnabled = true;
 
-        $ctrl.open = function() {
+        $ctrl.open = function(data) {
             var modalInstance = $uibModal.open({
                 animation: $ctrl.animationsEnabled,
                 ariaLabelledBy: 'modal-title',
@@ -244,7 +262,12 @@ angular
                 templateUrl: 'myModalContent.html',
                 controller: 'ModalInstanceCtrl',
                 controllerAs: '$ctrl',
-                size: 'lg'
+                size: 'lg',
+				resolve: {
+					items: function() {
+						return data;
+					}
+				}
             });
         };
 
@@ -252,12 +275,12 @@ angular
             $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
         };
     })
-    .controller('ModalInstanceCtrl', function($uibModalInstance, $scope) {
+    .controller('ModalInstanceCtrl', function($uibModalInstance, $scope, items) {
         var $ctrl = this;
 
         $ctrl.ok = function() {
             $uibModalInstance.close();
-            $scope.$broadcast('submitStaffManModal');
+            $scope.$broadcast('submitStaffManModal', items);
         };
 
         $ctrl.cancel = function() {
@@ -277,26 +300,51 @@ angular
             }
         }, true);
         $scope.editStaffManFormSubmit = function(data) {
-            var param = {
-            	staffNumber: '', // 员工工号
-				name: '', // 名称
-				areaId: '' // 地区
-            };
-            param.staffNumber = $rootScope.modifiedStaffMan.staffNumber;
-            param.name = $rootScope.modifiedStaffMan.name;
-            param.areaId = $rootScope.modifiedStaffMan.areaItem.areaId;
+        	if (data === 'insertStaff') {
+        		var param = {
+	            	staffNumber: '', // 员工工号
+					name: '', // 名称
+					areaId: '' // 地区
+	            };
+	            param.staffNumber = $rootScope.modifiedStaffMan.staffNumber;
+	            param.name = $rootScope.modifiedStaffMan.name;
+	            param.areaId = $rootScope.modifiedStaffMan.areaItem.areaId;
 
-            // 新建员工信息
-            httpMethod.insertStaff(param).then(function(rsp) {
-                $log.log('调用新建员工信息接口成功.');
-                if (rsp.data) {
-                	$log.log('新建员工信息成功.');
-                } else {
-                	$log.log('新建员工信息失败.');
-                }
-            }, function() {
-                $log.log('调用新建员工信息接口失败.');
-            });
+	            // 新建员工信息
+	            httpMethod.insertStaff(param).then(function(rsp) {
+	                $log.log('调用新建员工信息接口成功.');
+	                if (rsp.data) {
+	                	$log.log('新建员工信息成功.');
+	                } else {
+	                	$log.log('新建员工信息失败.');
+	                }
+	            }, function() {
+	                $log.log('调用新建员工信息接口失败.');
+	            });
+        	} else if (data === 'alertStaff') {
+        		var param = {
+        			staffId: '',//员工Id
+	            	staffNumber: '', // 员工工号
+					name: '', // 名称
+					areaId: '' // 地区
+	            };
+	            param.staffId = $rootScope.modifiedStaffMan.staffId;
+	            param.staffNumber = $rootScope.modifiedStaffMan.staffNumber;
+	            param.name = $rootScope.modifiedStaffMan.name;
+	            param.areaId = $rootScope.modifiedStaffMan.areaItem.areaId;
+
+	            // 修改员工信息
+	            httpMethod.alertStaff(param).then(function(rsp) {
+	                $log.log('调用修改员工信息接口成功.');
+	                if (rsp.data) {
+	                	$log.log('修改员工信息成功.');
+	                } else {
+	                	$log.log('修改员工信息失败.');
+	                }
+	            }, function() {
+	                $log.log('调用修改员工信息接口失败.');
+	            });
+        	}
         }
     }])
     // 分页控制器
