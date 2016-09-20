@@ -11,10 +11,10 @@
 </head>
 
 <body ng-app="staffManModule">
-    <div class="staff-man">
+    <div class="staff-man" ng-controller="queryStaffFormCtrl">
         <!-- 查询 -->
         <div class="staff-man-query">
-            <form name="queryStaff" ng-submit="queryStaffFormSubmit()" ng-controller="queryStaffFormCtrl" class="form-inline" role="form">
+            <form name="queryStaff" ng-submit="queryStaffFormSubmit()" class="form-inline" role="form">
                 <div class="row mb10">
                     <div class="col-xs-4">
                         <div class="form-group">
@@ -111,7 +111,7 @@
                     </table>
                 </div>
                 <div ng-controller="paginationCtrl" class="text-center">
-                    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                    <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
                 </div>
             </div>
             <script type="text/ng-template" id="myModalContent.html">

@@ -5,6 +5,13 @@
 
 angular
     .module('staffManModule', ['ui.bootstrap'])
+    .run(['$rootScope', function($rootScope) {
+    	$rootScope.isMock = false; // 是否MOCK数据
+        $rootScope.staffManResultList = []; // 查询员工列表
+        $rootScope.modifiedStaffMan = {}; // 待修改的员工信息
+        $rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
+        $rootScope.areaList = []; // 地区列表
+    }])
     .factory('httpMethod', ['$http', '$q', function($http, $q) {
         var httpMethod = {};
         var httpConfig = {
@@ -117,15 +124,14 @@ angular
 	    	return output;
 	    }
 	})
-    .run(['$rootScope', function($rootScope) {
-    	$rootScope.isMock = false;
-        $rootScope.staffManResultList = []; // 查询员工列表
-        $rootScope.modifiedStaffMan = {}; // 待修改的员工信息
-        $rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
-        $rootScope.areaList = []; // 地区列表
-    }])
     // 查询控制器
     .controller('queryStaffFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+    	
+    	// 查询结果分页信息
+    	$scope.requirePaging = true, // 是否需要分页
+        $scope.currentPage = 1, // 当前页
+        $scope.rowNumPerPage = 4, // 每页显示行数
+        $scope.totalNum = 0 // 总条数
 
         // 获取地区列表
         httpMethod.queryArea().then(function(rsp) {
@@ -165,14 +171,15 @@ angular
             staffNumber: '', // 员工工号
             areaItem: '', // 地区
         };
-        $scope.queryStaffFormSubmit = function() {
+        $scope.queryStaffFormSubmit = function(currentPage) {
+        	$log.log($scope.currentPage, '$scope.currentPage');
         	var param = {
         		// name: '', // 员工姓名
 	            // staffNumber: '', // 员工工号
 	            // areaId: '', // 地区Id
-            	requirePaging: true, // 是否需要分页
-	            currentPage: '1', // 当前页
-	            rowNumPerPage: '5' // 每页显示行数
+            	requirePaging: $scope.requirePaging, // 是否需要分页
+	            currentPage: currentPage || $scope.currentPage, // 当前页
+	            rowNumPerPage: $scope.rowNumPerPage // 每页显示行数
         	};
         	$scope.queryStaffForm.name ? param.name = $scope.queryStaffForm.name : '';
         	$scope.queryStaffForm.staffNumber ? param.staffNumber = $scope.queryStaffForm.staffNumber : '';
@@ -182,6 +189,10 @@ angular
             httpMethod.queryStaffManager(param).then(function(rsp) {
                 $log.log('调用查询员工信息接口成功.');
                 $rootScope.staffManResultList = rsp.data.list;
+                $scope.totalNum = rsp.data.totalNum;
+                if ($rootScope.isMock) {
+                	$scope.totalNum = 10;
+                }
             }, function() {
                 $log.log('调用查询员工信息接口失败.');
             });
@@ -232,7 +243,6 @@ angular
 			})
 
             $rootScope.modalTitle = title;
-            $log.log($rootScope.modifiedStaffMan, '待修改员工信息');
             $scope.$emit('openEditStaffManModal', 'alertStaff');
         }
         // 新建
@@ -348,19 +358,14 @@ angular
         }
     }])
     // 分页控制器
-    .controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {
-        $scope.totalItems = 64;
-        $scope.currentPage = 4;
-
+    .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+    	$scope.maxSize = 10;
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
 
         $scope.pageChanged = function() {
+        	$scope.queryStaffFormSubmit($scope.currentPage);
             $log.log('Page changed to: ' + $scope.currentPage);
         };
-
-        $scope.maxSize = 5;
-        $scope.bigTotalItems = 175;
-        $scope.bigCurrentPage = 1;
     }]);
