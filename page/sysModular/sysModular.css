@@ -178,3 +178,20 @@
 	float: left;
 
 }
+
+.detail_table{
+	width: 100%;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+}
+.detail_table tr td{
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	padding:10px;
+	height: 12px;
+	line-height: 12px;
+}
+.detail_table_left{
+	text-align: right;
+	font-weight: bold;
+}
