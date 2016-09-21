@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>系统管理平台-员工管理</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
     <link href="../../lib/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/common.css">
@@ -56,9 +57,9 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <button ng-click="addStaffMan('新建员工')" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
-                        <button ng-click="demo()" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
-                        <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
-                        <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                        <button ng-click="uLockStaffManagerBatch()" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
+                        <button ng-click="lockStaffManagerBatch()" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
+                        <button ng-click="batchCancelStaff()" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
                         <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60f;</i> Excel批量导入</button>
                     </div>
                 </div>
@@ -80,7 +81,7 @@
                         <tbody>
                             <tr ng-repeat="item in staffManResultList">
                                 <td>
-                                    <input type="checkbox" name="checkbox{{$index}}">
+                                    <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
                                 </td>
                                 <td>
                                     <p ng-bind="item.staffId"></p>
@@ -92,16 +93,16 @@
                                     <p ng-bind="item.name"></p>
                                 </td>
                                 <td>
-                                    <p>{{item.areaName}}</p>
+                                    <p ng-bind="item.areaName"></p>
                                 </td>
                                 <td>
-                                    <p>{{item.state | stateConversionText}}</p>
+                                    <p ng-bind="item.staffStatusCd | stateConversionText"></p>
                                 </td>
                                 <td>
-                                    <p>{{item.createDt | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                                    <p ng-bind="item.createDt | date:'yyyy-MM-dd HH:mm:ss'"></p>
                                 </td>
                                 <td>
-                                    <p>{{item.version | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                                    <p ng-bind="item.version | date:'yyyy-MM-dd HH:mm:ss'"></p>
                                 </td>
                                 <td>
                                     <button ng-click="editStaffMan('修改员工', $index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
@@ -166,6 +167,7 @@
     <script src="../../lib/bootstrap.min.js"></script>
     <script src="../../lib/ui-bootstrap.js"></script>
     <script src="../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
+    <script src="../../lib/sweetalert.min.js"></script>
     <script src="staffMan.js"></script>
 </body>
 

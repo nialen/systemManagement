@@ -118,3 +118,24 @@ body {
 .modal-footer {
 	text-align: center !important;
 }
+
+.sweet-alert {
+	top: 30%;
+}
+.sweet-alert h2 {
+	font-size: 20px;
+	margin: 15px 0 8px;
+	line-height: 30px;
+}
+.sweet-alert button {
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: normal !important;
+}
+.la-ball-fall > div {
+	width: 8px;
+	height: 8px;
+}
+.confirm {
+	background-color: #ffaa00 !important;
+}
