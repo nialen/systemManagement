@@ -89,6 +89,23 @@ angular
             $scope.$emit('openAddAuthorityModal');
         }
     }])
+    .controller('assignedRoleListCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+        // MOCK 已有角色列表
+        $scope.assignedRoleList = [{
+            authorityId: '10103', // 权限规格ID
+            authorityName: '采购入库', // 权限规格名称
+            authorityCode: '70342', // 权限规格编码
+            authorityType: '进销存管理', // 权限类型
+            describe: '', // 描述
+            createDate: '2016-01-12', // 分配时间
+            authorityRole: '采购员', // 权限管理角色
+        }];
+
+        // 添加新角色
+        $scope.addRole = function() {
+            $scope.$emit('openAddRoleModal');
+        }
+    }])
     .controller('authorityDimensionListCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
         // 入参
         var obj = {
@@ -112,12 +129,12 @@ angular
         }];
 
         // 权限维度-设置按钮
-        $scope.setDimension = function() {
-            $scope.$emit('openSetDimensionModal');
+        $scope.setDimension = function(index) {
+            $scope.$emit('openSetDimensionModal', $scope.authorityDimensionList[index]);
         }
         // 权限维度-查看按钮
-        $scope.viewDimension = function() {
-            $scope.$emit('openViewDimensionModal');
+        $scope.viewDimension = function(index) {
+            $scope.$emit('openViewDimensionModal', $scope.authorityDimensionList[index]);
         }
     }])
     // 添加权限弹框
@@ -170,7 +187,7 @@ angular
 
         $ctrl.animationsEnabled = true;
 
-        $ctrl.setDimensionModal = function() {
+        $ctrl.setDimensionModal = function(data) {
             var modalInstance = $uibModal.open({
                 animation: $ctrl.animationsEnabled,
                 ariaLabelledBy: 'modal-title',
@@ -178,11 +195,16 @@ angular
                 templateUrl: 'setDimensionModalContent.html',
                 controller: 'ModalSetDimensionCtrl',
                 controllerAs: '$ctrl',
-                size: 'lg'
+                size: 'lg',
+                resolve: {
+                    items: function() {
+                        return data;
+                    }
+                }
             });
         };
 
-        $ctrl.viewDimensionModal = function() {
+        $ctrl.viewDimensionModal = function(data) {
             var modalInstance = $uibModal.open({
                 animation: $ctrl.animationsEnabled,
                 ariaLabelledBy: 'modal-title',
@@ -190,7 +212,12 @@ angular
                 templateUrl: 'viewDimensionModalContent.html',
                 controller: 'ModalViewDimensionCtrl',
                 controllerAs: '$ctrl',
-                size: 'lg'
+                size: 'lg',
+                resolve: {
+                    items: function() {
+                        return data;
+                    }
+                }
             });
         };
 
@@ -198,7 +225,7 @@ angular
             $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
         };
     })
-    .controller('ModalSetDimensionCtrl', function($uibModalInstance, $scope, $log, httpMethod) {
+    .controller('ModalSetDimensionCtrl', function($uibModalInstance, $scope, $log, httpMethod, items) {
         // 获取所有权限维度列表
         var obj = {
             'operationSpecTypeCd': '1', // 类型编码
@@ -212,7 +239,7 @@ angular
         $log.log(roleList, 'TODO 获取所有权限维度列表');
 
         var $ctrl = this;
-
+        $ctrl.authorityDimensionItem = items;
         $ctrl.ok = function() {
             $uibModalInstance.close();
             $scope.$broadcast('submitSetDimensionModal');
@@ -222,12 +249,50 @@ angular
             $uibModalInstance.dismiss('cancel');
         };
     })
-    .controller('ModalViewDimensionCtrl', function($uibModalInstance, $scope) {
+    .controller('ModalViewDimensionCtrl', function($uibModalInstance, $scope, items) {
+        var $ctrl = this;
+
+        $ctrl.authorityDimensionItem = items;
+        $ctrl.ok = function() {
+            $uibModalInstance.close();
+            $scope.$broadcast('submitViewAuthorityModal');
+        };
+
+        $ctrl.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
+    })
+    // 添加角色弹框
+    .controller('addRoleModalCtrl', function($scope, $rootScope, $uibModal, $log) {
+        var $ctrl = this;
+        $scope.$on('openAddRoleModal', function(d, data) {
+            $ctrl.open(data);
+        });
+
+        $ctrl.animationsEnabled = true;
+
+        $ctrl.open = function() {
+            var modalInstance = $uibModal.open({
+                animation: $ctrl.animationsEnabled,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'addRoleModal.html',
+                controller: 'ModalRoleCtrl',
+                controllerAs: '$ctrl',
+                size: 'lg'
+            });
+        };
+
+        $ctrl.toggleAnimation = function() {
+            $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
+        };
+    })
+    .controller('ModalRoleCtrl', function($uibModalInstance, $scope, $log, httpMethod) {
         var $ctrl = this;
 
         $ctrl.ok = function() {
             $uibModalInstance.close();
-            $scope.$broadcast('submitViewAuthorityModal');
+            $scope.$broadcast('submitSetDimensionModal');
         };
 
         $ctrl.cancel = function() {
@@ -268,6 +333,47 @@ angular
         // 选中索引
         $scope.selectStaffMan = function(index) {
             $rootScope.checkedStaffMan = $rootScope.staffManResultList[index];
+        }
+        $scope.$on('submitAddAuthorityModal', function(d, data) {
+            $scope.selectStaffManFormSubmit(data);
+        });
+        $scope.selectStaffManFormSubmit = function(data) {
+            // TODO 提交接口保存权限
+            $log.log($rootScope.checkedStaffMan, '选中的表单数据');
+        }
+    }])
+    // 角色查询控制器
+    .controller('queryRoleFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+        $scope.authorityTypeList = ['进销存管理'];
+        $scope.isForbid = true;
+        $scope.queryAuthorityForm = {
+            authorityCode: '',
+            authorityName: '',
+            authorityType: null,
+        };
+        $scope.queryRoleFormSubmit = function() {
+            // TODO $http发送请求，获取数据，写入$rootScope查询结果
+            $rootScope.roleResultList = [{
+                authorityId: '10101', // 角色ID
+                authorityName: '采购入库', // 角色名称
+                describe: '采购出入库操作权限', // 描述
+                createDate: '2016-01-12', // 生效时间
+                authorityRole: '采购员', // 失效时间
+            }];
+        }
+        $scope.$watch('queryAuthorityForm', function(current, old, scope) {
+            if (scope.queryAuthorityForm.authorityCode || scope.queryAuthorityForm.authorityName || scope.queryAuthorityForm.authorityType) {
+                scope.isForbid = false;
+            } else {
+                scope.isForbid = true;
+            }
+        }, true);
+    }])
+    // 角色查询结果控制器
+    .controller('roleResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+        // 选中索引
+        $scope.selectStaffMan = function(index) {
+            $rootScope.checkedStaffMan = $rootScope.roleResultList[index];
         }
         $scope.$on('submitAddAuthorityModal', function(d, data) {
             $scope.selectStaffManFormSubmit(data);
