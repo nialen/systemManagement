@@ -24,11 +24,18 @@ angular
             }
         };
     })
-    // tabs
+    // tabs标签
     .controller('tabsCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
         var tabs = [];
         $scope.tabs = tabs;
         $scope.selectedIndex = 0;
+        /**
+         * 添加Tab标签
+         * @title 标签名称
+         * @view URL
+         * @id DOM的ID
+         * @data 传递给DOM的数据
+         */
         $scope.addTab = function(title, view, id, data) {
             var isHas = tabs.some(function(item, index) {
                 return item.title === title
@@ -49,23 +56,38 @@ angular
                         selectedIndex = index;
                     }
                 })
+                tabs[selectedIndex] = {
+                    title: title,
+                    url: view,
+                    id: id || '',
+                    data: data || ''
+                };
                 $scope.changeTab(selectedIndex);
             }
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
         };
+        /**
+         * 删除Tab标签
+         * @index 需要删除的索引
+         */
         $scope.removeTab = function(index) {
             if (index <= $scope.selectedIndex) {
                 $scope.changeTab($scope.selectedIndex ? $scope.selectedIndex - 1 : $scope.selectedIndex);
             }
             tabs.splice(index, 1);
         };
+        /**
+         * 切换展示的Tab索引
+         * @index 切换后的索引值
+         */
         $scope.changeTab = function(selectedIndex) {
             $scope.selectedIndex = selectedIndex;
         }
     }])
     // 左侧菜单
+    // TODO factory 接口获取数据
     .controller('accordionCtrl', ['$scope', function($scope) {
         $scope.tabsTitle = {
             title: '菜单导航',

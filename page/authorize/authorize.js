@@ -29,7 +29,7 @@ angular
             });
         };
         // 获取权限列表
-        httpMethod.getJurisdiction = function(obj) {
+        httpMethod.getAuthorityDimension = function(obj) {
             $http({
                 url: httpConfig.siteUrl + "privilege/profile/queryOperationSpecType.action",
                 method: "POST",
@@ -63,25 +63,25 @@ angular
         };
         // 获取已有角色列表
         var roleList = httpMethod.getRole(obj);
-        $log.log(roleList, 'roleList');
+        $log.log(roleList, 'TODO 获取已有角色列表');
 
-        // TODO 等待接口
+        // MOCK 已有角色列表
         $scope.assignedAuthorityList = [{
-            authorityId: '10101', //权限规格ID
-            authorityName: '采购入库', //权限规格名称
-            authorityCode: '70342', //权限规格编码
-            authorityType: '进销存管理', //权限类型
-            describe: '', //描述
-            createDate: '2016-01-12', //分配时间
-            authorityRole: '采购员', //权限管理角色
+            authorityId: '10101', // 权限规格ID
+            authorityName: '采购入库', // 权限规格名称
+            authorityCode: '70342', // 权限规格编码
+            authorityType: '进销存管理', // 权限类型
+            describe: '', // 描述
+            createDate: '2016-01-12', // 分配时间
+            authorityRole: '采购员', // 权限管理角色
         }, {
-            authorityId: '10211', //权限规格ID
-            authorityName: '采购入库', //权限规格名称
-            authorityCode: '70672', //权限规格编码
-            authorityType: '进销存管理', //权限类型
-            describe: '', //描述
-            createDate: '2016-02-20', //分配时间
-            authorityRole: '采购员', //权限管理角色
+            authorityId: '10211', // 权限规格ID
+            authorityName: '采购入库', // 权限规格名称
+            authorityCode: '70672', // 权限规格编码
+            authorityType: '进销存管理', // 权限类型
+            describe: '', // 描述
+            createDate: '2016-02-20', // 分配时间
+            authorityRole: '采购员', // 权限管理角色
         }];
 
         // 添加新权限
@@ -99,21 +99,25 @@ angular
             'rowNumPerPage': '10', // 每页展示行数
             'totalRowNum': '0' // 总行数
         };
-        // 获取已有角色列表
-        var roleList = httpMethod.getRole(obj);
-        $log.log(roleList, 'roleList');
+        // 获取已有权限维度列表
+        var roleList = httpMethod.getAuthorityDimension(obj);
+        $log.log(roleList, 'TODO 获取已有权限维度列表');
 
-        // TODO 等待接口
+        // MOCK 已有权限维度列表
         $scope.authorityDimensionList = [{
-            dimensionCode: '10101', //权限维度编码
-            dimensionName: '仓库', //权限维度名称
-            dynamicSQL: '', //动态SQL
-            dimensionValue: ['仓库1', '仓库2'], //维度值
+            dimensionCode: '10101', // 权限维度编码
+            dimensionName: '仓库', // 权限维度名称
+            dynamicSQL: '', // 动态SQL
+            dimensionValue: ['仓库1', '仓库2'], // 维度值
         }];
 
-        // 权限维度设置
+        // 权限维度-设置按钮
         $scope.setDimension = function() {
             $scope.$emit('openSetDimensionModal');
+        }
+        // 权限维度-查看按钮
+        $scope.viewDimension = function() {
+            $scope.$emit('openViewDimensionModal');
         }
     }])
     // 添加权限弹框
@@ -146,7 +150,7 @@ angular
 
         $ctrl.ok = function() {
             $uibModalInstance.close();
-            $scope.$broadcast('submitSetDimensionModal');
+            $scope.$broadcast('submitAddAuthorityModal');
         };
 
         $ctrl.cancel = function() {
@@ -157,12 +161,16 @@ angular
     .controller('authorityDimensionModalCtrl', function($scope, $rootScope, $uibModal, $log) {
         var $ctrl = this;
         $scope.$on('openSetDimensionModal', function(d, data) {
-            $ctrl.open(data);
+            $ctrl.setDimensionModal(data);
+        });
+
+        $scope.$on('openViewDimensionModal', function(d, data) {
+            $ctrl.viewDimensionModal(data);
         });
 
         $ctrl.animationsEnabled = true;
 
-        $ctrl.open = function() {
+        $ctrl.setDimensionModal = function() {
             var modalInstance = $uibModal.open({
                 animation: $ctrl.animationsEnabled,
                 ariaLabelledBy: 'modal-title',
@@ -174,16 +182,52 @@ angular
             });
         };
 
+        $ctrl.viewDimensionModal = function() {
+            var modalInstance = $uibModal.open({
+                animation: $ctrl.animationsEnabled,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'viewDimensionModalContent.html',
+                controller: 'ModalViewDimensionCtrl',
+                controllerAs: '$ctrl',
+                size: 'lg'
+            });
+        };
+
         $ctrl.toggleAnimation = function() {
             $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
         };
     })
-    .controller('ModalSetDimensionCtrl', function($uibModalInstance, $scope) {
+    .controller('ModalSetDimensionCtrl', function($uibModalInstance, $scope, $log, httpMethod) {
+        // 获取所有权限维度列表
+        var obj = {
+            'operationSpecTypeCd': '1', // 类型编码
+            'operationSpecTypeName': '', // 权限类型名称
+            'requirePaging': 'true', // 是否需要分页
+            'currentPage': '1', // 当前页
+            'rowNumPerPage': '10', // 每页展示行数
+            'totalRowNum': '0' // 总行数
+        };
+        var roleList = httpMethod.getRole(obj);
+        $log.log(roleList, 'TODO 获取所有权限维度列表');
+
         var $ctrl = this;
 
         $ctrl.ok = function() {
             $uibModalInstance.close();
-            $scope.$broadcast('submitAddAuthorityModal');
+            $scope.$broadcast('submitSetDimensionModal');
+        };
+
+        $ctrl.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
+    })
+    .controller('ModalViewDimensionCtrl', function($uibModalInstance, $scope) {
+        var $ctrl = this;
+
+        $ctrl.ok = function() {
+            $uibModalInstance.close();
+            $scope.$broadcast('submitViewAuthorityModal');
         };
 
         $ctrl.cancel = function() {
@@ -202,13 +246,13 @@ angular
         $scope.queryAuthorityFormSubmit = function() {
             // TODO $http发送请求，获取数据，写入$rootScope查询结果
             $rootScope.staffManResultList = [{
-                authorityId: '10101', //权限规格ID
-                authorityName: '采购入库', //权限规格名称
-                authorityCode: '70342', //权限规格编码
-                authorityType: '进销存管理', //权限类型
-                describe: '采购出入库操作权限', //描述
-                createDate: '2016-01-12', //分配时间
-                authorityRole: '采购员', //权限管理角色
+                authorityId: '10101', // 权限规格ID
+                authorityName: '采购入库', // 权限规格名称
+                authorityCode: '70342', // 权限规格编码
+                authorityType: '进销存管理', // 权限类型
+                describe: '采购出入库操作权限', // 描述
+                createDate: '2016-01-12', // 分配时间
+                authorityRole: '采购员', // 权限管理角色
             }];
         }
         $scope.$watch('queryAuthorityForm', function(current, old, scope) {
