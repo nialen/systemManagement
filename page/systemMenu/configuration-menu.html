@@ -1,0 +1,25 @@
+<div class="accordion">
+	<ul id="accordion-tabs">
+	    <li class="accordion-tabs" ng-repeat="item in menuTree">
+	    	<div class="group-title">
+	    		<input type="checkbox" name="group-{{$index}}" id="group-{{$index}}">
+	        	<label for="group-{{$index}}">{{item.menu_name}}</label>
+	        	<div class="operation-set">
+	        		<i class="btn-item iconfont" ng-click="addMenu($index)">&#xe60e;</i>
+	        		<i class="btn-item iconfont" ng-click="editMenu($index)">&#xe61f;</i>
+	        		<i class="btn-item iconfont" ng-click="delMenu($index)">&#xe610;</i>
+	        	</div>
+	    	</div>
+	        <ul style="display:none">
+	            <li class="accordion-tabs-list" ng-repeat="i in item.childMenu" ng-mouseover="">
+	            	{{i.menu_name}}
+	            	<div class="operation-set">
+	            		<!-- <i class="btn-item iconfont" ng-click="addMenu($index)">&#xe60e;</i> -->
+	            		<i class="btn-item iconfont" ng-click="editMenu($index)">&#xe61f;</i>
+	            		<i class="btn-item iconfont" ng-click="delMenu($index)">&#xe610;</i>
+	            	</div>
+	            </li>
+	        </ul>
+	    </li>
+	</ul>
+</div>
