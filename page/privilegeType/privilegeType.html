@@ -26,11 +26,11 @@
                     <div class="col-xs-5">
                         <div class="form-group">
                             <label class="control-label" for="name">权限类型名称：</label>
-                            <input type="input" id="name" class="form-control query-input" ng-model="queryTypeForm.name">
+                            <input type="input" id="name" class="form-control query-input" ng-model="queryTypeForm.operationSpecTypeName">
                         </div>
                     </div>
                     <div class="col-xs-2 text-right">
-                         <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                         <button type="submit" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
                     </div>
                 </div>
             </form>
@@ -72,7 +72,7 @@
                                     <p ng-bind="item.operationSpecTypeCd"></p>
                                 </td>
                                 <td>
-                                    <p ng-bind="item.name"></p>
+                                    <p ng-bind="item.operationSpecTypeName"></p>
                                 </td>
                                 <td>
                                     <p ng-bind="item.operationSpecCdPrefix"></p>
@@ -88,7 +88,7 @@
                     </table>
                 </div>
                 <div ng-controller="paginationCtrl" class="text-center">
-                    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                    <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
                 </div>
             </div>
             <script type="text/ng-template" id="myModalContent.html">
@@ -102,7 +102,7 @@
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label class="control-label edit-label" for="operationSpecTypeCd">权限类型编码：</label>
-                                    <input type="input" id="operationSpecTypeCd" class="form-control edit-input" ng-model="modifiedQueryType.operationSpecTypeCd" disabled>
+                                    <input type="input" id="operationSpecTypeCd" class="form-control edit-input" ng-model="modifiedQueryType.operationSpecTypeCd" >
                                 </div>
                             </div>
                             <div class="col-xs-6">
@@ -115,7 +115,7 @@
                         <div class="row mb10">
                             <div class="form-group col-xs-6">
                                 <label class="control-label edit-label" for="name">权限类型名称：</label>
-                                <input type="input" id="name" class="form-control edit-input" ng-model="modifiedQueryType.name">
+                                <input type="input" id="name" class="form-control edit-input" ng-model="modifiedQueryType.operationSpecTypeName">
                             </div>
                         </div>
                         <div class="row ">
