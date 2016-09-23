@@ -11,12 +11,12 @@
 	        	</div>
 	    	</div>
 	        <ul style="display:none">
-	            <li class="accordion-tabs-list" ng-repeat="i in item.childMenu" ng-mouseover="">
+	            <li class="accordion-tabs-list" ng-repeat="i in item.childMenu">
 	            	{{i.menu_name}}
 	            	<div class="operation-set">
 	            		<!-- <i class="btn-item iconfont" ng-click="addMenu($index)">&#xe60e;</i> -->
-	            		<i class="btn-item iconfont" ng-click="editMenu($index)">&#xe61f;</i>
-	            		<i class="btn-item iconfont" ng-click="delMenu($index)">&#xe610;</i>
+	            		<i class="btn-item iconfont" ng-click="editMenu($index, $parent.$index)">&#xe61f;</i>
+	            		<i class="btn-item iconfont" ng-click="delMenu($index, $parent.$index)">&#xe610;</i>
 	            	</div>
 	            </li>
 	        </ul>

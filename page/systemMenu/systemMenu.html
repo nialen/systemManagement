@@ -19,33 +19,33 @@
                 <p class="title-cn">当前已配置的菜单</p>
                 <p class="title-en">Configuration menu</p>
             </div>
-            <accordion-list-directive lists="lists" value="value" add-tab="addTab()"></accordion-list-directive>
-            <div class="system-menu-btns text-center">
-                <button class="btn btn-sm btn-add">添加一级菜单</button>
-            </div>
+            <accordion-list-directive lists="lists" value="value"></accordion-list-directive>
+            <!--<div class="system-menu-btns text-center">-->
+                <!--<button class="btn btn-sm btn-add">添加一级菜单</button>-->
+            <!--</div>-->
         </div>
         <div class="configuration-edit fn-right" ng-controller="configurationEditFormCtrl">
             <form name="configurationEdit" ng-submit="configurationEditFormSubmit()" class="form-inline" role="form">
                 <div class="row mb10">
                     <label class="control-label edit-label" for="sysMenuId">系统菜单ID：</label>
-                    <input type="input" id="sysMenuId" class="form-control edit-input" ng-model="configurationEditForm.sysMenuId" required>
+                    <input type="input" id="sysMenuId" class="form-control edit-input" ng-model="choiceMenu.menu_id" disabled>
                 </div>
                 <div class="row mb10">
                     <label class="control-label edit-label" for="sysMenuName">菜单名称：</label>
-                    <input type="input" id="sysMenuName" class="form-control edit-input" ng-model="configurationEditForm.sysMenuName" required>
+                    <input type="input" id="sysMenuName" class="form-control edit-input" ng-model="choiceMenu.menu_name" required>
                 </div>
                 <div class="row mb10">
                     <label class="control-label edit-label" for="orderSeq">展现顺序：</label>
-                    <input type="input" id="orderSeq" class="form-control edit-input" ng-model="configurationEditForm.orderSeq" required>
+                    <input type="input" id="orderSeq" class="form-control edit-input" ng-model="choiceMenu.orderSeq" required>
                 </div>
                 <div class="row mb10" ng-controller="selectSysModularIdModalCtrl as $ctrl">
                     <label class="control-label edit-label" for="sysModularId">业务模块：</label>
-                    <input type="input" id="sysModularId" class="form-control select-input" ng-model="sysModularId" disabled required>
-                    <button type="button" ng-click="checkSysModularId()" class="btn btn-sm btn-select">选择</button>
+                    <input type="input" id="sysModularId" class="form-control select-input" ng-model="choiceMenu.sysModularName" disabled>
+                    <button type="button" ng-click="checkSysModularId()" class="btn btn-sm btn-select" ng-disabled="isDisableSysModular">选择</button>
                 </div>
                 <div class="row mb10">
                     <label class="control-label edit-label" for="iconNew">图标路径：</label>
-                    <input type="input" id="iconNew" class="form-control edit-input" ng-model="configurationEditForm.iconNew" required>
+                    <input type="input" id="iconNew" class="form-control edit-input" ng-model="choiceMenu.iconNew" ng-disabled="isDisableIcon">
                 </div>
                 <div class="row">
                     <div class="col-xs-12 text-center">

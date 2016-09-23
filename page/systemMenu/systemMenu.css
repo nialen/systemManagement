@@ -32,10 +32,10 @@
 }
 /* 菜单手风琴 */
 .accordion {
-	min-height: 210px;
-	max-height: 573px;
+	min-height: 270px;
+	max-height: 622px;
 	padding: 10px 0;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 .accordion-tabs .group-title {
 	position: relative;
