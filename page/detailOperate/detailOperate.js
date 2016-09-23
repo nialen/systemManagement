@@ -25,7 +25,7 @@ angular
 
 	// 权限维度查询控制器
 	.controller('preveligeDimensionFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-		$scope.isForbid = false;	
+		// $scope.isForbid = false;	
 		$rootScope.preveligeDimensionResultList = [{
 			dimensionCode:'10101',
        		dimensionName:'地区',
@@ -43,7 +43,7 @@ angular
 	}])
 	// 权限可操作查询控制器
 	.controller('preveligeDoneFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-		$scope.isForbid = true;
+		// $scope.isForbid = true;
 		$rootScope.preveligeDoneResultList = [{
 			businessModuleId:'10101',
        		businessModuleName:'采购入库',
