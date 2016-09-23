@@ -4,16 +4,163 @@
 <head>
     <meta charset="UTF-8">
     <title>系统管理平台-系统菜单设置</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
     <link href="../../lib/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="systemMenu.css">
 </head>
-
-<body ng-app="systemMenu">
-	<div class="system-menu">
-
+<body ng-app="systemMenuModule">
+    <div class="system-menu fn-clear">
+        <div class="configuration-menu fn-left" ng-controller="configurationMenu">
+            <div class="system-menu-title">
+                <img src="../../images/icon_systemMenu.png">
+                <p class="title-cn">当前已配置的菜单</p>
+                <p class="title-en">Configuration menu</p>
+            </div>
+            <accordion-list-directive lists="lists" value="value" add-tab="addTab()"></accordion-list-directive>
+            <div class="system-menu-btns text-center">
+                <button class="btn btn-sm btn-add">添加一级菜单</button>
+            </div>
+        </div>
+        <div class="configuration-edit fn-right" ng-controller="configurationEditFormCtrl">
+            <form name="configurationEdit" ng-submit="configurationEditFormSubmit()" class="form-inline" role="form">
+                <div class="row mb10">
+                    <label class="control-label edit-label" for="sysMenuId">系统菜单ID：</label>
+                    <input type="input" id="sysMenuId" class="form-control edit-input" ng-model="configurationEditForm.sysMenuId" required>
+                </div>
+                <div class="row mb10">
+                    <label class="control-label edit-label" for="sysMenuName">菜单名称：</label>
+                    <input type="input" id="sysMenuName" class="form-control edit-input" ng-model="configurationEditForm.sysMenuName" required>
+                </div>
+                <div class="row mb10">
+                    <label class="control-label edit-label" for="orderSeq">展现顺序：</label>
+                    <input type="input" id="orderSeq" class="form-control edit-input" ng-model="configurationEditForm.orderSeq" required>
+                </div>
+                <div class="row mb10" ng-controller="selectSysModularIdModalCtrl as $ctrl">
+                    <label class="control-label edit-label" for="sysModularId">业务模块：</label>
+                    <input type="input" id="sysModularId" class="form-control select-input" ng-model="sysModularId" disabled required>
+                    <button type="button" ng-click="checkSysModularId()" class="btn btn-sm btn-select">选择</button>
+                </div>
+                <div class="row mb10">
+                    <label class="control-label edit-label" for="iconNew">图标路径：</label>
+                    <input type="input" id="iconNew" class="form-control edit-input" ng-model="configurationEditForm.iconNew" required>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <button type="submit" ng-disabled="!configurationEdit.$valid" class="btn btn-submit">确定</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+            <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>业务模块选择</h3>
+        </div>
+        <div class="modal-body" id="modal-body" ng-controller="queryStaffFormCtrl">
+            <!-- 查询 -->
+            <div class="staff-man-query">
+                <form name="querySysForm" ng-submit="querySysFormSubmit()" class="form-inline" role="form">
+                    <div class="row mb10">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label sys_label" for="sysId">业务模块ID：</label>
+                                <input type="input" id="sysId" class="form-control query-input" ng-model="querySysForm.sysModularId">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label sys_label" for="sysName">业务模块名称：</label>
+                                <input type="input" id="sysName" class="form-control query-input" ng-model="querySysForm.name">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label sys_label" for="modularTypeItem">业务模块类型：</label>
+                                <select class="form-control query-input" id="modularTypeItem" ng-model="querySysForm.modularTypeItem" ng-options="item as item.name for item in modularType track by item.modularTypeCd"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label sys_label" for="sysSystemItem">所属系统：</label>
+                                <select class="form-control query-input" id="sysSystemItem" ng-model="querySysForm.sysSystemItem" ng-options="item as item.sysName for item in businessSystem track by item.sysId"></select>
+                            </div>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- 结果 -->
+            <div class="staff-man-result" ng-controller="sysResultListCtrl">
+                <div class="row result-header">
+                    <div class="col-xs-4">
+                        <div class="title">
+                            <img src="../../images/icon_staffList.png">
+                            <p class="title-cn">权限规格列表</p>
+                            <p class="title-en">Jurisdiction</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-table">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>选择</th>
+                                <th>业务模块ID</th>
+                                <th>业务模块名称</th>
+                                <th>业务模块类型</th>
+                                <th>所属系统</th>
+                                <th>上级业务模块</th>
+                                <th>模块URL</th>
+                                <th>接口方法</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in sysResultList">
+                                <td>
+                                    <input type="radio" name="staffRadio" ng-click="selectSysModular($index)">
+                                </td>
+                                <td>
+                                    <p ng-bind="item.sysModularId"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.name"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.modularTypeCd"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.sysId"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.upSysModularName"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.url"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.intfFunc"></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-controller="paginationCtrl" class="text-center">
+                    <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+            <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
+        </div>
+    </script>
     <script src="../../lib/angular.min.js"></script>
     <script src="../../lib/angular-touch.min.js"></script>
     <script src="../../lib/angular-animate.min.js"></script>
@@ -21,7 +168,8 @@
     <script src="../../lib/jquery.min.js"></script>
     <script src="../../lib/bootstrap.min.js"></script>
     <script src="../../lib/ui-bootstrap.js"></script>
-
+    <script src="../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
+    <script src="../../lib/sweetalert.min.js"></script>
     <script src="systemMenu.js"></script>
 </body>
 

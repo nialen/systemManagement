@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>系统管理平台-权限类型管理</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
     <link href="../../lib/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/common.css">
@@ -11,21 +12,21 @@
 </head>
 
 <body ng-app="privilegeTypeModule">
-     <div class="privilege-type">
+     <div class="privilege-type" ng-controller="queryTypeFormCtrl">
         <!-- 查询 -->
         <div class="privilege-type-query">
-            <form name="queryTypeForm" ng-submit="queryTypeFormSubmit()" ng-controller="queryTypeFormCtrl" class="form-inline" role="form">
+            <form name="queryTypeForm" ng-submit="queryTypeFormSubmit()" class="form-inline" role="form">
                 <div class="row ">
                     <div class="col-xs-5">
                         <div class="form-group">
-                            <label class="control-label" for="typeId">权限类型编码：</label>
-                            <input type="input" id="typeId" class="form-control query-input" ng-model="queryTypeForm.typeId">
+                            <label class="control-label" for="operationSpecTypeCd">权限类型编码：</label>
+                            <input type="input" id="operationSpecTypeCd" class="form-control query-input" ng-model="queryTypeForm.operationSpecTypeCd">
                         </div>
                     </div>
                     <div class="col-xs-5">
                         <div class="form-group">
-                            <label class="control-label" for="typeName">权限类型名称：</label>
-                            <input type="input" id="typeName" class="form-control query-input" ng-model="queryTypeForm.typeName">
+                            <label class="control-label" for="name">权限类型名称：</label>
+                            <input type="input" id="name" class="form-control query-input" ng-model="queryTypeForm.name">
                         </div>
                     </div>
                     <div class="col-xs-2 text-right">
@@ -47,7 +48,7 @@
                     </div>
                     <div class="col-xs-8 text-right"> 
                         <button ng-click="addQueryType('新增权限类型')" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
-                        <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                        <button ng-click="batchCancelType()" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
                     </div>
                 </div>
                 <div class="result-table">
@@ -65,16 +66,16 @@
                         <tbody>
                             <tr ng-repeat="item in queryTypeResultList">
                                 <td>
-                                    <input type="checkbox" name="checkbox{{$index}}">
+                                    <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
                                 </td>
                                 <td>
-                                    <p ng-bind="item.typeId"></p>
+                                    <p ng-bind="item.operationSpecTypeCd"></p>
                                 </td>
                                 <td>
-                                    <p ng-bind="item.typeName"></p>
+                                    <p ng-bind="item.name"></p>
                                 </td>
                                 <td>
-                                    <p ng-bind="item.typeRulePreCode"></p>
+                                    <p ng-bind="item.operationSpecCdPrefix"></p>
                                 </td>
                                 <td>
                                     <p ng-bind="item.description"></p>
@@ -100,21 +101,21 @@
                         <div class="row mb10">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label class="control-label edit-label" for="typeId">权限类型编码：</label>
-                                    <input type="input" id="typeId" class="form-control edit-input" ng-model="modifiedQueryType.typeId" disabled>
+                                    <label class="control-label edit-label" for="operationSpecTypeCd">权限类型编码：</label>
+                                    <input type="input" id="operationSpecTypeCd" class="form-control edit-input" ng-model="modifiedQueryType.operationSpecTypeCd" disabled>
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label class="control-label edit-label" for="typeRulePreCode">权限规格编码前缀：</label>
-                                    <input type="input" id="typeRulePreCode" class="form-control edit-input" ng-model="modifiedQueryType.typeRulePreCode">    
+                                    <label class="control-label edit-label" for="operationSpecCdPrefix">权限规格编码前缀：</label>
+                                    <input type="input" id="operationSpecCdPrefix" class="form-control edit-input" ng-model="modifiedQueryType.operationSpecCdPrefix">    
                                 </div>
                             </div>
                         </div>
                         <div class="row mb10">
                             <div class="form-group col-xs-6">
-                                <label class="control-label edit-label" for="typeName">权限类型名称：</label>
-                                <input type="input" id="typeName" class="form-control edit-input" ng-model="modifiedQueryType.typeName">
+                                <label class="control-label edit-label" for="name">权限类型名称：</label>
+                                <input type="input" id="name" class="form-control edit-input" ng-model="modifiedQueryType.name">
                             </div>
                         </div>
                         <div class="row ">
@@ -140,6 +141,7 @@
     <script src="../../lib/bootstrap.min.js"></script>
     <script src="../../lib/ui-bootstrap.js"></script>
     <script src="../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
+    <script src="../../lib/sweetalert.min.js"></script>
     <script src="privilegeType.js"></script>
 </body>
 
