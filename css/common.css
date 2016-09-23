@@ -2,6 +2,7 @@
  * Auth 丁少华
  * Date 2016-09-06
  */
+
 @font-face {
 	font-family: 'iconfont';
 	src: url('http://at.alicdn.com/t/font_1474519585_0842838.eot'); /* IE9*/
@@ -10,6 +11,7 @@
 	url('http://at.alicdn.com/t/font_1474519585_0842838.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 	url('http://at.alicdn.com/t/font_1474519585_0842838.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
+
 .iconfont {
 	font-family: "iconfont";
 	font-size: 14px;

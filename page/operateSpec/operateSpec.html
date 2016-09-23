@@ -13,8 +13,8 @@
 <body ng-app="operateSpecModule">
     <div class="operate-spec">
         <!-- 查询 -->
-        <div class="operate-spec-query">
-            <form name="queryOperateForm" ng-submit="queryOperateFormSubmit()" ng-controller="queryOperateFormCtrl" class="form-inline" role="form">
+        <div class="operate-spec-query" ng-controller="queryOperateFormCtrl">
+            <form name="queryOperateForm" ng-submit="queryOperateFormSubmit()" class="form-inline" role="form">
                 <div class="row mb10">
                     <div class="col-xs-4">
                         <div class="form-group">

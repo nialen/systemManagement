@@ -2,11 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d8dc01-a44b-430e-8304-5908a648b2b9" name="默认的" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/icom_time.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/icon_info.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/icon_newmodule.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/icon_rolelist.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/common.css" afterPath="$PROJECT_DIR$/css/common.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/detailOperate/detailOperate.html" afterPath="$PROJECT_DIR$/page/detailOperate/detailOperate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/detailOperate/detailOperate.js" afterPath="$PROJECT_DIR$/page/detailOperate/detailOperate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.css" afterPath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.html" afterPath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.js" afterPath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/modifyStaff/modifyStaff.js" afterPath="$PROJECT_DIR$/page/modifyStaff/modifyStaff.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/operateSpec/operateSpec.html" afterPath="$PROJECT_DIR$/page/operateSpec/operateSpec.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/operateSpec/operateSpec.js" afterPath="$PROJECT_DIR$/page/operateSpec/operateSpec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/privilegeType/privilegeType.html" afterPath="$PROJECT_DIR$/page/privilegeType/privilegeType.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/privilegeType/privilegeType.js" afterPath="$PROJECT_DIR$/page/privilegeType/privilegeType.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/staffMan/staffMan.js" afterPath="$PROJECT_DIR$/page/staffMan/staffMan.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/systemMenu/configuration-menu.html" afterPath="$PROJECT_DIR$/page/systemMenu/configuration-menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/systemMenu/systemMenu.css" afterPath="$PROJECT_DIR$/page/systemMenu/systemMenu.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/sysModular/sysModular.css" afterPath="$PROJECT_DIR$/page/sysModular/sysModular.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/sysModular/sysModular.html" afterPath="$PROJECT_DIR$/page/sysModular/sysModular.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/sysModular/sysModular.js" afterPath="$PROJECT_DIR$/page/sysModular/sysModular.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/systemMenu/systemMenu.html" afterPath="$PROJECT_DIR$/page/systemMenu/systemMenu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/systemMenu/systemMenu.js" afterPath="$PROJECT_DIR$/page/systemMenu/systemMenu.js" />
     </list>
     <ignored path="systemManagement.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,13 +46,13 @@
         <entry file="file://$PROJECT_DIR$/page/systemMenu/systemMenu.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
-              <caret line="15" column="38" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="38" />
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="systemMenu.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="systemMenu.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/systemMenu/systemMenu.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="592">
@@ -49,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="staffMan.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="staffMan.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/page/staffMan/staffMan.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="372" column="45" selection-start-line="367" selection-start-column="20" selection-end-line="372" selection-end-column="45" />
+            <state relative-caret-position="168">
+              <caret line="189" column="19" selection-start-line="189" selection-start-column="19" selection-end-line="189" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -89,10 +104,10 @@
       <list>
         <option value="$PROJECT_DIR$/page/staffMan/staffMan.html" />
         <option value="$PROJECT_DIR$/page/systemMenu/configuration-menu.html" />
-        <option value="$PROJECT_DIR$/page/staffMan/staffMan.js" />
         <option value="$PROJECT_DIR$/page/systemMenu/systemMenu.html" />
         <option value="$PROJECT_DIR$/page/systemMenu/systemMenu.css" />
         <option value="$PROJECT_DIR$/page/systemMenu/systemMenu.js" />
+        <option value="$PROJECT_DIR$/page/staffMan/staffMan.js" />
       </list>
     </option>
   </component>
@@ -287,12 +302,12 @@
       <workItem from="1474560997402" duration="255000" />
       <workItem from="1474561553188" duration="38000" />
       <workItem from="1474592707710" duration="4988000" />
-      <workItem from="1474610815738" duration="8149000" />
+      <workItem from="1474610815738" duration="8272000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13430000" />
+    <option name="totallyTimeSpent" value="13553000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
@@ -455,14 +470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page/staffMan/staffMan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="372" column="45" selection-start-line="367" selection-start-column="20" selection-end-line="372" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/page/systemMenu/systemMenu.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
@@ -474,7 +481,7 @@
     <entry file="file://$PROJECT_DIR$/page/systemMenu/systemMenu.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="38" />
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -485,6 +492,14 @@
           <caret line="312" column="46" selection-start-line="312" selection-start-column="28" selection-end-line="312" selection-end-column="46" />
           <caret line="227" column="46" selection-start-line="227" selection-start-column="28" selection-end-line="227" selection-end-column="46" />
           <caret line="283" column="46" selection-start-line="283" selection-start-column="28" selection-end-line="283" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/staffMan/staffMan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="189" column="19" selection-start-line="189" selection-start-column="19" selection-end-line="189" selection-end-column="19" />
           <folding />
         </state>
       </provider>
