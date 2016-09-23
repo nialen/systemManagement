@@ -168,3 +168,5 @@
 	text-align: right;
 	font-weight: bold;
 }
+
+.sytModular_table tr td, .sytModular_table tr th{ vertical-align: middle; }
