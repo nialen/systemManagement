@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>系统管理平台-新建/修改用户</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
     <link href="../../lib/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/common.css">
@@ -36,29 +37,29 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label class="control-label edit-label" for="staffJobId">员工工号：</label>
-                                        <input type="input" id="staffJobId" class="form-control jobId-input" ng-model="modifyStaffForm.staffJobId" disabled>
+                                        <label class="control-label edit-label" for="staffNumber">员工工号：</label>
+                                        <input type="input" id="staffNumber" class="form-control jobId-input" ng-model="modifyStaffForm.staffNumber" disabled>
                                         <button type="button" ng-click="checkStaffMan()" class="btn btn-sm btn-jobId">选择</button>
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label class="control-label edit-label" for="staffName">员工姓名：</label>
-                                        <input type="input" id="staffName" class="form-control modify-input" ng-model="modifyStaffForm.staffName" disabled>
+                                        <label class="control-label edit-label" for="name">员工姓名：</label>
+                                        <input type="input" id="name" class="form-control modify-input" ng-model="modifyStaffForm.name" disabled>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb10">
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label class="control-label edit-label" for="userAccount">用户账户：</label>
-                                        <input type="input" id="userAccount" class="form-control modify-input" ng-model="modifyStaffForm.userAccount">
+                                        <label class="control-label edit-label" for="loginCode">用户账户：</label>
+                                        <input type="input" id="loginCode" class="form-control modify-input" ng-model="modifyStaffForm.loginCode">
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label class="control-label edit-label" for="staffPhoneNum">手机号码：</label>
-                                        <input type="input" id="staffPhoneNum" class="form-control modify-input" ng-model="modifyStaffForm.staffPhoneNum">
+                                        <label class="control-label edit-label" for="mobileTel">手机号码：</label>
+                                        <input type="input" id="mobileTel" class="form-control modify-input" ng-model="modifyStaffForm.mobileTel">
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
@@ -70,7 +71,7 @@
                             </div>
                             <div class="row mb10">
                                 <div class="col-xs-12">
-                                    <div class="form-group">
+                                    <div class="form-group" ng-if="isDisableEditPassword">
                                         <label class="control-label edit-label" for="confirmPassword">密码确认：</label>
                                         <input type="password" id="confirmPassword" class="form-control modify-input" ng-model="modifyStaffForm.confirmPassword" ng-disabled="modifyStaffForm.checkDefault">
                                         <input type="checkbox" id="checkDefault" class="check-default" ng-model="modifyStaffForm.checkDefault">
@@ -81,14 +82,14 @@
                             <div class="row mb10">
                                 <div class="col-xs-12">
                                     <div class="from-group">
-                                        <label class="control-label edit-label" for="remark">备注：</label>
-                                        <textarea id="remark" class="form-control remark" ng-model="modifyStaffForm.remark"></textarea>
+                                        <label class="control-label edit-label" for="remaeks">备注：</label>
+                                        <textarea id="remaeks" class="form-control remark" ng-model="modifyStaffForm.remaeks"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 text-center">
-                                    <button class="btn btn-cancel">取消</button>
+                                    <!--<button class="btn btn-cancel">取消</button>-->
                                     <button type="submit" ng-disabled="isForbid" class="btn btn-submit">保存</button>
                                 </div>
                             </div>
@@ -100,33 +101,34 @@
                         <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
                         <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>员工选择</h3>
                     </div>
-                    <div class="modal-body" id="modal-body">
+                    <div class="modal-body" id="modal-body" ng-controller="queryStaffFormCtrl">
                         <!-- 查询 -->
                         <div class="staff-man-query">
-                            <form name="queryStaff" ng-submit="queryStaffFormSubmit()" ng-controller="queryStaffFormCtrl" class="form-inline" role="form">
+                            <form name="queryStaff" ng-submit="queryStaffFormSubmit()" class="form-inline" role="form">
                                 <div class="row mb10">
                                     <div class="col-xs-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="staffId">员工工号：</label>
-                                            <input type="input" id="staffId" class="form-control query-input" ng-model="queryStaffForm.staffId">
+                                            <label class="control-label" for="staffNumber">员工工号：</label>
+                                            <input type="input" id="staffNumber" class="form-control query-input" ng-model="queryStaffForm.staffNumber">
                                         </div>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="staffName">员工姓名：</label>
-                                            <input type="input" id="staffName" class="form-control query-input" ng-model="queryStaffForm.staffName">
+                                            <label class="control-label" for="name">员工姓名：</label>
+                                            <input type="input" id="name" class="form-control query-input" ng-model="queryStaffForm.name">
                                         </div>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="staffArea">归属地区：</label>
-                                            <select class="form-control query-input" id="staffArea" ng-model="queryStaffForm.staffArea" ng-options="opt for opt in areaList"></select>
+                                            <label class="control-label" for="areaItem">归属地区：</label>
+                                            <select class="form-control edit-input" id="areaItem" ng-model="queryStaffForm.areaItem" ng-options="item as item.areaName for item in areaList track by item.areaId"></select>
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 text-right">
-                                        <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                                        <button type="submit" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
                                     </div>
                                 </div>
                             </form>
@@ -165,29 +167,29 @@
                                                 <p ng-bind="item.staffId"></p>
                                             </td>
                                             <td>
-                                                <p ng-bind="item.staffJobId"></p>
+                                                <p ng-bind="item.staffNumber"></p>
                                             </td>
                                             <td>
-                                                <p ng-bind="item.staffName"></p>
+                                                <p ng-bind="item.name"></p>
                                             </td>
                                             <td>
-                                                <p ng-bind="item.staffArea"></p>
+                                                <p ng-bind="item.areaName"></p>
                                             </td>
                                             <td>
-                                                <p ng-bind="item.status"></p>
+                                                <p ng-bind="item.staffStatusCd | stateConversionText"></p>
                                             </td>
                                             <td>
-                                                <p ng-bind="item.createDate"></p>
+                                                <p ng-bind="item.createDt | date:'yyyy-MM-dd HH:mm:ss'"></p>
                                             </td>
                                             <td>
-                                                <p ng-bind="item.lastModifiedDate"></p>
+                                                <p ng-bind="item.version | date:'yyyy-MM-dd HH:mm:ss'"></p>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div ng-controller="paginationCtrl" class="text-center">
-                                <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                                <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
                             </div>
                         </div>
                     </div>
@@ -197,7 +199,7 @@
                     </div>
                 </script>
             </div>
-        </div>   
+        </div>
     </div>
     <script src="../../lib/angular.min.js"></script>
     <script src="../../lib/angular-touch.min.js"></script>
@@ -207,6 +209,8 @@
     <script src="../../lib/bootstrap.min.js"></script>
     <script src="../../lib/ui-bootstrap.js"></script>
     <script src="../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
+    <script src="../../lib/sweetalert.min.js"></script>
+    <script src="../../lib/angular-md5.js"></script>
     <script src="modifyStaff.js"></script>
 </body>
 

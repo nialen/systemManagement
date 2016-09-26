@@ -43,7 +43,7 @@
     text-align: right;
 }
 .remark {
-	width: 805px !important;
+	width: 812px !important;
 	height: 240px !important;
 }
 .check-default {
@@ -128,7 +128,7 @@
 .btn-set {
 	margin-left: 10px;
 	padding-left: 15px;
-	padding-right: 15px; 
+	padding-right: 15px;
     background-color: #ffc619;
     border-color: #ffc619;
     color: #fff;

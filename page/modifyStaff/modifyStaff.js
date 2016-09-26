@@ -4,43 +4,187 @@
  */
 
 angular
-	.module('modifyStaff', ['ui.bootstrap'])
+	.module('modifyStaff', ['ui.bootstrap', 'angular-md5'])
 	.run(['$rootScope', '$parse', '$log', function($rootScope, $parse, $log) {
 		var id = window.frameElement && window.frameElement.id || '',
 			obj = parent.$('#' + id).attr('data');
 		$rootScope.modifiedStaffMan = obj ? JSON.parse(obj) : {}; // 待修改的员工信息
-		$rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
-		$rootScope.areaList = ['南京', '镇江', '丹阳']; // 地区列表
+		$rootScope.isDisableEditPassword = !obj ? true : false; // 新增用户模式下给添加密码、修改模式下密码不给操作
+
 		// 员工选择弹框内部信息
 		$rootScope.staffManResultList = []; // 查询员工列表
 		$rootScope.checkedStaffMan = {}; // 选中的员工信息
 		$rootScope.checkedIndex = ''; // 选中的索引
+        $rootScope.areaList = []; // 地区列表
 	}])
+    .factory('httpMethod', ['$http', '$q', function ($http, $q) {
+        var httpMethod = {};
+        var httpConfig = {
+            // 'siteUrl': 'http://192.168.16.67:8080/psm',
+            'siteUrl': 'http://192.168.74.17/psm',
+            'requestHeader': {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        };
+
+        // 获取地区列表
+        httpMethod.queryArea = function() {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/staff/profile/queryArea.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader
+            }).success(function(data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function(data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 查询员工
+        httpMethod.queryStaffManager = function (param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/staff/profile/queryStaffManager.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'param=' + JSON.stringify(param)
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 新增用户
+        httpMethod.insertUserByStaffManager = function (param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/userManager/profile/insertUserByStaffManager.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'data=' + JSON.stringify(param)
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 修改用户
+        httpMethod.alterUser = function (param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/userManager/profile/alterUser.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'data=' + JSON.stringify(param)
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        return httpMethod;
+    }])
+    // 员工状态码转换文本
+    .filter('stateConversionText', function() {
+        return function(stateValue) {
+            switch (stateValue) {
+                case '1000':
+                    return '有效';
+                    break;
+                case '1001':
+                    return '停用';
+                    break;
+                case '1002':
+                    return '无效';
+                    break;
+            }
+        }
+    })
 	// 修改用户控制器
-	.controller('modifyStaffFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+	.controller('modifyStaffFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', 'md5', function($scope, $rootScope, $log, httpMethod, md5) {
 		$scope.isForbid = true;
 		$scope.modifyStaffForm = $.extend(true, {
-			userId: '', //用户ID
-			userAccount: '', //用户账户
-			staffJobId: '', //员工工号
-			staffName: '', //员工姓名
-			staffPhoneNum: '', //手机号码
+            userId: '', //用户ID
+            loginCode: '', //用户账户
+            staffNumber: '', //员工工号
+			name: '', //员工姓名
+            mobileTel: '', //手机号码
 			systemPassword: '888888', //系统密码
 			confirmPassword: '888888', //确认密码
-			remark: '', //备注
+            remaeks: '', //备注
 			checkDefault: true //默认密码
 		}, $rootScope.modifiedStaffMan);
 
 		$scope.modifyStaffFormSubmit = function() {
-			// TODO $http发送请求，获取数据$scope.modifyStaffForm;
-			$log.log($scope.isForbid, $scope.modifyStaffForm);
+
+            var param = {
+                userId: '',//登录账号
+                loginPwd: '',//账号密码（MD5加密）
+                loginCode: '',//登录账号
+                mobileTel: '',//电话
+                remaeks: ''//备注
+            };
+
+            $scope.modifyStaffForm.userId ? param.userId = $scope.modifyStaffForm.userId : '';
+            $scope.modifyStaffForm.loginCode ? param.loginCode = $scope.modifyStaffForm.loginCode : '';
+            $scope.modifyStaffForm.mobileTel ? param.mobileTel = $scope.modifyStaffForm.mobileTel : '';
+            $scope.modifyStaffForm.remaeks ? param.remaeks = $scope.modifyStaffForm.remaeks : '';
+
+            if ($rootScope.isDisableEditPassword) {
+                $scope.modifyStaffForm.systemPassword ? param.loginPwd = md5.createHash($scope.modifyStaffForm.systemPassword) : '';
+                httpMethod.insertUserByStaffManager(param).then(function (rsp) {
+                    $log.log('调用新建用户接口成功.');
+                    if (rsp.success) {
+                        swal({
+                            title: '操作成功!',
+                            text: '新建用户成功！',
+                            type: 'success'
+                        }, function () {
+                            location.reload();
+                        });
+                    } else {
+                        swal("OMG", rsp.msg || "新建用户失败!", "error");
+                    }
+                })
+            } else {
+                httpMethod.alterUser(param).then(function (rsp) {
+                    $log.log('调用修改用户接口成功.');
+                    if (rsp.success) {
+                        swal("操作成功", "修改用户成功!", "success");
+                        // TODO 关闭TABS
+                    } else {
+                        swal("OMG", rsp.msg || "新建用户失败!", "error");
+                    }
+                })
+            }
+
 		};
 		// 员工选择
 		$scope.checkStaffMan = function(index) {
 			$scope.$emit('openCheckStaffManModal');
-		}
+		};
 		$scope.$watch('modifyStaffForm', function(current, old, scope) {
-			if (scope.modifyStaffForm.staffJobId || scope.modifyStaffForm.staffName || scope.modifyStaffForm.staffPhoneNum) {
+			if (scope.modifyStaffForm.staffNumber && scope.modifyStaffForm.loginCode && scope.modifyStaffForm.name && scope.modifyStaffForm.mobileTel) {
 				scope.isForbid = false;
 			} else {
 				scope.isForbid = true;
@@ -48,20 +192,18 @@ angular
 		}, true);
 		// 监听响应变化
 		$scope.$watch('modifiedStaffMan', function(current, old, scope) {
-			if (current.staffJobId !== old.staffJobId || current.staffName !== old.staffName) {
-				scope.modifyStaffForm.staffJobId = $rootScope.modifiedStaffMan.staffJobId;
-				scope.modifyStaffForm.staffName = $rootScope.modifiedStaffMan.staffName;
+			if (current.staffNumber !== old.staffNumber || current.name !== old.name) {
+				scope.modifyStaffForm.staffNumber = $rootScope.modifiedStaffMan.staffNumber;
+				scope.modifyStaffForm.name = $rootScope.modifiedStaffMan.name;
 			}
 		}, true);
 	}])
 	// 弹出框控制器
-	// TODO 删除冗余代码
 	.controller('selectStaffManModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
 		$scope.$on('openCheckStaffManModal', function(d, data) {
 			$ctrl.open(data);
 		});
-		$ctrl.items = ['item1', 'item2', 'item3'];
 
 		$ctrl.animationsEnabled = true;
 
@@ -80,44 +222,17 @@ angular
 					}
 				}
 			});
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('Modal dismissed at: ' + new Date());
-			});
-		};
-
-		$ctrl.openComponentModal = function() {
-			var modalInstance = $uibModal.open({
-				animation: $ctrl.animationsEnabled,
-				component: 'modalComponent',
-				resolve: {
-					items: function() {
-						return $ctrl.items;
-					}
-				}
-			});
-
-			modalInstance.result.then(function(selectedItem) {
-				$ctrl.selected = selectedItem;
-			}, function() {
-				$log.info('modal-component dismissed at: ' + new Date());
-			});
 		};
 
 		$ctrl.toggleAnimation = function() {
 			$ctrl.animationsEnabled = !$ctrl.animationsEnabled;
 		};
 	})
-	.controller('ModalInstanceCtrl', function($uibModalInstance, $scope, items) {
+	.controller('ModalInstanceCtrl', function($uibModalInstance, $scope) {
 		var $ctrl = this;
-		$ctrl.items = items;
-		$ctrl.selected = {
-			item: $ctrl.items[0]
-		};
 
 		$ctrl.ok = function() {
-			$uibModalInstance.close($ctrl.selected.item);
+			$uibModalInstance.close();
 			$scope.$broadcast('submitStaffManModal');
 		};
 
@@ -125,118 +240,76 @@ angular
 			$uibModalInstance.dismiss('cancel');
 		};
 	})
-	.component('modalComponent', {
-		templateUrl: 'myModalContent.html',
-		bindings: {
-			resolve: '<',
-			close: '&',
-			dismiss: '&'
-		},
-		controller: function() {
-			var $ctrl = this;
-
-			$ctrl.$onInit = function() {
-				$ctrl.items = $ctrl.resolve.items;
-				$ctrl.selected = {
-					item: $ctrl.items[0]
-				};
-			};
-
-			$ctrl.ok = function() {
-				$ctrl.close({
-					$value: $ctrl.selected.item
-				});
-			};
-
-			$ctrl.cancel = function() {
-				$ctrl.dismiss({
-					$value: 'cancel'
-				});
-			};
-		}
-	})
 	// 查询控制器
-	.controller('queryStaffFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-		$scope.isForbid = true;
-		$scope.queryStaffForm = {
-			staffId: '',
-			staffName: '',
-			staffArea: null,
+	.controller('queryStaffFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+        // 查询结果分页信息
+        $scope.requirePaging = true; // 是否需要分页
+        $scope.currentPage = 1; // 当前页
+        $scope.rowNumPerPage = 4; // 每页显示行数
+        $scope.totalNum = 0; // 总条数
+
+        // 获取地区列表
+        httpMethod.queryArea().then(function(rsp) {
+            $log.log('调用获取地区接口成功.');
+            $rootScope.areaList = rsp.data;
+        }, function() {
+            $log.log('调用获取地区接口失败.');
+        });
+
+        $scope.queryStaffForm = {
+            name: '', // 员工姓名
+            staffNumber: '', // 员工工号
+            areaItem: '', // 地区
+        };
+
+		$scope.queryStaffFormSubmit = function(currentPage) {
+            var param = {
+                // name: '', // 员工姓名
+                // staffNumber: '', // 员工工号
+                // areaId: '', // 地区Id
+                requirePaging: $scope.requirePaging, // 是否需要分页
+                currentPage: currentPage || $scope.currentPage, // 当前页
+                rowNumPerPage: $scope.rowNumPerPage // 每页显示行数
+            };
+            $scope.queryStaffForm.name ? param.name = $scope.queryStaffForm.name : '';
+            $scope.queryStaffForm.staffNumber ? param.staffNumber = $scope.queryStaffForm.staffNumber : '';
+            $scope.queryStaffForm.areaItem.areaId ? param.areaId = $scope.queryStaffForm.areaItem.areaId : '';
+
+            // 查询员工信息
+            httpMethod.queryStaffManager(param).then(function(rsp) {
+                $log.log('调用查询员工信息接口成功.');
+                $rootScope.staffManResultList = rsp.data.list;
+                $scope.totalNum = rsp.data.totalNum;
+            }, function() {
+                $log.log('调用查询员工信息接口失败.');
+            });
 		};
-		$scope.queryStaffFormSubmit = function() {
-			// TODO $http发送请求，获取数据，写入$rootScope查询结果
-			$rootScope.staffManResultList = [{
-				staffId: '10101', //员工ID
-				staffJobId: '35352', //员工工号
-				staffName: '李明浩', //员工姓名
-				staffArea: '南京', //归属地区
-				status: '在用', //状态
-				createDate: '2016-01-12', //创建时间
-				lastModifiedDate: '2016-01-30', //最后修改时间
-			}, {
-				staffId: '20306', //员工ID
-				staffJobId: '64201', //员工工号
-				staffName: '张晓东', //员工姓名
-				staffArea: '南京', //归属地区
-				status: '在用', //状态
-				createDate: '2016-02-22', //创建时间
-				lastModifiedDate: '2016-02-28', //最后修改时间
-			}, {
-				staffId: '10101', //员工ID
-				staffJobId: '35352', //员工工号
-				staffName: '李明浩', //员工姓名
-				staffArea: '南京', //归属地区
-				status: '在用', //状态
-				createDate: '2016-01-12', //创建时间
-				lastModifiedDate: '2016-01-30', //最后修改时间
-			}, {
-				staffId: '20306', //员工ID
-				staffJobId: '64201', //员工工号
-				staffName: '张晓东', //员工姓名
-				staffArea: '南京', //归属地区
-				status: '在用', //状态
-				createDate: '2016-02-22', //创建时间
-				lastModifiedDate: '2016-02-28', //最后修改时间
-			}];
-		}
-		$scope.$watch('queryStaffForm', function(current, old, scope) {
-			if (scope.queryStaffForm.staffId || scope.queryStaffForm.staffName || scope.queryStaffForm.staffArea) {
-				scope.isForbid = false;
-			} else {
-				scope.isForbid = true;
-			}
-		}, true);
 	}])
 	// 查询结果控制器
 	.controller('staffManResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 		// 选中索引
 		$scope.selectStaffMan = function(index) {
 			$rootScope.checkedStaffMan = $rootScope.staffManResultList[index];
-		}
+		};
 		$scope.$on('submitStaffManModal', function(d, data) {
 			$scope.selectStaffManFormSubmit(data);
 		});
 		$scope.selectStaffManFormSubmit = function(data) {
 			// 更新数据为选择的员工信息
-			$rootScope.modifiedStaffMan.staffJobId = $rootScope.checkedStaffMan.staffJobId;
-			$rootScope.modifiedStaffMan.staffName = $rootScope.checkedStaffMan.staffName;
+			$rootScope.modifiedStaffMan.staffNumber = $rootScope.checkedStaffMan.staffNumber;
+			$rootScope.modifiedStaffMan.name = $rootScope.checkedStaffMan.name;
 		}
 	}])
 
-	// 分页控制器
-	.controller('paginationCtrl', ['$scope', '$log', function($scope, $log) {
-		$scope.totalItems = 64;
-		$scope.currentPage = 4;
+    // 分页控制器
+    .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+        $scope.maxSize = 10;
+        $scope.setPage = function(pageNo) {
+            $scope.currentPage = pageNo;
+        };
 
-		$scope.setPage = function(pageNo) {
-			$scope.currentPage = pageNo;
-		};
-
-		$scope.pageChanged = function() {
-			$log.log('Page changed to: ' + $scope.currentPage);
-		};
-
-		$scope.maxSize = 5;
-		$scope.bigTotalItems = 175;
-		$scope.bigCurrentPage = 1;
-	}]);
+        $scope.pageChanged = function() {
+            $scope.queryStaffFormSubmit($scope.currentPage);
+            $log.log('Page changed to: ' + $scope.currentPage);
+        };
+    }]);
