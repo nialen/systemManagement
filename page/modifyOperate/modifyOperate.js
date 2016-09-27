@@ -4,17 +4,19 @@
  */
 
 angular
-	.module('modifyOperate', ['ui.bootstrap'])
+	.module('modifyOperate', ['ui.bootstrap', 'angular-md5'])
 	.run(['$rootScope', '$parse', '$log', function($rootScope, $parse, $log) {
 		var id = window.frameElement && window.frameElement.id || '',
 			obj = parent.$('#' + id).attr('data');
 		$rootScope.modifiedOperateSpec = obj ? JSON.parse(obj) : {}; // 待修改的权限规格信息
-		$rootScope.operateType = ['进销存管理', '系统管理']; // 规格类型
+		
+		// $rootScope.operateType = ['进销存管理', '系统管理']; // 规格类型
 
 		$rootScope.preveligeDimensionResultList = [];//权限维度列表
 		$rootScope.preveligeDoneResultList = [];//权限可操作列表
-		$rootScope.ownerSys = ['1', '2']; 
-		$rootScope.businessModuleType = ['3', '4']; 
+		
+		// $rootScope.ownerSys = ['1', '2']; 
+		// $rootScope.businessModuleType = ['3', '4']; 
 		
 	}])
 	// 修改权限规格基本信息控制器

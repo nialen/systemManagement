@@ -159,7 +159,7 @@ angular
 				url: httpConfig.siteUrl + '/privilege/profile/deleteOperationSpecBatch.action',
 				method: 'POST',
 				headers: httpConfig.requestHeader,
-				data: 'data=' + param
+				data: 'data=' + JSON.stringify(param)
 			}).success(function(data, header, config, status) {
 				if (status != 200) {
 					// 跳转403页面
