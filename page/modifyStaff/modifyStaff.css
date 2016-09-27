@@ -99,12 +99,17 @@
     color: #fff;
 }
 
+.edit-input {
+    width: 205px !important;
+}
+
 .result-header {
 	height: 48px;
 	margin: 0;
 	line-height: 46px;
 	border: 1px solid #ddd;
 	border-bottom: none;
+    overflow: hidden;
 }
 .result-header .title {
 	position: relative;

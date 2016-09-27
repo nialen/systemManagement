@@ -9,7 +9,7 @@ angular
 		var id = window.frameElement && window.frameElement.id || '',
 			obj = parent.$('#' + id).attr('data');
 		$rootScope.modifiedStaffMan = obj ? JSON.parse(obj) : {}; // 待修改的员工信息
-		$rootScope.isDisableEditPassword = !obj ? true : false; // 新增用户模式下给添加密码、修改模式下密码不给操作
+		$rootScope.isEnableEditPassword = !obj ? true : false; // 新增用户模式下给添加密码、修改模式下密码不给操作
 
 		// 员工选择弹框内部信息
 		$rootScope.staffManResultList = []; // 查询员工列表
@@ -127,6 +127,7 @@ angular
             userId: '', //用户ID
             loginCode: '', //用户账户
             staffNumber: '', //员工工号
+            staffId: '', //员工ID
 			name: '', //员工姓名
             mobileTel: '', //手机号码
 			systemPassword: '888888', //系统密码
@@ -138,19 +139,20 @@ angular
 		$scope.modifyStaffFormSubmit = function() {
 
             var param = {
-                userId: '',//登录账号
+                userId: '',//用户ID
+                staffId: '',//员工ID
                 loginPwd: '',//账号密码（MD5加密）
                 loginCode: '',//登录账号
                 mobileTel: '',//电话
                 remaeks: ''//备注
             };
 
-            $scope.modifyStaffForm.userId ? param.userId = $scope.modifyStaffForm.userId : '';
+            $scope.modifyStaffForm.staffId ? param.staffId = $scope.modifyStaffForm.staffId : '';
             $scope.modifyStaffForm.loginCode ? param.loginCode = $scope.modifyStaffForm.loginCode : '';
             $scope.modifyStaffForm.mobileTel ? param.mobileTel = $scope.modifyStaffForm.mobileTel : '';
             $scope.modifyStaffForm.remaeks ? param.remaeks = $scope.modifyStaffForm.remaeks : '';
 
-            if ($rootScope.isDisableEditPassword) {
+            if ($rootScope.isEnableEditPassword) {
                 $scope.modifyStaffForm.systemPassword ? param.loginPwd = md5.createHash($scope.modifyStaffForm.systemPassword) : '';
                 httpMethod.insertUserByStaffManager(param).then(function (rsp) {
                     $log.log('调用新建用户接口成功.');
@@ -167,6 +169,7 @@ angular
                     }
                 })
             } else {
+                $scope.modifyStaffForm.userId ? param.userId = $scope.modifyStaffForm.userId : '';
                 httpMethod.alterUser(param).then(function (rsp) {
                     $log.log('调用修改用户接口成功.');
                     if (rsp.success) {
@@ -195,6 +198,7 @@ angular
 			if (current.staffNumber !== old.staffNumber || current.name !== old.name) {
 				scope.modifyStaffForm.staffNumber = $rootScope.modifiedStaffMan.staffNumber;
 				scope.modifyStaffForm.name = $rootScope.modifiedStaffMan.name;
+				scope.modifyStaffForm.staffId = $rootScope.modifiedStaffMan.staffId;
 			}
 		}, true);
 	}])
@@ -298,6 +302,7 @@ angular
 			// 更新数据为选择的员工信息
 			$rootScope.modifiedStaffMan.staffNumber = $rootScope.checkedStaffMan.staffNumber;
 			$rootScope.modifiedStaffMan.name = $rootScope.checkedStaffMan.name;
+			$rootScope.modifiedStaffMan.staffId = $rootScope.checkedStaffMan.staffId;
 		}
 	}])
 
