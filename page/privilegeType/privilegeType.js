@@ -254,11 +254,6 @@ angular
 
         $ctrl.ok = function() {
             $uibModalInstance.close();
-<<<<<<< HEAD
-
-=======
-            debugger
->>>>>>> d4e640d89de409913c482373de3e019c168d66d8
             $scope.$broadcast('submitQueryTypeModal', items);
         };
 
@@ -294,7 +289,6 @@ angular
                 param.operationSpecCdPrefix = $rootScope.modifiedQueryType.operationSpecCdPrefix;
                 param.operationSpecTypeDesc = $rootScope.modifiedQueryType.description;
 
-                debugger
                 // 新建权限类型配置
                 httpMethod.insertType(param).then(function(rsp) {
                     $log.log('调用新建权限类型配置接口成功.');

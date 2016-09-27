@@ -234,8 +234,8 @@ angular
             };
             $scope.modifySysForm.sysModularId ? param.sysModularId = $scope.modifySysForm.sysModularId : '';
             $scope.modifySysForm.name ? param.name = $scope.modifySysForm.name : '';
-            $scope.modifySysForm.modularTypeCdItem ? param.modularTypeCd = $scope.modifySysForm.modularTypeCdItem.modularTypeCd :'';
-            $scope.modifySysForm.sysIdItem ? param.sysId = $scope.modifySysForm.sysIdItem.sysId : '';
+            $scope.modifySysForm.modularTypeCdItem ? param.modularTypeCd = $scope.modifySysForm.modularTypeCdItem :'';
+            $scope.modifySysForm.sysIdItem ? param.sysId = $scope.modifySysForm.sysIdItem : '';
             $scope.modifySysForm.upSysModularId ? param.upSysModularId = $scope.modifySysForm.upSysModularId :'';
             $scope.modifySysForm.url ? param.url = $scope.modifySysForm.url :'';
             $scope.modifySysForm.intfFunc ? param.intfFunc = $scope.modifySysForm.intfFunc :'';
