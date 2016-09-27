@@ -14,7 +14,7 @@ angular
 	.factory('httpMethod', ['$http', '$q', function($http, $q) {
 		var httpMethod = {};
 		var httpConfig = {
-            'siteUrl': 'http://127.0.0.1/psm',
+            'siteUrl': 'http://192.168.74.17/psm',
 			// 'siteUrl': 'http://192.168.74.17/psm',
 			//'siteUrl': 'http://192.168.16.161:80/psm',
 			'requestHeader': {

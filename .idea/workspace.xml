@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d8dc01-a44b-430e-8304-5908a648b2b9" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/authorize/authorize.js" afterPath="$PROJECT_DIR$/page/authorize/authorize.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/modifyStaff/modifyStaff.js" afterPath="$PROJECT_DIR$/page/modifyStaff/modifyStaff.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/operateSpec/operateSpec.html" afterPath="$PROJECT_DIR$/page/operateSpec/operateSpec.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/operateSpec/operateSpec.js" afterPath="$PROJECT_DIR$/page/operateSpec/operateSpec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/privilegeType/privilegeType.js" afterPath="$PROJECT_DIR$/page/privilegeType/privilegeType.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.html" afterPath="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/staffMan/staffMan.js" afterPath="$PROJECT_DIR$/page/staffMan/staffMan.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.js" afterPath="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/sysModular/sysModular.js" afterPath="$PROJECT_DIR$/page/sysModular/sysModular.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/systemMenu/systemMenu.js" afterPath="$PROJECT_DIR$/page/systemMenu/systemMenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/userMan/userMan.js" afterPath="$PROJECT_DIR$/page/userMan/userMan.js" />
     </list>
     <ignored path="systemManagement.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,21 +33,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="userMan.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/page/userMan/userMan.js">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+            <state relative-caret-position="218">
+              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/index.js">
+      <file leaf-file-name="userMan.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/page/userMan/userMan.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+            <state relative-caret-position="338">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -52,8 +56,8 @@
       <file leaf-file-name="authorize.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/authorize/authorize.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+            <state relative-caret-position="218">
+              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -62,8 +66,8 @@
       <file leaf-file-name="modifyStaff.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/modifyStaff/modifyStaff.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+            <state relative-caret-position="218">
+              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -72,8 +76,8 @@
       <file leaf-file-name="operateSpec.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/operateSpec/operateSpec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="388" column="43" selection-start-line="388" selection-start-column="43" selection-end-line="388" selection-end-column="43" />
+            <state relative-caret-position="218">
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -82,44 +86,44 @@
       <file leaf-file-name="staffMan.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/staffMan/staffMan.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+            <state relative-caret-position="218">
+              <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
               <folding>
-                <element signature="e#5660#6031#0" expanded="false" />
-                <element signature="e#6099#6458#0" expanded="false" />
-                <marker date="1474985348000" expanded="true" signature="6606:6916" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="6865:6916" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="13526:17871" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="13593:14980" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="13642:14892" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="13742:13807" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="13869:14294" ph="{&quot;title&quot;: &quot;员工状态启用&quot;...}" />
-                <marker date="1474985348000" expanded="true" signature="14308:14876" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="14391:14705" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="14482:14576" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="14582:14683" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="14719:14856" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="14898:14970" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="15048:16434" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="15097:16346" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="15197:15262" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="15324:15749" ph="{&quot;title&quot;: &quot;员工状态停用&quot;...}" />
-                <marker date="1474985348000" expanded="true" signature="15763:16330" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="15845:16159" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="15936:16030" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="16036:16137" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="16173:16310" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="16352:16424" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="16497:17864" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="16546:17776" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="16646:16711" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="16773:17194" ph="{&quot;title&quot;: &quot;删除员工&quot;...}" />
-                <marker date="1474985348000" expanded="true" signature="17208:17760" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="17285:17593" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="17374:17466" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="17472:17571" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="17607:17740" ph="{...}" />
-                <marker date="1474985348000" expanded="true" signature="17782:17854" ph="{...}" />
+                <element signature="e#5664#6035#0" expanded="false" />
+                <element signature="e#6103#6462#0" expanded="false" />
+                <marker date="1474987152000" expanded="true" signature="6610:6920" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="6869:6920" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="13530:17875" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="13597:14984" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="13646:14896" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="13746:13811" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="13873:14298" ph="{&quot;title&quot;: &quot;员工状态启用&quot;...}" />
+                <marker date="1474987152000" expanded="true" signature="14312:14880" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="14395:14709" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="14486:14580" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="14586:14687" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="14723:14860" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="14902:14974" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="15052:16438" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="15101:16350" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="15201:15266" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="15328:15753" ph="{&quot;title&quot;: &quot;员工状态停用&quot;...}" />
+                <marker date="1474987152000" expanded="true" signature="15767:16334" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="15849:16163" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="15940:16034" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="16040:16141" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="16177:16314" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="16356:16428" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="16501:17868" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="16550:17780" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="16650:16715" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="16777:17198" ph="{&quot;title&quot;: &quot;删除员工&quot;...}" />
+                <marker date="1474987152000" expanded="true" signature="17212:17764" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="17289:17597" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="17378:17470" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="17476:17575" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="17611:17744" ph="{...}" />
+                <marker date="1474987152000" expanded="true" signature="17786:17858" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -128,8 +132,8 @@
       <file leaf-file-name="modifiedSys.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="32" column="12" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
+            <state relative-caret-position="218">
+              <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -138,8 +142,8 @@
       <file leaf-file-name="sysModular.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/sysModular/sysModular.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state relative-caret-position="218">
+              <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -148,18 +152,18 @@
       <file leaf-file-name="systemMenu.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/systemMenu/systemMenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state relative-caret-position="218">
+              <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="privilegeType.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="privilegeType.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/privilegeType/privilegeType.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1457">
-              <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
+            <state relative-caret-position="218">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -195,16 +199,17 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/index.css" />
         <option value="$PROJECT_DIR$/accordion-list.html" />
-        <option value="$PROJECT_DIR$/page/userMan/userMan.js" />
+        <option value="$PROJECT_DIR$/page/operateSpec/operateSpec.html" />
         <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/page/authorize/authorize.js" />
         <option value="$PROJECT_DIR$/page/modifyStaff/modifyStaff.js" />
+        <option value="$PROJECT_DIR$/page/operateSpec/operateSpec.js" />
+        <option value="$PROJECT_DIR$/page/privilegeType/privilegeType.js" />
         <option value="$PROJECT_DIR$/page/staffMan/staffMan.js" />
         <option value="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.js" />
         <option value="$PROJECT_DIR$/page/sysModular/sysModular.js" />
         <option value="$PROJECT_DIR$/page/systemMenu/systemMenu.js" />
-        <option value="$PROJECT_DIR$/page/operateSpec/operateSpec.js" />
-        <option value="$PROJECT_DIR$/page/privilegeType/privilegeType.js" />
+        <option value="$PROJECT_DIR$/page/userMan/userMan.js" />
       </list>
     </option>
   </component>
@@ -490,12 +495,12 @@
       <workItem from="1474610815738" duration="9399000" />
       <workItem from="1474855289369" duration="21132000" />
       <workItem from="1474972579701" duration="2676000" />
-      <workItem from="1474983177392" duration="2584000" />
+      <workItem from="1474983177392" duration="3716000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41072000" />
+    <option name="totallyTimeSpent" value="42204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -561,21 +566,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/page/staffMan/staffMan.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4200">
           <caret line="201" column="11" selection-start-line="195" selection-start-column="8" selection-end-line="201" selection-end-column="11" />
           <folding>
-            <element signature="e#5660#6031#0" expanded="false" />
-            <element signature="e#6099#6458#0" expanded="false" />
+            <element signature="e#5664#6035#0" expanded="false" />
+            <element signature="e#6103#6462#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -593,8 +590,8 @@
         <state relative-caret-position="912">
           <caret line="38" column="10" selection-start-line="14" selection-start-column="4" selection-end-line="38" selection-end-column="10" />
           <folding>
-            <element signature="e#5660#6031#0" expanded="false" />
-            <element signature="e#6099#6458#0" expanded="false" />
+            <element signature="e#5664#6035#0" expanded="false" />
+            <element signature="e#6103#6462#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -649,8 +646,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#5660#6031#0" expanded="false" />
-            <element signature="e#6099#6458#0" expanded="false" />
+            <element signature="e#5664#6035#0" expanded="false" />
+            <element signature="e#6103#6462#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -682,8 +679,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#5660#6031#0" expanded="false" />
-            <element signature="e#6099#6458#0" expanded="false" />
+            <element signature="e#5664#6035#0" expanded="false" />
+            <element signature="e#6103#6462#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -895,9 +892,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/page/operateSpec/operateSpec.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
+        <state relative-caret-position="218">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/authorize/authorize.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
           <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
           <folding />
         </state>
@@ -905,108 +918,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/page/modifyStaff/modifyStaff.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/staffMan/staffMan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding>
-            <element signature="e#5660#6031#0" expanded="false" />
-            <element signature="e#6099#6458#0" expanded="false" />
-            <marker date="1474985348000" expanded="true" signature="6606:6916" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="6865:6916" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="13526:17871" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="13593:14980" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="13642:14892" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="13742:13807" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="13869:14294" ph="{&quot;title&quot;: &quot;员工状态启用&quot;...}" />
-            <marker date="1474985348000" expanded="true" signature="14308:14876" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="14391:14705" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="14482:14576" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="14582:14683" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="14719:14856" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="14898:14970" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="15048:16434" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="15097:16346" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="15197:15262" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="15324:15749" ph="{&quot;title&quot;: &quot;员工状态停用&quot;...}" />
-            <marker date="1474985348000" expanded="true" signature="15763:16330" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="15845:16159" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="15936:16030" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="16036:16137" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="16173:16310" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="16352:16424" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="16497:17864" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="16546:17776" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="16646:16711" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="16773:17194" ph="{&quot;title&quot;: &quot;删除员工&quot;...}" />
-            <marker date="1474985348000" expanded="true" signature="17208:17760" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="17285:17593" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="17374:17466" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="17472:17571" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="17607:17740" ph="{...}" />
-            <marker date="1474985348000" expanded="true" signature="17782:17854" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="32" column="12" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/sysModular/sysModular.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/systemMenu/systemMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/userMan/userMan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/authorize/authorize.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+        <state relative-caret-position="218">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/page/operateSpec/operateSpec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="388" column="43" selection-start-line="388" selection-start-column="43" selection-end-line="388" selection-end-column="43" />
+        <state relative-caret-position="218">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/page/privilegeType/privilegeType.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1457">
-          <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
+        <state relative-caret-position="218">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/staffMan/staffMan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+          <folding>
+            <element signature="e#5664#6035#0" expanded="false" />
+            <element signature="e#6103#6462#0" expanded="false" />
+            <marker date="1474987152000" expanded="true" signature="6610:6920" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="6869:6920" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="13530:17875" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="13597:14984" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="13646:14896" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="13746:13811" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="13873:14298" ph="{&quot;title&quot;: &quot;员工状态启用&quot;...}" />
+            <marker date="1474987152000" expanded="true" signature="14312:14880" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="14395:14709" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="14486:14580" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="14586:14687" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="14723:14860" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="14902:14974" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="15052:16438" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="15101:16350" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="15201:15266" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="15328:15753" ph="{&quot;title&quot;: &quot;员工状态停用&quot;...}" />
+            <marker date="1474987152000" expanded="true" signature="15767:16334" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="15849:16163" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="15940:16034" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="16040:16141" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="16177:16314" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="16356:16428" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="16501:17868" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="16550:17780" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="16650:16715" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="16777:17198" ph="{&quot;title&quot;: &quot;删除员工&quot;...}" />
+            <marker date="1474987152000" expanded="true" signature="17212:17764" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="17289:17597" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="17378:17470" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="17476:17575" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="17611:17744" ph="{...}" />
+            <marker date="1474987152000" expanded="true" signature="17786:17858" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/sysModular/sysModular.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/systemMenu/systemMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/userMan/userMan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
       </provider>
