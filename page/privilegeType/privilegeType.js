@@ -110,6 +110,7 @@ angular
 
         $scope.checkedPrivilegeType = []; // 已经选中的权限类型信息
 
+        $scope.isForbid = true;
 		$scope.queryTypeForm = {
 			operationSpecTypeCd: '',
 			name: '',
@@ -132,11 +133,21 @@ angular
             httpMethod.queryTypeManager(param).then(function(rsp) {
                 $log.log('调用查询员工信息接口成功.');
                 $rootScope.queryTypeResultList = rsp.data.list;
+                // if ($rootScope.isMock) {
+                //     $scope.totalNum = 3;
+                // }
                 $scope.totalNum = rsp.data.totalNum;
             }, function() {
                 $log.log('调用查询员工信息接口失败.');
             });
         }
+		$scope.$watch('queryTypeForm', function(current, old, scope) {
+            if (scope.queryTypeForm.operationSpecTypeCd || scope.queryTypeForm.operationSpecTypeName) {
+                scope.isForbid = false;
+            } else {
+                scope.isForbid = true;
+            }
+        }, true);
 	}])
 	// 查询结果控制器
     .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log, httpMethod) {
@@ -243,7 +254,11 @@ angular
 
         $ctrl.ok = function() {
             $uibModalInstance.close();
+<<<<<<< HEAD
 
+=======
+            debugger
+>>>>>>> d4e640d89de409913c482373de3e019c168d66d8
             $scope.$broadcast('submitQueryTypeModal', items);
         };
 
@@ -256,7 +271,6 @@ angular
     .controller('editQueryTypeFormCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log, httpMethod) {
 
         $scope.$on('submitQueryTypeModal', function(d, data) {
-
             $scope.editQueryTypeFormSubmit(data);
         });
         $scope.$watch('modifiedQueryType', function(current, old, scope) {
@@ -267,7 +281,6 @@ angular
             }
         }, true);
         $scope.editQueryTypeFormSubmit = function(data) {
-
             // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
             if (data === 'insertType') {
                 var param = {
@@ -281,6 +294,7 @@ angular
                 param.operationSpecCdPrefix = $rootScope.modifiedQueryType.operationSpecCdPrefix;
                 param.operationSpecTypeDesc = $rootScope.modifiedQueryType.description;
 
+                debugger
                 // 新建权限类型配置
                 httpMethod.insertType(param).then(function(rsp) {
                     $log.log('调用新建权限类型配置接口成功.');
@@ -321,7 +335,6 @@ angular
     // 分页控制器
 	.controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
         $scope.maxSize = 10;
-
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
