@@ -61,9 +61,9 @@
                 </div>
                 <div class="col-xs-8 text-right">
                     <button ng-click="addStaffMan()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
-                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe615;</i> 冻结</button>
-                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe617;</i> 解冻</button>
-                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe616;</i> 注销</button>
+                    <button ng-click="lockUserManagerBatch()" class="btn btn-xs btn-set"><i class="iconfont">&#xe615;</i> 冻结</button>
+                    <button ng-click="uLockUserManagerBatch()" class="btn btn-xs btn-set"><i class="iconfont">&#xe617;</i> 解冻</button>
+                    <button ng-click="deleteUserManagerBatch()" class="btn btn-xs btn-set"><i class="iconfont">&#xe616;</i> 注销</button>
                     <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60f;</i> Excel批量导入</button>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <tbody>
                         <tr ng-repeat="item in staffManResultList">
                             <td>
-                                <input type="checkbox" name="checkbox{{$index}}">
+                                <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
                             </td>
                             <td>
                                 <p ng-bind="item.userId"></p>
