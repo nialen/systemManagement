@@ -246,13 +246,13 @@ angular
             $rootScope.modifiedSys = $rootScope.SysResultList[index];
             $rootScope.sysType.map(function(item, index) {
                 if (item.modularTypeCd == $rootScope.modifiedSys.modularTypeCd) {
-                    $rootScope.modifiedSys.modularTypeCdItem = item;
+                    $rootScope.modifiedSys.modularTypeCdItem = item.modularTypeCd;
                 }
             })
             $rootScope.sysTitle = title;
             $rootScope.systemList.map(function(item, index) {
                 if (item.sysId == $rootScope.modifiedSys.sysId) {
-                    $rootScope.modifiedSys.sysIdItem = item;
+                    $rootScope.modifiedSys.sysIdItem = item.sysId;
                 }
             });
             parent.angular.element(parent.$('#tabs')).scope().addTab('模块修改', '/page/sysModular/modifiedSys/modifiedSys.html', 'modifySys', JSON.stringify($rootScope.modifiedSys));
