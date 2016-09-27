@@ -196,7 +196,6 @@ angular
         // 获取地区列表
         httpMethod.queryArea().then(function (rsp) {
             $log.log('调用获取地区接口成功.');
-            debugger
             $rootScope.areaList = rsp.data;
         }, function () {
             $log.log('调用获取地区接口失败.');

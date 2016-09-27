@@ -31,9 +31,8 @@
                     </div>
                     <div class="col-xs-4">
                         <div class="form-group">
-                            <label class="control-label" for="operationSpecTypeCd">权限类型：</label>
-                         <!--    <select class="form-control query-input" id="operationSpecTypeCd" ng-model="queryOperateForm.operationSpecTypeCd" ng-options="item as item.operationSpecTypeName for item in operationType track by item.operationSpecTypeCd"></select> -->
-                            <select class="form-control query-input" id="operationSpecTypeCd" ng-model="queryOperateForm.operationSpecTypeCd">
+                            <label class="control-label" for="operationSpecItem">权限类型：</label>
+                            <select class="form-control query-input" id="operationSpecItem" ng-model="queryOperateForm.operationSpecItem">
                                 <option value="">请选择权限类型</option>
                                 <option ng-repeat="item in operationType" value="{{item.operationSpecTypeCd}}">{{item.operationSpecTypeName}}</option>
                             </select>
@@ -57,8 +56,8 @@
                 </div>
                 <div class="col-xs-8 text-right"> 
                     <button ng-click="addQueryOperate()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
-                    <button ng-click="uLockOperateSpec(0)" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
-                    <button ng-click="lockOperateSpec(1)" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
+                    <button ng-click="uLockOperateSpec(state)" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
+                    <button ng-click="lockOperateSpec(state)" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
                     <button ng-click="batchCancelOperateSpec()" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
                     <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60f;</i> Excel批量导入</button>
                 </div>

@@ -51,6 +51,7 @@ angular
                 if (status != 200) {
                     // 跳转403页面
                 }
+                debugger
                 defer.resolve(data);
             }).error(function(data, status, headers, config) {
                 defer.reject(data);
@@ -201,7 +202,7 @@ angular
         httpMethod.queryOperationType().then(function(rsp) {
         	debugger
             $log.log('调用获取业务模块类型接口成功.');
-            $rootScope.operationType = rsp.data;
+            $rootScope.operationType = rsp.data.list;
         }, function() {
             $log.log('调用获取业务模块类型接口失败.');
         });
@@ -211,10 +212,11 @@ angular
 		$scope.queryOperateForm = {
 			operationSpecCd: '',
             name: '',
-            operationSpecTypeName: null,
+            operationSpecItem: '',//权限类型
 		};
 		
 		$scope.queryOperateFormSubmit = function(currentPage) {
+			debugger
 			$scope.checkedOperateSpec = []; // 置空已选员工列表
 
 			var param = {
@@ -224,7 +226,7 @@ angular
 			};
 			$scope.queryOperateForm.operationSpecCd ? param.operationSpecCd = $scope.queryOperateForm.operationSpecCd : '';
 			$scope.queryOperateForm.name ? param.name = $scope.queryOperateForm.name : '';
-			$scope.queryOperateForm.operationSpecTypeCd ? param.operationSpecTypeCd = $scope.queryOperateForm.operationSpecTypeCd: '';
+			$scope.queryOperateForm.operationSpecItem ? param.operationSpecTypeCd = $scope.queryOperateForm.operationSpecItem: '';
 
 			// 查询权限规格信息
 			httpMethod.queryOperateSpec(param).then(function(rsp) {
@@ -274,7 +276,7 @@ angular
 			if ($scope.checkedOperateSpec.length) {
 				var param = {
 					operationSpecCd: [],
-					state: state
+					state: 0
 				};
 				$scope.checkedOperateSpec.map(function(item, index) {
 					param.operationSpecCd.push(item.operationSpecCd);	
@@ -313,7 +315,7 @@ angular
 			if ($scope.checkedOperateSpec.length) {
 				var param = {
 					operationSpecCd:[],
-					state:state
+					state : 1
 				};
 				$scope.checkedOperateSpec.map(function(item, index) {
 					param.operationSpecCd.push(item.operationSpecCd);
