@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>系统管理平台-权限规格配置</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
     <link href="../../lib/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/common.css">
@@ -11,32 +12,36 @@
 </head>
 
 <body ng-app="operateSpecModule">
-    <div class="operate-spec">
+    <div class="operate-spec" ng-controller="queryOperateFormCtrl">
         <!-- 查询 -->
-        <div class="operate-spec-query" ng-controller="queryOperateFormCtrl">
+        <div class="operate-spec-query">
             <form name="queryOperateForm" ng-submit="queryOperateFormSubmit()" class="form-inline" role="form">
                 <div class="row mb10">
                     <div class="col-xs-4">
                         <div class="form-group">
-                            <label class="control-label" for="operateId">权限规格编码：</label>
-                            <input type="input" id="operateId" class="form-control query-input" ng-model="queryOperateForm.operateId">
+                            <label class="control-label" for="operationSpecCd">权限规格编码：</label>
+                            <input type="input" id="operationSpecCd" class="form-control query-input" ng-model="queryOperateForm.operationSpecCd">
                         </div>
                     </div>
                     <div class="col-xs-4">
                         <div class="form-group">
-                            <label class="control-label" for="operateName">权限规格名称：</label>
-                            <input type="input" id="operateName" class="form-control query-input" ng-model="queryOperateForm.operateName">
+                            <label class="control-label" for="name">权限规格名称：</label>
+                            <input type="input" id="name" class="form-control query-input" ng-model="queryOperateForm.name">
                         </div>
                     </div>
                     <div class="col-xs-4">
                         <div class="form-group">
-                            <label class="control-label" for="operateType">权限类型：</label>
-                            <input type="input" id="operateType" class="form-control query-input" ng-model="queryOperateForm.operateType">
+                            <label class="control-label" for="operationSpecTypeCd">权限类型：</label>
+                         <!--    <select class="form-control query-input" id="operationSpecTypeCd" ng-model="queryOperateForm.operationSpecTypeCd" ng-options="item as item.operationSpecTypeName for item in operationType track by item.operationSpecTypeCd"></select> -->
+                            <select class="form-control query-input" id="operationSpecTypeCd" ng-model="queryOperateForm.operationSpecTypeCd">
+                                <option value="">请选择权限类型</option>
+                                <option ng-repeat="item in operationType" value="{{item.operationSpecTypeCd}}">{{item.operationSpecTypeName}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="row text-right">
-                    <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                    <button type="submit" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
                 </div>
             </form>
         </div>
@@ -52,9 +57,9 @@
                 </div>
                 <div class="col-xs-8 text-right"> 
                     <button ng-click="addQueryOperate()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
-                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
-                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
-                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                    <button ng-click="uLockOperateSpec(0)" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
+                    <button ng-click="lockOperateSpec(1)" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
+                    <button ng-click="batchCancelOperateSpec()" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
                     <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60f;</i> Excel批量导入</button>
                 </div>
             </div>
@@ -63,13 +68,10 @@
                     <thead>
                         <tr>
                             <th>选择</th>
-                            <th>权限规格ID</th>
-                            <th>权限规格名称</th>
                             <th>权限规格编码</th>
-                            <th>权限类型</th>
-                            <th>状态</th>
-                            <th>创建时间</th>
-                            <th>最后修改时间</th>
+                            <th>权限规格名称</th> 
+                            <th>权限类型</th>                       
+                            <th>状态</th>                           
                             <th>描述</th>
                             <th>操作</th>
                         </tr>
@@ -77,28 +79,19 @@
                     <tbody>
                         <tr ng-repeat="item in queryOperateResultList">
                             <td>
-                                <input type="checkbox" name="checkbox{{$index}}">
+                               <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
                             </td>
                             <td>
-                                <p ng-bind="item.operateId"></p>
+                                <p ng-bind="item.operationSpecCd"></p>
                             </td>
                             <td>
-                                <p ng-bind="item.operateName"></p>
+                                <p ng-bind="item.name"></p>
                             </td>
                             <td>
-                                <p ng-bind="item.operateCode"></p>
+                                <p ng-bind="item.operationSpecTypeName"></p>
                             </td>
                             <td>
-                                <p ng-bind="item.operateType"></p>
-                            </td>
-                            <td>
-                                <p ng-bind="item.status"></p>
-                            </td>
-                            <td>
-                                <p ng-bind="item.creatDate"></p>
-                            </td>
-                            <td>
-                                <p ng-bind="item.lastModifiedDate"></p>
+                                <p ng-bind="item.stateName"></p>
                             </td>
                             <td>
                                 <p ng-bind="item.description"></p>
@@ -112,7 +105,7 @@
                 </table>
             </div>
             <div ng-controller="paginationCtrl" class="text-center">
-                <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
             </div>
         </div>
     </div>
@@ -124,6 +117,7 @@
     <script src="../../lib/bootstrap.min.js"></script>
     <script src="../../lib/ui-bootstrap.js"></script>
     <script src="../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
+    <script src="../../lib/sweetalert.min.js"></script>
     <script src="operateSpec.js"></script>
 </body>
 
