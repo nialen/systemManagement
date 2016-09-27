@@ -5,7 +5,7 @@
 
 angular
     .module('SysModule', ['ui.bootstrap'])
-    .run(['$rootScope', function($rootScope) {
+    .run(['$rootScope', function ($rootScope) {
         $rootScope.isMock = false; // 是否MOCK数据
         $rootScope.SysResultList = []; // 查询模块列表
         $rootScope.modifiedSys = {}; // 待修改的模块信息
@@ -14,142 +14,143 @@ angular
         $rootScope.systemList = []; // 所属系统
     }])
 
-/*传入数据*/
-    .factory('httpMethod', ['$http', '$q', function($http, $q) {
+    /*传入数据*/
+    .factory('httpMethod', ['$http', '$q', function ($http, $q) {
         var httpMethod = {};
         var httpConfig = {
+            'siteUrl': 'http://127.0.0.1/psm',
             //'siteUrl': 'http://192.168.74.17/psm',
-             'siteUrl': 'http://192.168.16.161:80/psm',
+            //  'siteUrl': 'http://192.168.16.161:80/psm',
             //'siteUrl': 'http://192.168.16.67:8080/psm',
             'requestHeader': {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
         };
         // 查询业务系统平台
-        httpMethod.queryBusinessSystem = function() {
+        httpMethod.queryBusinessSystem = function () {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/privilege/profile/queryBusinessSystem.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-            }).success(function(data, header, config, status) {
+            }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
                 }
                 defer.resolve(data);
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
                 defer.reject(data);
             });
             return defer.promise;
         };
 
         // 查询业务模块类型
-        httpMethod.queryModularType = function(param) {
+        httpMethod.queryModularType = function (param) {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/privilege/profile/queryModularType.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-            }).success(function(data, header, config, status) {
+            }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
                 }
                 defer.resolve(data);
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
                 defer.reject(data);
             });
             return defer.promise;
         };
 
         // 查询上级业务模块
-        httpMethod.querySysModularAsParent = function(param) {
+        httpMethod.querySysModularAsParent = function (param) {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/privilege/profile/querySysModularAsParent.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-            }).success(function(data, header, config, status) {
+            }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
                 }
                 defer.resolve(data);
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
                 defer.reject(data);
             });
             return defer.promise;
         };
 
         // 查询业务模块
-        httpMethod.querySysModular = function(param) {
+        httpMethod.querySysModular = function (param) {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/privilege/profile/querySysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
                 data: 'param=' + JSON.stringify(param)
-            }).success(function(data, header, config, status) {
+            }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
                 }
                 defer.resolve(data);
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
                 defer.reject(data);
             });
             return defer.promise;
         };
 
         // 新建服务
-        httpMethod.insertSysModular = function(param) {
+        httpMethod.insertSysModular = function (param) {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/privilege/profile/insertSysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
                 data: 'data=' + JSON.stringify(param)
-            }).success(function(data, header, config, status) {
+            }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
                 }
                 defer.resolve(data);
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
                 defer.reject(data);
             });
             return defer.promise;
         };
 
         // 修改服务
-        httpMethod.alterSysModular = function(param) {
+        httpMethod.alterSysModular = function (param) {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/privilege/profile/alterSysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
                 data: 'data=' + JSON.stringify(param)
-            }).success(function(data, header, config, status) {
+            }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
                 }
                 defer.resolve(data);
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
                 defer.reject(data);
             });
             return defer.promise;
         };
 
         // 删除服务
-        httpMethod.deleteSysModularBatch = function(param) {
+        httpMethod.deleteSysModularBatch = function (param) {
             var defer = $q.defer();
             $http({
                 url: httpConfig.siteUrl + '/privilege/profile/deleteSysModularBatch.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
                 data: 'data=' + param
-            }).success(function(data, header, config, status) {
+            }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
                 }
                 defer.resolve(data);
-            }).error(function(data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
                 defer.reject(data);
             });
             return defer.promise;
@@ -157,37 +158,37 @@ angular
 
         return httpMethod;
     }])
-/*传入数据*/
+    /*传入数据*/
 
 
 
     // 查询控制器
-    .controller('querySysFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+    .controller('querySysFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
 
         // 查询结果分页信息
         $scope.requirePaging = true; // 是否需要分页
-            $scope.currentPage = 1; // 当前页
-            $scope.rowNumPerPage = 5; // 每页显示行数
-            $scope.totalNum = 0; // 总条数
+        $scope.currentPage = 1; // 当前页
+        $scope.rowNumPerPage = 5; // 每页显示行数
+        $scope.totalNum = 0; // 总条数
 
         // 获取业务模块类型列表
-        httpMethod.queryModularType().then(function(rsp) {
+        httpMethod.queryModularType().then(function (rsp) {
             $log.log('调用获取业务模块类型接口成功.');
             $rootScope.sysType = rsp.data;
-        }, function() {
+        }, function () {
             $log.log('调用获取业务模块类型接口失败.');
         });
 
         // 获取业务系统平台列表
-        httpMethod.queryBusinessSystem().then(function(rsp) {
+        httpMethod.queryBusinessSystem().then(function (rsp) {
             $log.log('调用获取业务系统平台接口成功.');
             $rootScope.systemList = rsp.data;
-        }, function() {
+        }, function () {
             $log.log('调用获取业务系统平台接口失败.');
         });
 
 
-        $scope.querySysFormSubmit = function(currentPage) {
+        $scope.querySysFormSubmit = function (currentPage) {
             $scope.checkedSys = []; // 置空已选业务模型列表
 
             var param = {
@@ -203,18 +204,18 @@ angular
             $scope.querySysForm.modularTypeCdItem ? param.modularTypeCd = $scope.querySysForm.modularTypeCdItem.modularTypeCd : '';
             $scope.querySysForm.sysName ? param.sysName = $scope.querySysForm.sysName : '';
             $scope.querySysForm.sysIdItem ? param.sysId = $scope.querySysForm.sysIdItem.sysId : '';
-            
+
             // 查询模块信息
-            httpMethod.querySysModular(param).then(function(rsp) {
+            httpMethod.querySysModular(param).then(function (rsp) {
                 $log.log('调用查询模块信息接口成功.');
                 $rootScope.SysResultList = rsp.data.list;
                 $scope.totalNum = rsp.data.totalNum;
-            }, function() {
+            }, function () {
                 $log.log('调用查询模块信息接口失败.');
             });
         }
-        $scope.$watch('querySysForm', function(current, old, scope) {
-            if (scope.querySysForm.sysModularId || scope.querySysForm.name || 
+        $scope.$watch('querySysForm', function (current, old, scope) {
+            if (scope.querySysForm.sysModularId || scope.querySysForm.name ||
                 scope.querySysForm.modularTypeCdItem) {
                 scope.isForbid = false;
             } else {
@@ -223,18 +224,18 @@ angular
         }, true)
     }])
     // 查询结果控制器
-    .controller('SysResultCtrl', ['$scope', '$rootScope', '$log', '$filter', 'httpMethod', function($scope, $rootScope, $log, $filter, httpMethod) {
-        
+    .controller('SysResultCtrl', ['$scope', '$rootScope', '$log', '$filter', 'httpMethod', function ($scope, $rootScope, $log, $filter, httpMethod) {
+
         // 详情
-        $scope.editSys = function(index, title) {
+        $scope.editSys = function (index, title) {
             $rootScope.modifiedSys = $rootScope.SysResultList[index];
-            $rootScope.sysType.map(function(item, index) {
+            $rootScope.sysType.map(function (item, index) {
                 if (item.modularTypeCd == $rootScope.modifiedSys.modularTypeCd) {
                     $rootScope.modifiedSys.modularTypeCdItem = item;
                 }
             })
             $rootScope.sysTitle = title;
-            $rootScope.systemList.map(function(item, index) {
+            $rootScope.systemList.map(function (item, index) {
                 if (item.sysId == $rootScope.modifiedSys.sysId) {
                     $rootScope.modifiedSys.sysIdItem = item;
                 }
@@ -242,15 +243,15 @@ angular
             $scope.$emit('openEditSysModal', 'alertSys');
         }
         // 修改
-        $scope.modifySys = function(index, title) {
+        $scope.modifySys = function (index, title) {
             $rootScope.modifiedSys = $rootScope.SysResultList[index];
-            $rootScope.sysType.map(function(item, index) {
+            $rootScope.sysType.map(function (item, index) {
                 if (item.modularTypeCd == $rootScope.modifiedSys.modularTypeCd) {
                     $rootScope.modifiedSys.modularTypeCdItem = item;
                 }
             })
             $rootScope.sysTitle = title;
-            $rootScope.systemList.map(function(item, index) {
+            $rootScope.systemList.map(function (item, index) {
                 if (item.sysId == $rootScope.modifiedSys.sysId) {
                     $rootScope.modifiedSys.sysIdItem = item;
                 }
@@ -258,12 +259,12 @@ angular
             parent.angular.element(parent.$('#tabs')).scope().addTab('模块修改', '/page/sysModular/modifiedSys/modifiedSys.html', 'modifySys', JSON.stringify($rootScope.modifiedSys));
         }
         // 新建
-        $scope.addSys = function(title) {
+        $scope.addSys = function (title) {
             /*
-            $rootScope.modifiedSys = {};
-            $rootScope.sysTitle = '新建模块'; 
-            $scope.$emit('openEditSysModal');
-            */
+             $rootScope.modifiedSys = {};
+             $rootScope.sysTitle = '新建模块';
+             $scope.$emit('openEditSysModal');
+             */
             parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/page/sysModular/modifiedSys/modifiedSys.html', 'addNewSys');
         }
         /**
@@ -271,9 +272,9 @@ angular
          * @param  {[type]} val [整行数据]
          * @param  {[boolean]} chk [是否选中]
          */
-        $scope.check = function(val, chk) {
+        $scope.check = function (val, chk) {
             var valueOfIndex = '';
-            $scope.checkedSys.length && $scope.checkedSys.map(function(item, index) {
+            $scope.checkedSys.length && $scope.checkedSys.map(function (item, index) {
                 if (item.sysModularId == val.sysModularId) {
                     valueOfIndex = index;
                 }
@@ -281,10 +282,10 @@ angular
             chk ? valueOfIndex === '' && $scope.checkedSys.push(val) : $scope.checkedSys.splice(valueOfIndex, 1);
         }
         // 删除
-        $scope.deleteSysModularBatch = function() {
+        $scope.deleteSysModularBatch = function () {
             if ($scope.checkedSys.length) {
                 var param = [];
-                $scope.checkedSys.map(function(item, index) {
+                $scope.checkedSys.map(function (item, index) {
                     param.push(item.sysModularId);
                 });
                 param = param.join();
@@ -298,15 +299,15 @@ angular
                     confirmButtonColor: "#ffaa00",
                     cancelButtonText: "取消",
                     showLoaderOnConfirm: true
-                }, function() {
-                    httpMethod.deleteSysModularBatch(param).then(function(rsp) {
+                }, function () {
+                    httpMethod.deleteSysModularBatch(param).then(function (rsp) {
                         $log.log('调用删除业务模块接口成功.');
                         if (rsp.data) {
                             swal("操作成功!", "删除业务模块成功！", "success");
                         } else {
                             swal("OMG", "删除业务模块失败!", "error");
                         }
-                    }, function() {
+                    }, function () {
                         $log.log('调用删除业务模块接口失败.');
                         swal("OMG", "调用删除业务模块接口失败!", "error");
                     });
@@ -317,7 +318,7 @@ angular
         }
 
         // 子iframe调用父iframe控制器内方法；
-        $scope.demo = function() {
+        $scope.demo = function () {
             parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/page/sysModular/sysModular.html');
             // $log.log(parent.angular.element($('#tabs')).abbTabs, '父层iframe');
         }
@@ -325,15 +326,15 @@ angular
     // 弹出框控制器
     // TODO 删除冗余代码
     // TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
-    .controller('editSysModalCtrl', function($scope, $rootScope, $uibModal, $log) {
+    .controller('editSysModalCtrl', function ($scope, $rootScope, $uibModal, $log) {
         var $ctrl = this;
-        $scope.$on('openEditSysModal', function(d,data) {  
-            $ctrl.open(data); 
+        $scope.$on('openEditSysModal', function (d, data) {
+            $ctrl.open(data);
         });
 
         $ctrl.animationsEnabled = true;
 
-        $ctrl.open = function(data) {
+        $ctrl.open = function (data) {
             var modalInstance = $uibModal.open({
                 animation: $ctrl.animationsEnabled,
                 ariaLabelledBy: 'modal-title',
@@ -343,74 +344,74 @@ angular
                 controllerAs: '$ctrl',
                 size: 'lg',
                 resolve: {
-                    items: function() {
+                    items: function () {
                         return data;
                     }
                 }
             });
-            modalInstance.result.then(function(selectedItem) {
+            modalInstance.result.then(function (selectedItem) {
                 $ctrl.selected = selectedItem;
-            }, function() {
+            }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
 
-        $ctrl.openComponentModal = function() {
+        $ctrl.openComponentModal = function () {
             var modalInstance = $uibModal.open({
                 animation: $ctrl.animationsEnabled,
                 component: 'modalComponent',
                 resolve: {
-                    items: function() {
+                    items: function () {
                         return $ctrl.items;
                     }
                 }
             });
 
-            modalInstance.result.then(function(selectedItem) {
+            modalInstance.result.then(function (selectedItem) {
                 $ctrl.selected = selectedItem;
-            }, function() {
+            }, function () {
                 $log.info('modal-component dismissed at: ' + new Date());
             });
         };
 
-        $ctrl.toggleAnimation = function() {
+        $ctrl.toggleAnimation = function () {
             $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
         };
     })
-    .controller('ModalInstanceCtrl', function($uibModalInstance, $scope, items) {
+    .controller('ModalInstanceCtrl', function ($uibModalInstance, $scope, items) {
         var $ctrl = this;
 
-        $ctrl.ok = function() {
+        $ctrl.ok = function () {
             $uibModalInstance.close();
             $scope.$broadcast('submitSysModal', items);
         };
 
-        $ctrl.cancel = function() {
+        $ctrl.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
     })
-    
+
     // 编辑模块信息控制器
-    .controller('editSysFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
-        $scope.$on('submitSysModal', function(d, data) {
+    .controller('editSysFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+        $scope.$on('submitSysModal', function (d, data) {
             $scope.editSysFormSubmit(data);
         });
-        $scope.$watch('modifiedSys', function(current, old, scope) {
-            if ( scope.modifiedSys.sysModularId && scope.modifiedSys.name && 
+        $scope.$watch('modifiedSys', function (current, old, scope) {
+            if (scope.modifiedSys.sysModularId && scope.modifiedSys.name &&
                 scope.modifiedSys.modularTypeCdItem) {
                 $rootScope.isForbidSubmit = false;
             } else {
                 $rootScope.isForbidSubmit = true;
             }
         }, true);
-        $scope.editSysFormSubmit = function(data) {
+        $scope.editSysFormSubmit = function (data) {
             if (data === 'insertSysModular') {
                 var param = {
                     name: '', // 业务模块名称
                     sysModularId: '', // 业务模块Id
                     modularTypeCd: '', // 业务模块类型
-                    sysId:'',// 所属系统Id
-                    sysName:'', //所属系统名称
+                    sysId: '',// 所属系统Id
+                    sysName: '', //所属系统名称
 
                 };
                 param.name = $rootScope.modifiedSys.name;
@@ -420,14 +421,14 @@ angular
                 param.sysName = $rootScope.modifiedSys.sysName;
 
                 // 新建模块信息
-                httpMethod.insertSysModular(param).then(function(rsp) {
+                httpMethod.insertSysModular(param).then(function (rsp) {
                     $log.log('调用新建模块接口成功.');
                     if (rsp.data) {
                         $log.log('新建模块成功.');
                     } else {
                         $log.log('新建模块失败.');
                     }
-                }, function() {
+                }, function () {
                     $log.log('调用新建模块接口失败.');
                 });
             } else if (data === 'alertStaff') {
@@ -435,8 +436,8 @@ angular
                     name: '', // 业务模块名称
                     sysModularId: '', // 业务模块Id
                     modularTypeCd: '', // 业务模块类型
-                    sysId:'',// 所属系统
-                    sysName:'', //所属系统名称
+                    sysId: '',// 所属系统
+                    sysName: '', //所属系统名称
                 };
                 param.name = $rootScope.modifiedSys.name;
                 param.sysModularId = $rootScope.modifiedSys.sysModularId;
@@ -445,27 +446,27 @@ angular
                 param.sysName = $rootScope.modifiedSys.sysName;
 
                 // 修改模块信息
-                httpMethod.alterSysModular(param).then(function(rsp) {
+                httpMethod.alterSysModular(param).then(function (rsp) {
                     $log.log('调用修改模块接口成功.');
                     if (rsp.data) {
                         $log.log('修改模块成功.');
                     } else {
                         $log.log('修改模块失败.');
                     }
-                }, function() {
+                }, function () {
                     $log.log('调用修改模块接口失败.');
                 });
             }
         }
     }])
     // 分页控制器
-    .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+    .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
         $scope.maxSize = 10;
-        $scope.setPage = function(pageNo) {
+        $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
 
-        $scope.pageChanged = function() {
+        $scope.pageChanged = function () {
             $scope.querySysFormSubmit($scope.currentPage);
             $log.log('Page changed to: ' + $scope.currentPage);
         };

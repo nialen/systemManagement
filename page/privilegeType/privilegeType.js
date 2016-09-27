@@ -1,5 +1,5 @@
 /**
- * Auth 
+ * Auth
  * Date 2016-09-07
  */
 
@@ -13,8 +13,9 @@ angular
     .factory('httpMethod', ['$http', '$q', function($http, $q) {
         var httpMethod = {};
         var httpConfig = {
+            'siteUrl': 'http://127.0.0.1/psm',
             // 'siteUrl': 'http://192.168.16.67:8080/psm',
-             'siteUrl': 'http://192.168.74.17/psm',
+            //  'siteUrl': 'http://192.168.74.17/psm',
             // 'siteUrl': 'http://192.168.16.161:80/psm',
             'requestHeader': {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -127,18 +128,18 @@ angular
             $scope.queryTypeForm.operationSpecTypeCd ? param.operationSpecTypeCd = $scope.queryTypeForm.operationSpecTypeCd : '';
             $scope.queryTypeForm.operationSpecTypeName ? param.operationSpecTypeName = $scope.queryTypeForm.operationSpecTypeName : '';
 
-            // 查询权限类型配置 
+            // 查询权限类型配置
             httpMethod.queryTypeManager(param).then(function(rsp) {
                 $log.log('调用查询员工信息接口成功.');
                 $rootScope.queryTypeResultList = rsp.data.list;
                 $scope.totalNum = rsp.data.totalNum;
             }, function() {
                 $log.log('调用查询员工信息接口失败.');
-            });         
+            });
         }
 	}])
 	// 查询结果控制器
-    .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log, httpMethod) {      
+    .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log, httpMethod) {
 
         // 修改
         $scope.editQueryType = function(title, index) {
@@ -210,10 +211,10 @@ angular
     // TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
     .controller('editQueryTypeModalCtrl', function($scope, $rootScope, $uibModal, $log) {
     	var $ctrl = this;
-        $scope.$on('openEditQueryTypeModal', function(d,data) {  
-	        $ctrl.open(data); 
+        $scope.$on('openEditQueryTypeModal', function(d,data) {
+	        $ctrl.open(data);
 	    });
- 
+
         $ctrl.animationsEnabled = true;
 
         $ctrl.open = function(data) {
@@ -231,7 +232,7 @@ angular
                     }
                 }
             });
-           
+
         };
         $ctrl.toggleAnimation = function() {
             $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
@@ -239,10 +240,10 @@ angular
     })
     .controller('ModalInstanceCtrl', function($uibModalInstance, $scope, items) {
         var $ctrl = this;
-        
+
         $ctrl.ok = function() {
             $uibModalInstance.close();
-          
+
             $scope.$broadcast('submitQueryTypeModal', items);
         };
 
@@ -250,15 +251,15 @@ angular
             $uibModalInstance.dismiss('cancel');
         };
     })
-   
+
     // 编辑控制器
     .controller('editQueryTypeFormCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log, httpMethod) {
-        
+
         $scope.$on('submitQueryTypeModal', function(d, data) {
-         
+
             $scope.editQueryTypeFormSubmit(data);
         });
-        $scope.$watch('modifiedQueryType', function(current, old, scope) {        
+        $scope.$watch('modifiedQueryType', function(current, old, scope) {
             if (scope.modifiedQueryType.operationSpecTypeCd && scope.modifiedQueryType.operationSpecTypeName ) {
                 $rootScope.isForbidSubmit = false;
             } else {
@@ -266,12 +267,12 @@ angular
             }
         }, true);
         $scope.editQueryTypeFormSubmit = function(data) {
-            
+
             // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
             if (data === 'insertType') {
                 var param = {
                     operationSpecTypeCd:'', //类型编码
-                    operationSpecTypeName:'',//权限类型名称                    
+                    operationSpecTypeName:'',//权限类型名称
                     operationSpecCdPrefix:'',//权限规格编码前缀
                     operationSpecTypeDesc:''//描述
                 };
@@ -320,7 +321,7 @@ angular
     // 分页控制器
 	.controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
         $scope.maxSize = 10;
-         
+
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };

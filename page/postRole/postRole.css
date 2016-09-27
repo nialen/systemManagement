@@ -1,10 +1,8 @@
 .staff-man {
-	width: 960px;
-	margin: 0 auto;
-	padding-top: 10px;
+	padding: 10px 20px 0;
 }
 
-.sys_left{ 
+.sys_left{
 	float: left;
 	display: inline-block;
 	height: 34px;
@@ -76,7 +74,7 @@
 .btn-set {
 	margin-left: 10px;
 	padding-left: 15px;
-	padding-right: 15px; 
+	padding-right: 15px;
     background-color: #ffc619;
     border-color: #ffc619;
     color: #fff;

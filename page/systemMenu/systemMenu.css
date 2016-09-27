@@ -1,6 +1,5 @@
 .system-menu {
-	width: 960px;
-	margin: 10px auto 0;
+    margin: 10px 20px 0;
 	border: 1px solid #ddd;
 }
 
@@ -125,8 +124,9 @@
 }
 
 .configuration-edit {
-	width: 718px;
+	/*width: 718px;*/
 	padding: 20px;
+    width: calc(100% - 260px);
 }
 
 .edit-input {
@@ -252,4 +252,7 @@
 }
 .query-input {
     width: 164px !important;
+}
+.pleft {
+    padding-left: 316px;
 }

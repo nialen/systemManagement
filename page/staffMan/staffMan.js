@@ -15,7 +15,8 @@ angular
     .factory('httpMethod', ['$http', '$q', function ($http, $q) {
         var httpMethod = {};
         var httpConfig = {
-            'siteUrl': 'http://192.168.16.67:8080/psm',
+            'siteUrl': 'http://127.0.0.1/psm',
+            // 'siteUrl': 'http://192.168.16.67:8080/psm',
             'requestHeader': {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
