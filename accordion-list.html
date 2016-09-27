@@ -1,0 +1,12 @@
+<p class="accordion-title"><i class="iconfont {{tabsTitle.icon}}"></i><span ng-bind="tabsTitle.title"></span></p>
+<ul id="accordion-tabs">
+    <li class="accordion-tabs" ng-repeat="item in tabsList">
+        <input type="checkbox" name="group-{{$index}}" id="group-{{$index}}">
+        <label for="group-{{$index}}"><i class="iconfont {{item.groupIcon}}"></i><span ng-bind="item.groupName"></span></label>
+        <ul style="display:none">
+            <li class="accordion-tabs-list" ng-repeat="i in item.groupList"
+                ng-click="addTab(i.title, i.url, i.id, i.data)">{{i.title}}
+            </li>
+        </ul>
+    </li>
+</ul>
