@@ -352,6 +352,7 @@ angular
             });
             chk ? valueOfIndex === '' && $scope.checkedStaffMan.push(val) : $scope.checkedStaffMan.splice(valueOfIndex, 1);
         };
+
         // 启用
         $scope.uLockStaffManagerBatch = function () {
             if ($scope.checkedStaffMan.length) {

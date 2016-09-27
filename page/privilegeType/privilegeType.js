@@ -109,6 +109,7 @@ angular
 
         $scope.checkedPrivilegeType = []; // 已经选中的权限类型信息
 
+        $scope.isForbid = true;
 		$scope.queryTypeForm = {
 			operationSpecTypeCd: '',
 			name: '',
@@ -131,11 +132,34 @@ angular
             httpMethod.queryTypeManager(param).then(function(rsp) {
                 $log.log('调用查询员工信息接口成功.');
                 $rootScope.queryTypeResultList = rsp.data.list;
+                // if ($rootScope.isMock) {
+                //     $scope.totalNum = 3;
+                // }
                 $scope.totalNum = rsp.data.totalNum;
             }, function() {
                 $log.log('调用查询员工信息接口失败.');
-            });         
+            });
+            // if ($rootScope.isMock) {
+            //     $rootScope.queryTypeResultList = [{
+            //         "description": "系统管理访问权限",//描述
+            //         "name": "系统管理",//权限类型名称
+            //         "operationSpecCdPrefix": "10",//权限规格编码前缀
+            //         "operationSpecTypeCd": "1" //权限类型编码
+            //     }, {
+            //         "description": "系统管理访问权限",//描述
+            //         "name": "系统管理",//权限类型名称
+            //         "operationSpecCdPrefix": "11",//权限规格编码前缀
+            //         "operationSpecTypeCd": "2" //权限类型编码
+            //     }];
+            // }  
         }
+		$scope.$watch('queryTypeForm', function(current, old, scope) {
+            if (scope.queryTypeForm.operationSpecTypeCd || scope.queryTypeForm.operationSpecTypeName) {
+                scope.isForbid = false;
+            } else {
+                scope.isForbid = true;
+            }
+        }, true);
 	}])
 	// 查询结果控制器
     .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log, httpMethod) {      
@@ -242,7 +266,6 @@ angular
         
         $ctrl.ok = function() {
             $uibModalInstance.close();
-          
             $scope.$broadcast('submitQueryTypeModal', items);
         };
 
@@ -255,7 +278,6 @@ angular
     .controller('editQueryTypeFormCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log, httpMethod) {
         
         $scope.$on('submitQueryTypeModal', function(d, data) {
-         
             $scope.editQueryTypeFormSubmit(data);
         });
         $scope.$watch('modifiedQueryType', function(current, old, scope) {        
@@ -266,7 +288,7 @@ angular
             }
         }, true);
         $scope.editQueryTypeFormSubmit = function(data) {
-            
+ 
             // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
             if (data === 'insertType') {
                 var param = {
@@ -320,7 +342,6 @@ angular
     // 分页控制器
 	.controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
         $scope.maxSize = 10;
-         
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
