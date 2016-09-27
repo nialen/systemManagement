@@ -372,8 +372,10 @@ angular
 					cancelButtonText: "取消",
 					showLoaderOnConfirm: true
 				}, function() {
+					debugger
 					httpMethod.uLockStaffManagerBatch(param).then(function(rsp) {
 						$log.log('调用启用员工状态接口成功.');
+						debugger
 						if (rsp.data) {
 							swal("操作成功!", "员工状态启用成功！", "success");
 						} else {
