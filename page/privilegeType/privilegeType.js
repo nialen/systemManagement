@@ -266,7 +266,6 @@ angular
         
         $ctrl.ok = function() {
             $uibModalInstance.close();
-            debugger
             $scope.$broadcast('submitQueryTypeModal', items);
         };
 
@@ -279,7 +278,6 @@ angular
     .controller('editQueryTypeFormCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log, httpMethod) {
         
         $scope.$on('submitQueryTypeModal', function(d, data) {
-            debugger
             $scope.editQueryTypeFormSubmit(data);
         });
         $scope.$watch('modifiedQueryType', function(current, old, scope) {        
@@ -290,7 +288,7 @@ angular
             }
         }, true);
         $scope.editQueryTypeFormSubmit = function(data) {
-            debugger
+ 
             // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
             if (data === 'insertType') {
                 var param = {
@@ -304,7 +302,6 @@ angular
                 param.operationSpecCdPrefix = $rootScope.modifiedQueryType.operationSpecCdPrefix;
                 param.operationSpecTypeDesc = $rootScope.modifiedQueryType.description;
 
-                debugger
                 // 新建权限类型配置
                 httpMethod.insertType(param).then(function(rsp) {
                     $log.log('调用新建权限类型配置接口成功.');
