@@ -87,7 +87,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/querySysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'param=' + JSON.stringify(param)
+                data: 'param=' + encodeURI(JSON.stringify(param))
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -106,7 +106,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/insertSysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -125,7 +125,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/alterSysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -247,13 +247,13 @@ angular
             $rootScope.modifiedSys = $rootScope.SysResultList[index];
             $rootScope.sysType.map(function (item, index) {
                 if (item.modularTypeCd == $rootScope.modifiedSys.modularTypeCd) {
-                    $rootScope.modifiedSys.modularTypeCdItem = item.modularTypeCd;
+                    $rootScope.modifiedSys.modularTypeCdItem = item;
                 }
             })
             $rootScope.sysTitle = title;
             $rootScope.systemList.map(function (item, index) {
                 if (item.sysId == $rootScope.modifiedSys.sysId) {
-                    $rootScope.modifiedSys.sysIdItem = item.sysId;
+                    $rootScope.modifiedSys.sysIdItem = item;
                 }
             });
             parent.angular.element(parent.$('#tabs')).scope().addTab('模块修改', '/psm/page/sysModular/modifiedSys/modifiedSys.html', 'modifySys', JSON.stringify($rootScope.modifiedSys));
