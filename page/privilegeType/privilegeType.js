@@ -29,7 +29,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/queryOperationSpecType.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'param=' + JSON.stringify(param)
+                data: 'param=' + encodeURI(JSON.stringify(param))
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -48,7 +48,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/insertOperationSpecType.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -67,7 +67,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/alterOperationSpecType.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面

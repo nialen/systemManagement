@@ -28,7 +28,7 @@ angular
 				url: httpConfig.siteUrl + '/privilege/profile/queryOperationSpec.action',
 				method: 'POST',
 				headers: httpConfig.requestHeader,
-				data: 'param=' + JSON.stringify(param)
+				data: 'param=' + encodeURI(JSON.stringify(param))
 			}).success(function(data, header, config, status) {
 				if (status != 200) {
 					// 跳转403页面
@@ -65,7 +65,7 @@ angular
 				url: httpConfig.siteUrl + '/privilege/profile/insertOperationSpec.action',
 				method: 'POST',
 				headers: httpConfig.requestHeader,
-				data: 'data=' + JSON.stringify(param)
+				data: 'data=' + encodeURI(JSON.stringify(param))
 			}).success(function(data, header, config, status) {
 				if (status != 200) {
 					// 跳转403页面
@@ -81,10 +81,10 @@ angular
 		httpMethod.alertOperateSpec = function(param) {
 			var defer = $q.defer();
 			$http({
-				url: httpConfig.siteUrl + '/privilege/profile/alertOperationSpec.action',
+				url: httpConfig.siteUrl + '/privilege/profile/alterOperationSpec.action',
 				method: 'POST',
 				headers: httpConfig.requestHeader,
-				data: 'data=' + JSON.stringify(param)
+				data: 'data=' + encodeURI(JSON.stringify(param))
 			}).success(function(data, header, config, status) {
 				if (status != 200) {
 					// 跳转403页面
@@ -103,7 +103,7 @@ angular
 				url: httpConfig.siteUrl + '/privilege/profile/alertOperationSpec.action',
 				method: 'POST',
 				headers: httpConfig.requestHeader,
-				data: 'data=' + JSON.stringify(param)
+				data: 'data=' + encodeURI(JSON.stringify(param))
 			}).success(function(data, header, config, status) {
 				if (status != 200) {
 					// 跳转403页面
@@ -190,23 +190,22 @@ angular
 	})
 
 	// 查询控制器
-	.controller('queryOperateFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+	.controller('queryOperateFormCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log, httpMethod) {
 		// 查询结果分页信息
 		$scope.requirePaging = true; // 是否需要分页
 		$scope.currentPage = 1; // 当前页
 		$scope.rowNumPerPage = 4; // 每页显示行数
 		$scope.totalNum = 0; // 总条数
 
-		// 获取业务模块类型列表
+		// 获取权限类型列表
         httpMethod.queryOperationType().then(function(rsp) {
-        	debugger
-            $log.log('调用获取业务模块类型接口成功.');
+            $log.log('调用获取权限类型接口成功.');
             $rootScope.operationType = rsp.data.list;
         }, function() {
-            $log.log('调用获取业务模块类型接口失败.');
+            $log.log('调用获取权限类型接口失败.');
         });
 
-		$scope.checkedOperateSpec = []; // 已经选中的员工信息
+		$scope.checkedOperateSpec = []; // 已经选中
 
 		$scope.queryOperateForm = {
 			operationSpecCd: '',
@@ -216,7 +215,6 @@ angular
 
 		$scope.queryOperateFormSubmit = function(currentPage) {
 			$scope.checkedOperateSpec = []; // 置空已选员工列表
-
 			var param = {
 				requirePaging: $scope.requirePaging, //是否需要分页
                 currentPage: currentPage || $scope.currentPage, //当前页
@@ -238,20 +236,19 @@ angular
 
 	}])
 	// 查询结果控制器
-	.controller('queryOperateResultCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log, httpMethod) {
+	.controller('queryOperateResultCtrl', ['$scope', '$rootScope', '$log','$filter','httpMethod', function($scope, $rootScope, $log, $filter, httpMethod) {
 		// 修改
-		$scope.editQueryOperate = function(title, index) {
-			debugger
+		$scope.editQueryOperate = function(index) {
 			$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
 			parent.angular.element(parent.$('#tabs')).scope().addTab('修改权限规格', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
 		}
 		// 新建
-		$scope.addQueryOperate = function(title) {
+		$scope.addQueryOperate = function() {
 			parent.angular.element(parent.$('#tabs')).scope().addTab('新建权限规格', '/page/modifyOperate/modifyOperate.html', 'addOperate');
 
 		}
 		// 详情
-		$scope.infoQueryOperate = function(title, index) {
+		$scope.infoQueryOperate = function(index) {
 			$rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
 			parent.angular.element(parent.$('#tabs')).scope().addTab('权限规格详情', '/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
 		}
@@ -386,9 +383,6 @@ angular
 	 // 分页控制器
 	.controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
         $scope.maxSize = 10;
-        // $scope.setPage = function(pageNo) {
-        //     $scope.currentPage = pageNo;
-        // };
         $scope.pageChanged = function() {
             $scope.queryOperateFormSubmit($scope.currentPage);
             $log.log('Page changed to: ' + $scope.currentPage);

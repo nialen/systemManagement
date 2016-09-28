@@ -122,7 +122,7 @@ angular
         }
     })
 	// 修改用户控制器
-	.controller('modifyStaffFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', 'md5', function($scope, $rootScope, $log, httpMethod, md5) {
+	.controller('modifyStaffFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
 		$scope.isForbid = true;
 		$scope.modifyStaffForm = $.extend(true, {
             userId: '', //用户ID
@@ -137,8 +137,15 @@ angular
 			checkDefault: true //默认密码
 		}, $rootScope.modifiedStaffMan);
 
-		$scope.modifyStaffFormSubmit = function() {
+        // 获取业务模块类型列表
+        httpMethod.queryOperationType().then(function(rsp) {
+            $log.log('调用获取业务模块类型接口成功.');
+            $rootScope.operationType = rsp.data.list;
+        }, function() {
+            $log.log('调用获取业务模块类型接口失败.');
+        });
 
+		$scope.modifyStaffFormSubmit = function() {
             var param = {
                 userId: '',//用户ID
                 staffId: '',//员工ID
