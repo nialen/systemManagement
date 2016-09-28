@@ -87,7 +87,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/querySysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'param=' + JSON.stringify(param)
+                data: 'param=' + encodeURI(JSON.stringify(param))
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -106,7 +106,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/insertSysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -125,7 +125,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/alterSysModular.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
