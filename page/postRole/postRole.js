@@ -11,17 +11,135 @@ angular
         $rootScope.isForbidSubmit = true; // 禁用编辑模块提交按钮
         $rootScope.RoleType = ['进销存管理']; // 业务模块类型
 	}])
+
+    /*传入数据*/
+        .factory('httpMethod', ['$http', '$q', function($http, $q) {
+            var httpMethod = {};
+            var httpConfig = {
+                // 'siteUrl': 'http://192.168.74.17/psm',
+                 'siteUrl': 'http://192.168.16.161:80/psm',
+                //'siteUrl': 'http://192.168.16.67:8080/psm',
+                'requestHeader': {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            };
+            // 查询角色
+            httpMethod.queryRole = function() {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/role/profile/queryRole.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
+                    data: 'param=' + JSON.stringify(param)
+                }).success(function(data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function(data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            // 新建服务
+            httpMethod.insertRole = function(param) {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/role/profile/insertRole.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
+                }).success(function(data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function(data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            // 查询权限规格
+            httpMethod.queryOperateSpecForSelect = function(param) {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/role/profile/queryOperateSpecForSelect.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
+                }).success(function(data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function(data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            // 修改服务
+            httpMethod.alterRole = function(param) {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/role/profile/alterRole.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
+                    data: 'param=' + JSON.stringify(param)
+                }).success(function(data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function(data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            // 删除服务
+            httpMethod.deleteRoleBatch = function(param) {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/role/profile/deleteRoleBatch.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
+                    data: 'data=' + JSON.stringify(param)
+                }).success(function(data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function(data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            return httpMethod;
+        }])
+    /*传入数据*/
+
     // 查询控制器
     .controller('queryRoleFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+        
+        // 查询结果分页信息
+        $scope.requirePaging = true; // 是否需要分页
+        $scope.currentPage = 1; // 当前页
+        $scope.rowNumPerPage = 5; // 每页显示行数
+        $scope.totalNum = 0; // 总条数
+
+
         $scope.isForbid = true;
         $scope.queryRoleForm = {
-            RoleId: '',
-            RoleName: '',
-            RoleType: 'null',
+            roleId: '',
+            name: '',
+            description: 'null',
         };
         $scope.queryRoleFormSubmit = function() {
-        	// TODO $http发送请求，获取数据，写入$rootScope；
-        	// TODO查询结果
+
+            $scope.checkedRole = []; // 置空已选角色定义列表
+/*
 	        $rootScope.RoleList = [{
 	            roleId: '10101', //角色ID
                 roleName: '采购员', //角色名称
@@ -36,10 +154,37 @@ angular
                 roleExpire : '2016-05-11',//失效时间              
             }];
             $log.log($scope.queryRoleForm.roleId);
+*/
+            var param = {
+                // roleId: '', // 角色Id
+                // name: '', // 角色名称
+                // description: '', // 描述
+                // startDt: '', //生效日期
+                // endDt: '',  //失效日期
+                requirePaging: $scope.requirePaging, // 是否需要分页
+                currentPage: currentPage || $scope.currentPage, // 当前页
+                rowNumPerPage: $scope.rowNumPerPage // 每页显示行数
+            };
+            $scope.queryRoleForm.roleId ? param.roleId = $scope.queryRoleForm.roleId : '';
+            $scope.queryRoleForm.name ? param.name = $scope.queryRoleForm.name : '';
+            $scope.queryRoleForm.description ? param.description = $scope.queryRoleForm.description : '';
+            $scope.queryRoleForm.startDt ? param.startDt = $scope.queryRoleForm.startDt : '';
+            $scope.queryRoleForm.endDt ? param.endDt = $scope.queryRoleForm.endDt : '';
+            // $scope.queryRoleForm.sysIdItem ? param.sysId = $scope.queryRoleForm.sysIdItem.sysId : '';
+            
+            // 查询模块信息
+            httpMethod.queryRole(param).then(function(rsp) {
+                $log.log('调用查询模块信息接口成功.');
+                $rootScope.RoleList = rsp.data.list;
+                $scope.totalNum = rsp.data.totalNum;
+            }, function() {
+                $log.log('调用查询模块信息接口失败.');
+            });
         }
+
         $scope.$watch('queryRoleForm', function(current, old, scope) {
-            if (scope.queryRoleForm.roleId || scope.queryRoleForm.roleName || 
-                scope.queryRoleForm.roleDescribe) {
+            if (scope.queryRoleForm.roleId || scope.queryRoleForm.name || 
+                scope.queryRoleForm.description) {
                 scope.isForbid = false;
             } else {
                 scope.isForbid = true;
