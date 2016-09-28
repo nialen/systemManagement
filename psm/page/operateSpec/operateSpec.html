@@ -29,11 +29,10 @@
                             <input type="input" id="name" class="form-control query-input" ng-model="queryOperateForm.name">
                         </div>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 text-right">
                         <div class="form-group">
-                            <label class="control-label" for="operationSpecTypeCd">权限类型：</label>
-                         <!--    <select class="form-control query-input" id="operationSpecTypeCd" ng-model="queryOperateForm.operationSpecTypeCd" ng-options="item as item.operationSpecTypeName for item in operationType track by item.operationSpecTypeCd"></select> -->
-                            <select class="form-control query-input" id="operationSpecTypeCd" ng-model="queryOperateForm.operationSpecTypeCd">
+                            <label class="control-label" for="operationSpecItem">权限类型：</label>
+                            <select class="form-control query-input" id="operationSpecItem" ng-model="queryOperateForm.operationSpecItem">
                                 <option value="">请选择权限类型</option>
                                 <option ng-repeat="item in operationType" value="{{item.operationSpecTypeCd}}">{{item.operationSpecTypeName}}</option>
                             </select>

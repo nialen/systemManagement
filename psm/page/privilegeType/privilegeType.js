@@ -13,9 +13,9 @@ angular
     .factory('httpMethod', ['$http', '$q', function($http, $q) {
         var httpMethod = {};
         var httpConfig = {
+            //'siteUrl': 'http://192.168.74.17/psm',
+            //'siteUrl': 'http://192.168.16.67:8080/psm',
             'siteUrl': 'http://192.168.74.17/psm',
-            // 'siteUrl': 'http://192.168.16.67:8080/psm',
-            //  'siteUrl': 'http://192.168.74.17/psm',
             // 'siteUrl': 'http://192.168.16.161:80/psm',
             'requestHeader': {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -29,7 +29,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/queryOperationSpecType.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'param=' + JSON.stringify(param)
+                data: 'param=' + encodeURI(JSON.stringify(param))
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -48,7 +48,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/insertOperationSpecType.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -67,7 +67,7 @@ angular
                 url: httpConfig.siteUrl + '/privilege/profile/alterOperationSpecType.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-                data: 'data=' + JSON.stringify(param)
+                data: 'data=' + encodeURI(JSON.stringify(param))
             }).success(function(data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
