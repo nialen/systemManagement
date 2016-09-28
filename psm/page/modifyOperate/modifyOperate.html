@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>系统管理平台-权限信息</title>
+    <link href="../../../lib/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="modifyOperate.css">
+</head>
+
+<body ng-app="modifyOperate">
+	<div class="modify-operate">
+        <div class="modify-operate-result">
+            <div class="row result-header">
+                <div class="col-xs-4">
+                    <div class="title">
+                        <img src="../../../images/icon_basicInfo.png">
+                        <p class="title-cn red">基本信息</p>
+                        <p class="title-en">Essential information</p>
+                    </div>
+                </div>
+            </div>
+            <div class="result-table mb10">
+                <div class="modify-operate-spec">
+                    <form name="modifyOperate" ng-controller="modifyOperateFormCtrl"  ng-submit="modifyOperateFormSubmit()" class="form-inline" role="form">
+                        <div class="row mb10">
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="operateId">权限编码：</label>
+                                    <input type="input" id="operateId" class="form-control modify-input" ng-model="modifyOperateForm.operateId"  disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="operateName">权限名称：</label>
+                                    <input type="input" id="operateName" class="form-control modify-input" ng-model="modifyOperateForm.operateName">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="operateType">权限类型：</label>
+                                    <select class="form-control query-input query-select"" id="operateType" ng-model="modifyOperateForm.operateType" ng-options="opt for opt in operateType"></select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="description">权限描述：</label>
+                                    <input type="input" id="description" class="form-control modify-input" ng-model="modifyOperateForm.description">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 权限对应的维度 -->
+            <div ng-controller="preveligeDimensionModalCtrl as $ctrl">
+                <div class="operate-spec-result mb10" ng-controller="preveligeDimensionFormCtrl">
+                    <div class="row result-header">
+                        <div class="col-xs-4">
+                            <div class="title">
+                                <img src="../../../images/icon_typeSetup.png">
+                                <p class="title-cn">权限对应的维度</p>
+                                <p class="title-en">Authority dimension</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <button ng-click="addDimension('新增权限类型')" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 添加</button>
+                            <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                        </div>
+                    </div>
+                    <div class="result-table">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>权限维度编码</th>
+                                    <th>权限维度名称</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in preveligeDimensionResultList">
+                                    <td>
+                                        <input type="checkbox" name="checkbox{{$index}}">
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.dimensionCode"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.dimensionName"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.remark"></p>
+                                    </td>
+                                    <td>
+                                        <button ng-click="dimensionInfo($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60b;</i> 详情</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-controller="paginationCtrl" class="text-center">
+                        <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                    </div>
+                </div>
+                <script type="text/ng-template" id="addDimensionModal.html">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                        <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe614;</i>权限维度选择</h3>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <!-- 查询 -->
+                        <div class="prevelige-dimension-query">
+                            <form name="queryDimension" ng-submit="queryDimensionFormSubmit()" ng-controller="queryDimensionFormCtrl" class="form-inline" role="form">
+                                <div class="row mb10">
+                                    <div class="col-xs-5">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dimensionCode">权限维度编码：</label>
+                                            <input type="input" id="dimensionCode" class="form-control query-input" ng-model="queryDimensionForm.dimensionCode">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dimensionName">权限维度名称：</label>
+                                            <input type="input" id="dimensionName" class="form-control query-input" ng-model="queryDimensionForm.dimensionName">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2 text-right">
+                                        <div class="form-group">
+                                            <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- 结果 -->
+                        <div class="query-dimension-result" ng-controller="queryDimensionResultCtrl">
+                            <div class="row result-header">
+                                <div class="col-xs-4">
+                                    <div class="title">
+                                        <img src="../../../images/icon_typeSetup.png">
+                                        <p class="title-cn">权限维度列表</p>
+                                        <p class="title-en">Authority dimension</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-table">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>选择</th>
+                                            <th>权限维度编码</th>
+                                            <th>权限维度名称</th>
+                                            <th>动态SQL</th>
+                                            <th>数据类型</th>
+                                            <th>描述</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in queryDimensionResultList">
+                                            <td>
+                                                <input type="radio" name="dimensionRadio" ng-click="selectQueryDimension($index)">
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.dimensionCode"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.dimensionName"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.moveSQL"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.dataType"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.remark"></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-controller="paginationCtrl" class="text-center">
+                                <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">取消</button>
+                        <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
+                    </div>
+                </script>
+
+                <script type="text/ng-template" id="dimensionInfoModal.html">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                        <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe614;</i>权限维度详情</h3>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <div class="row mb10">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="dimensionCode">权限维度编码：</label>
+                                    <span id="dimensionCode" class="edit-input sys_detail" ng-bind="dimensionInfo.dimensionCode"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="dimensionName">权限维度名称：</label>
+                                    <span id="dimensionName" class="edit-input sys_detail" ng-bind="dimensionInfo.dimensionName"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb10">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="dataType">数据类型：</label>
+                                    <span id="dataType" class="edit-input sys_detail" ng-bind="dimensionInfo.dataType"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="moveSql">动态SQL：</label>
+                                    <span id="moveSql" class="edit-input sys_detail" ng-bind="dimensionInfo.moveSql"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb10">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="remark">描述：</label>
+                                    <span id="remark" class="edit-input sys_remark" ng-bind="dimensionInfo.remark"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                    </div>
+                </script>
+            </div>
+
+            <!-- 权限可操作的模块 -->
+            <div ng-controller="preveligeDoneModalCtrl as $ctrl">
+                <div class="prevelige-done-result mt20" ng-submit="preveligeDoneFormSubmit()" ng-controller="preveligeDoneFormCtrl">
+                    <div class="row result-header">
+                        <div class="col-xs-4">
+                            <div class="title">
+                                <img src="../../../images/icon_previlege.png">
+                                <p class="title-cn green">权限可操作的模块</p>
+                                <p class="title-en">Operation module</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <button ng-click="addPreveligeDone('新增模块')" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 添加</button>
+                            <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                        </div>
+                    </div>
+                    <div class="result-table">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>业务模块ID</th>
+                                    <th>业务模块名称</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in preveligeDoneResultList">
+                                    <td>
+                                        <input type="checkbox" name="checkbox{{$index}}">
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.businessModuleId"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.businessModuleName"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.doneDescription"></p>
+                                    </td>
+                                    <td>
+                                        <button ng-click="businessModuleInfo($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60b;</i> 详情</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-controller="paginationCtrl" class="text-center">
+                        <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                    </div>
+
+                    <div class="row mt20">
+                        <div class="col-xs-12 text-center">
+                            <button class="btn btn-cancel">取消</button>
+                            <button type="submit" ng-disabled="isForbid" class="btn btn-submit">保存</button>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/ng-template" id="doneModalContent.html">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                        <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe61d;</i>业务模块选择</h3>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <!-- 查询 -->
+                        <div class="prevelige-done-query">
+                            <form name="queryDone" ng-submit="queryDoneFormSubmit()" ng-controller="queryDoneFormCtrl" class="form-inline" role="form">
+                                <div class="row mb10">
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            <label class="control-label operate-label" for="businessModuleId">业务模块ID：</label>
+                                            <input type="input" id="businessModuleId" class="form-control query-input" ng-model="queryDoneForm.businessModuleId">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            <label class="control-label operate-label" for="businessModuleName">业务模块名称：</label>
+                                            <input type="input" id="businessModuleName" class="form-control query-input" ng-model="queryDoneForm.businessModuleName">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            <label class="control-label operate-label" for="ownerSys">所属系统：</label>
+                                            <select class="form-control query-input query-select"" id="ownerSys" ng-model="queryDoneForm.ownerSys" ng-options="opt for opt in ownerSys"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb10">
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            <label class="control-label operate-label" for="businessModuleType">业务模块类型：</label>
+                                            <select class="form-control query-input query-select"" id="businessModuleType" ng-model="queryDoneForm.businessModuleType" ng-options="opt for opt in businessModuleType"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8 text-right">
+                                        <button type="submit" ng-disabled="isForbid" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- 结果 -->
+                        <div class="query-done-result" ng-controller="queryDoneResultCtrl">
+                            <div class="row result-header">
+                                <div class="col-xs-4">
+                                    <div class="title">
+                                        <img src="../../../images/icon_typeSetup.png">
+                                        <p class="title-cn">权限规格列表</p>
+                                        <p class="title-en">Operation module</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-table">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>选择</th>
+                                            <th>业务模块ID</th>
+                                            <th>业务模块名称</th>
+                                            <th>业务模块类型</th>
+                                            <th>所属系统</th>
+                                            <th>上级业务模块</th>
+                                            <th>模块URL</th>
+                                            <th>接口方法</th>
+                                            <th>描述</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in queryDoneResultList">
+                                            <td>
+                                                <input type="radio" name="doneRadio" ng-click="selectQueryDone($index)">
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.businessModuleId"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.businessModuleName"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.businessModuleType"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.ownerSys"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.preBusinessModule"></p>
+                                            </td>
+                                              <td>
+                                                <p ng-bind="item.moduleURL"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.interfaceMethod"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.doneDescription"></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-controller="paginationCtrl" class="text-center">
+                                <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">取消</button>
+                        <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
+                    </div>
+                </script>
+                <script type="text/ng-template" id="businessModuleInfoModal.html">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                        <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe61d;</i>业务模块详情</h3>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <div class="row mb10">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="businessModuleId">业务模块ID：</label>
+                                    <span id="businessModuleId" class="edit-input sys_detail" ng-bind="businessModuleInfo.businessModuleId"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="businessModuleName">业务模块名称：</label>
+                                    <span id="businessModuleName" class="edit-input sys_detail" ng-bind="businessModuleInfo.businessModuleName"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb10">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="businessModuleType">业务模块类型：</label>
+                                    <span id="businessModuleType" class="edit-input sys_detail" ng-bind="businessModuleInfo.businessModuleType"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="ownerSys">所属系统：</label>
+                                    <span id="ownerSys" class="edit-input sys_detail" ng-bind="businessModuleInfo.ownerSys"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb10">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="preBusinessModule">上级业务模块：</label>
+                                    <span id="preBusinessModule" class="edit-input sys_detail" ng-bind="businessModuleInfo.preBusinessModule"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="moduleURL">模块URL：</label>
+                                    <span id="moduleURL" class="edit-input sys_detail" ng-bind="businessModuleInfo.moduleURL"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb10">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="interfaceMethod">接口方法：</label>
+                                    <span id="interfaceMethod" class="edit-input sys_detail" ng-bind="businessModuleInfo.interfaceMethod"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb10">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label edit-label sys_left" for="doneDescription">描述：</label>
+                                    <span id="doneDescription" class="edit-input sys_remark" ng-bind="businessModuleInfo.doneDescription"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+<script src="../../../lib/angular.min.js"></script>
+<script src="../../../lib/angular-touch.min.js"></script>
+<script src="../../../lib/angular-animate.min.js"></script>
+<script src="../../../lib/angular-aria.min.js"></script>
+<script src="../../../lib/jquery.min.js"></script>
+<script src="../../../lib/bootstrap.min.js"></script>
+<script src="../../../lib/ui-bootstrap.js"></script>
+<script src="../../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
+<script src="modifyOperate.js"></script>
+</body>
+
+</html>

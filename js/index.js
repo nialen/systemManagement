@@ -128,51 +128,6 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                 title: '菜单导航',
                 icon: 'icon-602'
             };
-            $scope.menuInfo = [{
-                'name': '基础配置',
-                'iconNew': 'icon-604',
-                'submenu': [{
-                    id: 'privilegeType',
-                    name: '权限类型配置',
-                    url: '/page/privilegeType/privilegeType.html'
-                }, {
-                    id: 'sysModular',
-                    name: '业务模块配置',
-                    url: '/page/sysModular/sysModular.html'
-                }, {
-                    id: 'operateSpec',
-                    name: '权限规格配置',
-                    url: '/page/operateSpec/operateSpec.html'
-                }, {
-                    id: 'postRole',
-                    name: '角色定义',
-                    url: '/page/postRole/postRole.html'
-                }, {
-                    id: 'systemMenu',
-                    name: '系统菜单设置',
-                    url: '/page/systemMenu/systemMenu.html'
-                }]
-            }, {
-                'name': '员工管理',
-                'iconNew': 'icon-603',
-                'submenu': [{
-                    id: 'staffMan',
-                    name: '员工管理',
-                    url: '/page/staffMan/staffMan.html'
-                }]
-            }, {
-                'name': '系统用户',
-                'iconNew': 'icon-606',
-                'submenu': [{
-                    id: 'userMan',
-                    name: '用户管理',
-                    url: 'page/userMan/userMan.html'
-                }, {
-                    id: 'userPrivilege',
-                    name: '用户授权管理',
-                    url: 'page/userPrivilege/userPrivilege.html'
-                }]
-            }];
         }])
         .directive('accordionListDirective', function () {
             return {
