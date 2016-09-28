@@ -135,48 +135,48 @@ angular
             title: '菜单导航',
             icon: 'icon-602'
         };
-        $scope.tabsList = [{
-            'groupName': '基础配置',
-            'groupIcon': 'icon-604',
-            'groupList': [{
+        $scope.menuInfo = [{
+            'name': '基础配置',
+            'iconNew': 'icon-604',
+            'submenu': [{
                 id: 'privilegeType',
-                title: '权限类型配置',
+                name: '权限类型配置',
                 url: '/page/privilegeType/privilegeType.html'
             }, {
                 id: 'sysModular',
-                title: '业务模块配置',
+                name: '业务模块配置',
                 url: '/page/sysModular/sysModular.html'
             }, {
                 id: 'operateSpec',
-                title: '权限规格配置',
+                name: '权限规格配置',
                 url: '/page/operateSpec/operateSpec.html'
             }, {
                 id: 'postRole',
-                title: '角色定义',
+                name: '角色定义',
                 url: '/page/postRole/postRole.html'
             }, {
                 id: 'systemMenu',
-                title: '系统菜单设置',
+                name: '系统菜单设置',
                 url: '/page/systemMenu/systemMenu.html'
             }]
         }, {
-            'groupName': '员工管理',
-            'groupIcon': 'icon-603',
-            'groupList': [{
+            'name': '员工管理',
+            'iconNew': 'icon-603',
+            'submenu': [{
                 id: 'staffMan',
-                title: '员工管理',
+                name: '员工管理',
                 url: '/page/staffMan/staffMan.html'
             }]
         }, {
-            'groupName': '系统用户',
-            'groupIcon': 'icon-606',
-            'groupList': [{
+            'name': '系统用户',
+            'iconNew': 'icon-606',
+            'submenu': [{
                 id: 'userMan',
-                title: '用户管理',
+                name: '用户管理',
                 url: 'page/userMan/userMan.html'
             }, {
                 id: 'userPrivilege',
-                title: '用户授权管理',
+                name: '用户授权管理',
                 url: 'page/userPrivilege/userPrivilege.html'
             }]
         }];
