@@ -63,7 +63,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     url: httpConfig.siteUrl + '/sysMenu/profile/addNewMenu.action',
                     method: 'POST',
                     headers: httpConfig.requestHeader,
-                    data: 'data=' + JSON.stringify(param)
+                    data: 'data=' + encodeURI(JSON.stringify(param))
                 }).success(function (data, header, config, status) {
                     if (status != 200) {
                         // 跳转403页面
@@ -118,7 +118,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     url: httpConfig.siteUrl + '/sysMenu/profile/editMenu.action',
                     method: 'POST',
                     headers: httpConfig.requestHeader,
-                    data: 'data=' + JSON.stringify(param)
+                    data: 'data=' + encodeURI(JSON.stringify(param))
                 }).success(function (data, header, config, status) {
                     if (status != 200) {
                         // 跳转403页面

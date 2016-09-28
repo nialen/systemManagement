@@ -2,56 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d8dc01-a44b-430e-8304-5908a648b2b9" name="默认的" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/authorize/authorize.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/authorize/authorize.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/authorize/authorize.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/detailOperate/detailOperate.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/detailOperate/detailOperate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/detailOperate/detailOperate.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/modifyOperate/modifyOperate.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/modifyStaff/entry.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/modifyStaff/modifyStaff.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/modifyStaff/modifyStaff.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/modifyStaff/modifyStaff.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/operateSpec/operateSpec.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/operateSpec/operateSpec.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/operateSpec/operateSpec.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/postRole/addrole/addrole.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/postRole/addrole/addrole.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/postRole/addrole/addrole.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/postRole/postRole.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/postRole/postRole.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/postRole/postRole.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/privilegeType/privilegeType.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/privilegeType/privilegeType.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/privilegeType/privilegeType.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/staffMan/entry.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/staffMan/staffMan.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/staffMan/staffMan.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/staffMan/staffMan.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/sysModular/modifiedSys/modifiedSys.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/sysModular/sysModular.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/sysModular/sysModular.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/sysModular/sysModular.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/systemMenu/configuration-menu.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/systemMenu/entry.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/systemMenu/systemMenu.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/systemMenu/systemMenu.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/systemMenu/systemMenu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userMan/entry.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userMan/userMan.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userMan/userMan.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userMan/userMan.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userPrivilege/entry.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userPrivilege/userPrivilege.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userPrivilege/userPrivilege.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/page/userPrivilege/userPrivilege.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psm/page/modifyStaff/modifyStaff.js" afterPath="$PROJECT_DIR$/psm/page/modifyStaff/modifyStaff.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psm/page/systemMenu/systemMenu.js" afterPath="$PROJECT_DIR$/psm/page/systemMenu/systemMenu.js" />
     </list>
     <ignored path="systemManagement.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,8 +38,28 @@
       <file leaf-file-name="staffMan.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/psm/page/staffMan/staffMan.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="6" column="45" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="45" />
+            <state relative-caret-position="384">
+              <caret line="89" column="66" selection-start-line="89" selection-start-column="66" selection-end-line="89" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="systemMenu.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/psm/page/systemMenu/systemMenu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="120" column="68" selection-start-line="120" selection-start-column="68" selection-end-line="120" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modifyStaff.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/psm/page/modifyStaff/modifyStaff.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="86" column="68" selection-start-line="86" selection-start-column="68" selection-end-line="86" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -112,11 +85,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="entry.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="entry.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/psm/page/modifyStaff/entry.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="239">
               <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="staffMan.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/psm/page/staffMan/staffMan.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -187,6 +170,10 @@
         <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/psm/page/authorize/authorize.html" />
         <option value="$PROJECT_DIR$/psm/page/modifyStaff/entry.js" />
+        <option value="$PROJECT_DIR$/psm/page/staffMan/staffMan.js" />
+        <option value="$PROJECT_DIR$/psm/page/staffMan/staffMan.html" />
+        <option value="$PROJECT_DIR$/psm/page/systemMenu/systemMenu.js" />
+        <option value="$PROJECT_DIR$/psm/page/modifyStaff/modifyStaff.js" />
       </list>
     </option>
   </component>
@@ -286,7 +273,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="staffMan" />
+              <option name="myItemId" value="modifyStaff" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -408,12 +395,12 @@
       <workItem from="1474610815738" duration="9399000" />
       <workItem from="1474855289369" duration="21132000" />
       <workItem from="1474972579701" duration="2676000" />
-      <workItem from="1474983177392" duration="27686000" />
+      <workItem from="1474983177392" duration="28380000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66174000" />
+    <option name="totallyTimeSpent" value="66868000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -479,30 +466,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tabs-title.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="57" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/authorize/authorize.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="27" selection-start-line="1" selection-start-column="4" selection-end-line="4" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/privilegeType/privilegeType.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/page/sysModular/sysModular.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
@@ -861,14 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psm/page/staffMan/staffMan.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="45" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/psm/page/authorize/authorize.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -889,6 +844,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psm/page/staffMan/staffMan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psm/page/staffMan/staffMan.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="89" column="66" selection-start-line="89" selection-start-column="66" selection-end-line="89" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psm/page/systemMenu/systemMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="120" column="68" selection-start-line="120" selection-start-column="68" selection-end-line="120" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psm/page/modifyStaff/modifyStaff.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="86" column="68" selection-start-line="86" selection-start-column="68" selection-end-line="86" selection-end-column="68" />
           <folding />
         </state>
       </provider>
