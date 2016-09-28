@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body ng-app="indexModule" ng-controller="indexCtrl">
+<body ng-controller="indexCtrl">
     <div class="header fn-clear">
         <div class="header-logo fn-left">
             <img class="logo" src="images/logo.png" alt="">
@@ -29,7 +29,7 @@
             <!-- user -->
             <div class="user fn-right">
                 <img src="images/photo1.jpg" alt="" class="photo fn-left">
-                <p class="name">{{userInfo.name}}</p>
+                <p class="name" ng-bind="userInfo.name"></p>
             </div>
         </div>
     </div>
@@ -44,14 +44,15 @@
             <tabs-content-directive></tabs-content-directive>
         </div>
     </div>
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/angular-touch.min.js"></script>
-    <script src="lib/angular-animate.min.js"></script>
-    <script src="lib/angular-aria.min.js"></script>
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
-    <script src="lib/ui-bootstrap.js"></script>
-    <script src="js/index.js"></script>
+    <!--<script src="lib/angular.min.js"></script>-->
+    <!--<script src="lib/angular-touch.min.js"></script>-->
+    <!--<script src="lib/angular-animate.min.js"></script>-->
+    <!--<script src="lib/angular-aria.min.js"></script>-->
+    <!--<script src="lib/jquery.min.js"></script>-->
+    <!--<script src="lib/bootstrap.min.js"></script>-->
+    <!--<script src="lib/ui-bootstrap.js"></script>-->
+    <!--<script src="js/index.js"></script>-->
+    <script src="lib/require.js" data-main="js/entry"></script>
 </body>
 
 </html>
