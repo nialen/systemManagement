@@ -142,3 +142,10 @@ body {
 .confirm {
 	background-color: #ffaa00 !important;
 }
+.form-control {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.form-group {
+    width: 100% !important;
+}

@@ -1,5 +1,6 @@
 /* 头部 */
 .header {
+    min-width: 1200px;
 	height: 60px;
 	background-color: #ff8c19;
 }
@@ -92,6 +93,7 @@
 }
 .index-content {
     position: relative;
+    min-width: 1200px;
 }
 /* 手风琴 */
 .accordion-list {
