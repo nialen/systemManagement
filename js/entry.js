@@ -33,11 +33,10 @@ require.config({
             'exports': 'ngAria'
         },
         'bootstrap': {
-            'deps': ['jquery'],
-            'exports': 'ngAria'
+            'deps': ['jquery']
         },
         'ui-bootstrap-tpls': {
-            deps: ['angular']
+            'deps': ['angular']
         }
     }
 });

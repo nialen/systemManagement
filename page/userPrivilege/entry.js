@@ -41,6 +41,6 @@ require.config({
     }
 });
 
-require(['angular', 'staffMan'], function (angular) {
-    angular.bootstrap(document, ['staffManModule']);
+require(['angular', 'userPrivilege'], function (angular) {
+    angular.bootstrap(document, ['userPrivilegeModule']);
 });

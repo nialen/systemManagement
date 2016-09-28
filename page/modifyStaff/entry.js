@@ -14,6 +14,7 @@ require.config({
         'ui-bootstrap': '../../lib/ui-bootstrap',
         'ui-bootstrap-tpls': '../../lib/ui-bootstrap-tpls-2.1.3',
         'sweetalert': '../../lib/sweetalert.min',
+        'angular-md5': '../../lib/angular-md5',
         'httpConfig': '../../js/httpConfig'
     },
     shim: {
@@ -32,6 +33,10 @@ require.config({
             'deps': ['angular'],
             'exports': 'ngAria'
         },
+        'angular-md5': {
+            'deps': ['angular'],
+            'exports': 'angular-md5'
+        },
         'bootstrap': {
             'deps': ['jquery']
         },
@@ -41,6 +46,6 @@ require.config({
     }
 });
 
-require(['angular', 'staffMan'], function (angular) {
-    angular.bootstrap(document, ['staffManModule']);
+require(['angular', 'modifyStaff'], function (angular) {
+    angular.bootstrap(document, ['modifyStaffModule']);
 });
