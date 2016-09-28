@@ -9,16 +9,181 @@ angular
 		var id = window.frameElement && window.frameElement.id || '',
 			obj = parent.$('#' + id).attr('data');
 		$rootScope.modifiedOperateSpec = obj ? JSON.parse(obj) : {}; // 待修改的权限规格信息
-		$rootScope.operateType = ['进销存管理', '系统管理']; // 规格类型
+		
+		//$rootScope.operateType = ['进销存管理', '系统管理']; // 规格类型
 
 		$rootScope.preveligeDimensionResultList = [];//权限维度列表
 		$rootScope.preveligeDoneResultList = [];//权限可操作列表
-		$rootScope.ownerSys = ['1', '2']; 
-		$rootScope.businessModuleType = ['3', '4']; 
+		// $rootScope.ownerSys = ['1', '2']; 
+		// $rootScope.businessModuleType = ['3', '4']; 
 		
 	}])
+	.factory('httpMethod', ['$http', '$q', function ($http, $q) {
+        var httpMethod = {};
+        var httpConfig = {
+            //'siteUrl': 'http://192.168.74.17/psm',
+            'siteUrl': 'http://192.168.16.67:8080/psm',
+            // 'siteUrl': 'http://192.168.74.17/psm',
+            'requestHeader': {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        };
+
+        // 获取权限类型
+        httpMethod.queryOperationType = function(param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/privilege/profile/queryOperationSpecType.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+            }).success(function(data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function(data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 查询已选权限维度
+        httpMethod.queryStaffManager = function (param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/privilege/profile/queryPrivilegeDimensionInOperationSpec.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'param=' + JSON.stringify(param)
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 查询已选业务模块
+        httpMethod.insertUserByStaffManager = function (param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/privilege/profile/querySysModularInOperationSpec.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'data=' + JSON.stringify(param)
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 查询可选权限维度
+        httpMethod.queryStaffManager = function (param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/privilege/profile/queryPrivilegeDimension4Pick.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'param=' + JSON.stringify(param)
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 查询可选业务模块
+        httpMethod.insertUserByStaffManager = function (param) {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/privilege/profile/querySysModular4Pick.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+                data: 'data=' + JSON.stringify(param)
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 查询业务系统平台
+        httpMethod.queryBusinessSystem = function () {
+            var defer = $q.defer();
+            $http({
+                url: httpConfig.siteUrl + '/privilege/profile/queryBusinessSystem.action',
+                method: 'POST',
+                headers: httpConfig.requestHeader,
+            }).success(function (data, header, config, status) {
+                if (status != 200) {
+                    // 跳转403页面
+                }
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data);
+            });
+            return defer.promise;
+        };
+
+        // 新建权限规格信息
+		httpMethod.insertOperateSpec = function(param) {
+			var defer = $q.defer();
+			$http({
+				url: httpConfig.siteUrl + '/privilege/profile/insertOperationSpec.action',
+				method: 'POST',
+				headers: httpConfig.requestHeader,
+				data: 'data=' + JSON.stringify(param)
+			}).success(function(data, header, config, status) {
+				if (status != 200) {
+					// 跳转403页面
+				}
+				defer.resolve(data);
+			}).error(function(data, status, headers, config) {
+				defer.reject(data);
+			});
+			return defer.promise;
+		};
+
+		// 编辑权限规格信息
+		httpMethod.alertOperateSpec = function(param) {
+			var defer = $q.defer();
+			$http({
+				url: httpConfig.siteUrl + '/privilege/profile/alertOperationSpec.action',
+				method: 'POST',
+				headers: httpConfig.requestHeader,
+				data: 'data=' + JSON.stringify(param)
+			}).success(function(data, header, config, status) {
+				if (status != 200) {
+					// 跳转403页面
+				}
+				defer.resolve(data);
+			}).error(function(data, status, headers, config) {
+				defer.reject(data);
+			});
+			return defer.promise;
+		};
+
+        return httpMethod;
+    }])
+
 	// 修改权限规格基本信息控制器
-	.controller('modifyOperateFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+	.controller('modifyOperateFormCtrl', ['$scope', '$rootScope', '$log','httpMethod' function($scope, $rootScope, $log, $httpMethod) {
 		$scope.isForbid = true;
 		$scope.modifyOperateForm = $.extend(true, {
 			operateId: '', //权限规格ID
@@ -44,7 +209,7 @@ angular
 
 
 	// 权限维度查询控制器
-	.controller('preveligeDimensionFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
+	.controller('preveligeDimensionFormCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log,httpMethod) {
 		$scope.isForbid = false;	
 		$rootScope.preveligeDimensionResultList = [{
 			dimensionCode:'10101',
@@ -59,6 +224,15 @@ angular
        		moveSql:'',
        		remark:'可操作',
 		}];
+		// 查询权限规格信息
+		httpMethod.queryOperateSpec(param).then(function(rsp) {
+			$log.log('调用查询权限规格接口成功.');
+			$rootScope.queryOperateResultList = rsp.data.list;
+			$scope.totalNum = rsp.data.totalNum;
+		}, function() {
+			$log.log('调用查询权限规格接口失败.');
+		});
+
         // 新建权限维度
         $scope.addDimension = function() {
             $scope.$emit('openAddDimensionModal');

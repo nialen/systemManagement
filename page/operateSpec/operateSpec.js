@@ -15,8 +15,8 @@ angular
 		var httpMethod = {};
 		var httpConfig = {
             'siteUrl': 'http://192.168.74.17/psm',
-			// 'siteUrl': 'http://192.168.74.17/psm',
 			//'siteUrl': 'http://192.168.16.161:80/psm',
+			//'siteUrl': 'http://192.168.16.67:8080/psm',
 			'requestHeader': {
 				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 			}
@@ -241,6 +241,7 @@ angular
 	.controller('queryOperateResultCtrl', ['$scope', '$rootScope', '$log','httpMethod', function($scope, $rootScope, $log, httpMethod) {
 		// 修改
 		$scope.editQueryOperate = function(title, index) {
+			debugger
 			$rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
 			parent.angular.element(parent.$('#tabs')).scope().addTab('修改权限规格', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
 		}
