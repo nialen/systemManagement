@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>系统管理平台-新增修改角色</title>
+    <link rel="stylesheet" href="../../../../lib/css/sweetalert.css">
+    <link href="../../../../lib/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../css/reset.css">
+    <link rel="stylesheet" href="../../../../css/common.css">
+    <link rel="stylesheet" href="addrole.css">
+</head>
+
+<body ng-app="modifyRole">
+    <form name="modifyRole" ng-submit="modifyRoleFormSubmit()" ng-controller="modifyRoleFormCtrl" class="form-inline" role="form">
+    <div class="modify-staff">
+        <div class="staff-man-result">
+            <div class="row result-header">
+                <div class="col-xs-4">
+                    <div class="title">
+                        <img src="../../../../../images/icon_info.png">
+                        <p class="title-cn-info">基本信息</p>
+                        <p class="title-en">Essential information</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 弹出 -->
+            <div>
+                <div class="result-table">
+                    <div class="modify-staff-man">
+                        
+                            <div class="row mb10">
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label class="control-label edit-label" for="roleId">角色ID：</label>
+                                        <input type="input" id="roleId" class="form-control modify-input" ng-model="modifyRoleForm.roleId">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label class="control-label edit-label" for="name">角色名称：</label>
+                                        <input type="input" id="name" class="form-control modify-input" ng-model="modifyRoleForm.name" >
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label class="control-label edit-label" for="startDt">生效日期：</label>
+                                        <input type="input" id="startDt" class="form-control modify-input" ng-model="modifyRoleForm.startDt">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb10">
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label class="control-label edit-label" for="endDt">失效日期：</label>
+                                        <input type="input" id="endDt" class="form-control modify-input" ng-model="modifyRoleForm.endDt">
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="from-group">
+                                        <label class="control-label edit-label" for="description">描述：</label>
+                                        <input id="description" class="form-control input_wh500" ng-model="modifyRoleForm.description">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modify-staff" ng-controller="selectRoleModalCtrl as $ctrl">
+        <div class="staff-man-result">
+            <div class="row result-header">
+                <div class="col-xs-4">
+                    <div class="title">
+                        <img src="../../../../../images/icon_typeSetup.png">
+                        <p class="title-cn">角色所具有的权限</p>
+                        <p class="title-en">Role permission</p>
+                    </div>
+                </div>
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4 text-right">
+                    <a ng-click="checkRolelist()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</a>
+                    <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                </div>
+            </div>
+            <!-- 弹出 -->
+            <div>
+                <div class="result-table">
+                    <table class="table table-hover table-bordered">
+                        <tr>
+                            <th>选择</th>
+                            <th>权限规格ID</th>
+                            <th>权限规格编码</th>
+                            <th>权限类型</th>
+                            <th>备注</th>
+                        </tr>
+                        <tr ng-repeat="item in RoleList">
+                            <td>
+                                <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
+                            </td>
+                            <td ng-bind="item.manageCd"></td>
+                            <td ng-bind="item.operationSpecCd"></td>
+                            <td ng-bind="item.operationSpecTypeName"></td>
+                            <td ng-bind="item.description"></td>
+                        </tr>
+                    </table>
+                </div>
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                        <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>权限选择</h3>
+                    </div>
+                    <div class="modal-body" id="modal-body" ng-controller="queryPowerFormCtrl">
+                        <!-- 查询 -->
+                        <div class="staff-man-query clearfix">
+                            <form name="queryRole" ng-submit="queryRoleFormSubmit()" class="form-inline" role="form">
+                                    <div class="row mb10">
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <label class="control-label sys_label" for="operationSpecCd">权限规格编码：</label>
+                                                <input type="input" id="operationSpecCd" class="form-control modify-input" ng-model="queryRoleForm.operationSpecCd">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <label class="control-label sys_label" for="name">权限规格名称：</label>
+                                                <input type="input" id="name" class="form-control modify-input" ng-model="queryRoleForm.name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb10">
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <label class="control-label sys_label" for="modularTypeName">业务模块类型：</label>
+                                                <select class="form-control modify-input" id="modularTypeCdItem" ng-model="queryRoleForm.modularTypeCdItem" ng-options="item as item.name for item in sysType track by item.modularTypeCd" ></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-right">
+                                                    <button type="submit" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                            </form>
+                        </div>
+                        <!-- 结果 -->
+                        <div class="staff-man-result">
+                            <div class="row result-header">
+                                <div class="col-xs-4">
+                                    <div class="title">
+                                        <img src="../../../../../images/icon_staffList.png">
+                                        <p class="title-cn lh30">权限规格列表</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-table" ng-controller="PowerListResultCtrl">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>选择</th>
+                                            <th>权限规格ID</th>
+                                            <th>权限规格名称</th>
+                                            <th>权限类型</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in PowerListResultList">
+                                            <td>
+                                                <input type="radio" name="RoleRadio" ng-click="selectRoleList($index)">
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.manageCd"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.name"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.operationSpecTypeName"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.description"></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-controller="paginationCtrl" class="text-center">
+                                <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                        <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+        <div ng-controller="paginationCtrl" class="text-center">
+            <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+        </div>
+        <div class="text-center mt20">
+            <button type="submit" ng-="isForbid" class="btn btn-submit">保存</button>
+        </div>
+    </form>
+
+    <script src="../../../../lib/angular.min.js"></script>
+    <script src="../../../../lib/angular-touch.min.js"></script>
+    <script src="../../../../lib/angular-animate.min.js"></script>
+    <script src="../../../../lib/angular-aria.min.js"></script>
+    <script src="../../../../lib/jquery.min.js"></script>
+    <script src="../../../../lib/bootstrap.min.js"></script>
+    <script src="../../../../lib/ui-bootstrap.js"></script>
+    <script src="../../../../lib/ui-bootstrap-tpls-2.1.3.js"></script>
+    <script src="../../../../lib/sweetalert.min.js"></script>
+    <script src="addrole.js"></script>
+</body>
+
+</html>
