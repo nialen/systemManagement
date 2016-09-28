@@ -13,8 +13,9 @@ angular
     .factory('httpMethod', ['$http', '$q', function ($http, $q) {
         var httpMethod = {};
         var httpConfig = {
-            // 'siteUrl': 'http://192.168.16.67:8080/psm',
             'siteUrl': 'http://192.168.74.17/psm',
+            // 'siteUrl': 'http://192.168.16.67:8080/psm',
+            // 'siteUrl': 'http://192.168.74.17/psm',
             'requestHeader': {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
@@ -102,7 +103,7 @@ angular
                 url: httpConfig.siteUrl + '/userManager/profile/lockUserManagerBatch.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-				data: 'param=' + JSON.stringify(param)
+				data: 'data=' + param
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -121,7 +122,7 @@ angular
                 url: httpConfig.siteUrl + '/userManager/profile/uLockUserManagerBatch.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-				data: 'param=' + JSON.stringify(param)
+				data: 'data=' + param
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -140,7 +141,7 @@ angular
                 url: httpConfig.siteUrl + '/userManager/profile/deleteUserManagerBatch.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-				data: 'param=' + JSON.stringify(param)
+				data: 'data=' + param
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -159,7 +160,7 @@ angular
                 url: httpConfig.siteUrl + '/passwordManage/profile/resetPwd.action',
                 method: 'POST',
                 headers: httpConfig.requestHeader,
-				data: 'param=' + JSON.stringify(param)
+				data: 'loginCode=' + param
             }).success(function (data, header, config, status) {
                 if (status != 200) {
                     // 跳转403页面
@@ -232,7 +233,7 @@ angular
 
     }])
     // 查询结果控制器
-    .controller('staffManResultCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
+    .controller('staffManResultCtrl', ['$scope', '$rootScope', '$log','httpMethod', function ($scope, $rootScope, $log, httpMethod) {
         // 新建
         $scope.addStaffMan = function () {
             parent.angular.element(parent.$('#tabs')).scope().addTab('新建用户', '/page/modifyStaff/modifyStaff.html', 'addNewStaff');
@@ -244,27 +245,154 @@ angular
         };
         // 密码重置
         $scope.resetPassword = function (index) {
-
             swal({
                 title: "密码重置",
-                text: "您确定要重置 " + $rootScope.staffManResultList[index].staffName + " 的密码为6个8吗？",
+                text: "您确定要重置 " + $rootScope.staffManResultList[index].name + " 的密码为6个8吗？",
                 type: "warning",
                 showCancelButton: true,
                 closeOnConfirm: false,
                 confirmButtonText: "确定",
                 confirmButtonColor: "#ffaa00",
                 cancelButtonText: "取消",
-
+                showLoaderOnConfirm: true
             }, function () {
-                $.ajax({
-                    url: "",
-                    type: "DELETE"
-                }).done(function (data) {
-                    swal("操作成功!", "密码重置成功！", "success");
-                }).error(function (data) {
-                    swal("OMG", "密码重置操作失败!", "error");
+                httpMethod.resetPwd($rootScope.staffManResultList[index].loginCode).then(function (rsp) {
+                    $log.log('调用密码重置接口成功.');
+                    if (rsp.success) {
+                        swal("操作成功!", "密码重置成功！", "success");
+                    } else {
+                        swal("OMG", rsp.msg || "密码重置操作失败!", "error");
+                    }
+                }, function () {
+                    $log.log('调用密码重置接口失败.');
+                    swal("OMG", "调用密码重置接口失败!", "error");
                 });
             });
+        };
+
+        $scope.checkedStaffMan = []; // 已经选中的员工信息
+
+        /**
+         * [check 复选框点击事件]
+         * @param  {[type]} val [整行数据]
+         * @param  {[boolean]} chk [是否选中]
+         */
+        $scope.check = function (val, chk) {
+            var valueOfIndex = '';
+            $scope.checkedStaffMan.length && $scope.checkedStaffMan.map(function (item, index) {
+                if (item.staffId == val.staffId) {
+                    valueOfIndex = index;
+                }
+            });
+            chk ? valueOfIndex === '' && $scope.checkedStaffMan.push(val) : $scope.checkedStaffMan.splice(valueOfIndex, 1);
+        };
+
+        // 冻结
+        $scope.lockUserManagerBatch = function () {
+            if ($scope.checkedStaffMan.length) {
+                var param = [];
+                $scope.checkedStaffMan.map(function (item, index) {
+                    param.push(item.staffId);
+                });
+                param = param.join();
+                swal({
+                    title: "冻结员工",
+                    text: "您确定要把员工ID为" + param + "的员工冻结吗？",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    confirmButtonText: "确定",
+                    confirmButtonColor: "#ffaa00",
+                    cancelButtonText: "取消",
+                    showLoaderOnConfirm: true
+                }, function () {
+                    httpMethod.lockUserManagerBatch(param).then(function (rsp) {
+                        $log.log('调用冻结员工接口成功.');
+                        if (rsp.data) {
+                            swal("操作成功!", "员工冻结成功！", "success");
+                        } else {
+                            swal("OMG", rsp.msg || "员工冻结失败!", "error");
+                        }
+                    }, function () {
+                        $log.log('调用冻结员工接口失败.');
+                        swal("OMG", "调用冻结员工接口失败!", "error");
+                    });
+                });
+            } else {
+                swal("操作提醒", "您没有选中任何需要冻结的员工！", "info");
+            }
+        };
+
+        // 解冻
+        $scope.uLockUserManagerBatch = function () {
+            if ($scope.checkedStaffMan.length) {
+                var param = [];
+                $scope.checkedStaffMan.map(function (item, index) {
+                    param.push(item.staffId);
+                });
+                param = param.join();
+                swal({
+                    title: "解冻员工",
+                    text: "您确定要把员工ID为" + param + "的员工解冻吗？",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    confirmButtonText: "确定",
+                    confirmButtonColor: "#ffaa00",
+                    cancelButtonText: "取消",
+                    showLoaderOnConfirm: true
+                }, function () {
+                    httpMethod.uLockUserManagerBatch(param).then(function (rsp) {
+                        $log.log('调用解冻员工接口成功.');
+                        if (rsp.data) {
+                            swal("操作成功!", "解冻员工成功！", "success");
+                        } else {
+                            swal("OMG", rsp.msg || "解冻员工失败!", "error");
+                        }
+                    }, function () {
+                        $log.log('调用解冻员工接口失败.');
+                        swal("OMG", "调用解冻员工接口失败!", "error");
+                    });
+                });
+            } else {
+                swal("操作提醒", "您没有选中任何需要解冻的员工！", "info");
+            }
+        };
+
+        // 注销
+        $scope.deleteUserManagerBatch = function () {
+            if ($scope.checkedStaffMan.length) {
+                var param = [];
+                $scope.checkedStaffMan.map(function (item, index) {
+                    param.push(item.staffId);
+                });
+                param = param.join();
+                swal({
+                    title: "注销员工",
+                    text: "您确定要把员工ID为" + param + "的员工注销吗？",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    confirmButtonText: "确定",
+                    confirmButtonColor: "#ffaa00",
+                    cancelButtonText: "取消",
+                    showLoaderOnConfirm: true
+                }, function () {
+                    httpMethod.deleteUserManagerBatch(param).then(function (rsp) {
+                        $log.log('调用注销员工接口成功.');
+                        if (rsp.data) {
+                            swal("操作成功!", "注销员工成功！", "success");
+                        } else {
+                            swal("OMG", rsp.msg || "注销员工失败!", "error");
+                        }
+                    }, function () {
+                        $log.log('调用注销员工接口失败.');
+                        swal("OMG", "调用注销员工接口失败!", "error");
+                    });
+                });
+            } else {
+                swal("操作提醒", "您没有选中任何需要注销的员工！", "info");
+            }
         }
     }])
     // 分页控制器

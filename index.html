@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body ng-app="indexModule">
-    <div class="box-1200 header fn-clear">
+<body ng-app="indexModule" ng-controller="indexCtrl">
+    <div class="header fn-clear">
         <div class="header-logo fn-left">
             <img class="logo" src="images/logo.png" alt="">
         </div>
@@ -29,15 +29,17 @@
             <!-- user -->
             <div class="user fn-right">
                 <img src="images/photo1.jpg" alt="" class="photo fn-left">
-                <p class="name">Albertwang</p>
+                <p class="name">{{userInfo.name}}</p>
             </div>
         </div>
     </div>
-    <div class="box-1200 fn-clear" id="tabs" ng-controller="tabsCtrl">
-        <div class="accordion-list fn-left" ng-controller="accordionCtrl">
+    <div class="index-content" id="tabs" ng-controller="tabsCtrl">
+        <div class="accordion-list" ng-class="{nothing: checked}" ng-controller="accordionCtrl">
             <accordion-list-directive lists="lists" value="value" add-tab="addTab()"></accordion-list-directive>
         </div>
-        <div class="tab-container fn-left">
+        <div class="tab-container" ng-class="{full: checked}">
+            <label for="toggle-btn" class="slide-toggle" ng-model="checked"></label>
+            <input id="toggle-btn" type="checkbox" ng-model="checked" class="hidden">
             <tabs-title-directive remove-tab="removeTab()"></tabs-title-directive>
             <tabs-content-directive></tabs-content-directive>
         </div>
