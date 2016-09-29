@@ -110,7 +110,6 @@ angular
 
         $scope.checkedPrivilegeType = []; // 已经选中的权限类型信息
 
-        $scope.isForbid = true;
 		$scope.queryTypeForm = {
 			operationSpecTypeCd: '',
 			name: '',
@@ -141,13 +140,6 @@ angular
                 $log.log('调用查询员工信息接口失败.');
             });
         }
-		$scope.$watch('queryTypeForm', function(current, old, scope) {
-            if (scope.queryTypeForm.operationSpecTypeCd || scope.queryTypeForm.operationSpecTypeName) {
-                scope.isForbid = false;
-            } else {
-                scope.isForbid = true;
-            }
-        }, true);
 	}])
 	// 查询结果控制器
     .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log, httpMethod) {
@@ -218,8 +210,6 @@ angular
     }])
 
 	// 弹出框控制器
-    // TODO 删除冗余代码
-    // TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
     .controller('editQueryTypeModalCtrl', function($scope, $rootScope, $uibModal, $log) {
     	var $ctrl = this;
         $scope.$on('openEditQueryTypeModal', function(d,data) {

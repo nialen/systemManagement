@@ -224,10 +224,11 @@ angular
             $scope.modifyOperateForm.state ? param.state = $scope.modifyOperateForm.state :'';
             $scope.modifyOperateForm.specLevel ? param.specLevel = $scope.modifyOperateForm.specLevel :'';
             $scope.modifyOperateForm.description? param.description = $scope.modifyOperateForm.description :'';
-           	// $scope.modifyOperateForm.modularList.sysModularId? param.modularList.sysModularId = $scope.modifyOperateForm.modularList.sysModularId :'';
-           	// $scope.modifyOperateForm.dimensionList.privilegeDimensionCd? param.dimensionList.privilegeDimensionCd = $scope.modifyOperateForm.dimensionList.privilegeDimensionCd :'';
+           	$scope.modifyOperateForm.modularList? param.modularList.sysModularId = $scope.modifyOperateForm.modularList :'';
+           	$scope.modifyOperateForm.dimensionList? param.dimensionList.privilegeDimensionCd = $scope.modifyOperateForm.dimensionList :'';
  
             if ($rootScope.isModifiedOperateList) {
+            	debugger
                 httpMethod.insertOperateSpec(param).then(function (rsp) {
                     $log.log('调用新建权限规格接口成功.');
                     if (rsp.data) {
@@ -308,7 +309,6 @@ angular
 
 	// 业务模块查询控制器
 	.controller('preveligeDoneFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log,httpMethod) {
-		debugger
 		$scope.requirePaging = true; // 是否需要分页
 		$scope.currentPage = 1; // 当前页
 		$scope.rowNumPerPage = 4; // 每页显示行数
@@ -326,7 +326,6 @@ angular
 		
 		// 查询已选业务模块信息
 		httpMethod.querySysModularInOperationSpec(param).then(function(rsp) {
-			debugger
 			$log.log('调用查询已选业务模块接口成功.');
 			$scope.preveligeDoneResultList = rsp.data;
 			$scope.totalNum = rsp.data.totalNum;
@@ -347,7 +346,6 @@ angular
 	}])
 
 	// 权限维度弹出框控制器
-	// TODO 删除冗余代码
 	.controller('preveligeDimensionModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
         $scope.$on('openAddDimensionModal', function(d, data) {
@@ -415,42 +413,35 @@ angular
 			$uibModalInstance.dismiss('cancel');
 		};
 	})
-	// 维度查询控制器
+	// 维度可选查询控制器queryPrivilegeDimension4Pick
 	.controller('queryDimensionFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log,httpMethod) {
-		$scope.isForbid = true;
-		$scope.queryDimensionForm = {
-			dimensionCode: '',
-			dimensionName: '',
-		};
-		$scope.queryDimensionFormSubmit = function() {
-			// TODO $http发送请求，获取数据，写入$rootScope查询结果
-			$rootScope.queryDimensionResultList = [{
-				dimensionCode: '10101', //权限维度编码
-				dimensionName: '35352', //权限维度名称
-				remark: '李明浩', //描述
-				moveSQL: '南京', //动态SQL
-				dataType: '在用', //数据类型
-			}, {
-				dimensionCode: '10101', //权限维度编码
-				dimensionName: '35352', //权限维度名称
-				remark: '李明浩', //描述
-				moveSQL: '南京', //动态SQL
-				dataType: '在用', //数据类型
-			}, {
-				dimensionCode: '10101', //权限维度编码
-				dimensionName: '35352', //权限维度名称
-				remark: '李明浩', //描述
-				moveSQL: '南京', //动态SQL
-				dataType: '在用', //数据类型
-			}];
-		}
-		$scope.$watch('queryDimensionForm', function(current, old, scope) {
-			if (scope.queryDimensionForm.dimensionCode || scope.queryDimensionForm.dimensionName) {
-				scope.isForbid = false;
-			} else {
-				scope.isForbid = true;
-			}
-		}, true);
+		
+		$scope.requirePaging = true, // 是否需要分页
+        $scope.currentPage = 1, // 当前页
+        $scope.rowNumPerPage = 4, // 每页显示行数
+        $scope.totalNum = 0 // 总条数
+
+        $scope.checkedPrivilegeDimension4Pick = []; // 已经选中的权限类型信息
+
+		$scope.queryDimensionFormSubmit = function(currentPage) {
+            $scope.checkedPrivilegeDimension4Pick = []; // 置空已选权限类型列表
+
+            var param = {
+                requirePaging: $scope.requirePaging, //是否需要分页
+                currentPage: currentPage || $scope.currentPage, //当前页
+                rowNumPerPage: $scope.rowNumPerPage, //每页展示行数
+                totalRowNum: $scope.totalRowNum //总行数
+            };
+            $scope.queryDimension.operationSpecCd ? param.operationSpecCd = $scope.queryDimension.operationSpecCd : '';
+            // 查询权限类型配置
+            httpMethod.queryPrivilegeDimension4Pick(param).then(function(rsp) {
+                $log.log('调用查询可选权限维度接口成功.');
+                $rootScope.queryDimensionResultList = rsp.data;
+                $scope.totalNum = rsp.data.totalNum;
+            }, function() {
+                $log.log('调用查询可选权限维度接口失败.');
+            });
+        }
 	}])
 	// 查询结果控制器
 	.controller('queryDimensionResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log,httpMethod) {   
@@ -465,7 +456,6 @@ angular
 	
 
 	// 权限可操作的模块弹出框控制器
-	// TODO 删除冗余代码
 	.controller('preveligeDoneModalCtrl', function($scope, $rootScope, $uibModal, $log) {
 		var $ctrl = this;
 		$scope.$on('openAddPreveligeDoneModal', function(d, data) {
@@ -531,9 +521,15 @@ angular
 			$uibModalInstance.dismiss('cancel');
 		};
 	})
-	// 查询控制器
+	// 权限维度可选查询控制器
 	.controller('queryDoneFormCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-		$scope.isForbid = true;
+		$scope.requirePaging = true, // 是否需要分页
+        $scope.currentPage = 1, // 当前页
+        $scope.rowNumPerPage = 4, // 每页显示行数
+        $scope.totalNum = 0 // 总条数
+
+        $scope.checkedPrivilegeType = []; // 已经选中的权限类型信息
+
 		$scope.queryDoneForm = {
 			businessModuleId: '',
 			businessModuleName: '',
@@ -571,13 +567,9 @@ angular
 				doneDescription:'',//描述
 			}];
 		}
-		$scope.$watch('queryDoneForm', function(current, old, scope) {
-			if (scope.queryDoneForm.businessModuleId || scope.queryDoneForm.businessModuleName||scope.queryDoneForm.ownerSys||scope.queryDoneForm.businessModuleType) {
-				scope.isForbid = false;
-			} else {
-				scope.isForbid = true;
-			}
-		}, true);
+		
+
+	
 	}])
 	// 查询结果控制器
 	.controller('queryDoneResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {   
@@ -591,8 +583,8 @@ angular
 	}])
 	
 	// 分页控制器
-	.controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
-        $scope.maxSize = 10;
+	.controller('paginationDimensionCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+        $scope.maxSize = 4;
         $scope.pageChanged = function() {
             $scope.queryOperateFormSubmit($scope.currentPage);
             $log.log('Page changed to: ' + $scope.currentPage);
