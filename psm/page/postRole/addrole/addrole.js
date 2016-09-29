@@ -20,14 +20,15 @@ angular
 		$rootScope.PowerListResultList = []; // 查询模块列表
 		$rootScope.checkedRoleList = {}; // 选中的模块信息
 		$rootScope.checkedIndex = ''; // 选中的索引
+        $rootScope.OperateSpecList = []; //查询角色已选权限规格列表
 	}])
 
 /*传入数据*/
         .factory('httpMethod', ['$http', '$q', function($http, $q) {
             var httpMethod = {};
             var httpConfig = {
-                 'siteUrl': 'http://192.168.74.17/psm',
-                // 'siteUrl': 'http://192.168.16.161:80/psm',
+                // 'siteUrl': 'http://192.168.74.17/psm',
+                'siteUrl': 'http://192.168.16.161:80/psm',
                 // 'siteUrl': 'http://192.168.16.67:8080/psm',
                 'requestHeader': {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -42,6 +43,26 @@ angular
                     headers: httpConfig.requestHeader,
                     // data: 'param=' + param
                     data: 'param=' + encodeURI(JSON.stringify(param))
+                }).success(function(data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function(data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            //查询角色已选权限规格
+            httpMethod.queryOperateSpecByRoleId = function(param) {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/role/profile/queryOperateSpecByRoleId.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
+                    // data: 'param=' + param
+                    data: 'roleId='+ param
                 }).success(function(data, header, config, status) {
                     if (status != 200) {
                         // 跳转403页面
@@ -73,7 +94,7 @@ angular
             };
 
             // 查询权限规格
-        httpMethod.queryOperateSpecForSelect = function(param) {
+            httpMethod.queryOperateSpecForSelect = function(param) {
                 var defer = $q.defer();
                 $http({
                     url: httpConfig.siteUrl + '/role/profile/queryOperateSpecForSelect.action',
@@ -135,31 +156,9 @@ angular
 
 	// 修改用户控制器
 	.controller('modifyRoleFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
-         /* 获取业务模块类型列表
-        httpMethod.queryModularType().then(function(rsp) {
-            $log.log('调用获取业务模块类型接口成功.');
-            $rootScope.RoleType = rsp.data;
-        }, function() {
-            $log.log('调用获取业务模块类型接口失败.');
-        });*/
+        // 查询角色已选权限规格
 
-         // 详情
-         /*
-        $scope.editRole = function(index, title) {
-            $rootScope.modifiedRole = $rootScope.RoleResultList[index];
-            $rootScope.RoleType.map(function(item, index) {
-                if (item.modularTypeCd == $rootScope.modifiedRole.modularTypeCd) {
-                    $rootScope.modifiedRole.modularTypeCdItem = item;
-                }
-            })
-            $rootScope.RoleTitle = title;
-            $rootScope.RoletemList.map(function(item, index) {
-                if (item.RoleId == $rootScope.modifiedRole.RoleId) {
-                    $rootScope.modifiedRole.RoleIdItem = item;
-                }
-            });
-        };
-        */
+        
 
         $scope.isForbid = true;
 		$scope.modifyRoleForm = $.extend(true, {
@@ -217,6 +216,12 @@ angular
                 })
             }
         };
+        httpMethod.queryOperateSpecByRoleId($scope.modifyRoleForm.roleId).then(function(rsp) {
+            $log.log('调用查询角色已选权限规格接口成功.');
+            $rootScope.OperateSpecList = rsp.data;
+        }, function() {
+            $log.log('调用查询角色已选权限规格接口失败.');
+        });
 
 		// 模块选择
 		$scope.checkRolelist = function(index) {
@@ -283,12 +288,12 @@ angular
 	})
 	// 查询控制器
 	.controller('queryPowerFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
-		$scope.isForbid = true;
+
+        $scope.isForbid = true;
         $scope.queryPowerForm = {
             manageCd:'',//角色Id
-            operationSpecTypeName:'',//权限规格编码
-            name:''//权限规格名称
-
+            name:'',//权限规格编码
+            operationSpecTypeName:''//权限规格名称
         };
 
         // 查询结果分页信息
@@ -297,9 +302,8 @@ angular
         $scope.rowNumPerPage = 5; // 每页显示行数
         $scope.totalNum = 0; // 总条数
 
-        $scope.queryRoleFormSubmit = function(currentPage) {
+        $scope.queryPowerFormSubmit = function(currentPage) {
             $scope.checkedRole = []; // 置空已选业务模型列表
-
             var param = {
                 // name: '', // 角色名称
                 // roleId: '', // 角色ID
@@ -343,7 +347,6 @@ angular
             $scope.selectRoleListFormSubmit(data);
         });
         $scope.selectRoleListFormSubmit = function(data) {
-            // 更新数据为选择的模块信息
             $rootScope.modifiedRoleList.manageCd = $rootScope.checkedRoleList.manageCd;
             $rootScope.modifiedRoleList.name = $rootScope.checkedRoleList.name;
             $rootScope.modifiedRoleList.operationSpecTypeName = $rootScope.checkedRoleList.operationSpecTypeName;
@@ -360,7 +363,7 @@ angular
         };
 
         $scope.pageChanged = function() {
-            $scope.queryRoleFormSubmit($scope.currentPage);
+            $scope.queryPowerFormSubmit($scope.currentPage);
             $log.log('Page changed to: ' + $scope.currentPage);
         };
     }]);
