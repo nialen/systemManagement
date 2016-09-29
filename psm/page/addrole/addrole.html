@@ -36,7 +36,8 @@
                                         <label class="control-label edit-label" for="roleId">角色ID：</label>
                                         <input type="input" id="roleId" class="form-control modify-input" ng-model="modifyRoleForm.roleId">
                                     </div>
-                                    <div class="col-xs-4">
+                                </div>
+                                <div class="col-xs-4">
                                         <div class="form-group">
                                             <label class="control-label edit-label" for="name">角色名称：</label>
                                             <input type="input" id="name" class="form-control modify-input" ng-model="modifyRoleForm.name" >
@@ -48,7 +49,7 @@
                                             <input type="input" id="startDt" class="form-control modify-input" ng-model="modifyRoleForm.startDt">
                                         </div>
                                     </div>
-                                </div>
+                                    </div>
                                 <div class="row mb10">
                                     <div class="col-xs-4">
                                         <div class="form-group">
@@ -81,7 +82,7 @@
                     </div>
                     <div class="col-xs-4"></div>
                     <div class="col-xs-4 text-right">
-                        <a ng-click="checkRolelist()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</a>
+                        <a ng-click="checkPowerlist()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 添加</a>
                         <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
                     </div>
                 </div>
@@ -92,6 +93,7 @@
                             <tr>
                                 <th>选择</th>
                                 <th>权限规格编码</th>
+                                <th>权限规格名称</th>
                                 <th>权限类型</th>
                                 <th>备注</th>
                             </tr>
@@ -99,7 +101,8 @@
                                 <td>
                                     <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
                                 </td>
-                                <td ng-bind="item.operationSpecCd">{{item.operationSpecCd}}</td>
+                                <td ng-bind="item.operationSpecCd"></td>
+                                <td ng-bind="item.name"></td>
                                 <td ng-bind="item.operationSpecTypeName"></td>
                                 <td ng-bind="item.stateName"></td>
                             </tr>
@@ -112,28 +115,30 @@
                             <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>权限选择</h3>
                         </div>
                         <div class="modal-body" id="modal-body" ng-controller="queryPowerFormCtrl">
-                            <!-- 查询 -->
                             <div class="staff-man-query clearfix">
-                                <form name="queryRole" ng-submit="queryPowerFormSubmit()" class="form-inline" role="form">
+                                <form name="queryPower" class="form-inline" ng-submit="queryPowerFormSubmit()" role="form">
                                         <div class="row mb10">
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label class="control-label sys_label" for="operationSpecCd">权限规格编码：</label>
-                                                    <input type="input" id="operationSpecCd" class="form-control modify-input" ng-model="queryRoleForm.operationSpecCd">
+                                                    <input type="input" id="operationSpecCd" class="form-control modify-input" ng-model="queryPowerForm.operationSpecCd">
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label class="control-label sys_label" for="name">权限规格名称：</label>
-                                                    <input type="input" id="name" class="form-control modify-input" ng-model="queryRoleForm.name">
+                                                    <input type="input" id="name" class="form-control modify-input" ng-model="queryPowerForm.name">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb10">
                                             <div class="col-xs-6">
                                                 <div class="form-group">
-                                                    <label class="control-label sys_label" for="modularTypeName">业务模块类型：</label>
-                                                    <select class="form-control modify-input" id="modularTypeCdItem" ng-model="queryRoleForm.modularTypeCdItem" ng-options="item as item.name for item in sysType track by item.modularTypeCd" ></select>
+                                                    <label class="control-label sys_label" for="operationSpecTypeCd">权限类型：</label>
+                                                    <select name="SpecItem" class="form-control modify-input" id="SpecItem" ng-model="queryPowerForm.SpecItem">
+                                                        <option value="">请选择权限类型</option>
+                                                        <option ng-repeat="item in SpecList" value="{{item.operationSpecTypeCd}}">{{item.operationSpecTypeName}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
@@ -144,25 +149,23 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                            </form>
-                        </div>
-                        <!-- 结果 -->
-                        <div class="staff-man-result">
-                            <div class="row result-header">
-                                <div class="col-xs-4">
-                                    <div class="title">
-                                        <img src="../../../../../images/icon_staffList.png">
-                                        <p class="title-cn lh30">权限规格列表</p>
+                                </form>
+                            </div>
+                            <div class="staff-man-result">
+                                <div class="row result-header">
+                                    <div class="col-xs-4">
+                                        <div class="title">
+                                            <img src="../../../../../images/icon_staffList.png">
+                                            <p class="title-cn lh30">权限规格列表</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="result-table" ng-controller="PowerListResultCtrl">
+                                <div class="result-table">
                                     <table class="table table-hover table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>选择</th>
-                                                <th>权限规格ID</th>
+                                                <th>权限规格编码</th>
                                                 <th>权限规格名称</th>
                                                 <th>权限类型</th>
                                                 <th>备注</th>
@@ -171,7 +174,7 @@
                                         <tbody>
                                             <tr ng-repeat="item in PowerListResultList">
                                                 <td>
-                                                    <input type="radio" name="RoleRadio" ng-click="selectRoleList($index)">
+                                                    <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
                                                 </td>
                                                 <td>
                                                     <p ng-bind="item.manageCd"></p>

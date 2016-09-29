@@ -14,7 +14,12 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             $rootScope.modifiedRole = {}; // 待修改的模块信息
             $rootScope.isForbidSubmit = true; // 禁用编辑模块提交按钮
-            $rootScope.modularTypeName = []; // 业务模块类型
+
+            $rootScope.SpecList = []; // 权限类型列表
+            $rootScope.PowerList = {}; // 待修改权限类型列表
+
+            $rootScope.OperateSpecList = []; // 查询角色已选权限规格
+            $rootScope.checkedPowerList = []; // 添加选中的权限规格
 
             $rootScope.isModifiedRoleList = !obj ? true : false;
             // 模块选择弹框内部信息
@@ -35,6 +40,44 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     headers: httpConfig.requestHeader,
                     // data: 'param=' + param
                     data: 'param=' + encodeURI(JSON.stringify(param))
+                }).success(function (data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function (data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            // 查询角色已选权限规格
+            httpMethod.queryOperateSpecByRoleId = function (param) {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/role/profile/queryOperateSpecByRoleId.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
+                    // data: 'param=' + param
+                    data: 'roleId=' + param
+                }).success(function (data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function (data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
+
+            // 查询权限类型
+            httpMethod.queryOperationSpecType = function (param) {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/privilege/profile/queryOperationSpecType.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader,
                 }).success(function (data, header, config, status) {
                     if (status != 200) {
                         // 跳转403页面
@@ -128,31 +171,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
         // 修改用户控制器
         .controller('modifyRoleFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
-            /* 获取业务模块类型列表
-             httpMethod.queryModularType().then(function(rsp) {
-             $log.log('调用获取业务模块类型接口成功.');
-             $rootScope.RoleType = rsp.data;
-             }, function() {
-             $log.log('调用获取业务模块类型接口失败.');
-             });*/
-
-            // 详情
-            /*
-             $scope.editRole = function(index, title) {
-             $rootScope.modifiedRole = $rootScope.RoleResultList[index];
-             $rootScope.RoleType.map(function(item, index) {
-             if (item.modularTypeCd == $rootScope.modifiedRole.modularTypeCd) {
-             $rootScope.modifiedRole.modularTypeCdItem = item;
-             }
-             })
-             $rootScope.RoleTitle = title;
-             $rootScope.RoletemList.map(function(item, index) {
-             if (item.RoleId == $rootScope.modifiedRole.RoleId) {
-             $rootScope.modifiedRole.RoleIdItem = item;
-             }
-             });
-             };
-             */
 
             $scope.isForbid = true;
             $scope.modifyRoleForm = $.extend(true, {
@@ -210,9 +228,18 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     })
                 }
             };
+            // 获取业务模块类型列表
+           httpMethod.queryOperateSpecByRoleId($scope.modifyRoleForm.roleId).then(function (rsp) {
+                $log.log('调用获取业务模块类型接口成功.');
+                if (rsp.data) {
+                    $rootScope.OperateSpecList = rsp.data;
+                }
+            }, function () {
+                $log.log('调用获取业务模块类型接口失败.');
+            });
 
             // 模块选择
-            $scope.checkRolelist = function (index) {
+            $scope.checkPowerlist = function (index) {
                 $scope.$broadcast('openCheckRoleListModal');
             }
             $scope.$watch('modifyRoleForm', function (current, old, scope) {
@@ -266,8 +293,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             var $ctrl = this;
 
             $ctrl.ok = function () {
+                debugger;
                 $uibModalInstance.close();
-                $scope.$broadcast('submitRoleListModal');
+                $scope.$broadcast('submitPowerListModal');
             };
 
             $ctrl.cancel = function () {
@@ -276,12 +304,31 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         })
         // 查询控制器
         .controller('queryPowerFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+            
+            // 获取业务模块类型列表
+           httpMethod.queryOperationSpecType().then(function (rsp) {
+                $log.log('调用获取业务模块类型接口成功.');
+                $rootScope.SpecList = rsp.data.list;
+            }, function () {
+                $log.log('调用获取业务模块类型接口失败.');
+            });
+
+            $scope.editPower = function (index, title) {
+                $rootScope.PowerList = $rootScope.SpecList[index];
+                $rootScope.PowerList.map(function (item, index) {
+                    if (item.operationSpecTypeCd == $rootScope.PowerList.operationSpecTypeCd) {
+                        $rootScope.PowerList.SpecItem = item;
+                    }
+                })
+                $rootScope.PowerTitle = title;
+            };
+
             $scope.isForbid = true;
             $scope.queryPowerForm = {
-                manageCd: '',//角色Id
-                operationSpecTypeName: '',//权限规格编码
-                name: ''//权限规格名称
-
+                operationSpecCd: '',//权限规格编码
+                name: '',//权限规格名称
+                SpecItem:'',//权限类型列表
+                operationSpecTypeCd: ''//规格类型
             };
 
             // 查询结果分页信息
@@ -290,20 +337,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.rowNumPerPage = 5; // 每页显示行数
             $scope.totalNum = 0; // 总条数
 
-            $scope.queryRoleFormSubmit = function (currentPage) {
-                $scope.checkedRole = []; // 置空已选业务模型列表
-
+            $scope.queryPowerFormSubmit = function (currentPage) {
+                $scope.checkedPower = []; // 置空已选业务模型列表
                 var param = {
-                    // name: '', // 角色名称
-                    // roleId: '', // 角色ID
-                    // modularTypeCd: '', // 业务模块类型
+                    // operationSpecCd: '',//权限规格编码
+                    // name: '',//权限规格名称
+                    // operationSpecTypeCd: ''//规格类型
                     requirePaging: $scope.requirePaging, // 是否需要分页
                     currentPage: currentPage || $scope.currentPage, // 当前页
                     rowNumPerPage: $scope.rowNumPerPage // 每页显示行数
                 };
-                $scope.queryPowerForm.manageCd ? param.manageCd = $scope.queryPowerForm.manageCd : '';
+                $scope.queryPowerForm.operationSpecCd ? param.operationSpecCd = $scope.queryPowerForm.operationSpecCd : '';
                 $scope.queryPowerForm.name ? param.name = $scope.queryPowerForm.name : '';
-                $scope.queryPowerForm.operationSpecTypeName ? param.operationSpecTypeName = $scope.queryPowerForm.operationSpecTypeName : '';
+                $scope.queryPowerForm.SpecItem ? param.operationSpecTypeCd = $scope.queryPowerForm.SpecItem : '';
                 // $scope.queryRoleForm.modularTypeCdItem ? param.operationSpecTypeCd = $scope.queryRoleForm.operationSpecTypeCdItem.modularTypeCd : '';
 
                 // 获取业务模块类型列表
@@ -317,33 +363,51 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             }
             $scope.$watch('queryPowerForm', function (current, old, scope) {
-                if (scope.queryPowerForm.roleId || scope.queryPowerForm.name ||
-                    scope.queryPowerForm.modularTypeCdItem) {
+                if (scope.queryPowerForm.manageCd || scope.queryPowerForm.name ||
+                    scope.queryPowerForm.operationSpecTypeName) {
                     scope.isForbid = false;
                 } else {
                     scope.isForbid = true;
                 }
             }, true)
-        }])
-        // 查询结果控制器
-        .controller('PowerListResultCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
 
+            $scope.check = function (val, chk) {
+                var valueOfIndex = '';
+                $rootScope.checkedPowerList.length && $rootScope.checkedPowerList.map(function (item, index) {
+                    if (item.manageCd == val.manageCd) {
+                        valueOfIndex = index;
+                    }
+                });
+                chk ? valueOfIndex === '' && $rootScope.checkedPowerList.push(val) : $rootScope.checkedPowerList.splice(valueOfIndex, 1);
+                $log.log($rootScope.checkedPowerList, '$rootScope.checkedPowerList');
+            };
+
+
+/*
             // 选中索引
-            $scope.selectRoleList = function (index) {
-                $rootScope.checkedRoleList = $rootScope.PowerListResultList[index];
+            $scope.selectPowerList = function (index) {
+                $rootScope.checkedPowerList = $rootScope.PowerListResultList[index];
             }
-            $scope.$on('submitRoleListModal', function (d, data) {
-                $scope.selectRoleListFormSubmit(data);
-            });
-            $scope.selectRoleListFormSubmit = function (data) {
-                // 更新数据为选择的模块信息
-                $rootScope.modifiedRoleList.manageCd = $rootScope.checkedRoleList.manageCd;
-                $rootScope.modifiedRoleList.name = $rootScope.checkedRoleList.name;
-                $rootScope.modifiedRoleList.operationSpecTypeName = $rootScope.checkedRoleList.operationSpecTypeName;
-                $rootScope.modifiedRoleList.description = $rootScope.checkedRoleList.description;
-            }
-        }])
 
+*/
+            $scope.$on('submitPowerListModal', function (d, data) {
+                $scope.selectPowerListFormSubmit(data);
+            });
+            $scope.selectPowerListFormSubmit = function (data) {
+                $log.log($rootScope.checkedPowerList, '$rootScope.checkedPowerList', $rootScope.OperateSpecList, '$rootScope.OperateSpecList');
+                debugger
+                // todo 清空$rootScope.checkedPowerList 比对重复的
+                $rootScope.OperateSpecList = $rootScope.OperateSpecList.concat($rootScope.checkedPowerList);
+                $log.log($rootScope.OperateSpecList, '$rootScope.OperateSpecList');
+                debugger
+                // 更新数据为选择的模块信息
+                // $rootScope.OperateSpecList.manageCd = $rootScope.checkedPowerList.manageCd;
+                // $rootScope.OperateSpecList.name = $rootScope.checkedPowerList.name;
+                // $rootScope.OperateSpecList.operationSpecTypeName = $rootScope.checkedPowerList.operationSpecTypeName;
+                // $rootScope.OperateSpecList.stateName = $rootScope.checkedPowerList.stateName;
+            }
+
+        }])
 
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
@@ -353,7 +417,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             };
 
             $scope.pageChanged = function () {
-                $scope.queryRoleFormSubmit($scope.currentPage);
+                $scope.queryPowerFormSubmit($scope.currentPage);
                 $log.log('Page changed to: ' + $scope.currentPage);
             };
         }])
