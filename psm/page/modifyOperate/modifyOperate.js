@@ -209,6 +209,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }, $rootScope.modifiedOperateSpec);
 
         $scope.modifyOperateFormSubmit = function() {
+
             var param = {
                 operationSpecCd: '', //权限规格编码
                 name: '', //权限规格名称    
@@ -234,7 +235,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.modifyOperateForm.description ? param.description = $scope.modifyOperateForm.description : '';
             $scope.modifyOperateForm.modularList ? param.modularList.sysModularId = $scope.modifyOperateForm.modularList : '';
             $scope.modifyOperateForm.dimensionList ? param.dimensionList.privilegeDimensionCd = $scope.modifyOperateForm.dimensionList : '';
-
+            param.modularList = $rootScope.preveligeDoneResultList;
+            param.dimensionList = $rootScope.preveligeDimensionResultList;
             if ($rootScope.isModifiedOperateList) {
                 httpMethod.insertOperateSpec(param).then(function(rsp) {
                     $log.log('调用新建权限规格接口成功.');
@@ -279,12 +281,12 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         // 权限维度删除列表
         $scope.deleteDimensionList = [];
 
-        $scope.preveligeDimensionResultList = [];
+        $rootScope.preveligeDimensionResultList = [];
 
         // 查询已选权限维度信息
         httpMethod.queryPrivilegeDimensionInOperationSpec(param).then(function(rsp) {
             $log.log('调用查询已选权限维度接口成功.');
-            $scope.preveligeDimensionResultList = rsp.data;
+            $rootScope.preveligeDimensionResultList = rsp.data;
             $scope.totalNum = rsp.data.totalNum;
         }, function() {
             $log.log('调用查询已选权限维度接口失败.');
@@ -316,12 +318,12 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     confirmButtonColor: "#ffaa00",
                     cancelButtonText: "取消",
                 }, function () {
-                    for (var i = $scope.preveligeDimensionResultList.length - 1; i >= 0; i--) {
-                        var preveligeDimension = $scope.preveligeDimensionResultList[i];
+                    for (var i = $rootScope.preveligeDimensionResultList.length - 1; i >= 0; i--) {
+                        var preveligeDimension = $rootScope.preveligeDimensionResultList[i];
                         for (var j = $scope.deleteDimensionList.length - 1; j >= 0; j--) {
                             var deleteObj = $scope.deleteDimensionList[j];
                             if(deleteObj.privilegeDimensionCd == preveligeDimension.privilegeDimensionCd){
-                                $scope.preveligeDimensionResultList.splice(i,1); 
+                                $rootScope.preveligeDimensionResultList.splice(i,1); 
                             }
                         }
                     } 
@@ -346,7 +348,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }
         // 权限维度详情
         $scope.dimensionInfo = function(index) {
-            $rootScope.dimensionInfo = $scope.preveligeDimensionResultList[index];
+            $rootScope.dimensionInfo = $rootScope.preveligeDimensionResultList[index];
             $scope.$emit('openDimensionInfoModal');
         }
     }])
@@ -361,7 +363,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         // 业务模块删除列表
         $scope.deleteSysModularList = [];
 
-        $scope.preveligeDoneResultList = [];
+        $rootScope.preveligeDoneResultList = [];
 
         var param = {};
 
@@ -370,7 +372,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         // 查询已选业务模块信息
         httpMethod.querySysModularInOperationSpec(param).then(function(rsp) {
             $log.log('调用查询已选业务模块接口成功.');
-            $scope.preveligeDoneResultList = rsp.data;
+            $rootScope.preveligeDoneResultList = rsp.data;
             $scope.totalNum = rsp.data.totalNum;
         }, function() {
             $log.log('调用查询已选业务模块接口失败.');
@@ -402,20 +404,15 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     confirmButtonColor: "#ffaa00",
                     cancelButtonText: "取消",
                 }, function () {
-                    for (var i = $scope.preveligeDoneResultList.length - 1; i >= 0; i--) {
-                        var preveligeDone = $scope.preveligeDoneResultList[i];
+                    for (var i = $rootScope.preveligeDoneResultList.length - 1; i >= 0; i--) {
+                        var preveligeDone = $rootScope.preveligeDoneResultList[i];
                         for (var j = $scope.deleteSysModularList.length - 1; j >= 0; j--) {
                             var deleteObj = $scope.deleteSysModularList[j];
                             if(deleteObj.sysModularId == preveligeDone.sysModularId){
-                                $scope.preveligeDoneResultList.splice(i,1); 
+                                $rootScope.preveligeDoneResultList.splice(i,1); 
                             }
                         }
                     } 
-                    // angular.forEach($scope.preveligeDimensionResultList, function(preveligeDimension,i){
-                    //     angular.forEach($scope.deleteDimensionList, function(deleteDimension,j){
-                    //         if()
-                    //     }
-                    // }
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
@@ -427,13 +424,12 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }
 
         // 新建业务模块
-        $scope.addPreveligeDone = function(title) {
-            $scope.modalTitle = title;
+        $scope.addPreveligeDone = function() {
             $scope.$emit('openAddPreveligeDoneModal');
         }
         // 业务模块详情
         $scope.businessModuleInfo = function(index) {
-            $rootScope.businessModuleInfo = $scope.preveligeDoneResultList[index];
+            $rootScope.businessModuleInfo = $rootScope.preveligeDoneResultList[index];
             $scope.$emit('openBusinessModuleInfoModal');
         }
     }])
@@ -492,7 +488,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         var $ctrl = this;
 
         $ctrl.ok = function() {
-            $uibModalInstance.close($ctrl.selected.item);
+            $uibModalInstance.close();
             $scope.$broadcast('submitPreveligeDimensionModal');
         };
 
@@ -508,13 +504,14 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     })
     // 维度可选查询控制器queryPrivilegeDimension4Pick
     .controller('queryDimensionFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
-        // debugger
         $scope.requirePaging = true, // 是否需要分页
-            $scope.currentPage = 1, // 当前页
-            $scope.rowNumPerPage = 4, // 每页显示行数
-            $scope.totalNum = 0 // 总条数
+        $scope.currentPage = 1, // 当前页
+        $scope.rowNumPerPage = 4, // 每页显示行数
+        $scope.totalNum = 0 // 总条数
 
-        $scope.checkedPrivilegeDimension4Pick = []; // 已经选中的权限类型信息
+        $scope.queryDimensionForm = {};
+
+        $rootScope.queryDimensionResultList = [];
 
         $scope.queryDimensionFormSubmit = function(currentPage) {
             $scope.checkedPrivilegeDimension4Pick = []; // 置空已选权限类型列表
@@ -523,7 +520,11 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 currentPage: currentPage || $scope.currentPage, //当前页
                 rowNumPerPage: $scope.rowNumPerPage, //每页展示行数
             };
-            $scope.queryDimension.operationSpecCd ? param.operationSpecCd = $scope.queryDimension.operationSpecCd : '';
+
+            $scope.queryDimensionForm.privilegeDimensionCd ? param.privilegeDimensionCd = $scope.queryDimensionForm.privilegeDimensionCd : '';
+            $scope.queryDimensionForm.name ? param.name = $scope.queryDimensionForm.name : '';
+            param.operationSpecCd = $rootScope.modifiedOperateSpec.operationSpecCd;
+
             // 查询权限类型配置
             httpMethod.queryPrivilegeDimension4Pick(param).then(function(rsp) {
                 $log.log('调用查询可选权限维度接口成功.');
@@ -534,14 +535,37 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             });
         }
     }])
-    // 查询结果控制器
-    .controller('queryDimensionResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+    // 权限维度查询结果控制器
+    .controller('queryDimensionResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
         $scope.$on('submitPreveligeDimensionModal', function(d, data) {
             $scope.addQueryDimensionFormSubmit(data);
         });
-        $scope.addQueryDimensionFormSubmit = function(data) {
-            // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
-            $log.log('弹出框表单提交', data, $rootScope.addPreveligeDimension);
+        // 添加维度列表
+        $scope.addDimensionList = [];
+
+        $scope.check = function (val, chk) {
+            var valueOfIndex = '';
+            var existFlag = false;
+            // 判断已有的维度列表是否存在
+            angular.forEach($rootScope.preveligeDimensionResultList, function(data){
+                if(!existFlag){
+                    if(val.privilegeDimensionCd==data.privilegeDimensionCd){
+                        existFlag = true;
+                    }
+                }
+
+            });
+            $scope.addDimensionList.length && $scope.addDimensionList.map(function (item, index) {
+                if (item.privilegeDimensionCd == val.privilegeDimensionCd) {
+                    valueOfIndex = index;
+                }
+            })
+            chk ? valueOfIndex === ''&& !existFlag && $scope.addDimensionList.push(val) : $scope.addDimensionList.splice(valueOfIndex, 1);
+        }
+        $scope.addQueryDimensionFormSubmit = function() {
+            // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；           
+           
+            $rootScope.preveligeDimensionResultList = $rootScope.preveligeDimensionResultList.concat($scope.addDimensionList);
         }
     }])
 
@@ -599,8 +623,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     .controller('ModalAddPreveligeDoneCtrl', function($uibModalInstance, $scope, items) {
         var $ctrl = this;
         $ctrl.ok = function() {
-            $uibModalInstance.close($ctrl.selected.item);
-            $scope.$broadcast('submitPreveligeDoneModal');
+            $uibModalInstance.close();
+            $scope.$broadcast('submitQueryDoneModal');
         };
         $ctrl.cancel = function() {
             $uibModalInstance.dismiss('cancel');
@@ -635,27 +659,29 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         $scope.rowNumPerPage = 4, // 每页显示行数
         $scope.totalNum = 0 // 总条数
 
-        $scope.queryDoneForm = {
-            businessModuleId: '',
-            businessModuleName: '',
-            ownerSys: 'null',
-            businessModuleType: 'null',
-        };
+        $scope.queryDoneForm = {};
+
+        $rootScope.queryDoneResultList = [];
         
         $scope.queryDoneFormSubmit = function(currentPage) {
             $scope.checkedSysModular4Pick = []; // 置空已选权限类型列表
-            debugger
             var param = {
                 requirePaging: $scope.requirePaging, //是否需要分页
                 currentPage: currentPage || $scope.currentPage, //当前页
                 rowNumPerPage: $scope.rowNumPerPage, //每页展示行数
             };
-            $scope.queryDone.operationSpecCd ? param.operationSpecCd = $scope.queryDone.operationSpecCd : '';
+
+            $scope.queryDoneForm.sysModularId ? param.sysModularId = $scope.queryDoneForm.sysModularId : '';
+            $scope.queryDoneForm.name ? param.name = $scope.queryDoneForm.name : '';
+            $scope.queryDoneForm.sysItem ? param.sysId = $scope.queryDoneForm.sysItem : '';
+            $scope.queryDoneForm.modularTypeCd ? param.modularTypeCd = $scope.queryDoneForm.modularTypeCd : '';
+
+            param.operationSpecCd = $rootScope.modifiedOperateSpec.operationSpecCd;
+            
             // 查询权限类型配置
             httpMethod.querySysModular4Pick(param).then(function(rsp) {
                 $log.log('调用查询可选权限维度接口成功.');
                 $rootScope.queryDoneResultList = rsp.data.list;
-                debugger
                 $scope.totalNum = rsp.data.totalNum;
             }, function() {
                 $log.log('调用查询可选权限维度接口失败.');
@@ -664,12 +690,34 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     }])
     // 查询结果控制器
     .controller('queryDoneResultCtrl', ['$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
-        $scope.$on('submitQueryDoneModal', function(d, data) {
-            $scope.addQueryDoneFormSubmit(data);
+        $scope.$on('submitQueryDoneModal', function() {
+            $scope.addQueryDoneFormSubmit();
         });
-        $scope.addQueryDoneFormSubmit = function(data) {
-            // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
-            $log.log('弹出框表单提交', data, $rootScope.modifiedQueryType);
+
+         // 添加维度列表
+        $scope.addSysModularList = [];
+
+        $scope.check = function (val, chk) {
+            var valueOfIndex = '';
+            var existFlag = false;
+            // 判断已有的业务模块列表是否存在
+            angular.forEach($rootScope.preveligeDoneResultList, function(data){
+                if(!existFlag){
+                    if(val.sysModularId==data.sysModularId){
+                        existFlag = true;
+                    }
+                }
+            });
+            $scope.addSysModularList.length && $scope.addSysModularList.map(function (item, index) {
+                if (item.sysModularId == val.sysModularId) {
+                    valueOfIndex = index;
+                }
+            })
+            chk ? valueOfIndex === ''&& !existFlag && $scope.addSysModularList.push(val) : $scope.addSysModularList.splice(valueOfIndex, 1);
+        }
+        $scope.addQueryDoneFormSubmit = function() {
+                       
+            $rootScope.preveligeDoneResultList = $rootScope.preveligeDoneResultList.concat($scope.addSysModularList);
         }
     }])
 
