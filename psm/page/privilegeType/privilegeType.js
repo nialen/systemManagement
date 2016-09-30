@@ -96,10 +96,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         .controller('queryTypeFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
             // 查询结果分页信息
             $scope.requirePaging = true, // 是否需要分页
-                $scope.currentPage = 1, // 当前页
-                $scope.rowNumPerPage = 4, // 每页显示行数
-                $scope.totalNum = 0 // 总条数
-
+            $scope.currentPage = 1, // 当前页
+            $scope.rowNumPerPage = 4, // 每页显示行数
+            $scope.totalNum = 0 // 总条数
             $scope.checkedPrivilegeType = []; // 已经选中的权限类型信息
 
             $scope.isForbid = true;
