@@ -181,26 +181,26 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 description: ''//描述
             }, $rootScope.modifiedRoleList);
 
-            /*
-             $scope.modifyRoleFormSubmit = function() {
-             // TODO $http发送请求，获取数据$scope.modifyRoleForm;
-             $log.log($scope.isForbid, $scope.modifyRoleForm);
-             };
-             */
-
             $scope.modifyRoleFormSubmit = function () {
                 var param = {
                     roleId: '',//角色Id
                     name: '',//角色名称
                     startDt: '',//生效日期
                     endDt: '',//失效日期
-                    description: ''//描述
+                    description: '',//描述
+                    privilegeList: [
+                        {
+                            operationSpecCd: ''//权限规格编码
+                        }
+                    ]
                 };
+
                 $scope.modifyRoleForm.roleId ? param.roleId = $scope.modifyRoleForm.roleId : '';
                 $scope.modifyRoleForm.name ? param.name = $scope.modifyRoleForm.name : '';
                 $scope.modifyRoleForm.startDt ? param.startDt = $scope.modifyRoleForm.startDt : '';
                 $scope.modifyRoleForm.endDt ? param.endDt = $scope.modifyRoleForm.endDt : '';
                 $scope.modifyRoleForm.description ? param.description = $scope.modifyRoleForm.description : '';
+
                 if ($rootScope.isModifiedRoleList) {
                     httpMethod.insertRole(param).then(function (rsp) {
                         $log.log('调用新建角色接口成功.');
@@ -229,7 +229,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 }
             };
             // 获取业务模块类型列表
-           httpMethod.queryOperateSpecByRoleId($scope.modifyRoleForm.roleId).then(function (rsp) {
+            httpMethod.queryOperateSpecByRoleId($scope.modifyRoleForm.roleId).then(function (rsp) {
                 $log.log('调用获取业务模块类型接口成功.');
                 if (rsp.data) {
                     $rootScope.OperateSpecList = rsp.data;
@@ -238,10 +238,33 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $log.log('调用获取业务模块类型接口失败.');
             });
 
-            // 模块选择
-            $scope.checkPowerlist = function (index) {
+            // 添加
+            $scope.addRolePermission = function () {
                 $scope.$broadcast('openCheckRoleListModal');
-            }
+            };
+
+            // 删除
+            $scope.removeRolePermission = function () {
+                if ($rootScope.checkedDelRolePermission.length) {
+                    $rootScope.checkedDelRolePermission.map(function (item, index) {
+                        $rootScope.OperateSpecList;// 已有的权限
+                    });
+                }
+            };
+
+            $rootScope.checkedDelRolePermission = [];
+            // 选中索引
+            $scope.check = function (val, chk) {
+                debugger
+                var valueOfIndex = '';
+                $rootScope.checkedDelRolePermission.length && $rootScope.checkedDelRolePermission.map(function (item, index) {
+                    if (item.manageCd == val.manageCd) {
+                        valueOfIndex = index;
+                    }
+                });
+                chk ? valueOfIndex === '' && $rootScope.checkedDelRolePermission.push(val) : $rootScope.checkedDelRolePermission.splice(valueOfIndex, 1);
+            };
+
             $scope.$watch('modifyRoleForm', function (current, old, scope) {
                 if (scope.modifyRoleForm.roleId || scope.modifyRoleForm.name) {
                     scope.isForbid = false;
@@ -249,6 +272,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     scope.isForbid = true;
                 }
             }, true);
+
             // 监听响应变化
             $scope.$watch('modifiedRoleList', function (current, old, scope) {
                 if (current.uproleId !== old.uproleId || current.upRoleModularName !== old.upRoleModularName
@@ -259,7 +283,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             }, true);
         }])
         // 弹出框控制器
-        // TODO 删除冗余代码
         .controller('selectRoleModalCtrl', function ($scope, $rootScope, $uibModal, $log) {
             var $ctrl = this;
             $scope.$on('openCheckRoleListModal', function (d, data) {
@@ -293,9 +316,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             var $ctrl = this;
 
             $ctrl.ok = function () {
-                debugger;
-                $uibModalInstance.close();
                 $scope.$broadcast('submitPowerListModal');
+                $uibModalInstance.close();
             };
 
             $ctrl.cancel = function () {
@@ -304,9 +326,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         })
         // 查询控制器
         .controller('queryPowerFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
-            
+
             // 获取业务模块类型列表
-           httpMethod.queryOperationSpecType().then(function (rsp) {
+            httpMethod.queryOperationSpecType().then(function (rsp) {
                 $log.log('调用获取业务模块类型接口成功.');
                 $rootScope.SpecList = rsp.data.list;
             }, function () {
@@ -319,7 +341,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     if (item.operationSpecTypeCd == $rootScope.PowerList.operationSpecTypeCd) {
                         $rootScope.PowerList.SpecItem = item;
                     }
-                })
+                });
                 $rootScope.PowerTitle = title;
             };
 
@@ -327,7 +349,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.queryPowerForm = {
                 operationSpecCd: '',//权限规格编码
                 name: '',//权限规格名称
-                SpecItem:'',//权限类型列表
+                SpecItem: '',//权限类型列表
                 operationSpecTypeCd: ''//规格类型
             };
 
@@ -338,7 +360,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.totalNum = 0; // 总条数
 
             $scope.queryPowerFormSubmit = function (currentPage) {
-                $scope.checkedPower = []; // 置空已选业务模型列表
                 var param = {
                     // operationSpecCd: '',//权限规格编码
                     // name: '',//权限规格名称
@@ -361,7 +382,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     $log.log('调用获取查询权限规格接口失败.');
                 });
 
-            }
+            };
             $scope.$watch('queryPowerForm', function (current, old, scope) {
                 if (scope.queryPowerForm.manageCd || scope.queryPowerForm.name ||
                     scope.queryPowerForm.operationSpecTypeName) {
@@ -369,42 +390,33 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 } else {
                     scope.isForbid = true;
                 }
-            }, true)
+            }, true);
 
             $scope.check = function (val, chk) {
                 var valueOfIndex = '';
-                $rootScope.checkedPowerList.length && $rootScope.checkedPowerList.map(function (item, index) {
-                    if (item.manageCd == val.manageCd) {
-                        valueOfIndex = index;
-                    }
+                var isHasRolePermission = $rootScope.OperateSpecList.some(function (item, index) {
+                    return item.manageCd == val.manageCd;
                 });
-                chk ? valueOfIndex === '' && $rootScope.checkedPowerList.push(val) : $rootScope.checkedPowerList.splice(valueOfIndex, 1);
-                $log.log($rootScope.checkedPowerList, '$rootScope.checkedPowerList');
+
+                if (chk) {
+                    !isHasRolePermission && $rootScope.checkedPowerList.push(val);
+                } else {
+                    $rootScope.checkedPowerList.length && $rootScope.checkedPowerList.map(function (item, index) {
+                        if (item.manageCd == val.manageCd) {
+                            valueOfIndex = index;
+                        }
+                    });
+                    valueOfIndex !== '' && $rootScope.checkedPowerList.splice(valueOfIndex, 1);
+                }
             };
 
-
-/*
-            // 选中索引
-            $scope.selectPowerList = function (index) {
-                $rootScope.checkedPowerList = $rootScope.PowerListResultList[index];
-            }
-
-*/
             $scope.$on('submitPowerListModal', function (d, data) {
                 $scope.selectPowerListFormSubmit(data);
             });
+
             $scope.selectPowerListFormSubmit = function (data) {
-                $log.log($rootScope.checkedPowerList, '$rootScope.checkedPowerList', $rootScope.OperateSpecList, '$rootScope.OperateSpecList');
-                debugger
-                // todo 清空$rootScope.checkedPowerList 比对重复的
                 $rootScope.OperateSpecList = $rootScope.OperateSpecList.concat($rootScope.checkedPowerList);
-                $log.log($rootScope.OperateSpecList, '$rootScope.OperateSpecList');
-                debugger
-                // 更新数据为选择的模块信息
-                // $rootScope.OperateSpecList.manageCd = $rootScope.checkedPowerList.manageCd;
-                // $rootScope.OperateSpecList.name = $rootScope.checkedPowerList.name;
-                // $rootScope.OperateSpecList.operationSpecTypeName = $rootScope.checkedPowerList.operationSpecTypeName;
-                // $rootScope.OperateSpecList.stateName = $rootScope.checkedPowerList.stateName;
+                $rootScope.checkedPowerList = []; // 置空弹框中已选权限列表
             }
 
         }])
@@ -421,4 +433,4 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $log.log('Page changed to: ' + $scope.currentPage);
             };
         }])
-})
+});
