@@ -673,8 +673,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             $scope.queryDoneForm.sysModularId ? param.sysModularId = $scope.queryDoneForm.sysModularId : '';
             $scope.queryDoneForm.name ? param.name = $scope.queryDoneForm.name : '';
-            // $scope.queryOperateForm.systemList ? param.sysId = $scope.queryOperateForm.systemList : '';
-            // $scope.queryOperateForm.sysType ? param.modularTypeCd = $scope.queryOperateForm.sysType : '';
+            $scope.queryDoneForm.sysItem ? param.sysId = $scope.queryDoneForm.sysItem : '';
+            $scope.queryDoneForm.modularTypeCd ? param.modularTypeCd = $scope.queryDoneForm.modularTypeCd : '';
 
             param.operationSpecCd = $rootScope.modifiedOperateSpec.operationSpecCd;
             
