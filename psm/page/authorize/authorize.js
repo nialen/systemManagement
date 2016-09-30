@@ -12,6 +12,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $rootScope.staffManInformation = obj ? JSON.parse(obj) : {}; // 获取授权员工信息
             $rootScope.queryUserPrivilegeDimensionDetail = function (item) {
                 $rootScope.userPrivilegeId = item.userPrivilegeId;
+                $rootScope.operationSpecCd = item.operationSpecCd;
             };
             $rootScope.authorityDimensionList = []; // 权限维度详情列表
         }])
@@ -342,7 +343,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 }
             };
 
-            // 查看权限维度 TODO $rootScope
+            // 查看权限维度
             $scope.viewUserPrivilegeDimension = function (item) {
                 $rootScope.queryUserPrivilegeDimensionDetail(item);
 
@@ -454,8 +455,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             // 权限维度-设置按钮
             $scope.setDimension = function (index) {
-
-                // TODO 分页
                 var param = $scope.authorityDimensionList[index].dynamicSql;
                 httpMethod.queryDimensionValues(param).then(function (rsp) {
                     $log.log('调用查询权限维度列表接口成功.');
@@ -464,7 +463,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     $log.log('调用查询权限维度列表接口失败.');
                 });
 
-                $scope.$emit('openSetDimensionModal');
+                $scope.$emit('openSetDimensionModal', $scope.authorityDimensionList[index]);
             };
             // 权限维度-查看按钮
             $scope.viewDimension = function (index) {
@@ -559,12 +558,64 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
             };
         })
-        .controller('ModalSetDimensionCtrl', function ($uibModalInstance, $scope, $log, httpMethod, items) {
+        .controller('ModalSetDimensionCtrl', function ($uibModalInstance, $scope, $rootScope, $log, httpMethod, items) {
             var $ctrl = this;
 
+            $rootScope.checkedDimension = [];
+            // 选中索引
+            $scope.check = function (val, chk) {
+                var valueOfIndex = '';
+                $rootScope.checkedDimension.length && $rootScope.checkedDimension.map(function (item, index) {
+                    if (item.VALUEID == val.VALUEID) {
+                        valueOfIndex = index;
+                    }
+                });
+                chk ? valueOfIndex === '' && $rootScope.checkedDimension.push(val) : $rootScope.checkedDimension.splice(valueOfIndex, 1);
+            };
+
             $ctrl.ok = function () {
+                if ($rootScope.checkedDimension.length) {
+                    var checkedDimensionName = [];
+                    var checkedDimensionId = [];
+                    $rootScope.checkedDimension.map(function (item) {
+                        checkedDimensionName.push(item.VALUENAME);
+                        checkedDimensionId.push(item.VALUEID);
+                    });
+
+                    var obj = {
+                        privilegeDimensionCd: items.privilegeDimensionCd,//权限维度编码
+                        name: items.privilegeDimensionName,//权限维度名称
+                        dimensionValue: checkedDimensionId.join(),//维度值
+                        userPrivilegeId: items.userPrivilegeId,//用户权限Id
+                        operationSpecCd: $rootScope.operationSpecCd,//权限规格Id
+                        privilegeScopeId: items.privilegeScopeId//用户权限维度Id（新增时为空）
+                    };
+
+                    swal({
+                        title: "添加权限维度",
+                        text: "您确定要添加 " + checkedDimensionName.join() + " 权限维度吗？",
+                        type: "info",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        confirmButtonText: "确定",
+                        confirmButtonColor: "#ffaa00",
+                        cancelButtonText: "取消",
+                        showLoaderOnConfirm: true
+                    }, function () {
+                        httpMethod.insertUserPrivilegeDimension(obj).then(function (rsp) {
+                            $log.log('调用添加权限维度接口成功.');
+                            if (rsp.data) {
+                                swal("操作成功!", "添加权限维度成功！", "success");
+                            } else {
+                                swal("操作失败!", rsp.msg || "添加权限维度失败！", "error");
+                            }
+                        }, function () {
+                            $log.log('调用添加权限维度接口失败.');
+                        });
+                    });
+                }
+                $rootScope.checkedDimension = []; //关闭维度选择弹框置空已选择维度项
                 $uibModalInstance.close();
-                $scope.$broadcast('submitSetDimensionModal');
             };
 
             $ctrl.cancel = function () {
@@ -577,7 +628,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $ctrl.authorityDimensionItem = items;
             $ctrl.ok = function () {
                 $uibModalInstance.close();
-                $scope.$broadcast('submitViewAuthorityModal');
             };
 
             $ctrl.cancel = function () {

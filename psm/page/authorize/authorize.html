@@ -57,7 +57,7 @@
                                 <thead>
                                 <tr>
                                     <th width="5%">选择</th>
-                                    <th width="12%">权限规格ID</th>
+                                    <th width="12%">用户权限ID</th>
                                     <th width="15%">权限规格名称</th>
                                     <th width="15%">权限规格编码</th>
                                     <th width="10%">权限类型</th>
@@ -197,7 +197,7 @@
                                                 <p ng-bind="item.operationSpecTypeName"></p>
                                             </td>
                                             <td>
-                                                <p class="overflow-handle" ng-bind="item.description"></p>
+                                                <p class="overflow-handle" title="item.description" ng-bind="item.description"></p>
                                             </td>
                                         </tr>
                                         </tbody>
