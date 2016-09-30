@@ -55,12 +55,12 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>选择</th>
-                                <th>权限类型编码</th>
-                                <th>权限类型名称</th>
-                                <th>权限规格编码前缀</th>
+                                <th width="5%">选择</th>
+                                <th width="13%">权限类型编码</th>
+                                <th width="20%">权限类型名称</th>
+                                <th width="12%">权限规格编码前缀</th>
                                 <th>描述</th>
-                                <th>操作</th>
+                                <th width="10%">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,7 +78,7 @@
                                     <p ng-bind="item.operationSpecCdPrefix"></p>
                                 </td>
                                 <td>
-                                    <p ng-bind="item.description"></p>
+                                    <p ng-bind="item.description" class="overflow-handle" title="item.description"></p>
                                 </td>
                                 <td>
                                     <button ng-click="editQueryType('修改权限类型',$index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>

@@ -84,11 +84,11 @@
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>选择</th>
-                                        <th>权限维度编码</th>
-                                        <th>权限维度名称</th>
+                                        <th width="5%">选择</th>
+                                        <th width="15%">权限维度编码</th>
+                                        <th width="15%">权限维度名称</th>
                                         <th>备注</th>
-                                        <th>操作</th>
+                                        <th width="15%">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,7 +103,7 @@
                                             <p ng-bind="item.name"></p>
                                         </td>
                                         <td>
-                                            <p ng-bind="item.description"></p>
+                                            <p ng-bind="item.description" class="overflow-handle" title="item.description"></p>
                                         </td>
                                         <td>
                                             <button ng-click="dimensionInfo($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60b;</i> 详情</button>
@@ -159,11 +159,11 @@
                                     <table class="table table-hover table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>选择</th>
-                                                <th>权限维度编码</th>
-                                                <th>权限维度名称</th>
-                                                <th>动态SQL</th>
-                                                <th>数据类型</th>
+                                                <th width="6%">选择</th>
+                                                <th width="12%">权限维度编码</th>
+                                                <th width="15%">权限维度名称</th>
+                                                <th width="32%">动态SQL</th>
+                                                <th width="10%">数据类型</th>
                                                 <th>描述</th>
                                             </tr>
                                         </thead>
@@ -179,13 +179,13 @@
                                                     <p ng-bind="item.name"></p>
                                                 </td>
                                                 <td>
-                                                    <p ng-bind="item.dynamicSql"></p>
+                                                    <p ng-bind="item.dynamicSql" class="overflow-handle" title="item.dynamicSql"></p>
                                                 </td>
                                                 <td>
                                                     <p ng-bind="item.dataTypeName"></p>
                                                 </td>
                                                 <td>
-                                                    <p ng-bind="item.description"></p>
+                                                    <p ng-bind="item.description" class="overflow-handle" title="item.description"></p>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -275,11 +275,11 @@
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>选择</th>
-                                        <th>业务模块ID</th>
-                                        <th>业务模块名称</th>
+                                        <th width="5%">选择</th>
+                                        <th width="15%">业务模块ID</th>
+                                        <th width="15%">业务模块名称</th>
                                         <th>备注</th>
-                                        <th>操作</th>
+                                        <th width="15%">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -294,7 +294,7 @@
                                             <p ng-bind="item.name"></p>
                                         </td>
                                         <td>
-                                            <p ng-bind="item.description"></p>
+                                            <p ng-bind="item.description" class="overflow-handle" title="item.description"></p>
                                         </td>
                                         <td>
                                             <button ng-click="businessModuleInfo($index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60b;</i> 详情</button>
@@ -368,14 +368,14 @@
                                     <table class="table table-hover table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>选择</th>
-                                                <th>业务模块ID</th>
-                                                <th>业务模块名称</th>
-                                                <th>业务模块类型</th>
-                                                <th>所属系统</th>
-                                                <th>上级业务模块</th>
-                                                <th>模块URL</th>
-                                                <th>接口方法</th>
+                                                <th width="5%">选择</th>
+                                                <th width="10%">业务模块ID</th>
+                                                <th width="12%">业务模块名称</th>
+                                                <th width="12%">业务模块类型</th>
+                                                <th width="10%">所属系统</th>
+                                                <th width="12%">上级业务模块</th>
+                                                <th width="18%">模块URL</th>
+                                                <th width="10%">接口方法</th>
                                                 <th>描述</th>
                                             </tr>
                                         </thead>
@@ -400,13 +400,13 @@
                                                     <p ng-bind="item.upSysModularName"></p>
                                                 </td>
                                                   <td>
-                                                    <p ng-bind="item.url"></p>
+                                                    <p ng-bind="item.url" class="overflow-handle" title="item.url"></p>
                                                 </td>
                                                 <td>
                                                     <p ng-bind="item.intfFunc"></p>
                                                 </td>
-                                                <td>
-                                                    <p ng-bind="item.description"></p>
+                                                <td> 
+                                                    <p ng-bind="item.description" class="overflow-handle" title="item.description"></p>
                                                 </td>
                                             </tr>
                                         </tbody>
