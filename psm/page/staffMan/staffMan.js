@@ -246,62 +246,10 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 httpMethod.queryStaffManager(param).then(function (rsp) {
                     $log.log('调用查询员工信息接口成功.');
                     $rootScope.staffManResultList = rsp.data.list;
-                    if ($rootScope.isMock) {
-                        $scope.totalNum = 2;
-                    }
                     $scope.totalNum = rsp.data.totalNum;
                 }, function () {
                     $log.log('调用查询员工信息接口失败.');
                 });
-                if ($rootScope.isMock) {
-                    $rootScope.staffManResultList = [{
-                        'partyId': '1', // 参与人ID
-                        'name': '测试员A', // 中文正式名称
-                        'staffName': '大王', // 员工名称
-                        'areaId': '1', // 地区ID
-                        'areaName': '南京市', // 地区名称
-                        'partyTypeCd': '1', // 参与人类型编码，取值范围：1－个人，2－组织'
-                        'staffStatusCd': '1002', // 员工状态1000 有效 1001 停用 1002 无效
-                        'identidiesTypeCd': '1', // 证件类型
-                        'primaryIdentifyNum': null, // '默认证件号码'
-                        'addressStr': null, // 所在地址
-                        'linkTeleNumber': null, // party参与人联系电话
-                        'createDt': 1427990400000, // 创建时间
-                        'creator': null, // 创建人
-                        'version': 1427990400000, // 最后修改时间
-                        'state': '0', // '状态，取值范围：0－生效，1－失效'
-                        'staffId': '1', // '员工ID，
-                        'staffNumber': 'test1', // '员工工号
-                        'fixedTel': null, // 固定电话
-                        'mobileTel': null, // 员工移动电话 默认与party参与人联系电话相同
-                        'email': null, // 电子邮箱地址
-                        'remarks': null, // 备注
-                        'linkNbr': null //员工电话
-                    }, {
-                        'partyId': '1', // 参与人ID
-                        'name': '测试员B', // 中文正式名称
-                        'staffName': '二王', // 员工名称
-                        'areaId': '1', // 地区ID
-                        'areaName': '南京市', // 地区名称
-                        'partyTypeCd': '1', // 参与人类型编码，取值范围：1－个人，2－组织'
-                        'staffStatusCd': '1002', // 员工状态1000 有效 1001 停用 1002 无效
-                        'identidiesTypeCd': '1', // 证件类型
-                        'primaryIdentifyNum': null, // '默认证件号码'
-                        'addressStr': null, // 所在地址
-                        'linkTeleNumber': null, // party参与人联系电话
-                        'createDt': 1427990400000, // 创建时间
-                        'creator': null, // 创建人
-                        'version': 1427990400000, // 最后修改时间
-                        'state': '0', // '状态，取值范围：0－生效，1－失效'
-                        'staffId': '1', // '员工ID，
-                        'staffNumber': 'test1', // '员工工号
-                        'fixedTel': null, // 固定电话
-                        'mobileTel': null, // 员工移动电话 默认与party参与人联系电话相同
-                        'email': null, // 电子邮箱地址
-                        'remarks': null, // 备注
-                        'linkNbr': null //员工电话
-                    }];
-                }
             };
             $scope.$watch('queryStaffForm', function (current, old, scope) {
                 if (scope.queryStaffForm.staffNumber || scope.queryStaffForm.name || scope.queryStaffForm.areaItem) {

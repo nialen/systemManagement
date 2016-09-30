@@ -149,3 +149,20 @@ body {
 .form-group {
     width: 100% !important;
 }
+
+/* 表格固定百分比宽度,不会被内容撑开 */
+.table {
+    table-layout: fixed;
+}
+.overflow-handle {
+    width: 90%;
+    margin: 0 auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.modal-body {
+    max-height: 380px;
+    overflow-y: auto;
+}
