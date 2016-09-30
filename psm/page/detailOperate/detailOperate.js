@@ -65,8 +65,6 @@ angular
 			// operationSpecTypeCd: '', //数据类型
 			// description: '', //地区描述
 		}, $rootScope.detailQueryOperate);
-
-		$scope.detailOperateForm = $rootScope.detailQueryOperate;
 	}])
 
 	// 权限维度查询控制器

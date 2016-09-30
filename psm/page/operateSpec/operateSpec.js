@@ -152,7 +152,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     url: httpConfig.siteUrl + '/privilege/profile/deleteOperationSpecBatch.action',
                     method: 'POST',
                     headers: httpConfig.requestHeader,
-                    data: 'data=' + JSON.stringify(param)
+                    data: 'data=' + param
                 }).success(function (data, header, config, status) {
                     if (status != 200) {
                         // 跳转403页面
