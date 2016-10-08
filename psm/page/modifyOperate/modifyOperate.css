@@ -49,11 +49,11 @@
 	margin: 0 2px 0 8px !important;
 }
 .modify-input {
-	width: 260px !important;
+	width: 215px !important;
 	height: 28px;
 }
 .query-input {
-	width: 276px !important;
+	width: 209px !important;
 	height: 28px;
 }
 .jobId-input {
@@ -79,13 +79,15 @@
 }
 
 /* 弹出框 */
-.btn-query {
-	padding-left: 15px;
-	padding-right: 15px;
+.btn-query {	
+	padding:0;
     background-color: #ff9f19;
     border-color: #ff9f19;
     color: #fff;
     font-size: 12px;
+    width:60px;
+	line-height:24px;
+	text-align:center;
 }
 .btn-query:focus, .btn-query.focus {
 	background-color: #d1800e;
@@ -231,7 +233,7 @@
 	text-align: center;
 }
 .result-table table td {
-	padding: 6px !important;
+	padding: 2px !important;
 	text-align: center;
 }
 .result-table table td p {

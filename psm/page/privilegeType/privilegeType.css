@@ -11,7 +11,7 @@
 	line-height: 38px;
 }
 .query-input {
-	width: 366px !important;
+	width: 300px !important;
 	height: 25px;
 	padding:0 12px;
 	line-height: 25px;
@@ -94,7 +94,7 @@
 	text-align: center;
 }
 .result-table table td {
-	padding: 6px !important;
+	padding: 2px !important;
 	text-align: center;
 }
 .result-table table td p {
@@ -104,6 +104,7 @@
 .btn-edit {
     background-color: #b1cc00;
     color: #fff;
+    margin-top:2px;
 }
 .btn-edit i{
     font-size:12px;
