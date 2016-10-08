@@ -70,7 +70,6 @@ angular
 	// 权限维度查询控制器
 	.controller('preveligeDimensionFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod',function($scope, $rootScope, $log,httpMethod) {
 		var param = {};
-		debugger
 		param.operationSpecCd = $rootScope.detailQueryOperate.operationSpecCd;
 		// 查询已选权限维度信息
 		httpMethod.queryPrivilegeDimensionInOperationSpec(param).then(function(rsp) {
