@@ -5,7 +5,7 @@
 
 define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap-tpls', 'angular-animate'], function (angular, $, httpConfig, swal, _) {
     angular
-        .module('addRoleModule', ['ui.bootstrap'])
+        .module('detailRoleModule', ['ui.bootstrap'])
         .run(['$rootScope', '$parse', '$log', function ($rootScope, $parse, $log) {
             var id = window.frameElement && window.frameElement.id || '',
                 obj = parent.$('#' + id).attr('data');
@@ -322,6 +322,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
         })
         // 查询控制器
         .controller('queryPowerFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+
             // 获取业务模块类型列表
             httpMethod.queryOperationSpecType().then(function (rsp) {
                 $log.log('调用获取业务模块类型接口成功.');

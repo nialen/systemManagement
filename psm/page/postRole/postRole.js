@@ -169,8 +169,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             //详情
             $scope.modifyRole = function (index, title) {
                 $rootScope.modifiedRole = $rootScope.RoleList[index];
-                $rootScope.RoleTitle = title;
-                $scope.$emit('openEditRoleModal');
+                // $rootScope.RoleTitle = title;
+                // $scope.$emit('openEditRoleModal');
+                parent.angular.element(parent.$('#tabs')).scope().addTab('角色详情', '/psm/page/detailRole/detailRole.html', 'modifiedRole', JSON.stringify($rootScope.modifiedRole));
             }
             // 新建
             $scope.addRole = function () {
