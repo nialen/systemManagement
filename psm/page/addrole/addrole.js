@@ -3,7 +3,7 @@
  * Date 2016-09-19
  */
 
-define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'angular-animate'], function (angular, $, httpConfig, swal) {
+define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap-tpls', 'angular-animate'], function (angular, $, httpConfig, swal, _) {
     angular
         .module('addRoleModule', ['ui.bootstrap'])
         .run(['$rootScope', '$parse', '$log', function ($rootScope, $parse, $log) {
@@ -245,20 +245,16 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             // 删除
             $scope.removeRolePermission = function () {
-                if ($rootScope.checkedDelRolePermission.length) {
-                    $rootScope.checkedDelRolePermission.map(function (item, index) {
-                        $rootScope.OperateSpecList;// 已有的权限
-                    });
-                }
+                $rootScope.OperateSpecList = _.differenceWith($rootScope.OperateSpecList, $rootScope.checkedDelRolePermission, _.isEqual);
+                $rootScope.checkedDelRolePermission = []; // 重置为空
             };
 
             $rootScope.checkedDelRolePermission = [];
             // 选中索引
             $scope.check = function (val, chk) {
-                debugger
                 var valueOfIndex = '';
                 $rootScope.checkedDelRolePermission.length && $rootScope.checkedDelRolePermission.map(function (item, index) {
-                    if (item.manageCd == val.manageCd) {
+                    if (item.operationSpecCd == val.operationSpecCd) {
                         valueOfIndex = index;
                     }
                 });
@@ -395,14 +391,14 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.check = function (val, chk) {
                 var valueOfIndex = '';
                 var isHasRolePermission = $rootScope.OperateSpecList.some(function (item, index) {
-                    return item.manageCd == val.manageCd;
+                    return item.operationSpecCd == val.operationSpecCd;
                 });
 
                 if (chk) {
                     !isHasRolePermission && $rootScope.checkedPowerList.push(val);
                 } else {
                     $rootScope.checkedPowerList.length && $rootScope.checkedPowerList.map(function (item, index) {
-                        if (item.manageCd == val.manageCd) {
+                        if (item.operationSpecCd == val.operationSpecCd) {
                             valueOfIndex = index;
                         }
                     });
