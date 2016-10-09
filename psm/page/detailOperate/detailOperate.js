@@ -73,7 +73,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             }, function () {
                 $log.log('调用查询已选权限维度接口失败.');
             });
-
         }])
 
         // 权限可操作查询控制器
@@ -88,6 +87,5 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             }, function () {
                 $log.log('调用查询已选业务模块接口失败.');
             });
-
         }])
-})
+});

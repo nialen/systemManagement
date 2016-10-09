@@ -62,7 +62,7 @@
         </div>
 
         <!-- 权限对应的维度 -->
-        <div class="operate-spec-result mb10" ng-controller="preveligeDimensionFormCtrl">
+        <div class="operate-spec-result" ng-controller="preveligeDimensionFormCtrl">
             <div class="row result-header">
                 <div class="col-xs-4">
                     <div class="title">
@@ -72,79 +72,80 @@
                     </div>
                 </div>
             </div>
-            <div class="result-table">
-                <table class="table table-hover table-bordered">
-                    <thead>
-                    <tr>
-                        <th>权限维度编码</th>
-                        <th>权限维度名称</th>
-                        <th>数据类型</th>
-                        <th>动态SQL</th>
-                        <th>备注</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in preveligeDimensionResultList">
-                        <td>
-                            <p ng-bind="item.privilegeDimensionCd"></p>
-                        </td>
-                        <td>
-                            <p ng-bind="item.name"></p>
-                        </td>
-                        <td>
-                            <p ng-bind="item.dataTypeName"></p>
-                        </td>
-                        <td>
-                            <p ng-bind="item.dynamicSql"></p>
-                        </td>
-                        <td>
-                            <p ng-bind="item.description"></p>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
+        </div>
+        <div class="result-table">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>权限维度编码</th>
+                    <th>权限维度名称</th>
+                    <th>数据类型</th>
+                    <th>动态SQL</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in preveligeDimensionResultList">
+                    <td>
+                        <p ng-bind="item.privilegeDimensionCd"></p>
+                    </td>
+                    <td>
+                        <p ng-bind="item.name"></p>
+                    </td>
+                    <td>
+                        <p ng-bind="item.dataTypeName"></p>
+                    </td>
+                    <td>
+                        <p ng-bind="item.dynamicSql"></p>
+                    </td>
+                    <td>
+                        <p ng-bind="item.description"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- 权限可操作的模块 -->
-        <div class="operate-spec-result" ng-controller="preveligeDoneFormCtrl">
-            <div class="row result-header">
-                <div class="col-xs-4">
-                    <div class="title">
-                        <img src="../../../images/icon_previlege.png">
-                        <p class="title-cn green">权限可操作的模块</p>
-                        <p class="title-en">Operation module</p>
-                    </div>
+    </div>
+
+    <!-- 权限可操作的模块 -->
+    <div class="operate-spec-result" ng-controller="preveligeDoneFormCtrl">
+        <div class="row result-header">
+            <div class="col-xs-4">
+                <div class="title">
+                    <img src="../../../images/icon_previlege.png">
+                    <p class="title-cn green">权限可操作的模块</p>
+                    <p class="title-en">Operation module</p>
                 </div>
             </div>
-            <div class="result-table">
-                <table class="table table-hover table-bordered">
-                    <thead>
-                    <tr>
-                        <th>业务模块ID</th>
-                        <th>业务模块名称</th>
-                        <th>备注</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in preveligeDoneResultList">
-                        <td>
-                            <p ng-bind="item.sysModularId"></p>
-                        </td>
-                        <td>
-                            <p ng-bind="item.name"></p>
-                        </td>
-                        <td>
-                            <p ng-bind="item.description"></p>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
+        <div class="result-table">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>业务模块ID</th>
+                    <th>业务模块名称</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in preveligeDoneResultList">
+                    <td>
+                        <p ng-bind="item.sysModularId"></p>
+                    </td>
+                    <td>
+                        <p ng-bind="item.name"></p>
+                    </td>
+                    <td>
+                        <p ng-bind="item.description"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
+</div>
 </div>
 <script src="../../../lib/require.js" data-main="entry"></script>
 </body>

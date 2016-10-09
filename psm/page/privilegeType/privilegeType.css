@@ -6,23 +6,25 @@
 }
 /* 查询 */
 .privilege-type-query {
-	padding: 10px 15px;
+	padding: 2px 15px;
 	border: 1px solid #ddd;
+	line-height: 38px;
 }
 .query-input {
-	width: 225px !important;
-	height: 30px;
+	width: 300px !important;
+	height: 25px;
+	padding:0 12px;
+	line-height: 25px;
 }
 .btn-query {
-	margin-top: -2px;
-	margin-right: 16px;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding: 0;
     background-color: #ff9f19;
     border-color: #ff9f19;
     color: #fff;
     font-size: 12px;
-    margin-left: 56px;
+	width:60px;
+	line-height:24px;
+	text-align:center;
 }
 .btn-query:focus, .btn-query.focus {
 	background-color: #d1800e;
@@ -39,21 +41,21 @@
 	margin-top: 10px;
 }
 .result-header {
-	height: 48px;
+	height: 37px;
 	margin: 0;
-	line-height: 46px;
+	line-height: 32px;
 	border: 1px solid #ddd;
 	border-bottom: none;
 }
 .result-header .title {
 	position: relative;
-	padding-top: 9px;
+	padding-top: 4px;
 	padding-left: 32px;
 	line-height: 16px;
 }
 .result-header .title img {
 	position: absolute;
-	top: 9px;
+	top: 4px;
 	left: 0;
 }
 .result-header .title .title-cn {
@@ -72,6 +74,7 @@
     border-color: #ffc619;
     color: #fff;
     font-size: 12px;
+    margin-top:2px;
 }
 .btn-set:focus, .btn-set.focus {
 	background-color: #e4ae0c;
@@ -91,7 +94,7 @@
 	text-align: center;
 }
 .result-table table td {
-	padding: 6px !important;
+	padding: 2px !important;
 	text-align: center;
 }
 .result-table table td p {
@@ -101,6 +104,7 @@
 .btn-edit {
     background-color: #b1cc00;
     color: #fff;
+    margin-top:2px;
 }
 .btn-edit i{
     font-size:12px;
@@ -125,6 +129,9 @@
 .form-group .edit-label{
 	vertical-align: top;
 	margin-top: 12px;
+}
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td{
+	padding:5px 0;
 }
 
 
