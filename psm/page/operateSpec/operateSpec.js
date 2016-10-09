@@ -13,7 +13,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         .factory('httpMethod', ['$http', '$q', function ($http, $q) {
             var httpMethod = {};
-            
+
             // 查询权限规格信息
             httpMethod.queryOperateSpec = function (param) {
                 var defer = $q.defer();
@@ -242,7 +242,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             }
             // 详情
             $scope.infoQueryOperate = function (index) {
-            	debugger
                 $rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
                 parent.angular.element(parent.$('#tabs')).scope().addTab('权限规格详情', '/psm/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
             }

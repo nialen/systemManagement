@@ -184,7 +184,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             // 查询结果分页信息
             $scope.requirePaging = true; // 是否需要分页
             $scope.currentPage = 1; // 当前页
-            $scope.rowNumPerPage = 4; // 每页显示行数
+            $scope.rowNumPerPage = 10; // 每页显示行数
             $scope.totalNum = 0; // 总条数
 
             // 获取地区列表
