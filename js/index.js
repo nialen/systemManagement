@@ -133,7 +133,7 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
             return {
                 templateUrl: 'accordion-list.html',
                 restrict: 'E',
-                link: function postLink(scope, element, attrs) {
+                link: function ($scope, iElm, iAttrs, controller) {
                     if ($('#accordion-tabs').length > 0) {
                         $('#accordion-tabs').each(function () {
                             var accordion = $(this);
@@ -152,21 +152,29 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                 restrict: 'E',
                 templateUrl: 'tabs-title.html',
                 link: function ($scope, iElm, iAttrs, controller) {
-                    // element.text('this is the tabs directive');
                 }
             };
         })
         .directive('tabsContentDirective', function () {
             return {
                 restrict: 'E',
-                template: '<div class="tabs-content">' +
-                '<div ng-show="$index==selectedIndex" ng-repeat="tab in tabs">' +
-                '<iframe src="{{tab.url}}" id="{{tab.id}}" data="{{tab.data}}" class="iframe-box" frameborder="0"></iframe>' +
-                '</div>' +
-                '</div>',
+                templateUrl: 'tabs-content.html',
                 link: function ($scope, iElm, iAttrs, controller) {
-                    // element.text('this is the tabs directive');
+                    $('.tab-container').height(document.documentElement.clientHeight - 45);
+                    // $('.tabs-content').height(document.documentElement.clientHeight - 77);
+                    $('.accordion-list').height(document.documentElement.clientHeight - 45);
                 }
             };
-        });
+        })
+        .directive('iconDirective', function () {
+            return {
+                restrict: 'E',
+                link: function ($scope, iElm, iAttrs, controller) {
+                    var img = new Image();
+                    img.className = 'icon';
+                    img.src = iAttrs.url == 'null' ? 'images/icon-01.png' : imgSrc;
+                    $(iElm).append(img);
+                }
+            }
+        })
 });

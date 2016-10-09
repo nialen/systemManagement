@@ -200,6 +200,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                 $scope.modifyRoleForm.startDt ? param.startDt = $scope.modifyRoleForm.startDt : '';
                 $scope.modifyRoleForm.endDt ? param.endDt = $scope.modifyRoleForm.endDt : '';
                 $scope.modifyRoleForm.description ? param.description = $scope.modifyRoleForm.description : '';
+                $rootScope.OperateSpecList ? param.privilegeList = $rootScope.OperateSpecList : '';
 
                 if ($rootScope.isModifiedRoleList) {
                     httpMethod.insertRole(param).then(function (rsp) {
