@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>系统管理平台-员工授权</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
+    <link href="../../lib/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="authorize.css">
+</head>
+
+<body>
+<div class="authorize-staff">
+    <p class="authorize-staff-title">员工信息</p>
+    <div class="row mb10">
+        <div class="col-xs-3">
+            <p class="staff-attribute">员工名称：<span ng-bind="staffManInformation.name"></span></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="staff-attribute">员工工号：<span ng-bind="staffManInformation.staffNumber"></span></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="staff-attribute">系统账号：<span ng-bind="staffManInformation.loginCode"></span></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="staff-attribute">手机号码：<span ng-bind="staffManInformation.mobileTel"></span></p>
+        </div>
+    </div>
+    <div>
+        <uib-tabset active="activePill" vertical="true" type="pills">
+            <uib-tab index="0" heading="分配权限">
+                <!-- 弹出 -->
+                <div ng-controller="addAuthorityModalCtrl as $ctrl">
+                    <!-- 已分配权限列表 -->
+                    <div class="staff-man-result" ng-controller="assignedAuthorityListCtrl">
+                        <div class="row result-header">
+                            <div class="col-xs-4">
+                                <div class="title">
+                                    <img src="../../images/icon_typeSetup.png">
+                                    <p class="title-cn">已分配权限列表</p>
+                                    <p class="title-en">Assigned authority list</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <button ng-click="addAuthority()" class="btn btn-xs btn-set"><i class="iconfont">
+                                    &#xe60e;</i> 添加新权限
+                                </button>
+                                <button ng-click="removeAuthority()" class="btn btn-xs btn-set"><i class="iconfont">
+                                    &#xe610;</i> 删除已分配权限
+                                </button>
+                            </div>
+                        </div>
+                        <div class="result-table">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="5%">选择</th>
+                                    <th width="12%">用户权限ID</th>
+                                    <th width="15%">权限规格名称</th>
+                                    <th width="15%">权限规格编码</th>
+                                    <th width="10%">权限类型</th>
+                                    <th width="15%">分配时间</th>
+                                    <th>权限管理角色</th>
+                                    <th width="10%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in assignedAuthorityList">
+                                    <td>
+                                        <input type="checkbox" name="checkbox{{$index}}"
+                                               ng-click="check(item, isChecked)" ng-model="isChecked">
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.userPrivilegeId"></p>
+                                    </td>
+                                    <td>
+                                        <p class="overflow-handle" ng-bind="item.operationSpecName"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.operationSpecCd"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.operationSpecTypeName"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.createDt | date:'yyyy-MM-dd HH:mm:ss'"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.userRoleId"></p>
+                                    </td>
+                                    <td>
+                                        <button ng-click="viewUserPrivilegeDimension(item)" class="btn btn-xs btn-edit">
+                                            <i
+                                                class="iconfont">&#xe60b;</i> 查看维度
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-controller="paginationCtrl" class="text-center">
+                            <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage"
+                                ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()"
+                                class="pagination-sm" boundary-links="true" rotate="false" first-text="首页"
+                                last-text="尾页" previous-text="<" next-text=">"></ul>
+                        </div>
+                    </div>
+                    <script type="text/ng-template" id="addAuthorityModal.html">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                            <h3 class="modal-title"><i class="iconfont">&#xe603;</i>新增权限</h3>
+                        </div>
+                        <div class="modal-body" ng-controller="queryAuthorityFormCtrl">
+                            <!-- 查询 -->
+                            <div class="staff-man-query">
+                                <form name="queryAuthority" ng-submit="queryUserPrivilege()" class="form-inline"
+                                      role="form">
+                                    <div class="row mb10">
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label class="control-label edit-label"
+                                                       for="operationSpecCd">权限规格编码：</label>
+                                                <input type="input" id="operationSpecCd"
+                                                       class="form-control query-input"
+                                                       ng-model="queryAuthorityForm.operationSpecCd">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label class="control-label edit-label"
+                                                       for="name">权限规格名称：</label>
+                                                <input type="input" id="name" class="form-control query-input"
+                                                       ng-model="queryAuthorityForm.name">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label class="control-label edit-label"
+                                                       for="operationSpecTypeCd">权限规格类型：</label>
+                                                <select class="form-control query-input" id="operationSpecTypeCd"
+                                                        ng-model="queryAuthorityForm.operationSpecTypeCd">
+                                                    <option value="">请选择权限类型</option>
+                                                    <option ng-repeat="item in authorityTypeList"
+                                                            value="{{item.operationSpecTypeCd}}">
+                                                        {{item.operationSpecTypeName}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-right">
+                                            <button type="submit" class="btn btn-sm btn-query"><i
+                                                class="iconfont">&#xe600;</i> 查询
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- 结果 -->
+                            <div class="staff-man-result" ng-controller="staffManResultCtrl">
+                                <div class="row result-header">
+                                    <div class="col-xs-4">
+                                        <div class="title">
+                                            <img src="../../images/icon_typeSetup.png">
+                                            <p class="title-cn">权限规格列表</p>
+                                            <p class="title-en">Authority specification list</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="result-table">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th width="6%">选择</th>
+                                            <th width="20%">权限规格名称</th>
+                                            <th width="15%">权限规格编码</th>
+                                            <th width="15%">权限类型</th>
+                                            <th>描述</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in operationSpecList">
+                                            <td>
+                                                <input type="checkbox" name="checkbox{{$index}}"
+                                                       ng-click="check(item, isChecked)" ng-model="isChecked">
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.name"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.operationSpecCd"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.operationSpecTypeName"></p>
+                                            </td>
+                                            <td>
+                                                <p class="overflow-handle" title="item.description" ng-bind="item.description"></p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div ng-controller="paginationCtrl" class="text-center">
+                                    <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage"
+                                        ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()"
+                                        class="pagination-sm" boundary-links="true" rotate="false" first-text="首页"
+                                        last-text="尾页" previous-text="<" next-text=">"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                            <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit"
+                                    ng-click="$ctrl.ok()">确定
+                            </button>
+                        </div>
+                    </script>
+                </div>
+                <!-- 弹出 -->
+                <div ng-controller="authorityDimensionModalCtrl as $ctrl">
+                    <!-- 权限维度列表 -->
+                    <div class="staff-man-result" ng-controller="authorityDimensionListCtrl">
+                        <div class="row result-header">
+                            <div class="col-xs-12">
+                                <div class="title">
+                                    <img src="../../images/icon_typeSetup.png">
+                                    <p class="title-cn">权限维度列表</p>
+                                    <p class="title-en">Authority dimension list</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-table">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="12%">权限维度编码</th>
+                                    <th width="12%">权限维度名称</th>
+                                    <th>动态SQL</th>
+                                    <th width="12%">维度值</th>
+                                    <th width="14%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in authorityDimensionList">
+                                    <td>
+                                        <p ng-bind="item.privilegeDimensionCd"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.privilegeDimensionName"></p>
+                                    </td>
+                                    <td>
+                                        <p class="overflow-handle" title="{{item.dynamicSql}}" ng-bind="item.dynamicSql"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.dimensionValue"></p>
+                                    </td>
+                                    <td>
+                                        <button ng-click="setDimension($index)" class="btn btn-xs btn-edit"><i
+                                            class="iconfont">&#xe601;</i> 设置
+                                        </button>
+                                        <button ng-click="viewDimension($index)" class="btn btn-xs btn-edit"><i
+                                            class="iconfont">&#xe61c;</i> 查看
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <script type="text/ng-template" id="setDimensionModalContent.html">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                            <h3 class="modal-title"><i class="iconfont">&#xe603;</i>权限维度设置</h3>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>维度值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in allAuthorityDimension">
+                                    <td>
+                                        <input type="checkbox" name="checkbox{{$index}}"
+                                               ng-click="check(item, isChecked)" ng-model="isChecked">
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.VALUENAME"></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                            <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit"
+                                    ng-click="$ctrl.ok()">确定
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="viewDimensionModalContent.html">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                            <h3 class="modal-title"><i class="iconfont">&#xe603;</i>权限维度详情</h3>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>权限维度名称</th>
+                                    <th>维度值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <p ng-bind="$ctrl.authorityDimensionItem.privilegeDimensionName"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="$ctrl.authorityDimensionItem.dimensionValue"></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                            <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit"
+                                    ng-click="$ctrl.ok()">确定
+                            </button>
+                        </div>
+                    </script>
+                </div>
+            </uib-tab>
+            <uib-tab index="1" heading="分配角色">
+                <!-- 弹出 -->
+                <div ng-controller="addRoleModalCtrl as $ctrl">
+                    <!-- 已分配角色列表 -->
+                    <div class="staff-man-result" ng-controller="assignedRoleListCtrl">
+                        <div class="row result-header">
+                            <div class="col-xs-4">
+                                <div class="title">
+                                    <img src="../../images/icon_typeSetup.png">
+                                    <p class="title-cn">已分配角色列表</p>
+                                    <p class="title-en">Assigned role list</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <button ng-click="addRole()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i>
+                                    添加新角色
+                                </button>
+                                <button ng-click="removeRole()" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除已分配角色
+                                </button>
+                            </div>
+                        </div>
+                        <div class="result-table">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="5%">选择</th>
+                                    <th width="15%">角色ID</th>
+                                    <th width="20%">角色名称</th>
+                                    <th>描述</th>
+                                    <th width="17%">分配时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in assignedRoleList">
+                                    <td>
+                                        <input type="checkbox" name="checkbox{{$index}}"
+                                               ng-click="check(item, isChecked)" ng-model="isChecked">
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.postRoleId"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.postRoleName"></p>
+                                    </td>
+                                    <td>
+                                        <p class="overflow-handle" title="{{item.description}}" ng-bind="item.description"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.createDt | date:'YYYY-MM-DD hh:mm:ss'"></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <script type="text/ng-template" id="addRoleModal.html">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                            <h3 class="modal-title"><i class="iconfont">&#xe603;</i>新增角色</h3>
+                        </div>
+                        <div class="modal-body"
+                             ng-controller="queryRoleFormCtrl">
+                            <!-- 查询 -->
+                            <div class="staff-man-query">
+                                <form name="queryRole" ng-submit="queryUserPrivilege()" class="form-inline" role="form">
+                                    <div class="row mb10">
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label class="control-label edit-label"
+                                                       for="postRoleId">角色ID：</label>
+                                                <input type="input" id="postRoleId" class="form-control query-input"
+                                                       ng-model="queryAuthorityForm.postRoleId">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label class="control-label edit-label"
+                                                       for="name">角色名称：</label>
+                                                <input type="input" id="name" class="form-control query-input"
+                                                       ng-model="queryAuthorityForm.name">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 text-right">
+                                            <button type="submit" class="btn btn-sm btn-query"><i
+                                                class="iconfont">&#xe600;</i> 查询
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- 结果 -->
+                            <div class="staff-man-result" ng-controller="roleResultCtrl">
+                                <div class="row result-header">
+                                    <div class="col-xs-4">
+                                        <div class="title">
+                                            <img src="../../images/icon_staffList.png">
+                                            <p class="title-cn">角色列表</p>
+                                            <p class="title-en">Staff list</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="result-table">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th width="6%">选择</th>
+                                            <th width="10%">角色ID</th>
+                                            <th width="16%">角色名称</th>
+                                            <th width="17%">生效时间</th>
+                                            <th width="17%">失效时间</th>
+                                            <th>描述</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in roleResultList">
+                                            <td>
+                                                <input type="checkbox" name="checkbox{{$index}}"
+                                                       ng-click="check(item, isChecked)" ng-model="isChecked">
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.postRoleId"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.name"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.startDt | date: 'YYYY-MM-DD hh:mm:ss'"></p>
+                                            </td>
+                                            <td>
+                                                <p ng-bind="item.endDt | date: 'YYYY-MM-DD hh:mm:ss'"></p>
+                                            </td>
+                                            <td>
+                                                <p class="overflow-handle" title="{{item.description}}" ng-bind="item.description"></p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div ng-controller="paginationCtrl" class="text-center">
+                                    <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage"
+                                        ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()"
+                                        class="pagination-sm" boundary-links="true" rotate="false" first-text="首页"
+                                        last-text="尾页" previous-text="<" next-text=">"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                            <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit"
+                                    ng-click="$ctrl.ok()">确定
+                            </button>
+                        </div>
+                    </script>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>
+<script src="../../lib/require.js" data-main="entry"></script>
+</body>
+
+</html>

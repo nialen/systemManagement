@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>系统管理平台-员工管理</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
+    <link href="../../lib/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="staffMan.css">
+</head>
+
+<body>
+    <div class="staff-man" ng-controller="queryStaffFormCtrl">
+        <!-- 查询 -->
+        <div class="staff-man-query">
+            <form name="queryStaff" ng-submit="queryStaffFormSubmit()" class="form-inline" role="form">
+                <div class="row mb10">
+                    <div class="col-xs-4 text-right">
+                        <div class="form-group">
+                            <label class="control-label" for="staffNumber">员工工号：</label>
+                            <input type="input" id="staffNumber" class="form-control query-input" ng-model="queryStaffForm.staffNumber">
+                        </div>
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        <div class="form-group">
+                            <label class="control-label" for="name">员工姓名：</label>
+                            <input type="input" id="name" class="form-control query-input" ng-model="queryStaffForm.name">
+                        </div>
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        <div class="form-group">
+                            <label class="control-label" for="areaItem">归属地区：</label>
+                            <select class="form-control query-input" id="areaItem" ng-model="queryStaffForm.areaItem">
+                                <option value="">请选择地区</option>
+                                <option ng-repeat="item in areaList" value="{{item.areaId}}">{{item.areaName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-right">
+                        <button type="submit" class="btn btn-sm btn-query"><i class="iconfont">&#xe600;</i> 查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- 弹出 -->
+        <div ng-controller="editStaffManModalCtrl as $ctrl">
+            <!-- 结果 -->
+            <div class="staff-man-result" ng-controller="staffManResultCtrl">
+                <div class="row result-header">
+                    <div class="col-xs-4">
+                        <div class="title">
+                            <img src="../../images/icon_staffList.png">
+                            <p class="title-cn">员工列表</p>
+                            <p class="title-en">Staff list</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <button ng-click="addStaffMan('新建员工')" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
+                        <button ng-click="uLockStaffManagerBatch()" class="btn btn-xs btn-set"><i class="iconfont">&#xe613;</i> 启用</button>
+                        <button ng-click="lockStaffManagerBatch()" class="btn btn-xs btn-set"><i class="iconfont">&#xe612;</i> 停用</button>
+                        <button ng-click="batchCancelStaff()" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</button>
+                        <button ng-click="" class="btn btn-xs btn-set"><i class="iconfont">&#xe60f;</i> Excel批量导入</button>
+                    </div>
+                </div>
+                <div class="result-table">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="5%">选择</th>
+                                <th width="10%">员工ID</th>
+                                <th width="12%">员工工号</th>
+                                <th>员工姓名</th>
+                                <th width="12%">归属地区</th>
+                                <th width="8%">状态</th>
+                                <th width="16%">创建时间</th>
+                                <th width="16%">最后修改时间</th>
+                                <th width="10%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in staffManResultList">
+                                <td>
+                                    <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
+                                </td>
+                                <td>
+                                    <p ng-bind="item.staffId"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.staffNumber"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.name"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.areaName"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.staffStatusCd | stateConversionText"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.createDt | date:'yyyy-MM-dd HH:mm:ss'"></p>
+                                </td>
+                                <td>
+                                    <p ng-bind="item.version | date:'yyyy-MM-dd HH:mm:ss'"></p>
+                                </td>
+                                <td>
+                                    <button ng-click="editStaffMan('修改员工', $index)" class="btn btn-xs btn-edit"><i class="iconfont">&#xe60d;</i> 修改</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-controller="paginationCtrl" class="text-center">
+                    <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" rotate="false" first-text="首页" last-text="尾页" previous-text="<" next-text=">"></ul>
+                </div>
+            </div>
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>{{modalTitle}}</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form name="editStaffManForm" ng-submit="editStaffManFormSubmit()" ng-controller="editStaffManFormCtrl" class="form-inline" role="form">
+                        <div class="row mb10">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="staffId">员工ID：</label>
+                                    <input type="input" id="staffId" class="form-control edit-input" ng-model="modifiedStaffMan.staffId" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="staffNumber">员工工号：</label>
+                                    <input type="input" id="staffNumber" class="form-control edit-input" ng-model="modifiedStaffMan.staffNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="name">员工姓名：</label>
+                                    <input type="input" id="name" class="form-control edit-input" ng-model="modifiedStaffMan.name">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label edit-label" for="areaItem">归属地区：</label>
+                                    <select class="form-control edit-input" id="areaItem" ng-model="modifiedStaffMan.areaItem">
+                                        <option value="">请选择地区</option>
+                                        <option ng-repeat="item in areaList" value="{{item.areaId}}">{{item.areaName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                    <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit" ng-click="$ctrl.ok()">确定</button>
+                </div>
+            </script>
+        </div>
+    </div>
+    <script src="../../lib/require.js" data-main="entry"></script>
+</body>
+
+</html>

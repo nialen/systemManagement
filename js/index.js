@@ -35,6 +35,13 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                     var menuInfo = rsp.data.menuInfo.sort(function (a, b) {
                         return a.orderSeq - b.orderSeq;
                     });
+                    if (httpConfig.isProdEnvironment) {
+                        menuInfo.map(function (item) {
+                            item.submenu.map(function (obj) {
+                                obj.url = obj.url.slice(4);
+                            });
+                        });
+                    }
                     $scope.menuInfo = menuInfo;
                 }
             }, function () {
