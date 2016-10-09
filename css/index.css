@@ -113,7 +113,7 @@
     left: 0;
     top: 0;
 	width: 160px;
-	/*height: 720px;*/
+	/*min-height: 520px;*/
 	background-color: #353130;
 	color: #fff;
     overflow: hidden;
@@ -214,9 +214,9 @@
 .tab-container {
     padding-left: 160px;
     width: 100%;
+    /*min-height: 520px;*/
     transition: all linear 0.5s;
     background: url('../images/bg.jpg') no-repeat 280px 65px;
-    overflow-y: auto;
 }
 .full {
     padding-left: 0;
@@ -291,9 +291,7 @@
 	color: #4795e7;
 }
 .tabs-content {
-    height: 560px;
 }
 .iframe-box {
 	width: 100%;
-    height: 560px;
 }
