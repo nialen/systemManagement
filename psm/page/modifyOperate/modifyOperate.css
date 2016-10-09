@@ -7,34 +7,34 @@
 .modify-operate-result {
 	margin-top: 10px;
 }
-.result-header {
-	height: 48px;
-	margin: 0;
-	line-height: 46px;
-	border: 1px solid #ddd;
-	border-bottom: none;
-}
-.result-header .title {
-	position: relative;
-	padding-top: 9px;
-	padding-left: 32px;
-	line-height: 16px;
-}
-.result-header .title img {
-	position: absolute;
-	top: 9px;
-	left: 0;
-}
-.result-header .title .title-cn {
-	color: #4c9ef5;
-	font-size: 14px;
-}
-.result-header .title .title-en {
-	color: #ddd;
-	font-size: 12px;
-}
+// .result-header {
+// 	height: 48px;
+// 	margin: 0;
+// 	line-height: 46px;
+// 	border: 1px solid #ddd;
+// 	border-bottom: none;
+// }
+// .result-header .title {
+// 	position: relative;
+// 	padding-top: 9px;
+// 	padding-left: 32px;
+// 	line-height: 16px;
+// }
+// .result-header .title img {
+// 	position: absolute;
+// 	top: 9px;
+// 	left: 0;
+// }
+// .result-header .title .title-cn {
+// 	color: #4c9ef5;
+// 	font-size: 14px;
+// }
+// .result-header .title .title-en {
+// 	color: #ddd;
+// 	font-size: 12px;
+// }
 .modify-operate-spec {
-	padding: 10px;
+	padding: 5px 5px 0;
 	border: 1px solid #ddd;
 }
 .edit-label {
@@ -49,11 +49,11 @@
 	margin: 0 2px 0 8px !important;
 }
 .modify-input {
-	width: 180px !important;
+	width: 215px !important;
 	height: 28px;
 }
 .query-input {
-	width: 180px !important;
+	width: 209px !important;
 	height: 28px;
 }
 .jobId-input {
@@ -79,13 +79,15 @@
 }
 
 /* 弹出框 */
-.btn-query {
-	padding-left: 15px;
-	padding-right: 15px;
+.btn-query {	
+	padding:0;
     background-color: #ff9f19;
     border-color: #ff9f19;
     color: #fff;
     font-size: 12px;
+    width:60px;
+	line-height:24px;
+	text-align:center;
 }
 .btn-query:focus, .btn-query.focus {
 	background-color: #d1800e;
@@ -158,8 +160,8 @@
 	border-bottom: 1px solid #ccc;
 	float: left;
 }
-.mb10 {
-	margin-bottom: 10px;
+.mb5 {
+	margin-bottom: 5px;
 }
 .mt20 {
 	margin-top: 20px;
@@ -171,22 +173,23 @@
 	width: 84px!important;
     text-align: right;
 }
+
 .result-header {
-	height: 48px;
+	height: 37px;
 	margin: 0;
-	line-height: 46px;
+	line-height: 32px;
 	border: 1px solid #ddd;
 	border-bottom: none;
 }
 .result-header .title {
 	position: relative;
-	padding-top: 9px;
+	padding-top: 4px;
 	padding-left: 32px;
 	line-height: 16px;
 }
 .result-header .title img {
 	position: absolute;
-	top: 9px;
+	top: 4px;
 	left: 0;
 }
 .result-header .title .title-cn {
@@ -230,7 +233,7 @@
 	text-align: center;
 }
 .result-table table td {
-	padding: 6px !important;
+	padding: 2px !important;
 	text-align: center;
 }
 .result-table table td p {
@@ -256,3 +259,6 @@
 	border-color: #ff9f19;
 }
 .row.save_btn{width:100%;position:absolute;bottom:-80px;}
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td{
+	padding:5px 0;
+}

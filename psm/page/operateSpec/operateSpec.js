@@ -242,7 +242,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             }
             // 详情
             $scope.infoQueryOperate = function (index) {
-            	debugger
                 $rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
                 parent.angular.element(parent.$('#tabs')).scope().addTab('权限规格详情', '/psm/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
             }
