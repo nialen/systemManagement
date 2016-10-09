@@ -161,7 +161,7 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                 templateUrl: 'tabs-content.html',
                 link: function ($scope, iElm, iAttrs, controller) {
                     $('.tab-container').height(document.documentElement.clientHeight - 45);
-                    // $('.tabs-content').height(document.documentElement.clientHeight - 77);
+                    $('.tabs-content').height(document.documentElement.clientHeight - 77);
                     $('.accordion-list').height(document.documentElement.clientHeight - 45);
                 }
             };
