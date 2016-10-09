@@ -5,7 +5,7 @@
 
 define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap-tpls', 'angular-animate'], function (angular, $, httpConfig, swal, _) {
     angular
-        .module('addRoleModule', ['ui.bootstrap'])
+        .module('detailRoleModule', ['ui.bootstrap'])
         .run(['$rootScope', '$parse', '$log', function ($rootScope, $parse, $log) {
             var id = window.frameElement && window.frameElement.id || '',
                 obj = parent.$('#' + id).attr('data');
@@ -200,7 +200,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                 $scope.modifyRoleForm.startDt ? param.startDt = $scope.modifyRoleForm.startDt : '';
                 $scope.modifyRoleForm.endDt ? param.endDt = $scope.modifyRoleForm.endDt : '';
                 $scope.modifyRoleForm.description ? param.description = $scope.modifyRoleForm.description : '';
-                $rootScope.OperateSpecList ? param.privilegeList = $rootScope.OperateSpecList : '';
 
                 if ($rootScope.isModifiedRoleList) {
                     httpMethod.insertRole(param).then(function (rsp) {
@@ -241,7 +240,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
 
             // 添加
             $scope.addRolePermission = function () {
-                $rootScope.PowerListResultList = [];
                 $scope.$broadcast('openCheckRoleListModal');
             };
 
@@ -324,6 +322,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
         })
         // 查询控制器
         .controller('queryPowerFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+
             // 获取业务模块类型列表
             httpMethod.queryOperationSpecType().then(function (rsp) {
                 $log.log('调用获取业务模块类型接口成功.');
@@ -349,6 +348,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                 SpecItem: '',//权限类型列表
                 operationSpecTypeCd: ''//规格类型
             };
+
             // 查询结果分页信息
             $scope.requirePaging = true; // 是否需要分页
             $scope.currentPage = 1; // 当前页
@@ -368,6 +368,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                 $scope.queryPowerForm.name ? param.name = $scope.queryPowerForm.name : '';
                 $scope.queryPowerForm.SpecItem ? param.operationSpecTypeCd = $scope.queryPowerForm.SpecItem : '';
                 // $scope.queryRoleForm.modularTypeCdItem ? param.operationSpecTypeCd = $scope.queryRoleForm.operationSpecTypeCdItem.modularTypeCd : '';
+
                 // 获取业务模块类型列表
                 httpMethod.queryOperateSpecForSelect(param).then(function (rsp) {
                     $log.log('调用获取查询权限规格接口成功.');
@@ -418,112 +419,14 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
 
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
-            $scope.maxSize = 8;
+            $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;
             };
+
             $scope.pageChanged = function () {
                 $scope.queryPowerFormSubmit($scope.currentPage);
                 $log.log('Page changed to: ' + $scope.currentPage);
             };
         }])
-
-        //弹出日期控制器
-        .controller('DatepickerPopupDemoCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
-            $scope.today = function() {
-            $scope.dt = new Date();
-          };
-          $scope.today();
-
-          $scope.clear = function() {
-            $scope.dt = null;
-          };
-
-          $scope.inlineOptions = {
-            customClass: getDayClass,
-            minDate: new Date(),
-            showWeeks: true
-          };
-
-          $scope.dateOptions = {
-            // dateDisabled: disabled,
-            // maxDate: new Date(2020, 5, 22),
-            formatYear: 'yy',
-            minDate: new Date(),
-            startingDay: 1
-          };
-
-          // Disable weekend selection
-          function disabled(data) {
-            var date = data.date,
-              mode = data.mode;
-                return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-          }
-
-          $scope.toggleMin = function() {
-            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-          };
-
-          $scope.toggleMin();
-
-          $scope.open1 = function() {
-            $scope.popup1.opened = true;
-          };
-
-          $scope.open2 = function() {
-            $scope.popup2.opened = true;
-          };
-
-          $scope.setDate = function(year, month, day) {
-            $scope.dt = new Date(year, month, day);
-          };
-
-          $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-          $scope.format = $scope.formats[0];
-          $scope.altInputFormats = ['M!/d!/yyyy'];
-
-          $scope.popup1 = {
-            opened: false
-          };
-
-          $scope.popup2 = {
-            opened: false
-          };
-
-          var tomorrow = new Date();
-          tomorrow.setDate(tomorrow.getDate() + 1);
-          var afterTomorrow = new Date();
-          afterTomorrow.setDate(tomorrow.getDate() + 1);
-          $scope.events = [
-            {
-              date: tomorrow,
-              status: 'full'
-            },
-            {
-              date: afterTomorrow,
-              status: 'partially'
-            }
-          ];
-
-          function getDayClass(data) {
-            var date = data.date,
-                mode = data.mode;
-            if (mode === 'day') {
-              var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-              for (var i = 0; i < $scope.events.length; i++) {
-                var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-                if (dayToCheck === currentDay) {
-                  return $scope.events[i].status;
-                }
-              }
-            }
-
-            return '';
-          }
-        }])
-
-
 });

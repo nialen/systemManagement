@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <label class="control-label edit-label" for="modularTypeCd">业务模块类型：</label>
                                         <label for="modularTypeCdItem">
-                                        <select name="modularTypeCdItem" class="form-control modify-input" id="modularTypeCdItem" ng-model="modifySysForm.modularTypeCdItem">
+                                        <select name="modularTypeCdItem" class="form-control modify-input" id="modularTypeCdItem" ng-model="modifySysForm.modularTypeCd">
                                             <option value="">请选择业务模块类型</option>
                                             <option ng-repeat="item in sysType" value="{{item.modularTypeCd}}" ng-bind="item.name"></option>
                                         </select>
@@ -57,7 +57,7 @@
                                 <div class="col-xs-4">
                                     <div class="form-group">
                                         <label class="control-label edit-label" for="sysName">所属系统：</label>
-                                        <select class="form-control modify-input" id="sysIdItem" ng-model="modifySysForm.sysIdItem">
+                                        <select class="form-control modify-input" id="sysIdItem" ng-model="modifySysForm.sysId">
                                             <option value="">请选择所属系统</option>
                                             <option ng-repeat="item in systemList" value="{{item.sysId}}" ng-bind="item.sysName"></option>
                                         </select>
@@ -165,8 +165,8 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>选择</th>
-                                            <th>业务模块ID</th>
+                                            <th width="6%">选择</th>
+                                            <th width="10%">业务模块ID</th>
                                             <th>业务模块名称</th>
                                             <th>业务模块类型</th>
                                             <th>所属系统</th>
