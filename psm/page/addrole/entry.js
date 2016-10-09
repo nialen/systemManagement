@@ -45,6 +45,6 @@ require.config({
     }
 });
 
-require(['angular', 'addRole'], function (angular) {
+require(['angular', 'addrole'], function (angular) {
     angular.bootstrap(document, ['addRoleModule']);
 });

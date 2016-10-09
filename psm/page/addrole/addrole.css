@@ -263,3 +263,21 @@
 	width: 545px !important;
 	height: 28px;
 }
+.data-table table tr td{
+	padding:0px!important;
+}
+.data-table table tr th{
+	background:none;
+}
+
+.icon_time{
+	position: absolute;
+	left: 280px;
+	top: 6px;
+}
+.icon_time button{
+	background:url(../../../images/icom_time.jpg) #ccc no-repeat center center;
+	width: 14px;
+	height: 16px;
+	border: none;
+}
