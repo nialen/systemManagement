@@ -271,7 +271,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'angular-md5', 'ui-boot
                 };
                 $scope.queryStaffForm.name ? param.name = $scope.queryStaffForm.name : '';
                 $scope.queryStaffForm.staffNumber ? param.staffNumber = $scope.queryStaffForm.staffNumber : '';
-                $scope.queryStaffForm.areaItem.areaId ? param.areaId = $scope.queryStaffForm.areaItem.areaId : '';
+                $scope.queryStaffForm.areaItem ? param.areaId = $scope.queryStaffForm.areaItem : '';
 
                 // 查询员工信息
                 httpMethod.queryStaffManager(param).then(function (rsp) {

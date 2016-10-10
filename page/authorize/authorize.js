@@ -353,7 +353,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     // currentPage: '1', // 当前页
                     // rowNumPerPage: '10'//每页条数
                 };
-                httpMethod.queryUserPrivilegeDimensionDetail(param).then(function (rsp) {
+                httpMethod.queryUserPrivilegeDimension(param).then(function (rsp) {
                     $log.log('调用查询权限维度详情接口成功.');
                     if (rsp.data) {
                         $rootScope.authorityDimensionList = rsp.data;

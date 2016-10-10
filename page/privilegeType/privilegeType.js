@@ -6,10 +6,6 @@
 define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'angular-animate'], function (angular, $, httpConfig, swal) {
     angular
         .module('privilegeTypeModule', ['ui.bootstrap'])
-        .run(['$rootScope', function ($rootScope) {
-            $rootScope.queryTypeResultList = []; // 查询
-            $rootScope.modifiedQueryType = {}; // 待修改
-        }])
         .factory('httpMethod', ['$http', '$q', function ($http, $q) {
             var httpMethod = {};
 
@@ -143,6 +139,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.editQueryType = function (title, index) {
                 $rootScope.modifiedQueryType = $rootScope.queryTypeResultList[index];
                 $rootScope.modalTitle = title;
+                $rootScope.isEnabledState = false;
                 $scope.$emit('openEditQueryTypeModal', 'alertType');
             };
 
@@ -150,6 +147,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.addQueryType = function (title) {
                 $rootScope.modifiedQueryType = {};
                 $rootScope.modalTitle = title;
+                $rootScope.isEnabledState = true;
                 $scope.$emit('openEditQueryTypeModal', 'insertType');
             };
 

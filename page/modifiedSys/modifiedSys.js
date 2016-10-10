@@ -27,7 +27,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         /*传入数据*/
         .factory('httpMethod', ['$http', '$q', function ($http, $q) {
             var httpMethod = {};
-            
+
             // 查询业务系统平台
             httpMethod.queryBusinessSystem = function () {
                 var defer = $q.defer();
@@ -227,8 +227,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 };
                 $scope.modifySysForm.sysModularId ? param.sysModularId = $scope.modifySysForm.sysModularId : '';
                 $scope.modifySysForm.name ? param.name = $scope.modifySysForm.name : '';
-                $scope.modifySysForm.modularTypeCdItem ? param.modularTypeCd = $scope.modifySysForm.modularTypeCdItem : '';
-                $scope.modifySysForm.sysIdItem ? param.sysId = $scope.modifySysForm.sysIdItem : '';
+                $scope.modifySysForm.modularTypeCd ? param.modularTypeCd = $scope.modifySysForm.modularTypeCd : '';
+                $scope.modifySysForm.sysId ? param.sysId = $scope.modifySysForm.sysId : '';
                 $scope.modifySysForm.upSysModularId ? param.upSysModularId = $scope.modifySysForm.upSysModularId : '';
                 $scope.modifySysForm.url ? param.url = $scope.modifySysForm.url : '';
                 $scope.modifySysForm.intfFunc ? param.intfFunc = $scope.modifySysForm.intfFunc : '';
@@ -251,9 +251,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 } else {
                     httpMethod.alterSysModular(param).then(function (rsp) {
                         $log.log('调用修改模块接口成功.');
-                        if (rsp.success) {
+                        if (rsp.data) {
                             swal("操作成功", "修改模块成功!", "success");
-                            // TODO 关闭TABS
                         } else {
                             swal("OMG", rsp.msg || "修改模块失败!", "error");
                         }
@@ -283,7 +282,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             }, true);
         }])
         // 弹出框控制器
-        // TODO 删除冗余代码
         .controller('selectSysModalCtrl', function ($scope, $rootScope, $uibModal, $log) {
             var $ctrl = this;
             $scope.$on('openCheckSysListModal', function (d, data) {
