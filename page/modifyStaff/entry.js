@@ -20,7 +20,7 @@ window.loading = {
                 'ui-bootstrap-tpls': '../../lib/ui-bootstrap-tpls-2.1.3',
                 'sweetalert': '../../lib/sweetalert.min',
                 'angular-md5': '../../lib/angular-md5',
-                'httpConfig': '../../../js/httpConfig'
+                'httpConfig': '../../js/httpConfig'
             },
             shim: {
                 'angular': {

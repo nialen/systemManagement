@@ -233,17 +233,17 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             // 修改
             $scope.editQueryOperate = function (index) {
                 $rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
-                parent.angular.element(parent.$('#tabs')).scope().addTab('修改权限规格', '/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('修改权限规格', '/psm/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
             }
             // 新建
             $scope.addQueryOperate = function (title) {
-                parent.angular.element(parent.$('#tabs')).scope().addTab('新建权限规格', '/page/modifyOperate/modifyOperate.html', 'addOperate');
+                parent.angular.element(parent.$('#tabs')).scope().addTab('新建权限规格', '/psm/page/modifyOperate/modifyOperate.html', 'addOperate');
 
             }
             // 详情
             $scope.infoQueryOperate = function (index) {
                 $rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
-                parent.angular.element(parent.$('#tabs')).scope().addTab('权限规格详情', '/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('权限规格详情', '/psm/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
             }
             /**
              * [check 复选框点击事件]

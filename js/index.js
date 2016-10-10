@@ -35,13 +35,6 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                     var menuInfo = rsp.data.menuInfo.sort(function (a, b) {
                         return a.orderSeq - b.orderSeq;
                     });
-                    if (httpConfig.isProdEnvironment) {
-                        menuInfo.map(function (item) {
-                            item.submenu.map(function (obj) {
-                                obj.url = obj.url.slice(4);
-                            });
-                        });
-                    }
                     $scope.menuInfo = menuInfo;
                 }
             }, function () {
@@ -80,6 +73,9 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
              * @data 传递给DOM的数据
              */
             $scope.addTab = function (title, view, id, data) {
+                if (httpConfig.isProdEnvironment) {
+                    view = view.slice(4);
+                }
                 var isHas = tabs.some(function (item, index) {
                     return item.title === title
                 });

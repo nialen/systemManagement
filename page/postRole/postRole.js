@@ -164,18 +164,18 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             // 修改
             $scope.editRole = function (index, title) {
                 $rootScope.modifiedRole = $rootScope.RoleList[index];
-                parent.angular.element(parent.$('#tabs')).scope().addTab('角色修改', '/page/addrole/addrole.html', 'modifiedRole', JSON.stringify($rootScope.modifiedRole));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('角色修改', '/psm/page/addrole/addrole.html', 'modifiedRole', JSON.stringify($rootScope.modifiedRole));
             }
             //详情
             $scope.modifyRole = function (index, title) {
                 $rootScope.modifiedRole = $rootScope.RoleList[index];
                 // $rootScope.RoleTitle = title;
                 // $scope.$emit('openEditRoleModal');
-                parent.angular.element(parent.$('#tabs')).scope().addTab('角色详情', '/page/detailRole/detailRole.html', 'modifiedRole', JSON.stringify($rootScope.modifiedRole));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('角色详情', '/psm/page/detailRole/detailRole.html', 'modifiedRole', JSON.stringify($rootScope.modifiedRole));
             }
             // 新建
             $scope.addRole = function () {
-                parent.angular.element(parent.$('#tabs')).scope().addTab('新建角色', '/page/addrole/addrole.html', 'addNewrole');
+                parent.angular.element(parent.$('#tabs')).scope().addTab('新建角色', '/psm/page/addrole/addrole.html', 'addNewrole');
             }
 
             $scope.check = function (val, chk) {
@@ -226,7 +226,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             // 子iframe调用父iframe控制器内方法；
             $scope.demo = function () {
-                parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/page/sysModular/sysModular.html');
+                parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/psm/page/sysModular/sysModular.html');
                 // $log.log(parent.angular.element($('#tabs')).abbTabs, '父层iframe');
             }
 

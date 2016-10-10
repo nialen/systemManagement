@@ -19,7 +19,7 @@ window.loading = {
                 'ui-bootstrap': '../../lib/ui-bootstrap',
                 'ui-bootstrap-tpls': '../../lib/ui-bootstrap-tpls-2.1.3',
                 'sweetalert': '../../lib/sweetalert.min',
-                'httpConfig': '../../../js/httpConfig'
+                'httpConfig': '../../js/httpConfig'
             },
             shim: {
                 'angular': {

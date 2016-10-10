@@ -15,7 +15,7 @@ require.config({
         'ui-bootstrap-tpls': '../../lib/ui-bootstrap-tpls-2.1.3',
         'sweetalert': '../../lib/sweetalert.min',
         'lodash': '../../lib/lodash',
-        'httpConfig': '../../../js/httpConfig'
+        'httpConfig': '../../js/httpConfig'
     },
     shim: {
         'angular': {

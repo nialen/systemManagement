@@ -228,12 +228,12 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         .controller('staffManResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
             // 新建
             $scope.addStaffMan = function () {
-                parent.angular.element(parent.$('#tabs')).scope().addTab('新建用户', '/page/modifyStaff/modifyStaff.html', 'addNewStaff');
+                parent.angular.element(parent.$('#tabs')).scope().addTab('新建用户', '/psm/page/modifyStaff/modifyStaff.html', 'addNewStaff');
             };
             // 修改
             $scope.editStaffMan = function (index) {
                 $rootScope.modifiedStaffMan = $rootScope.staffManResultList[index];
-                parent.angular.element(parent.$('#tabs')).scope().addTab('修改用户', '/page/modifyStaff/modifyStaff.html', 'modifyStaff', JSON.stringify($rootScope.modifiedStaffMan));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('修改用户', '/psm/page/modifyStaff/modifyStaff.html', 'modifyStaff', JSON.stringify($rootScope.modifiedStaffMan));
             };
             // 密码重置
             $scope.resetPassword = function (index) {

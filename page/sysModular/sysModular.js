@@ -248,7 +248,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         $rootScope.modifiedSys.sysIdItem = item;
                     }
                 });
-                parent.angular.element(parent.$('#tabs')).scope().addTab('模块修改', '/page/modifiedSys/modifiedSys.html', 'modifySys', JSON.stringify($rootScope.modifiedSys));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('模块修改', '/psm/page/modifiedSys/modifiedSys.html', 'modifySys', JSON.stringify($rootScope.modifiedSys));
             }
             // 新建
             $scope.addSys = function (title) {
@@ -257,7 +257,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                  $rootScope.sysTitle = '新建模块';
                  $scope.$emit('openEditSysModal');
                  */
-                parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/page/modifiedSys/modifiedSys.html', 'addNewSys');
+                parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/psm/page/modifiedSys/modifiedSys.html', 'addNewSys');
             }
             /**
              * [check 复选框点击事件]
@@ -311,7 +311,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             // 子iframe调用父iframe控制器内方法；
             $scope.demo = function () {
-                parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/page/sysModular/sysModular.html');
+                parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/psm/page/sysModular/sysModular.html');
                 // $log.log(parent.angular.element($('#tabs')).abbTabs, '父层iframe');
             }
         }])

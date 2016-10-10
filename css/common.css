@@ -193,3 +193,12 @@ body {
     max-height: 450px;
     overflow-y: auto;
 }
+
+.no-data {
+    margin-top: -20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: none;
+    margin-bottom: 20px;
+    text-align: center;
+}

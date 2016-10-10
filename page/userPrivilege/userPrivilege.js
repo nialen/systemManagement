@@ -104,12 +104,12 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             // 授权
             $scope.authorize = function (index) {
                 $rootScope.modifiedStaffMan = $rootScope.staffManResultList[index];
-                parent.angular.element(parent.$('#tabs')).scope().addTab('员工授权', '/page/authorize/authorize.html', 'authorize', JSON.stringify($rootScope.modifiedStaffMan));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('员工授权', '/psm/page/authorize/authorize.html', 'authorize', JSON.stringify($rootScope.modifiedStaffMan));
             };
             // 权限详情
             $scope.detailPrivilege = function (index) {
                 $rootScope.detailStaffMan = $rootScope.staffManResultList[index];
-                parent.angular.element(parent.$('#tabs')).scope().addTab('权限详情', '/page/detailPrivilege/detailPrivilege.html', 'detailPrivilege', JSON.stringify($rootScope.detailStaffMan));
+                parent.angular.element(parent.$('#tabs')).scope().addTab('权限详情', '/psm/page/detailPrivilege/detailPrivilege.html', 'detailPrivilege', JSON.stringify($rootScope.detailStaffMan));
             }
         }])
         // 分页控制器

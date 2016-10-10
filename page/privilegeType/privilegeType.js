@@ -7,7 +7,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     angular
         .module('privilegeTypeModule', ['ui.bootstrap'])
         .run(['$rootScope', function ($rootScope) {
-            // $rootScope.isMock = false; // 是否MOCK数据
             $rootScope.queryTypeResultList = []; // 查询
             $rootScope.modifiedQueryType = {}; // 待修改
         }])
@@ -95,16 +94,16 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         // 查询控制器
         .controller('queryTypeFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
             // 查询结果分页信息
-            $scope.requirePaging = true, // 是否需要分页
-            $scope.currentPage = 1, // 当前页
-            $scope.rowNumPerPage = 4, // 每页显示行数
-            $scope.totalNum = 0 // 总条数
+            $scope.requirePaging = true; // 是否需要分页
+            $scope.currentPage = 1; // 当前页
+            $scope.rowNumPerPage = 10; // 每页显示行数
+            $scope.totalNum = 0; // 总条数
             $scope.checkedPrivilegeType = []; // 已经选中的权限类型信息
 
             $scope.isForbid = true;
             $scope.queryTypeForm = {
                 operationSpecTypeCd: '',
-                name: '',
+                name: ''
             };
             $scope.queryTypeFormSubmit = function (currentPage) {
                 $scope.checkedPrivilegeType = []; // 置空已选权限类型列表
@@ -124,9 +123,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 httpMethod.queryTypeManager(param).then(function (rsp) {
                     $log.log('调用查询员工信息接口成功.');
                     $rootScope.queryTypeResultList = rsp.data.list;
-                    // if ($rootScope.isMock) {
-                    //     $scope.totalNum = 3;
-                    // }
                     $scope.totalNum = rsp.data.totalNum;
                 }, function () {
                     $log.log('调用查询员工信息接口失败.');
@@ -148,13 +144,14 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $rootScope.modifiedQueryType = $rootScope.queryTypeResultList[index];
                 $rootScope.modalTitle = title;
                 $scope.$emit('openEditQueryTypeModal', 'alertType');
-            }
+            };
+
             // 新建
             $scope.addQueryType = function (title) {
                 $rootScope.modifiedQueryType = {};
                 $rootScope.modalTitle = title;
                 $scope.$emit('openEditQueryTypeModal', 'insertType');
-            }
+            };
 
             /**
              * [check 复选框点击事件]
@@ -167,9 +164,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     if (item.operationSpecTypeCd == val.operationSpecTypeCd) {
                         valueOfIndex = index;
                     }
-                })
+                });
                 chk ? valueOfIndex === '' && $scope.checkedPrivilegeType.push(val) : $scope.checkedPrivilegeType.splice(valueOfIndex, 1);
-            }
+            };
 
             // 删除
             $scope.batchCancelType = function () {
@@ -209,8 +206,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
 
         // 弹出框控制器
-        // TODO 删除冗余代码
-        // TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
         .controller('editQueryTypeModalCtrl', function ($scope, $rootScope, $uibModal, $log) {
             var $ctrl = this;
             $scope.$on('openEditQueryTypeModal', function (d, data) {
@@ -267,7 +262,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 }
             }, true);
             $scope.editQueryTypeFormSubmit = function (data) {
-                // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
                 if (data === 'insertType') {
                     var param = {
                         operationSpecTypeCd: '', //类型编码
@@ -329,4 +323,4 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $log.log('Page changed to: ' + $scope.currentPage);
             };
         }])
-})
+});
