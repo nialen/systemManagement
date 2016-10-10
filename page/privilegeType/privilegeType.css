@@ -1,137 +1,139 @@
 .style1 {
-	color: #333;
+    color: #333;
 }
+
 .privilege-type {
     padding: 10px 20px 0;
 }
+
 /* 查询 */
 .privilege-type-query {
-	padding: 2px 15px;
-	border: 1px solid #ddd;
-	line-height: 38px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
 }
+
 .query-input {
-	width: 300px !important;
-	height: 25px;
-	padding:0 12px;
-	line-height: 25px;
+    width: 300px !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height: 25px;
 }
-.btn-query {
-	padding: 0;
-    background-color: #ff9f19;
-    border-color: #ff9f19;
-    color: #fff;
-    font-size: 12px;
-	width:60px;
-	line-height:24px;
-	text-align:center;
-}
-.btn-query:focus, .btn-query.focus {
-	background-color: #d1800e;
-	border-color: #d1800e;
-	color: #fff;
-}
-.btn-query:hover {
-    background-color: #d1800e;
-    border-color: #d1800e;
-    color: #fff;
-}
+
 /* 结果 */
 .privilege-type-result {
-	margin-top: 10px;
+    margin-top: 10px;
 }
+
 .result-header {
-	height: 37px;
-	margin: 0;
-	line-height: 32px;
-	border: 1px solid #ddd;
-	border-bottom: none;
+    height: 37px;
+    margin: 0;
+    line-height: 32px;
+    border: 1px solid #ddd;
+    border-bottom: none;
 }
+
 .result-header .title {
-	position: relative;
-	padding-top: 4px;
-	padding-left: 32px;
-	line-height: 16px;
+    position: relative;
+    padding-top: 4px;
+    padding-left: 32px;
+    line-height: 16px;
 }
+
 .result-header .title img {
-	position: absolute;
-	top: 4px;
-	left: 0;
+    position: absolute;
+    top: 4px;
+    left: 0;
 }
+
 .result-header .title .title-cn {
-	color: #4c9ef5;
-	font-size: 14px;
+    color: #4c9ef5;
+    font-size: 14px;
 }
+
 .result-header .title .title-en {
-	color: #ddd;
-	font-size: 12px;
+    color: #ddd;
+    font-size: 12px;
 }
+
 .btn-set {
-	margin-left: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
+    margin-left: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
     background-color: #ffc619;
     border-color: #ffc619;
     color: #fff;
     font-size: 12px;
-    margin-top:2px;
+    margin-top: 2px;
 }
+
 .btn-set:focus, .btn-set.focus {
-	background-color: #e4ae0c;
-	border-color: #e4ae0c;
-	color: #fff;
+    background-color: #e4ae0c;
+    border-color: #e4ae0c;
+    color: #fff;
 }
+
 .btn-set:hover {
     background-color: #e4ae0c;
     border-color: #e4ae0c;
     color: #fff;
 }
+
 .result-table table th {
-	background-color: #f5fafa;
-	border-bottom-width: 1px !important;
-	color: #333;
-	font-weight: 800;
-	text-align: center;
+    background-color: #f5fafa;
+    border-bottom-width: 1px !important;
+    color: #333;
+    font-weight: 800;
+    text-align: center;
 }
+
 .result-table table td {
-	padding: 2px !important;
-	text-align: center;
+    padding: 2px !important;
+    text-align: center;
 }
+
 .result-table table td p {
-	height: 25px;
-	line-height: 25px;
+    height: 25px;
+    line-height: 25px;
 }
+
 .btn-edit {
     background-color: #b1cc00;
     color: #fff;
-    margin-top:2px;
+    margin-top: 2px;
 }
-.btn-edit i{
-    font-size:12px;
+
+.btn-edit i {
+    font-size: 12px;
 }
+
 .btn-edit:focus, .btn-edit.focus {
-	background-color: #a4bc04;
-	color: #fff;
+    background-color: #a4bc04;
+    color: #fff;
 }
+
 .btn-edit:hover {
     background-color: #a4bc04;
     color: #fff;
 }
+
 .edit-label {
-	width: 120px !important;
-	text-align: right;
+    width: 120px !important;
+    text-align: right;
 }
-.form-group .edit-txt{
-	width:648px;
-	height:250px;
-	resize: none;
+
+.form-group .edit-txt {
+    width: 648px;
+    height: 250px;
+    resize: none;
 }
-.form-group .edit-label{
-	vertical-align: top;
-	margin-top: 12px;
+
+.form-group .edit-label {
+    vertical-align: top;
+    margin-top: 12px;
 }
-.table-bordered > thead > tr > th, .table-bordered > thead > tr > td{
-	padding:5px 0;
+
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    padding: 5px 0;
 }
 
 

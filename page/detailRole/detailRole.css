@@ -82,24 +82,7 @@
 }
 
 /* 弹出框 */
-.btn-query {
-	padding-left: 15px;
-	padding-right: 15px;
-    background-color: #ff9f19;
-    border-color: #ff9f19;
-    color: #fff;
-    font-size: 12px;
-}
-.btn-query:focus, .btn-query.focus {
-	background-color: #d1800e;
-	border-color: #d1800e;
-	color: #fff;
-}
-.btn-query:hover {
-    background-color: #d1800e;
-    border-color: #d1800e;
-    color: #fff;
-}
+
 .modal-content {
 	border-radius: 0;
 }

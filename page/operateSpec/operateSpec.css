@@ -16,28 +16,7 @@
 	height: 25px;
 	line-height:25px;
 }
-.btn-query {
-	margin-top: 5px;
-	margin-right: 16px;
-    background-color: #ff9f19;
-    border-color: #ff9f19;
-    color: #fff;
-    font-size: 12px;
-    width:60px;
-	line-height:24px;
-	text-align:center;
-	padding:0;
-}
-.btn-query:focus, .btn-query.focus {
-	background-color: #d1800e;
-	border-color: #d1800e;
-	color: #fff;
-}
-.btn-query:hover {
-    background-color: #d1800e;
-    border-color: #d1800e;
-    color: #fff;
-}
+
 /* 结果 */
 .operate-spec-result {
 	margin-top: 10px;

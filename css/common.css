@@ -45,6 +45,30 @@ body {
     margin: 0 auto;
 }
 
+
+.btn-query {
+    padding: 0;
+    background-color: #ff9f19;
+    border-color: #ff9f19;
+    color: #fff;
+    font-size: 12px;
+    width: 60px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.btn-query:focus, .btn-query.focus {
+    background-color: #d1800e;
+    border-color: #d1800e;
+    color: #fff;
+}
+
+.btn-query:hover {
+    background-color: #d1800e;
+    border-color: #d1800e;
+    color: #fff;
+}
+
 .btn-submit, .btn-cancel {
     border: none;
     font-weight: normal;

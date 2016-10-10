@@ -147,24 +147,7 @@
 	width: 155px !important;
 	height: 30px;
 }
-.btn-query {
-	padding-left: 15px;
-	padding-right: 15px;
-    background-color: #ff9f19;
-    border-color: #ff9f19;
-    color: #fff;
-    font-size: 12px;
-}
-.btn-query:focus, .btn-query.focus {
-	background-color: #d1800e;
-	border-color: #d1800e;
-	color: #fff;
-}
-.btn-query:hover {
-    background-color: #d1800e;
-    border-color: #d1800e;
-    color: #fff;
-}
+
 /* 结果 */
 .staff-man-result {
 	margin-top: 10px;
