@@ -166,6 +166,11 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                     $('.tab-container').height(document.documentElement.clientHeight - 45);
                     $('.tabs-content').height(document.documentElement.clientHeight - 77);
                     $('.accordion-list').height(document.documentElement.clientHeight - 45);
+                    $(window).resize(function () {
+                        // $('.tab-container').height(document.documentElement.clientHeight - 45);
+                        // $('.tabs-content').height(document.documentElement.clientHeight - 77);
+                        // $('.accordion-list').height(document.documentElement.clientHeight - 45);
+                    });
                 }
             };
         })
@@ -175,7 +180,7 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                 link: function ($scope, iElm, iAttrs, controller) {
                     var img = new Image();
                     img.className = 'icon';
-                    img.src = iAttrs.url == 'null' ? 'images/icon-01.png' : imgSrc;
+                    img.src = iAttrs.url == 'null' ? 'images/icon-01.png' : iAttrs.url;
                     $(iElm).append(img);
                 }
             }

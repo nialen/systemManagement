@@ -173,7 +173,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
             $scope.isForbid = true;
             $scope.modifyRoleForm = $.extend(true, {
                 name: '',//角色名称
-                RoleId: '',//所属系统ID
+                roleId: '',//所属系统ID
                 startDt: '',//生效日期
                 endDt: '',//失效日期
                 description: ''//描述
@@ -390,6 +390,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
 
             $scope.queryPowerFormSubmit = function (currentPage) {
                 var param = {
+                    // roleId: '',
                     // operationSpecCd: '',//权限规格编码
                     // name: '',//权限规格名称
                     // operationSpecTypeCd: ''//规格类型
@@ -397,6 +398,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                     currentPage: currentPage || $scope.currentPage, // 当前页
                     rowNumPerPage: $scope.rowNumPerPage // 每页显示行数
                 };
+                $rootScope.modifiedRoleList.roleId ? param.roleId = $rootScope.modifiedRoleList.roleId : '';
                 $scope.queryPowerForm.operationSpecCd ? param.operationSpecCd = $scope.queryPowerForm.operationSpecCd : '';
                 $scope.queryPowerForm.name ? param.name = $scope.queryPowerForm.name : '';
                 $scope.queryPowerForm.SpecItem ? param.operationSpecTypeCd = $scope.queryPowerForm.SpecItem : '';
