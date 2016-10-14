@@ -8,7 +8,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         .module('sysModularModule', ['ui.bootstrap'])
         .run(['$rootScope', function ($rootScope) {
             $rootScope.isMock = false; // 是否MOCK数据
-            $rootScope.SysResultList = []; // 查询模块列表
             $rootScope.modifiedSys = {}; // 待修改的模块信息
             $rootScope.isForbidSubmit = true; // 禁用编辑模块提交按钮
             $rootScope.sysType = []; // 业务模块类型列表
@@ -152,15 +151,13 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         /*传入数据*/
 
-
-
         // 查询控制器
         .controller('querySysFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
 
             // 查询结果分页信息
             $scope.requirePaging = true; // 是否需要分页
             $scope.currentPage = 1; // 当前页
-            $scope.rowNumPerPage = 5; // 每页显示行数
+            $scope.rowNumPerPage = 10; // 每页显示行数
             $scope.totalNum = 0; // 总条数
 
             // 获取业务模块类型列表
@@ -316,8 +313,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             }
         }])
         // 弹出框控制器
-        // TODO 删除冗余代码
-        // TODO 弹出样式调整；弹出框的OK按钮绑定提交表单操作；
         .controller('editSysModalCtrl', function ($scope, $rootScope, $uibModal, $log) {
             var $ctrl = this;
             $scope.$on('openEditSysModal', function (d, data) {

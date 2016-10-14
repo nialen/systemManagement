@@ -1,5 +1,5 @@
 /**
- * Auth 
+ * Auth
  * Date 2016-09-13
  */
 
@@ -212,7 +212,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             var param = {
                 operationSpecCd: '', //权限规格编码
-                name: '', //权限规格名称    
+                name: '', //权限规格名称
                 operationSpecTypeCd: '', //权限规格类型
                 manageCd: '', //管理编码
                 state: '', //状态（0－启用，1－未启用，2－注销）
@@ -307,7 +307,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             chk ? valueOfIndex === '' && $scope.deleteDimensionList.push(val) : $scope.deleteDimensionList.splice(valueOfIndex, 1);
         }
         $scope.deleteDimension = function () {
-            if ($scope.deleteDimensionList.length) { 
+            if ($scope.deleteDimensionList.length) {
                 swal({
                     title: "删除权限维度",
                     text: "您确定要把权限维度编码为移除吗？",
@@ -323,10 +323,10 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         for (var j = $scope.deleteDimensionList.length - 1; j >= 0; j--) {
                             var deleteObj = $scope.deleteDimensionList[j];
                             if(deleteObj.privilegeDimensionCd == preveligeDimension.privilegeDimensionCd){
-                                $rootScope.preveligeDimensionResultList.splice(i,1); 
+                                $rootScope.preveligeDimensionResultList.splice(i,1);
                             }
                         }
-                    } 
+                    }
                     // angular.forEach($scope.preveligeDimensionResultList, function(preveligeDimension,i){
                     //     angular.forEach($scope.deleteDimensionList, function(deleteDimension,j){
                     //         if()
@@ -335,7 +335,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
-                    swal("操作成功!", "移除权限维度成功！", "success");                                         
+                    swal("操作成功!", "移除权限维度成功！", "success");
                 });
             } else {
                 swal("操作提醒", "您没有选中任何需要移除的权限维度！", "info");
@@ -393,7 +393,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             chk ? valueOfIndex === '' && $scope.deleteSysModularList.push(val) : $scope.deleteSysModularList.splice(valueOfIndex, 1);
         }
         $scope.deleteSysModular = function () {
-            if ($scope.deleteSysModularList.length) { 
+            if ($scope.deleteSysModularList.length) {
                 swal({
                     title: "删除业务模块",
                     text: "您确定要把该业务模块移除吗？",
@@ -409,14 +409,14 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         for (var j = $scope.deleteSysModularList.length - 1; j >= 0; j--) {
                             var deleteObj = $scope.deleteSysModularList[j];
                             if(deleteObj.sysModularId == preveligeDone.sysModularId){
-                                $rootScope.preveligeDoneResultList.splice(i,1); 
+                                $rootScope.preveligeDoneResultList.splice(i,1);
                             }
                         }
-                    } 
+                    }
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
-                    swal("操作成功!", "移除业务模块成功！", "success");                                         
+                    swal("操作成功!", "移除业务模块成功！", "success");
                 });
             } else {
                 swal("操作提醒", "您没有选中任何需要移除的业务模块！", "info");
@@ -563,8 +563,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             chk ? valueOfIndex === ''&& !existFlag && $scope.addDimensionList.push(val) : $scope.addDimensionList.splice(valueOfIndex, 1);
         }
         $scope.addQueryDimensionFormSubmit = function() {
-            // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；           
-           
+            // TODO 获取更改之后的信息$rootScope.modifiedQueryType提交接口；
+
             $rootScope.preveligeDimensionResultList = $rootScope.preveligeDimensionResultList.concat($scope.addDimensionList);
         }
     }])
@@ -654,15 +654,15 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $log.log('调用获取业务模块类型接口失败.');
         });
 
-        $scope.requirePaging = true, // 是否需要分页
-        $scope.currentPage = 1, // 当前页
-        $scope.rowNumPerPage = 4, // 每页显示行数
-        $scope.totalNum = 0 // 总条数
+        $scope.requirePaging = true; // 是否需要分页
+        $scope.currentPage = 1; // 当前页
+        $scope.rowNumPerPage = 4; // 每页显示行数
+        $scope.totalNum = 0; // 总条数
 
         $scope.queryDoneForm = {};
 
         $rootScope.queryDoneResultList = [];
-        
+
         $scope.queryDoneFormSubmit = function(currentPage) {
             $scope.checkedSysModular4Pick = []; // 置空已选权限类型列表
             var param = {
@@ -677,7 +677,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.queryDoneForm.modularTypeCd ? param.modularTypeCd = $scope.queryDoneForm.modularTypeCd : '';
 
             param.operationSpecCd = $rootScope.modifiedOperateSpec.operationSpecCd;
-            
+
             // 查询权限类型配置
             httpMethod.querySysModular4Pick(param).then(function(rsp) {
                 $log.log('调用查询可选权限维度接口成功.');
@@ -716,7 +716,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             chk ? valueOfIndex === ''&& !existFlag && $scope.addSysModularList.push(val) : $scope.addSysModularList.splice(valueOfIndex, 1);
         }
         $scope.addQueryDoneFormSubmit = function() {
-                       
+
             $rootScope.preveligeDoneResultList = $rootScope.preveligeDoneResultList.concat($scope.addSysModularList);
         }
     }])

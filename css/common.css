@@ -162,6 +162,10 @@ body {
     margin-bottom: 10px;
 }
 
+.pr50 {
+    padding-right: 50px;
+}
+
 .modal-footer {
     text-align: center !important;
 }
@@ -192,12 +196,13 @@ body {
 }
 
 .form-control {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    /*padding-top: 2px !important;*/
+    /*padding-bottom: 2px !important;*/
 }
 
 .form-group {
     width: 100% !important;
+    margin: 0 !important;
 }
 
 /* 表格固定百分比宽度,不会被内容撑开 */

@@ -6,7 +6,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     angular
         .module('operateSpecModule', ['ui.bootstrap'])
         .run(['$rootScope', function ($rootScope) {
-            $rootScope.queryOperateResultList = []; // 查询权限规格信息
             $rootScope.modifiedQueryOperate = {}; // 待修改的权限规格信息
             $rootScope.detailQueryOperate = []; // 权限规格详情
             $rootScope.operationType = []; // 权限类型列表
@@ -187,7 +186,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             // 查询结果分页信息
             $scope.requirePaging = true; // 是否需要分页
             $scope.currentPage = 1; // 当前页
-            $scope.rowNumPerPage = 4; // 每页显示行数
+            $scope.rowNumPerPage = 10; // 每页显示行数
             $scope.totalNum = 0; // 总条数
 
             // 获取权限类型列表

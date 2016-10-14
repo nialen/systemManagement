@@ -30,7 +30,7 @@
                         <input type="text" id="name" class="form-control query-input" ng-model="querySysForm.name">
                     </div>
                 </div>
-                <div class="col-xs-4 text-right">
+                <div class="col-xs-4">
                     <div class="form-group">
                         <label class="control-label sys_label" for="modularTypeCdItem">业务模块类型：</label>
                         <select class="form-control query-input" id="modularTypeCdItem"
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-xs-8 text-right">
-                    <a ng-click="addSys()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</a>
+                    <button ng-click="addSys()" class="btn btn-xs btn-set"><i class="iconfont">&#xe60e;</i> 新建</button>
                     <button ng-click="deleteSysModularBatch()" class="btn btn-xs btn-set"><i class="iconfont">
                         &#xe610;</i> 删除
                     </button>
@@ -121,6 +121,9 @@
                     </tr>
                     </tbody>
                 </table>
+                <p class="no-data" ng-if="SysResultList && !SysResultList.length">
+                    没有数据
+                </p>
             </div>
             <div ng-controller="paginationCtrl" class="text-center">
                 <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage" ng-model="currentPage"

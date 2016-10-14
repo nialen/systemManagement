@@ -19,7 +19,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             $rootScope.isModifiedSysList = !obj ? true : false;
             // 模块选择弹框内部信息
-            $rootScope.sysListResultList = []; // 查询模块列表
             $rootScope.checkedSysList = {}; // 选中的模块信息
             $rootScope.checkedIndex = ''; // 选中的索引
         }])

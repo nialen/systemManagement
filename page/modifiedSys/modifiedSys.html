@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-4">
-                                <div class="form-group">
+                                <div class="form-group btn-select">
                                     <label class="control-label edit-label" for="upSysModularName">上级业务模块：</label>
                                     <input type="text" id="upSysModularName" class="form-control jobId-input"
                                            ng-model="modifySysForm.upSysModularName" disabled>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="row mb10">
                             <div class="col-xs-12">
-                                <div class="from-group">
+                                <div class="form-group">
                                     <label class="control-label edit-label" for="description">描述：</label>
                                     <textarea id="description" class="form-control remark"
                                               ng-model="modifySysForm.description"></textarea>
@@ -222,6 +222,9 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <p class="no-data" ng-if="sysListResultList && !sysListResultList.length">
+                                没有数据
+                            </p>
                         </div>
                         <div ng-controller="paginationCtrl" class="text-center">
                             <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage"
