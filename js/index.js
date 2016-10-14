@@ -61,7 +61,7 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
             };
         })
         // tabs标签
-        .controller('tabsCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
+        .controller('tabsCtrl', ['$scope', '$rootScope', '$log', '$sce', function ($scope, $rootScope, $log, $sce) {
             var tabs = [];
             $scope.tabs = tabs;
             $scope.selectedIndex = 0;
@@ -83,7 +83,7 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                     view = view || title + "Content View";
                     var index = tabs.push({
                         title: title,
-                        url: view,
+                        url: $sce.trustAsResourceUrl(view),
                         id: id || '',
                         data: data || ''
                     });
@@ -97,7 +97,7 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                     });
                     tabs[selectedIndex] = {
                         title: title,
-                        url: view,
+                        url: $sce.trustAsResourceUrl(view),
                         id: id || '',
                         data: data || ''
                     };

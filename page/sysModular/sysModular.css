@@ -98,6 +98,10 @@
     line-height: 25px;
 }
 
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    padding: 5px 0;
+}
+
 .btn-edit {
     background-color: #b1cc00;
     color: #fff;

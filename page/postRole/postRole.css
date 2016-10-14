@@ -9,29 +9,6 @@
     line-height: 34px;
 }
 
-.title {
-    position: relative;
-    padding-top: 9px;
-    padding-left: 32px;
-    line-height: 16px;
-}
-
-.title img {
-    position: absolute;
-    top: 9px;
-    left: 0;
-}
-
-.title .title-cn {
-    color: #4c9ef5;
-    font-size: 14px;
-}
-
-.title .title-en {
-    color: #ddd;
-    font-size: 12px;
-}
-
 /* 查询 */
 .staff-man-query {
     padding: 10px 15px;
@@ -48,11 +25,34 @@
 }
 
 .result-header {
-    height: 48px;
+    height: 37px;
     margin: 0;
-    line-height: 46px;
+    line-height: 32px;
     border: 1px solid #ddd;
     border-bottom: none;
+}
+
+.result-header .title {
+    position: relative;
+    padding-top: 4px;
+    padding-left: 32px;
+    line-height: 16px;
+}
+
+.result-header .title img {
+    position: absolute;
+    top: 4px;
+    left: 0;
+}
+
+.result-header .title .title-cn {
+    color: #4c9ef5;
+    font-size: 14px;
+}
+
+.result-header .title .title-en {
+    color: #ddd;
+    font-size: 12px;
 }
 
 .btn-set {
@@ -85,8 +85,12 @@
     text-align: center;
 }
 
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    padding: 5px 0;
+}
+
 .result-table table td {
-    padding: 6px !important;
+    padding: 2px !important;
     text-align: center;
 }
 
@@ -229,5 +233,13 @@
 }
 
 .form-group input[type="text"] {
+    width: 100% !important;
+}
+
+.form-group select {
+    width: 100% !important;
+}
+
+.form-group textarea {
     width: 100% !important;
 }

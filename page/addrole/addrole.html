@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label class="control-label" for="roleId">角色ID：</label>
                             <input type="text" id="roleId" class="form-control modify-input"
-                                   ng-model="modifyRoleForm.roleId">
+                                   ng-model="modifyRoleForm.roleId" ng-disabled="!isModifiedRoleList">
                         </div>
                     </div>
                     <div class="col-xs-4">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb10">
+                <div class="row">
                     <div class="col-xs-4">
                         <div class="form-group data-table">
                             <label class="control-label" for="endDt">失效日期：</label>
@@ -97,140 +97,150 @@
                     <a ng-click="removeRolePermission()" class="btn btn-xs btn-set"><i class="iconfont">&#xe610;</i> 删除</a>
                 </div>
             </div>
-            <div>
-                <div class="result-table">
-                    <table class="table table-hover table-bordered">
-                        <tr>
-                            <th width="5%">选择</th>
-                            <th>权限规格编码</th>
-                            <th>权限规格名称</th>
-                            <th>权限类型</th>
-                            <th>备注</th>
-                        </tr>
-                        <tr ng-repeat="item in OperateSpecList">
-                            <td>
-                                <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)"
-                                       ng-model="isChecked">
-                            </td>
-                            <td ng-bind="item.operationSpecCd"></td>
-                            <td ng-bind="item.name"></td>
-                            <td ng-bind="item.operationSpecTypeName"></td>
-                            <td ng-bind="item.stateName"></td>
-                        </tr>
-                    </table>
-                </div>
-                <!--弹出框-->
-                <script type="text/ng-template" id="myModalContent.html">
-                    <div class="modal-header">
-                        <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
-                        <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>权限选择</h3>
-                    </div>
-                    <div class="modal-body" id="modal-body" ng-controller="queryPowerFormCtrl"
-                         ng-submit="queryPowerFormSubmit()">
-                        <div class="staff-man-query clearfix">
-                            <form name="queryPower" class="form-inline" role="form">
-                                <div class="row mb10">
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label class="control-label sys_label" for="operationSpecCd">权限规格编码：</label>
-                                            <input type="text" id="operationSpecCd" class="form-control modify-input"
-                                                   ng-model="queryPowerForm.operationSpecCd">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label class="control-label sys_label" for="name">权限规格名称：</label>
-                                            <input type="text" id="name" class="form-control modify-input"
-                                                   ng-model="queryPowerForm.name">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb10">
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label class="control-label sys_label">权限类型：</label>
-                                            <select name="SpecItem" class="form-control modify-input" id="SpecItem"
-                                                    ng-model="queryPowerForm.SpecItem">
-                                                <option value="">请选择权限类型</option>
-                                                <option ng-repeat="item in SpecList"
-                                                        value="{{item.operationSpecTypeCd}}">
-                                                    {{item.operationSpecTypeName}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="row">
-                                            <div class="col-xs-12 text-right">
-                                                <button type="submit" class="btn btn-sm btn-query"><i class="iconfont">
-                                                    &#xe600;</i> 查询
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="staff-man-result">
-                            <div class="row result-header">
-                                <div class="col-xs-4">
-                                    <div class="title">
-                                        <img src="../../images/icon_staffList.png">
-                                        <p class="title-cn lh30">权限规格列表</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="result-table">
-                                <table class="table table-hover table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th width="5%">选择</th>
-                                        <th>权限规格编码</th>
-                                        <th>权限规格名称</th>
-                                        <th>权限类型</th>
-                                        <th>备注</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="item in PowerListResultList">
-                                        <td>
-                                            <input type="checkbox" name="checkbox{{$index}}"
-                                                   ng-click="check(item, isChecked)" ng-model="isChecked">
-                                        </td>
-                                        <td>
-                                            <p ng-bind="item.manageCd"></p>
-                                        </td>
-                                        <td>
-                                            <p ng-bind="item.name"></p>
-                                        </td>
-                                        <td>
-                                            <p ng-bind="item.operationSpecTypeName"></p>
-                                        </td>
-                                        <td>
-                                            <p ng-bind="item.description"></p>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <p class="no-data" ng-if="PowerListResultList && !PowerListResultList.length">
-                                    没有数据
-                                </p>
-                            </div>
-                            <div ng-controller="paginationCtrl" class="text-center">
-                                <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage"
-                                    ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()"
-                                    class="pagination-sm" boundary-links="true" rotate="false" first-text="首页"
-                                    last-text="尾页" previous-text="<" next-text=">"></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
-                        <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
-                    </div>
-                </script>
-                <!--弹出框-->
+            <div class="result-table">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th width="5%">选择</th>
+                        <th width="20%">权限规格编码</th>
+                        <th width="20%">权限规格名称</th>
+                        <th width="20%">权限类型</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in OperateSpecList">
+                        <td>
+                            <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)"
+                                   ng-model="isChecked">
+                        </td>
+                        <td>
+                            <p ng-bind="item.operationSpecCd"></p>
+                        </td>
+                        <td>
+                            <p ng-bind="item.name"></p>
+                        </td>
+                        <td>
+                            <p ng-bind="item.operationSpecTypeName"></p>
+                        </td>
+                        <td>
+                            <p class="overflow-handle" ng-bind="item.description"></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+            <!--弹出框-->
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="$ctrl.cancel()">Close</button>
+                    <h3 class="modal-title" id="modal-title"><i class="iconfont">&#xe603;</i>权限选择</h3>
+                </div>
+                <div class="modal-body" id="modal-body" ng-controller="queryPowerFormCtrl"
+                     ng-submit="queryPowerFormSubmit()">
+                    <div class="staff-man-query clearfix">
+                        <form name="queryPower" class="form-inline" role="form">
+                            <div class="row mb10">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label class="control-label sys_label" for="operationSpecCd">权限规格编码：</label>
+                                        <input type="text" id="operationSpecCd" class="form-control modify-input"
+                                               ng-model="queryPowerForm.operationSpecCd">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label class="control-label sys_label" for="name">权限规格名称：</label>
+                                        <input type="text" id="name" class="form-control modify-input"
+                                               ng-model="queryPowerForm.name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb10">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label class="control-label sys_label">权限类型：</label>
+                                        <select name="SpecItem" class="form-control modify-input" id="SpecItem"
+                                                ng-model="queryPowerForm.SpecItem">
+                                            <option value="">请选择权限类型</option>
+                                            <option ng-repeat="item in SpecList"
+                                                    value="{{item.operationSpecTypeCd}}">
+                                                {{item.operationSpecTypeName}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-right">
+                                            <button type="submit" class="btn btn-sm btn-query"><i class="iconfont">
+                                                &#xe600;</i> 查询
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="staff-man-result">
+                        <div class="row result-header">
+                            <div class="col-xs-4">
+                                <div class="title">
+                                    <img src="../../images/icon_staffList.png">
+                                    <p class="title-cn lh30">权限规格列表</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-table">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="6%">选择</th>
+                                    <th width="20%">权限规格编码</th>
+                                    <th width="20%">权限规格名称</th>
+                                    <th width="20%">权限类型</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in PowerListResultList">
+                                    <td>
+                                        <input type="checkbox" name="checkbox{{$index}}"
+                                               ng-click="check(item, isChecked)" ng-model="isChecked">
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.manageCd"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.name"></p>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="item.operationSpecTypeName"></p>
+                                    </td>
+                                    <td>
+                                        <p class="overflow-handle" ng-bind="item.description"></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <p class="no-data" ng-if="PowerListResultList && !PowerListResultList.length">
+                                没有数据
+                            </p>
+                        </div>
+                        <div ng-controller="paginationCtrl" class="text-center">
+                            <ul uib-pagination total-items="totalNum" items-per-page="rowNumPerPage"
+                                ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()"
+                                class="pagination-sm" boundary-links="true" rotate="false" first-text="首页"
+                                last-text="尾页" previous-text="<" next-text=">"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
+                    <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
+                </div>
+            </script>
+            <!--弹出框-->
         </div>
     </div>
     <div class="text-center mt20">

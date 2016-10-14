@@ -1,80 +1,96 @@
 .modify-staff {
-	padding: 10px 20px 0;
+    padding: 10px 20px 0;
 }
 
 /* 结果 */
 .staff-man-result {
-	margin-top: 10px;
+    margin-top: 10px;
 }
+
 .result-header {
-	height: 48px;
-	margin: 0;
-	line-height: 46px;
-	border: 1px solid #ddd;
-	border-bottom: none;
+    height: 48px;
+    margin: 0;
+    line-height: 46px;
+    border: 1px solid #ddd;
+    border-bottom: none;
 }
+
 .result-header .title {
-	position: relative;
-	padding-top: 9px;
-	padding-left: 32px;
-	line-height: 16px;
+    position: relative;
+    padding-top: 9px;
+    padding-left: 32px;
+    line-height: 16px;
 }
+
 .result-header .title img {
-	position: absolute;
-	top: 9px;
-	left: 0;
+    position: absolute;
+    top: 9px;
+    left: 0;
 }
+
 .result-header .title .title-cn {
-	color: #4c9ef5;
-	font-size: 14px;
+    color: #4c9ef5;
+    font-size: 14px;
 }
+
 .result-header .title .title-cn-info {
-	color: #f54c84;
-	font-size: 14px;
+    color: #f54c84;
+    font-size: 14px;
 }
+
 .result-header .title .title-en {
-	color: #ddd;
-	font-size: 12px;
+    color: #ddd;
+    font-size: 12px;
 }
+
 .modify-staff-man {
-	padding: 20px;
-	border: 1px solid #ddd;
+    padding: 10px;
+    border: 1px solid #ddd;
 }
+
 .edit-label {
     width: 100px !important;
     text-align: right;
 }
+
 .remark {
-	width: 805px !important;
-	height: 240px !important;
+    width: 805px !important;
+    height: 240px !important;
 }
+
 .check-default {
-	margin: 0 2px 0 8px !important;
+    margin: 0 2px 0 8px !important;
 }
+
 .modify-input {
-	width: 180px !important;
-	height: 28px;
+    width: 180px !important;
+    height: 28px;
 }
+
 .query-input {
-	width: 205px !important;
-	height: 28px;
+    width: 205px !important;
+    height: 28px;
 }
+
 .jobId-input {
-	width: 122px !important;
-	height: 28px;
+    width: 122px !important;
+    height: 28px;
 }
+
 .btn-jobId {
-	padding: 4px 14px;
+    padding: 4px 14px;
     background-color: #ffc619;
     border-color: #ffc619;
     color: #fff;
     font-size: 12px;
 }
+
 .btn-jobId:focus, .btn-jobId.focus {
-	background-color: #e4ae0c;
+    background-color: #e4ae0c;
     border-color: #e4ae0c;
-	color: #fff;
+    color: #fff;
 }
+
 .btn-jobId:hover {
     background-color: #e4ae0c;
     border-color: #e4ae0c;
@@ -84,188 +100,251 @@
 /* 弹出框 */
 
 .modal-content {
-	border-radius: 0;
+    border-radius: 0;
 }
+
 .modal-header {
-	background-color: #ffb319;
+    background-color: #ffb319;
 }
+
 .modal-title {
-	color: #fff;
-	font-size: 14px;
-	font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
 }
+
 .modal-title .iconfont {
-	margin-right: 6px;
+    margin-right: 6px;
 }
+
 .edit-label {
-	width: 100px !important;
-	text-align: right;
+    width: 100px !important;
+    text-align: right;
 }
+
 .edit-input {
-	width: 200px !important;
+    width: 200px !important;
 }
+
 .mb10 {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
+
 .modal-footer {
-	text-align: center !important;
+    text-align: center !important;
 }
 
 .result-header {
-	height: 48px;
-	margin: 0;
-	line-height: 46px;
-	border: 1px solid #ddd;
-	border-bottom: none;
+    height: 37px;
+    margin: 0;
+    line-height: 32px;
+    border: 1px solid #ddd;
+    border-bottom: none;
 }
+
 .result-header .title {
-	position: relative;
-	padding-top: 9px;
-	padding-left: 32px;
-	line-height: 16px;
+    position: relative;
+    padding-top: 4px;
+    padding-left: 32px;
+    line-height: 16px;
 }
+
 .result-header .title img {
-	position: absolute;
-	top: 9px;
-	left: 0;
+    position: absolute;
+    top: 4px;
+    left: 0;
 }
+
 .result-header .title .title-cn {
-	color: #4c9ef5;
-	font-size: 14px;
+    color: #4c9ef5;
+    font-size: 14px;
 }
+
 .result-header .title .title-en {
-	color: #ddd;
-	font-size: 12px;
+    color: #ddd;
+    font-size: 12px;
 }
+
 .btn-set {
-	margin-left: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
+    margin-left: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
     background-color: #ffc619;
     border-color: #ffc619;
     color: #fff;
     font-size: 12px;
 }
+
 .btn-set:focus, .btn-set.focus {
-	background-color: #e4ae0c;
-	border-color: #e4ae0c;
-	color: #fff;
+    background-color: #e4ae0c;
+    border-color: #e4ae0c;
+    color: #fff;
 }
+
 .btn-set:hover {
     background-color: #e4ae0c;
     border-color: #e4ae0c;
     color: #fff;
 }
+
 .result-table table th {
-	background-color: #f5fafa;
-	border-bottom-width: 1px !important;
-	color: #333;
-	font-weight: 800;
-	text-align: center;
-}
-.result-table table td {
-	padding: 6px !important;
-	text-align: center;
-}
-.result-table table td p {
-	height: 25px;
-	line-height: 25px;
+    background-color: #f5fafa;
+    border-bottom-width: 1px !important;
+    color: #333;
+    font-weight: 800;
+    text-align: center;
 }
 
-.title_addsys{
-	height: 20px;
-	line-height: 20px;
+.result-table table td {
+    padding: 6px !important;
+    text-align: center;
 }
+
+.result-table table td p {
+    height: 25px;
+    line-height: 25px;
+}
+
+.title_addsys {
+    height: 20px;
+    line-height: 20px;
+}
+
 .newmodule-header {
-	height: 40px;
-	margin: 0;
-	line-height: 40px;
-	border: 1px solid #ddd;
-	border-bottom: none;
+    height: 40px;
+    margin: 0;
+    line-height: 40px;
+    border: 1px solid #ddd;
+    border-bottom: none;
 }
+
 .newmodule-header .title {
-	position: relative;
-	padding-top: 9px;
-	padding-left: 32px;
-	line-height: 16px;
+    position: relative;
+    padding-top: 9px;
+    padding-left: 32px;
+    line-height: 16px;
 }
+
 .newmodule-header .title img {
-	position: absolute;
-	top: 9px;
-	left: 0;
+    position: absolute;
+    top: 9px;
+    left: 0;
 }
+
 .newmodule-header .title .title-cn {
-	color: #4c9ef5;
-	font-size: 14px;
+    color: #4c9ef5;
+    font-size: 14px;
 }
+
 .newmodule-header .title .title-en {
-	color: #ddd;
-	font-size: 12px;
+    color: #ddd;
+    font-size: 12px;
 }
 
 .input_w805 {
     width: 805px !important;
 }
 
-.sys_label{
-	width: 84px!important;
-	text-align: right;
-}
-.lh30{
-	height: 30px;
-	line-height: 30px;
-}
-.modal-left{
-	float:left;
-	display:inline-block;
-	width:700px;
-}
-.model-right{
-	float:right;
-	display:inline-block;
-	width:130px;
-	margin:15px 35px 0px 0px;
-}
-
-.mt20{
-	margin-top: 20px;
-}
-.label_wh70 {
-    width: 70px!important;
+.sys_label {
+    width: 84px !important;
     text-align: right;
 }
+
+.lh30 {
+    height: 30px;
+    line-height: 30px;
+}
+
+.modal-left {
+    float: left;
+    display: inline-block;
+    width: 700px;
+}
+
+.model-right {
+    float: right;
+    display: inline-block;
+    width: 130px;
+    margin: 15px 35px 0px 0px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.label_wh70 {
+    width: 70px !important;
+    text-align: right;
+}
+
 .input_wh495 {
-	width: 495px !important;
-	height: 28px;
+    width: 495px !important;
+    height: 28px;
 }
+
 .input_wh545 {
-	width: 545px !important;
-	height: 28px;
+    width: 545px !important;
+    height: 28px;
 }
+
 .input_wh500 {
-	width: 545px !important;
-	height: 28px;
+    width: 545px !important;
+    height: 28px;
 }
-.role_text{
-	height: 34px;
+
+.role_text {
+    height: 34px;
     line-height: 34px;
     color: #333;
 }
-.detail-input{
-	border:none;
-    background: #fff!important;
+
+.detail-input {
+    height: 28px;
+    line-height: 25px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    background: #fff !important;
     box-shadow: inset 0 0 0 rgba(0, 0, 0, .075);
     -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, .075);
     font-size: 12px;
     padding: 0 5px;
 }
-.detail-p{
-	border:none;
-	background: #fff!important;
+
+.detail-p {
+    border: none;
+    background: #fff !important;
     box-shadow: inset 0 0 0 rgba(0, 0, 0, .075);
     -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, .075);
     font-size: 12px;
     padding: 0 5px;
     height: 28px;
     line-height: 28px;
+}
+
+/* input 百分比 */
+.form-group {
+    position: relative;
+    width: 100% !important;
+    padding-left: 120px;
+}
+
+.form-group label {
+    position: absolute;
+    left: 0;
+    width: 120px !important;
+    line-height: 25px;
+    text-align: right;
+}
+
+.form-group [type="text"] {
+    width: 100% !important;
+}
+
+.form-group select {
+    width: 100% !important;
+}
+
+.form-group textarea {
+    width: 100% !important;
 }
