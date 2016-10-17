@@ -144,8 +144,9 @@
     text-align: right;
 }
 .query-input {
-	width: 155px !important;
-	height: 30px;
+	height: 25px;
+    padding: 0 12px;
+    line-height: 25px;
 }
 
 /* 结果 */
@@ -227,3 +228,33 @@
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
     padding: 5px 0;
 }
+
+/* input 百分比 */
+.form-group {
+    position: relative;
+    width: 100% !important;
+    padding-left: 120px;
+}
+.form-group label {
+    position: absolute;
+    left: 0;
+    width: 120px !important;
+    line-height: 25px;
+    text-align: right;
+}
+.form-group input[type="text"] {
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group select{
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group textarea {
+    width: 100% !important;
+}
+

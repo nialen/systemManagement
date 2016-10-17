@@ -86,22 +86,22 @@
 }
 
 .result-header {
-	height: 48px;
+	height: 37px;
 	margin: 0;
-	line-height: 46px;
+	line-height: 32px;
 	border: 1px solid #ddd;
 	border-bottom: none;
     overflow: hidden;
 }
 .result-header .title {
 	position: relative;
-	padding-top: 9px;
+	padding-top: 4px;
 	padding-left: 32px;
 	line-height: 16px;
 }
 .result-header .title img {
 	position: absolute;
-	top: 9px;
+	top: 4px;
 	left: 0;
 }
 .result-header .title .title-cn {
@@ -139,14 +139,16 @@
 	text-align: center;
 }
 .result-table table td {
-	padding: 6px !important;
+	padding: 2px !important;
 	text-align: center;
 }
 .result-table table td p {
 	height: 25px;
 	line-height: 25px;
 }
-
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    padding: 5px 0;
+}
 /* input 百分比 */
 .form-group {
     position: relative;
