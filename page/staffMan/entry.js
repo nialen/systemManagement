@@ -5,7 +5,7 @@
 
 window.loading = {
     finish: function () {
-        parent.$('.iframe-box').height(parent.$('.tabs-content').height());
+        parent.$('.iframe-box').height(parent.$('.tabs-content').height()+3);
     },
     load: function () {
         require.config({

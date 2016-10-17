@@ -60,7 +60,8 @@
 	height: 28px;
 }
 .btn-jobId {
-	padding: 4px 14px;
+	width:25%;
+	padding: 3px 0;
     background-color: #ffc619;
     border-color: #ffc619;
     color: #fff;
@@ -85,22 +86,22 @@
 }
 
 .result-header {
-	height: 48px;
+	height: 37px;
 	margin: 0;
-	line-height: 46px;
+	line-height: 32px;
 	border: 1px solid #ddd;
 	border-bottom: none;
     overflow: hidden;
 }
 .result-header .title {
 	position: relative;
-	padding-top: 9px;
+	padding-top: 4px;
 	padding-left: 32px;
 	line-height: 16px;
 }
 .result-header .title img {
 	position: absolute;
-	top: 9px;
+	top: 4px;
 	left: 0;
 }
 .result-header .title .title-cn {
@@ -138,10 +139,67 @@
 	text-align: center;
 }
 .result-table table td {
-	padding: 6px !important;
+	padding: 2px !important;
 	text-align: center;
 }
 .result-table table td p {
 	height: 25px;
 	line-height: 25px;
 }
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    padding: 5px 0;
+}
+/* input 百分比 */
+.form-group {
+    position: relative;
+    width: 100% !important;
+    padding-left: 120px;
+}
+.form-group label {
+    position: absolute;
+    left: 0;
+    width: 120px !important;
+    line-height: 25px;
+    text-align: right;
+}
+.form-group label.special {
+    position: absolute;
+    left: 96%;
+    width: 120px !important;
+    line-height: 25px;
+    text-align: right;
+    top:0;
+}
+.form-group input[type="checkbox"] {
+    position: absolute;
+    left: 99%;
+    top:6px;
+}
+.form-group input[type="text"] {
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group input[type="password"] {
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group input.special{
+    width: 73% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group select{
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group textarea {
+    width: 100% !important;
+}
+
