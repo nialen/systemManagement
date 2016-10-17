@@ -122,8 +122,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.totalNum = 0; // 总条数
 
             $scope.queryRoleFormSubmit = function (currentPage) {
-                $scope.checkedRole = []; // 置空已选角色定义列表
+                !currentPage && $scope.$broadcast('pageChange');
 
+                $scope.checkedRole = []; // 置空已选角色定义列表
                 var param = {
                     // roleId: '', // 角色Id
                     // name: '', // 角色名称
@@ -228,7 +229,12 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
         }])
         // 分页控制器
-        .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+        .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
+            debugger
+            $scope.$on('pageChange', function () {
+                $scope.currentPage = 1;
+            });
+
             $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;

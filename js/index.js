@@ -112,10 +112,15 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
              * @index 需要删除的索引
              */
             $scope.removeTab = function (index) {
-                if (index <= $scope.selectedIndex) {
+                var i = index || $scope.selectedIndex;
+                if (i <= $scope.selectedIndex) {
                     $scope.changeTab($scope.selectedIndex ? $scope.selectedIndex - 1 : $scope.selectedIndex);
                 }
-                tabs.splice(index, 1);
+                tabs.splice(i, 1);
+
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
             };
             /**
              * 切换展示的Tab索引
@@ -123,7 +128,7 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
              */
             $scope.changeTab = function (selectedIndex) {
                 $scope.selectedIndex = selectedIndex;
-            }
+            };
         }])
         // 左侧菜单
         .controller('accordionCtrl', ['$scope', 'httpMethod', function ($scope, httpMethod) {

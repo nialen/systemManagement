@@ -212,7 +212,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
             $scope.startPopupOpened = false;
             $scope.endPopupOpened = false;
 
-
             $scope.modifyRoleFormSubmit = function () {
                 var param = {
                     roleId: '',//角色Id
@@ -243,7 +242,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                                 text: '新建角色成功！',
                                 type: 'success'
                             }, function () {
-                                location.reload();
+                                $timeout(function () {
+                                    parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                                });
                             });
                         } else {
                             swal("OMG", rsp.msg || "新建角色失败!", "error");
@@ -252,9 +253,16 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                 } else {
                     httpMethod.alterRole(param).then(function (rsp) {
                         $log.log('调用修改角色接口成功.');
-                        if (rsp.success) {
-                            swal("操作成功", "修改角色成功!", "success");
-                            // TODO 关闭TABS
+                        if (rsp.data) {
+                            swal({
+                                title: '操作成功!',
+                                text: '修改角色成功！',
+                                type: 'success'
+                            }, function () {
+                                $timeout(function () {
+                                    parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                                });
+                            });
                         } else {
                             swal("OMG", rsp.msg || "修改角色失败!", "error");
                         }
