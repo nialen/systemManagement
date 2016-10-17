@@ -43,7 +43,7 @@
                                 <div class="col-xs-4">
                                     <div class="form-group">
                                         <label class="control-label edit-label" for="staffNumber">员工工号：</label>
-                                        <input type="text" id="staffNumber" class="form-control jobId-input" ng-model="modifyStaffForm.staffNumber" disabled>
+                                        <input type="text" id="staffNumber" class="form-control jobId-input special" ng-model="modifyStaffForm.staffNumber" disabled>
                                         <button type="button" ng-click="checkStaffMan()" ng-disabled="!isEnableEditPassword" class="btn btn-sm btn-jobId">选择</button>
                                     </div>
                                 </div>
@@ -75,12 +75,12 @@
                                 </div>
                             </div>
                             <div class="row mb10">
-                                <div class="col-xs-12">
+                                <div class="col-xs-4">
                                     <div class="form-group" ng-if="isEnableEditPassword">
                                         <label class="control-label edit-label" for="confirmPassword">密码确认：</label>
                                         <input type="password" id="confirmPassword" class="form-control modify-input" ng-model="modifyStaffForm.confirmPassword" ng-disabled="modifyStaffForm.checkDefault">
                                         <input type="checkbox" id="checkDefault" class="check-default" ng-model="modifyStaffForm.checkDefault">
-                                        <label class="control-label" for="checkDefault">默认初始化6个8</label>
+                                        <label class="control-label special" for="checkDefault">默认初始化6个8</label>
                                     </div>
                                 </div>
                             </div>

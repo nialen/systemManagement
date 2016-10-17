@@ -60,7 +60,8 @@
 	height: 28px;
 }
 .btn-jobId {
-	padding: 4px 14px;
+	width:25%;
+	padding: 3px 0;
     background-color: #ffc619;
     border-color: #ffc619;
     color: #fff;
@@ -145,3 +146,58 @@
 	height: 25px;
 	line-height: 25px;
 }
+
+/* input 百分比 */
+.form-group {
+    position: relative;
+    width: 100% !important;
+    padding-left: 120px;
+}
+.form-group label {
+    position: absolute;
+    left: 0;
+    width: 120px !important;
+    line-height: 25px;
+    text-align: right;
+}
+.form-group label.special {
+    position: absolute;
+    left: 96%;
+    width: 120px !important;
+    line-height: 25px;
+    text-align: right;
+    top:0;
+}
+.form-group input[type="checkbox"] {
+    position: absolute;
+    left: 99%;
+    top:6px;
+}
+.form-group input[type="text"] {
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group input[type="password"] {
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group input.special{
+    width: 73% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group select{
+    width: 100% !important;
+    height: 25px;
+    padding: 0 12px;
+    line-height:25px;
+}
+.form-group textarea {
+    width: 100% !important;
+}
+
