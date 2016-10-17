@@ -97,19 +97,20 @@ body {
 }
 
 .btn-cancel {
-    background-color: #c1c1c1;
-    color: #fff;
+    background-color: #ffefce;
+    color: #ff7f00;
+    border:1px solid #ffcc00;
     box-shadow: none;
 }
 
 .btn-cancel:focus, .btn-cancel.focus {
-    background-color: #b9b9b9;
-    color: #fff;
+    background-color: #f8dda4;
+    color: #ff7f00;
 }
 
 .btn-cancel:hover {
-    background-color: #b9b9b9;
-    color: #fff;
+    background-color: #f8dda4;
+    color: #ff7f00;
 }
 
 /* 分页 */
@@ -137,8 +138,13 @@ body {
 
 .modal-header {
     background-color: #ffb319;
+    padding:4px 15px;
 }
-
+.modal-header .close{
+    color: #fff;
+    opacity: 1;
+    margin-top: 4px;
+}
 .modal-title {
     color: #fff;
     font-size: 14px;
