@@ -116,16 +116,13 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label class="control-label edit-label" for="operationSpecTypeCd">权限类型编码：</label>
-                                <input type="text" id="operationSpecTypeCd" class="form-control query-input"
-                                       ng-model="modifiedQueryType.operationSpecTypeCd"
-                                       ng-disabled="{{!isEnabledState}}">
+                                <input type="text" id="operationSpecTypeCd" class="form-control query-input" ng-model="modifiedQueryType.operationSpecTypeCd" ng-disabled="{{!isEnabledState}}">
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label class="control-label edit-label" for="operationSpecCdPrefix">权限规格编码前缀：</label>
-                                <input type="text" id="operationSpecCdPrefix" class="form-control query-input"
-                                       ng-model="modifiedQueryType.operationSpecCdPrefix">
+                                <input type="text" id="operationSpecCdPrefix" class="form-control query-input" ng-model="modifiedQueryType.operationSpecCdPrefix">
                             </div>
                         </div>
                     </div>
@@ -133,8 +130,7 @@
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label class="control-label edit-label" for="name">权限类型名称：</label>
-                                <input type="text" id="name" class="form-control query-input"
-                                       ng-model="modifiedQueryType.operationSpecTypeName">
+                                <input type="text" id="name" class="form-control query-input" ng-model="modifiedQueryType.operationSpecTypeName">
                             </div>
                         </div>
                     </div>
@@ -142,8 +138,7 @@
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label class="control-label edit-label" for="description">描述：</label>
-                                <textarea col="" row="10" id="description" class="form-control edit-txt"
-                                          ng-model="modifiedQueryType.description"></textarea>
+                                <textarea col="" row="10" id="description" class="form-control edit-txt" ng-model="modifiedQueryType.description"></textarea>
                             </div>
                         </div>
                     </div>
@@ -151,7 +146,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-cancel" type="button" ng-click="$ctrl.cancel()">关闭</button>
-                <button class="btn btn-submit" type="button" ng-click="$ctrl.ok()">确定</button>
+                <button class="btn btn-submit" type="button" ng-disabled="isForbidSubmit" ng-click="$ctrl.ok()">确定</button>
             </div>
         </script>
     </div>

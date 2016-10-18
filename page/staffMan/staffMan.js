@@ -203,6 +203,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 areaItem: '' // 地区
             };
             $scope.queryStaffFormSubmit = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 $scope.checkedStaffMan = []; // 置空已选员工列表
 
                 var param = {
@@ -485,6 +486,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
+            $scope.$on('pageChange', function () {
+                $scope.currentPage = 1;
+            });
             $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;
