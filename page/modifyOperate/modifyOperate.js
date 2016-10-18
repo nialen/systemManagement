@@ -16,6 +16,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
             $rootScope.systemList = []; //所属系统
             $rootScope.sysType = []; //业务模块类型
 
+            $rootScope.isForbidSubmit = true; // 禁用提交按钮
         }])
         .factory('httpMethod', ['$http', '$q', function ($http, $q) {
             var httpMethod = {};
@@ -277,6 +278,14 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                 if (current.operationSpecCd !== old.operationSpecCd || current.name !== old.name) {
                     scope.modifyOperateForm.operationSpecCd = $rootScope.modifiedOperateSpec.operationSpecCd;
                     scope.modifyOperateForm.name = $rootScope.modifiedOperateSpec.name;
+                }
+            }, true);
+
+            $scope.$watch('modifyOperateForm', function (current, old, scope) {
+                if (scope.modifyOperateForm.operationSpecCd || scope.modifyOperateForm.name || scope.modifyOperateForm.operationSpecTypeCd) {
+                    scope.isForbid = false;
+                } else {
+                    scope.isForbid = true;
                 }
             }, true);
         }])

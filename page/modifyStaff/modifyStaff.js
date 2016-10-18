@@ -115,7 +115,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'angular-md5', 'ui-boot
             }
         })
         // 修改用户控制器
-        .controller('modifyStaffFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', 'md5', function ($scope, $rootScope, $log, httpMethod, md5) {
+        .controller('modifyStaffFormCtrl', ['$scope', '$rootScope', '$log', '$timeout', 'httpMethod', 'md5', function ($scope, $rootScope, $log, $timeout, httpMethod, md5) {
             $scope.isForbid = true;
             $scope.modifyStaffForm = $.extend(true, {
                 userId: '', //用户ID
@@ -156,7 +156,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'angular-md5', 'ui-boot
                                 text: '新建用户成功！',
                                 type: 'success'
                             }, function () {
-                                location.reload();
+                                $timeout(function () {
+                                    parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                                });
                             });
                         } else {
                             swal("OMG", rsp.msg || "新建用户失败!", "error");
@@ -167,10 +169,17 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'angular-md5', 'ui-boot
                     httpMethod.alterUser(param).then(function (rsp) {
                         $log.log('调用修改用户接口成功.');
                         if (rsp.success) {
-                            swal("操作成功", "修改用户成功!", "success");
-                            // TODO 关闭TABS
+                           swal({
+                                title: '操作成功!',
+                                text: '修改用户成功！',
+                                type: 'success'
+                            }, function () {
+                                $timeout(function () {
+                                    parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                                });
+                            });
                         } else {
-                            swal("OMG", rsp.msg || "新建用户失败!", "error");
+                            swal("OMG", rsp.msg || "修改用户失败!", "error");
                         }
                     })
                 }
