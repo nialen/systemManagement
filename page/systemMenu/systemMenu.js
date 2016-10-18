@@ -7,7 +7,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     angular
         .module('systemMenuModule', ['ui.bootstrap'])
         .run(['$rootScope', function ($rootScope) {
-            $rootScope.isMock = false; // 是否MOCK数据
             $rootScope.checkedSysModular = {}; // 选中的业务模块ID
             $rootScope.choiceMenu = {
                 // sysModularId: '' // 选中的业务模块ID
@@ -358,13 +357,13 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             $scope.querySysFormSubmit = function (currentPage) {
                 var param = {
-                    // 'sysModularId': '', // 业务模块Id
-                    // 'name': '', // 业务模块名称
-                    // 'sysId ': '', // 所属系统
-                    // 'modularTypeCd ': '', // 业务模块类型
-                    'requirePaging': $scope.requirePaging, // 是否需要分页
-                    'currentPage': currentPage || $scope.currentPage, // 当前页
-                    'rowNumPerPage': $scope.rowNumPerPage // 每页展示行数
+                    // sysModularId: '', // 业务模块Id
+                    // name: '', // 业务模块名称
+                    // sysId: '', // 所属系统
+                    // modularTypeCd: '', // 业务模块类型
+                    requirePaging: $scope.requirePaging, // 是否需要分页
+                    currentPage: currentPage || $scope.currentPage, // 当前页
+                    rowNumPerPage: $scope.rowNumPerPage // 每页展示行数
                 };
                 $scope.querySysForm.name ? param.name = $scope.querySysForm.name : '';
                 $scope.querySysForm.sysModularId ? param.sysModularId = $scope.querySysForm.sysModularId : '';
@@ -378,22 +377,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 }, function () {
                     $log.log('调用查询业务系统平台接口失败.');
                 });
-                if ($rootScope.isMock) {
-                    $scope.sysResultList = [{
-                        description: '用户管理', // 描述
-                        intfFunc: '1', // 接口方法
-                        modularTypeCd: '1', // 业务模块类型
-                        modularTypeName: '前端界面',
-                        name: '客户查询', // 业务模块名称
-                        sysId: '3', // 所属系统
-                        sysModularId: '141', // 业务模块ID
-                        sysName: '流量分销', // 所属系统名称
-                        upSysModularId: '1', // 上级模块Id
-                        upSysModularName: '用户管理', // 上级模块名称
-                        url: '/flow-backend/view/cust/queryCusts.jsp' // 模块URL
-                    }];
-                    $scope.totalNum = 2;
-                }
             };
             $scope.$watch('querySysForm', function (current, old, scope) {
                 if (scope.querySysForm.sysModularId || scope.querySysForm.name || scope.querySysForm.modularTypeItem || scope.querySysForm.sysSystemItem) {

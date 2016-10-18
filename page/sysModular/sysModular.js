@@ -7,7 +7,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     angular
         .module('sysModularModule', ['ui.bootstrap'])
         .run(['$rootScope', function ($rootScope) {
-            $rootScope.isMock = false; // 是否MOCK数据
             $rootScope.modifiedSys = {}; // 待修改的模块信息
             $rootScope.isForbidSubmit = true; // 禁用编辑模块提交按钮
             $rootScope.sysType = []; // 业务模块类型列表

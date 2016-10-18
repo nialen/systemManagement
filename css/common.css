@@ -73,7 +73,7 @@ body {
     border: none;
     font-weight: normal;
     border-radius: 5px;
-    padding: 5px 15px;
+    padding: 5px 20px;
     margin: 0 5px;
     cursor: pointer;
     line-height: normal;
@@ -99,7 +99,7 @@ body {
 .btn-cancel {
     background-color: #ffefce;
     color: #ff7f00;
-    border:1px solid #ffcc00;
+    /*border:1px solid #ffcc00;*/
     box-shadow: none;
 }
 
@@ -123,12 +123,16 @@ body {
 }
 
 .pagination-sm > li > a, .pagination-sm > li > span {
-    padding: 6px 20px;
+    padding: 3px 18px;
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
     background-color: #ff9f19;
     border-color: #ff9f19;
+}
+
+.table {
+    margin-bottom: 10px;
 }
 
 /* 弹出框 */
