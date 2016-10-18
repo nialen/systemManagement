@@ -68,6 +68,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 namobileTelme: ''
             };
             $scope.queryStaffFormSubmit = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 var param = {
                     // loginCode: '',//登录账号
                     // staffNumber: '',//员工工号
@@ -114,6 +115,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
+            $scope.$on('pageChange', function () {
+                $scope.currentPage = 1;
+            });
             $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;

@@ -162,7 +162,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         /*传入数据*/
 
         // 修改用户控制器
-        .controller('modifySysFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+        .controller('modifySysFormCtrl', ['$scope', '$rootScope', '$log','$timeout', 'httpMethod', function ($scope, $rootScope, $log, $timeout, httpMethod) {
             // 获取业务模块类型列表
             httpMethod.queryModularType().then(function (rsp) {
                 $log.log('调用获取业务模块类型接口成功.');
@@ -241,7 +241,10 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                                 text: '新建模块成功！',
                                 type: 'success'
                             }, function () {
-                                location.reload();
+                                // location.reload();
+                                $timeout(function () {
+                                    parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                                });
                             });
                         } else {
                             swal("OMG", rsp.msg || "新建模块失败!", "error");
@@ -251,7 +254,15 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     httpMethod.alterSysModular(param).then(function (rsp) {
                         $log.log('调用修改模块接口成功.');
                         if (rsp.data) {
-                            swal("操作成功", "修改模块成功!", "success");
+                            swal({
+                                title: '操作成功!',
+                                text: '修改模块成功！',
+                                type: 'success'
+                            }, function () {
+                                $timeout(function () {
+                                    parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                                });
+                            });
                         } else {
                             swal("OMG", rsp.msg || "修改模块失败!", "error");
                         }

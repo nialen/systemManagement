@@ -102,6 +102,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 name: ''
             };
             $scope.queryTypeFormSubmit = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 $scope.checkedPrivilegeType = []; // 置空已选权限类型列表
 
                 var param = {
@@ -311,6 +312,10 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+            $scope.$on('pageChange', function () {
+                $scope.currentPage = 1;
+            });
+
             $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;

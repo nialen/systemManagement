@@ -177,6 +177,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
 
             $scope.querySysFormSubmit = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 $scope.checkedSys = []; // 置空已选业务模型列表
 
                 var param = {
@@ -447,6 +448,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+            $scope.$on('pageChange', function () {
+                $scope.currentPage = 1;
+            });
             $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;

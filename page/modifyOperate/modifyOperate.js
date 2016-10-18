@@ -192,7 +192,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
 
     // 修改权限规格基本信息控制器
-    .controller('modifyOperateFormCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function($scope, $rootScope, $log, httpMethod) {
+    .controller('modifyOperateFormCtrl', ['$scope', '$rootScope', '$log', '$timeout','httpMethod', function($scope, $rootScope, $log, $timeout, httpMethod) {
         // 获取权限类型列表
         httpMethod.queryOperationType().then(function(rsp) {
             $log.log('调用获取权限类型接口成功.');
@@ -246,7 +246,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                             text: '新建权限规格成功！',
                             type: 'success'
                         }, function() {
-                            location.reload();
+                            $timeout(function () {
+                                parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                            });
                         });
                     } else {
                         swal("OMG", rsp.msg || "新建权限规格失败!", "error");
@@ -255,9 +257,16 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             } else {
                 httpMethod.alertOperateSpec(param).then(function(rsp) {
                     $log.log('调用修改权限规格接口成功.');
-                    if (rsp.success) {
-                        swal("操作成功", "修改权限规格成功!", "success");
-                        // TODO 关闭TABS
+                   if (rsp.data) {
+                        swal({
+                            title: '操作成功!',
+                            text: '修改权限规格成功！',
+                            type: 'success'
+                        }, function () {
+                            $timeout(function () {
+                                parent.angular.element(parent.$('#tabs')).scope().removeTab();
+                            });
+                        });
                     } else {
                         swal("OMG", rsp.msg || "修改权限规格失败!", "error");
                     }
