@@ -6,7 +6,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     angular
         .module('staffManModule', ['ui.bootstrap'])
         .run(['$rootScope', function ($rootScope) {
-            $rootScope.isMock = false; // 是否MOCK数据
             $rootScope.staffManResultList = []; // 查询员工列表
             $rootScope.modifiedStaffMan = {}; // 待修改的员工信息
             $rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
@@ -196,30 +195,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             });
 
             $scope.checkedStaffMan = []; // 已经选中的员工信息
-
-            if ($rootScope.isMock) {
-                $rootScope.areaList = [{
-                    'areaId': '1', //地区ID
-                    'areaName': '南京市', //地区名称
-                    'areaCode': '025', //地区编码
-                    'areaIdParent': null, //上级地区ID
-                    'areaTier': '3', //地区级别
-                    'areaDesc': '南京市', //地区描述
-                    'commonRegionId': null,
-                    'state': null, //地区状态
-                    'areaNameParent': null //上级地区名称
-                }, {
-                    'areaId': '2',
-                    'areaName': '无锡市',
-                    'areaCode': '0510',
-                    'areaIdParent': null,
-                    'areaTier': '3',
-                    'areaDesc': '无锡市',
-                    'commonRegionId': null,
-                    'state': null,
-                    'areaNameParent': null
-                }];
-            }
 
             $scope.isForbid = true;
             $scope.queryStaffForm = {

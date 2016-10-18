@@ -230,7 +230,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
-            debugger
             $scope.$on('pageChange', function () {
                 $scope.currentPage = 1;
             });

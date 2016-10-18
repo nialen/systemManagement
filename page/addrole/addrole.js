@@ -397,6 +397,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
             $scope.totalNum = 0; // 总条数
 
             $scope.queryPowerFormSubmit = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 var param = {
                     // roleId: '',
                     // operationSpecCd: '',//权限规格编码
@@ -461,7 +462,11 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
 
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
-            $scope.maxSize = 8;
+            $scope.$on('pageChange', function () {
+                $scope.currentPage = 1;
+            });
+
+            $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;
             };

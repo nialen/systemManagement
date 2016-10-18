@@ -15,6 +15,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $rootScope.operationSpecCd = item.operationSpecCd;
             };
             $rootScope.authorityDimensionList = []; // 权限维度详情列表
+            $rootScope.checkedBeforeOperationSpecList = []; // 已选择权限列表
+            $rootScope.checkedAfterOperationSpecList = []; // 已选择权限列表(入参格式)
+            $rootScope.checkedAddRoleList = []; // 选中待添加的角色列表
         }])
         .factory('httpMethod', ['$http', '$q', function ($http, $q) {
             var httpMethod = {};
@@ -263,6 +266,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.totalNum = 0; // 总条数
 
             $scope.queryUserPrivilege = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 $rootScope.checkedOperationSpecList = []; // 选中的待删除的权限列表
                 var param = {
                     userId: $rootScope.staffManInformation.userId,//用户id
@@ -285,6 +289,9 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             // 添加新权限
             $scope.addAuthority = function () {
+                $rootScope.operationSpecList = []; // 置空已查询列表
+                $rootScope.checkedBeforeOperationSpecList = []; // 置空已选择权限列表
+                $rootScope.checkedAfterOperationSpecList = []; // 置空已选择权限列表(入参格式)
                 $scope.$emit('openAddAuthorityModal');
             };
 
@@ -367,6 +374,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         // 分配角色控制器
         .controller('assignedRoleListCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
             $scope.queryUserPostRole = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 $rootScope.checkedAssignedRoleList = []; // 选中的待删除的角色列表
                 var param = {
                     userId: $rootScope.staffManInformation.userId,//用户id
@@ -389,6 +397,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             // 添加新角色
             $scope.addRole = function () {
+                $rootScope.roleResultList = []; // 置空已查询角色列表
+                $rootScope.checkedAddRoleList = []; // 置空选中待添加的角色列表
                 $scope.$emit('openAddRoleModal');
             };
 
@@ -693,6 +703,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             };
 
             $scope.queryUserPrivilege = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 $rootScope.checkedBeforeOperationSpecList = []; // 已选择权限列表
                 $rootScope.checkedAfterOperationSpecList = []; // 已选择权限列表(入参格式)
 
@@ -795,6 +806,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             };
 
             $scope.queryUserPrivilege = function (currentPage) {
+                !currentPage && $scope.$broadcast('pageChange');
                 $rootScope.checkedAddRoleList = []; // 选中待添加的角色列表
 
                 var param = {
@@ -880,6 +892,10 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
+            $scope.$on('pageChange', function () {
+                $scope.currentPage = 1;
+            });
+
             $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;
