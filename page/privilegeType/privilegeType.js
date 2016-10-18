@@ -6,6 +6,11 @@
 define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'angular-animate'], function (angular, $, httpConfig, swal) {
     angular
         .module('privilegeTypeModule', ['ui.bootstrap'])
+         .run(['$rootScope', function ($rootScope) {
+            // $rootScope.queryTypeResultList = []; // 查询权限类型列表
+            // $rootScope.modifiedQueryType = {}; // 待修改的权限类型信息
+            $rootScope.isForbidSubmit = true; // 禁用提交按钮
+        }])
         .factory('httpMethod', ['$http', '$q', function ($http, $q) {
             var httpMethod = {};
 
