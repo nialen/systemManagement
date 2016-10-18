@@ -297,3 +297,7 @@
 	width: 100%;
     min-height: 488px;
 }
+
+.sweet-alert {
+    top: 50%;
+}

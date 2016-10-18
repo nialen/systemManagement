@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>系统管理平台</title>
+    <link rel="stylesheet" href="../../lib/css/sweetalert.css">
     <link href="lib/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
@@ -28,7 +29,7 @@
                 <img src="images/photo1.jpg" alt="" class="photo fn-left">
                 <span class="name" ng-bind="userInfo.name"></span>
             </div>
-            <div class="login-out fn-left">退出</div>
+            <div class="login-out fn-left" ng-click="loginOut()">退出</div>
         </div>
     </div>
     <div class="index-content" id="tabs" ng-controller="tabsCtrl">

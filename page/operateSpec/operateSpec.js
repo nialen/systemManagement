@@ -297,7 +297,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 } else {
                     swal("操作提醒", "您没有选中任何需要启用的权限规格！", "info");
                 }
-            }
+            };
             // 停用
             $scope.lockOperateSpec = function (state) {
                 if ($scope.checkedOperateSpec.length) {

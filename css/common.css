@@ -193,9 +193,14 @@ body {
 }
 
 .sweet-alert button {
-    padding: 10px 20px;
+    padding: 5px 20px;
     font-size: 14px;
     font-weight: normal !important;
+}
+
+.sweet-alert button.cancel {
+    background-color: #ffefce !important;
+    color: #ff7f00;
 }
 
 .la-ball-fall > div {

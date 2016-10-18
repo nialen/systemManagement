@@ -3,7 +3,7 @@
  * Date 2016-09-06
  */
 
-define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular, $, httpConfig) {
+define(['angular', 'jquery', 'sweetalert', 'httpConfig', 'angular-animate'], function (angular, $, swal, httpConfig) {
     angular.module('indexModule', ['ngAnimate'])
         .factory('httpMethod', ['$http', '$q', function ($http, $q) {
             var httpMethod = {};
@@ -24,10 +24,26 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
                 });
                 return defer.promise;
             };
-
+            // 用户登出
+            httpMethod.login = function () {
+                var defer = $q.defer();
+                $http({
+                    url: httpConfig.siteUrl + '/login.action',
+                    method: 'POST',
+                    headers: httpConfig.requestHeader
+                }).success(function (data, header, config, status) {
+                    if (status != 200) {
+                        // 跳转403页面
+                    }
+                    defer.resolve(data);
+                }).error(function (data, status, headers, config) {
+                    defer.reject(data);
+                });
+                return defer.promise;
+            };
             return httpMethod;
         }])
-        .controller('indexCtrl', ['$scope', '$log', 'httpMethod', function ($scope, $log, httpMethod) {
+        .controller('indexCtrl', ['$scope', '$window', '$log', 'httpMethod', function ($scope, $window, $log, httpMethod) {
             httpMethod.getUserInformation().then(function (rsp) {
                 $log.log('调用获取用户信息接口成功.');
                 if (rsp.success) {
@@ -40,6 +56,32 @@ define(['angular', 'jquery', 'httpConfig', 'angular-animate'], function (angular
             }, function () {
                 $log.log('调用获取用户信息接口失败.');
             });
+
+            $scope.loginOut = function () {
+                swal({
+                    title: "用户登出",
+                    text: "您确定要登出账户吗？",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    confirmButtonText: "确定",
+                    confirmButtonColor: "#ffaa00",
+                    cancelButtonText: "取消",
+                    showLoaderOnConfirm: true
+                }, function () {
+                    httpMethod.login().then(function (rsp) {
+                        $log.log('调用登出用户账户接口成功.');
+                        if (rsp.success) {
+                        $window.location.href = 'login.jsp';
+                        } else {
+                            swal("OMG", "用户登出失败!", "error");
+                        }
+                    }, function () {
+                        $log.log('调用登出用户账户接口失败.');
+                        swal("OMG", "调用登出用户账户接口失败!", "error");
+                    });
+                });
+            };
         }])
         // 搜索
         .controller('searchCtrl', ['$scope', function ($scope) {
