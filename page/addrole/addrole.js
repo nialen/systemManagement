@@ -393,7 +393,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
             // 查询结果分页信息
             $scope.requirePaging = true; // 是否需要分页
             $scope.currentPage = 1; // 当前页
-            $scope.rowNumPerPage = 5; // 每页显示行数
+            $scope.rowNumPerPage = 4; // 每页显示行数
             $scope.totalNum = 0; // 总条数
 
             $scope.queryPowerFormSubmit = function (currentPage) {

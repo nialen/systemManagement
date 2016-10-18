@@ -19,6 +19,7 @@ window.loading = {
                 'ui-bootstrap': '../../lib/ui-bootstrap',
                 'ui-bootstrap-tpls': '../../lib/ui-bootstrap-tpls-2.1.3',
                 'sweetalert': '../../lib/sweetalert.min',
+                'lodash': '../../lib/lodash',
                 'httpConfig': '../../js/httpConfig'
             },
             shim: {
@@ -42,6 +43,9 @@ window.loading = {
                 },
                 'ui-bootstrap-tpls': {
                     'deps': ['angular']
+                },
+                'lodash': {
+                    'exports': '_'
                 }
             }
         });

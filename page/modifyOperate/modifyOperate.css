@@ -268,27 +268,10 @@
     border-bottom: 1px solid #ddd;
 }
 
-.pagination {
-    margin: 0;
-}
-
-.pagination > li > a, .pagination > li > span {
-    color: #666;
-}
-
-.pagination-sm > li > a, .pagination-sm > li > span {
-    padding: 6px 20px;
-}
-
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #ff9f19;
-    border-color: #ff9f19;
-}
-
 .row.save_btn {
     width: 100%;
     position: absolute;
-    bottom: -80px;
+    bottom: -40px;
 }
 
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {

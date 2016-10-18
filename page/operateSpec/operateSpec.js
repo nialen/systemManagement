@@ -207,7 +207,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             $scope.queryOperateFormSubmit = function (currentPage) {
                 !currentPage && $scope.$broadcast('pageChange');
-                
                 $scope.checkedOperateSpec = []; // 置空已选员工列表
                 var param = {
                     requirePaging: $scope.requirePaging, //是否需要分页
@@ -379,12 +378,10 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.$on('pageChange', function () {
                 $scope.currentPage = 1;
             });
-            
             $scope.maxSize = 10;
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;
             };
-
             $scope.pageChanged = function () {
                 $scope.queryOperateFormSubmit($scope.currentPage);
                 $log.log('Page changed to: ' + $scope.currentPage);
