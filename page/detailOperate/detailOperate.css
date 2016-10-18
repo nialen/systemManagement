@@ -210,30 +210,13 @@
 }
 
 .result-table table td {
-    padding: 6px !important;
+    padding: 2px !important;
     text-align: center;
 }
 
 .result-table table td p {
     height: 25px;
     line-height: 25px;
-}
-
-.pagination {
-    margin: 0;
-}
-
-.pagination > li > a, .pagination > li > span {
-    color: #666;
-}
-
-.pagination-sm > li > a, .pagination-sm > li > span {
-    padding: 6px 20px;
-}
-
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #ff9f19;
-    border-color: #ff9f19;
 }
 
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
