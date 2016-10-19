@@ -154,7 +154,7 @@ define(['angular', 'jquery', 'sweetalert', 'httpConfig', 'angular-animate'], fun
              * @index 需要删除的索引
              */
             $scope.removeTab = function (index) {
-                var i = index || $scope.selectedIndex;
+                var i = index == undefined ? $scope.selectedIndex : index;
                 if (i <= $scope.selectedIndex) {
                     $scope.changeTab($scope.selectedIndex ? $scope.selectedIndex - 1 : $scope.selectedIndex);
                 }
