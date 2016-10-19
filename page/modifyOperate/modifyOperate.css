@@ -60,17 +60,19 @@
 
 .modify-input {
     width: 215px !important;
-    height: 28px;
+    height: 25px;
 }
 
 .query-input {
-    width: 180px !important;
-    height: 28px;
+    width: 220px !important;
+    padding:0 12px;
+    height: 25px;
+    line-height:25px;
 }
 
 .jobId-input {
     width: 122px !important;
-    height: 28px;
+    height: 25px;
 }
 
 .btn-jobId {
