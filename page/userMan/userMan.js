@@ -223,6 +223,10 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 });
             };
 
+            $scope.$on('requery', function () {
+                $scope.queryStaffFormSubmit();
+            });
+
         }])
         // 查询结果控制器
         .controller('staffManResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
@@ -301,12 +305,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.lockUserManagerBatch(param).then(function (rsp) {
                             $log.log('调用冻结员工接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "员工冻结成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "员工冻结成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "员工冻结失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用冻结员工接口失败.');
                             swal("OMG", "调用冻结员工接口失败!", "error");
                         });
                     });
@@ -337,12 +348,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.uLockUserManagerBatch(param).then(function (rsp) {
                             $log.log('调用解冻员工接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "解冻员工成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "解冻员工成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "解冻员工失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用解冻员工接口失败.');
                             swal("OMG", "调用解冻员工接口失败!", "error");
                         });
                     });
@@ -373,12 +391,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.deleteUserManagerBatch(param).then(function (rsp) {
                             $log.log('调用注销员工接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "注销员工成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "注销员工成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "注销员工失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用注销员工接口失败.');
                             swal("OMG", "调用注销员工接口失败!", "error");
                         });
                     });

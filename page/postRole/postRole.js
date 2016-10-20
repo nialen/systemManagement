@@ -148,6 +148,11 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     $log.log('调用获取查询角色接口失败.');
                 });
             };
+
+            $scope.$on('requery', function () {
+                $scope.queryRoleFormSubmit();
+            });
+
             $scope.$watch('queryRoleForm', function (current, old, scope) {
                 if (scope.queryRoleForm.roleId || scope.queryRoleForm.name) {
                     scope.isForbid = false;
@@ -208,12 +213,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.deleteRoleBatch(param).then(function (rsp) {
                             $log.log('调用删除角色接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "删除角色成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "删除角色成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", "删除角色失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用删除角色接口失败.');
                             swal("OMG", "调用删除角色接口失败!", "error");
                         });
                     });
@@ -221,12 +233,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     swal("操作提醒", "您没有选中任何需要删除的角色！", "info");
                 }
             };
-
-            // 子iframe调用父iframe控制器内方法；
-            $scope.demo = function () {
-                parent.angular.element(parent.$('#tabs')).scope().addTab('新建模块', '/psm/page/sysModular/sysModular.html');
-            }
-
         }])
         // 分页控制器
         .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {

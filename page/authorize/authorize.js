@@ -287,6 +287,17 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             $scope.queryUserPrivilege();
 
+            $scope.$on('requeryGetPrivilege', function () {
+                $scope.queryUserPrivilege();
+            });
+
+            $rootScope.$watch('isRefreshPrivilege', function (current) {
+                if (current) {
+                    $scope.queryUserPrivilege();
+                    $rootScope.isRefreshPrivilege = false;
+                }
+            });
+
             // 添加新权限
             $scope.addAuthority = function () {
                 $rootScope.operationSpecList = []; // 置空已查询列表
@@ -337,7 +348,15 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.removeUserPrivilegeBatch(param).then(function (rsp) {
                             $log.log('调用删除权限接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "删除权限成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "删除权限成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requeryGetPrivilege');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "删除权限失败!", "error");
                             }
@@ -395,6 +414,17 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
 
             $scope.queryUserPostRole();
 
+            $scope.$on('requeryGetRole', function () {
+                $scope.queryUserPostRole();
+            });
+
+            $rootScope.$watch('isRefreshRole', function (current) {
+                if (current) {
+                    $scope.queryUserPostRole();
+                    $rootScope.isRefreshRole = false;
+                }
+            });
+
             // 添加新角色
             $scope.addRole = function () {
                 $rootScope.roleResultList = []; // 置空已查询角色列表
@@ -446,7 +476,15 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.removeUserPostRoleBatch(param).then(function (rsp) {
                             $log.log('调用删除角色接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "删除角色成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "删除角色成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requeryGetRole');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "删除角色失败!", "error");
                             }
@@ -779,7 +817,18 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     httpMethod.appendUserPrivilegeBatch($rootScope.checkedAfterOperationSpecList).then(function (rsp) {
                         $log.log('调用添加用户权限接口成功.');
                         if (rsp.data) {
-                            swal("操作成功!", "添加用户权限成功！", "success");
+                            swal({
+                                title: "操作成功",
+                                text: "添加用户权限成功!",
+                                type: "success",
+                                confirmButtonText: "确定",
+                                showLoaderOnConfirm: true
+                            }, function () {
+                                $rootScope.isRefreshPrivilege = true;
+                                if (!$rootScope.$$phase) {
+                                    $rootScope.$apply();
+                                }
+                            });
                         } else {
                             swal("操作失败!", rsp.msg || "添加用户权限失败！", "error");
                         }
@@ -879,7 +928,18 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     httpMethod.appendUserPostRoleBatch(param).then(function (rsp) {
                         $log.log('调用添加用户角色接口成功.');
                         if (rsp.data) {
-                            swal("操作成功!", "添加用户角色成功！", "success");
+                            swal({
+                                title: "操作成功",
+                                text: "添加用户角色成功!",
+                                type: "success",
+                                confirmButtonText: "确定",
+                                showLoaderOnConfirm: true
+                            }, function () {
+                                $rootScope.isRefreshRole = true;
+                                if (!$rootScope.$$phase) {
+                                    $rootScope.$apply();
+                                }
+                            });
                         } else {
                             swal("操作失败!", rsp.msg || "添加用户角色失败！", "error");
                         }

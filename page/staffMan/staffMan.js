@@ -6,7 +6,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
     angular
         .module('staffManModule', ['ui.bootstrap'])
         .run(['$rootScope', function ($rootScope) {
-            $rootScope.staffManResultList = []; // 查询员工列表
             $rootScope.modifiedStaffMan = {}; // 待修改的员工信息
             $rootScope.isForbidSubmit = true; // 禁用编辑员工提交按钮
             $rootScope.areaList = []; // 地区列表
@@ -227,6 +226,18 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     $log.log('调用查询员工信息接口失败.');
                 });
             };
+
+            $scope.$on('requery', function () {
+                $scope.queryStaffFormSubmit();
+            });
+
+            $rootScope.$watch('isRefresh', function (current) {
+                if (current) {
+                    $scope.queryStaffFormSubmit();
+                    $rootScope.isRefresh = false;
+                }
+            });
+
             $scope.$watch('queryStaffForm', function (current, old, scope) {
                 if (scope.queryStaffForm.staffNumber || scope.queryStaffForm.name || scope.queryStaffForm.areaItem) {
                     scope.isForbid = false;
@@ -239,6 +250,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         .controller('staffManResultCtrl', ['$scope', '$rootScope', '$log', '$filter', 'httpMethod', function ($scope, $rootScope, $log, $filter, httpMethod) {
             // 修改
             $scope.editStaffMan = function (title, index) {
+                $rootScope.isDisable = true;
                 $rootScope.modifiedStaffMan = $rootScope.staffManResultList[index];
                 $rootScope.areaList.map(function (item, index) {
                     if (item.areaId == $rootScope.modifiedStaffMan.areaId) {
@@ -251,6 +263,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             };
             // 新建
             $scope.addStaffMan = function (title) {
+                $rootScope.isDisable = false;
                 $rootScope.modifiedStaffMan = {};
                 $rootScope.modalTitle = title;
                 $scope.$emit('openEditStaffManModal', 'insertStaff');
@@ -293,12 +306,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.uLockStaffManagerBatch(param).then(function (rsp) {
                             $log.log('调用启用员工状态接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "员工状态启用成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "员工状态启用成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "员工状态启用失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用启用员工状态接口失败.');
                             swal("OMG", "调用启用员工状态接口失败!", "error");
                         });
                     });
@@ -329,12 +349,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.lockStaffManagerBatch(param).then(function (rsp) {
                             $log.log('调用停用员工状态接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "员工状态停用成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "员工状态停用成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "员工状态停用失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用停用员工状态接口失败.');
                             swal("OMG", "调用停用员工状态接口失败!", "error");
                         });
                     });
@@ -365,12 +392,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.batchCancelStaff(param).then(function (rsp) {
                             $log.log('调用删除员工接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "删除员工成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "删除员工成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", rsp.msg || "删除员工失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用删除员工接口失败.');
                             swal("OMG", "调用删除员工接口失败!", "error");
                         });
                     });
@@ -449,12 +483,22 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     httpMethod.insertStaff(param).then(function (rsp) {
                         $log.log('调用新建员工信息接口成功.');
                         if (rsp.data) {
-                            swal("操作成功!", "新建员工信息成功！", "success");
+                            swal({
+                                title: "操作成功",
+                                text: "新建员工信息成功!",
+                                type: "success",
+                                confirmButtonText: "确定",
+                                showLoaderOnConfirm: true
+                            }, function () {
+                                $rootScope.isRefresh = true;
+                                if (!$rootScope.$$phase) {
+                                    $rootScope.$apply();
+                                }
+                            });
                         } else {
                             swal("OMG", rsp.msg || "新建员工信息失败!", "error");
                         }
                     }, function () {
-                        $log.log('调用新建员工信息接口失败.');
                         swal("OMG", "调用新建员工信息接口失败!", "error");
                     });
                 } else if (data === 'alertStaff') {
@@ -473,12 +517,22 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     httpMethod.alertStaff(param).then(function (rsp) {
                         $log.log('调用修改员工信息接口成功.');
                         if (rsp.data) {
-                            swal("操作成功!", "修改员工信息成功！", "success");
+                            swal({
+                                title: "操作成功",
+                                text: "修改员工信息成功!",
+                                type: "success",
+                                confirmButtonText: "确定",
+                                showLoaderOnConfirm: true
+                            }, function () {
+                                $rootScope.isRefresh = true;
+                                if (!$rootScope.$$phase) {
+                                    $rootScope.$apply();
+                                }
+                            });
                         } else {
                             swal("OMG", rsp.msg || "修改员工信息失败!", "error");
                         }
                     }, function () {
-                        $log.log('调用修改员工信息接口失败.');
                         swal("OMG", "调用修改员工信息接口失败!", "error");
                     });
                 }
@@ -499,4 +553,4 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $log.log('Page changed to: ' + $scope.currentPage);
             };
         }])
-})
+});
