@@ -196,6 +196,9 @@
 .accordion-tabs input[type=checkbox]:checked + label::after {
 	content: '\e607';
 }
+.accordion-tabs label.link::after {
+    display: none;
+}
 .accordion-tabs-list {
 	height: 28px;
 	margin-left: 26px;
