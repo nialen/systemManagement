@@ -202,7 +202,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.queryOperateForm = {
                 operationSpecCd: '',
                 name: '',
-                operationSpecItem: '',//权限类型
+                operationSpecItem: '' //权限类型
             };
 
             $scope.queryOperateFormSubmit = function (currentPage) {
@@ -225,7 +225,11 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 }, function () {
                     $log.log('调用查询权限规格接口失败.');
                 });
-            }
+            };
+
+            $scope.$on('requery', function () {
+                $scope.queryOperateFormSubmit();
+            });
 
         }])
         // 查询结果控制器
@@ -234,17 +238,17 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.editQueryOperate = function (index) {
                 $rootScope.modifiedQueryOperate = $rootScope.queryOperateResultList[index];
                 parent.angular.element(parent.$('#tabs')).scope().addTab('修改权限规格', '/psm/page/modifyOperate/modifyOperate.html', 'modifyOperate', JSON.stringify($rootScope.modifiedQueryOperate));
-            }
+            };
             // 新建
             $scope.addQueryOperate = function (title) {
                 parent.angular.element(parent.$('#tabs')).scope().addTab('新建权限规格', '/psm/page/modifyOperate/modifyOperate.html', 'addOperate');
 
-            }
+            };
             // 详情
             $scope.infoQueryOperate = function (index) {
                 $rootScope.detailQueryOperate = $rootScope.queryOperateResultList[index];
                 parent.angular.element(parent.$('#tabs')).scope().addTab('权限规格详情', '/psm/page/detailOperate/detailOperate.html', 'detailOperate', JSON.stringify($rootScope.detailQueryOperate));
-            }
+            };
             /**
              * [check 复选框点击事件]
              * @param  {[type]} val [整行数据]
@@ -285,12 +289,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.uLockOperateSpec(param).then(function (rsp) {
                             $log.log('调用启用权限规格配置接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "权限规格配置启用成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "权限规格配置启用成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", "权限规格配置启用失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用启用权限规格配置接口失败.');
                             swal("OMG", "调用启用权限规格配置接口失败!", "error");
                         });
                     });
@@ -323,19 +334,26 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.lockOperateSpec(param).then(function (rsp) {
                             $log.log('调用停用权限规格配置接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "权限规格配置停用成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "权限规格配置停用成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", "权限规格配置停用失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用停用权限规格配置接口失败.');
                             swal("OMG", "调用停用权限规格配置接口失败!", "error");
                         });
                     });
                 } else {
                     swal("操作提醒", "您没有选中任何需要停用的权限规格！", "info");
                 }
-            }
+            };
 
             // 删除
             $scope.batchCancelOperateSpec = function () {
@@ -359,12 +377,19 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.batchCancelOperateSpec(param).then(function (rsp) {
                             $log.log('调用删除权限规格配置接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "删除权限规格配置成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "删除权限规格配置成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", "删除权限规格配置失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用删除权限规格配置接口失败.');
                             swal("OMG", "调用删除权限规格配置接口失败!", "error");
                         });
                     });
@@ -387,4 +412,4 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 $log.log('Page changed to: ' + $scope.currentPage);
             };
         }])
-})
+});

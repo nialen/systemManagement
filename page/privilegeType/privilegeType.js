@@ -6,7 +6,7 @@
 define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'angular-animate'], function (angular, $, httpConfig, swal) {
     angular
         .module('privilegeTypeModule', ['ui.bootstrap'])
-         .run(['$rootScope', function ($rootScope) {
+        .run(['$rootScope', function ($rootScope) {
             // $rootScope.queryTypeResultList = []; // 查询权限类型列表
             $rootScope.modifiedQueryType = {}; // 待修改的权限类型信息
             $rootScope.isForbidSubmit = true; // 禁用提交按钮
@@ -101,6 +101,17 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.totalNum = 0; // 总条数
             $scope.checkedPrivilegeType = []; // 已经选中的权限类型信息
 
+            $scope.$on('requery', function () {
+                $scope.queryTypeFormSubmit();
+            });
+
+            $rootScope.$watch('isRefresh', function (current) {
+                if (current) {
+                    $scope.queryTypeFormSubmit();
+                    $rootScope.isRefresh = false;
+                }
+            });
+
             $scope.isForbid = true;
             $scope.queryTypeForm = {
                 operationSpecTypeCd: '',
@@ -129,7 +140,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                 }, function () {
                     $log.log('调用查询员工信息接口失败.');
                 });
-            }
+            };
+
             $scope.$watch('queryTypeForm', function (current, old, scope) {
                 if (scope.queryTypeForm.operationSpecTypeCd || scope.queryTypeForm.operationSpecTypeName) {
                     scope.isForbid = false;
@@ -140,7 +152,6 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         }])
         // 查询结果控制器
         .controller('privilegeTypeResultCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
-
             // 修改
             $scope.editQueryType = function (title, index) {
                 $rootScope.modifiedQueryType = $rootScope.queryTypeResultList[index];
@@ -182,7 +193,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     param = param.join();
                     swal({
                         title: "删除权限类型配置",
-                        text: "您确定要把权限类型编码为" + param + "的配置删除吗？",
+                        text: "您确定要把编码" + param + "的配置删除吗?",
                         type: "info",
                         showCancelButton: true,
                         closeOnConfirm: false,
@@ -194,17 +205,24 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         httpMethod.batchCancelType(param).then(function (rsp) {
                             $log.log('调用删除权限类型配置接口成功.');
                             if (rsp.data) {
-                                swal("操作成功!", "删除权限类型配置成功！", "success");
+                                swal({
+                                    title: "操作成功",
+                                    text: "删除权限类型配置成功!",
+                                    type: "success",
+                                    confirmButtonText: "确定",
+                                    confirmButtonColor: "#ffaa00"
+                                }, function () {
+                                    $scope.$emit('requery');
+                                });
                             } else {
                                 swal("OMG", "删除权限类型配置失败!", "error");
                             }
                         }, function () {
-                            $log.log('调用删除权限类型配置接口失败.');
                             swal("OMG", "调用删除权限类型配置接口失败!", "error");
                         });
                     });
                 } else {
-                    swal("操作提醒", "您没有选中任何需要删除的权限类型配置！", "info");
+                    swal("操作提醒", "您没有选中任何需要删除的权限类型！", "info");
                 }
             }
         }])
@@ -212,6 +230,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
         // 弹出框控制器
         .controller('editQueryTypeModalCtrl', function ($scope, $rootScope, $uibModal, $log) {
             var $ctrl = this;
+
             $scope.$on('openEditQueryTypeModal', function (d, data) {
                 $ctrl.open(data);
             });
@@ -233,20 +252,18 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                         }
                     }
                 });
-
             };
+
             $ctrl.toggleAnimation = function () {
                 $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
             };
         })
         .controller('ModalInstanceCtrl', function ($uibModalInstance, $scope, items) {
             var $ctrl = this;
-
             $ctrl.ok = function () {
-                $uibModalInstance.close();
                 $scope.$broadcast('submitQueryTypeModal', items);
+                $uibModalInstance.close();
             };
-
             $ctrl.cancel = function () {
                 $uibModalInstance.dismiss('cancel');
             };
@@ -258,6 +275,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
             $scope.$on('submitQueryTypeModal', function (d, data) {
                 $scope.editQueryTypeFormSubmit(data);
             });
+
             $scope.$watch('modifiedQueryType', function (current, old, scope) {
                 if (scope.modifiedQueryType.operationSpecTypeCd && scope.modifiedQueryType.operationSpecTypeName) {
                     $rootScope.isForbidSubmit = false;
@@ -265,6 +283,7 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     $rootScope.isForbidSubmit = true;
                 }
             }, true);
+
             $scope.editQueryTypeFormSubmit = function (data) {
                 if (data === 'insertType') {
                     var param = {
@@ -282,12 +301,23 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     httpMethod.insertType(param).then(function (rsp) {
                         $log.log('调用新建权限类型配置接口成功.');
                         if (rsp.data) {
-                            $log.log('新建权限类型配置成功.');
+                            swal({
+                                title: "操作成功",
+                                text: "新建权限类型配置成功!",
+                                type: "success",
+                                confirmButtonText: "确定",
+                                showLoaderOnConfirm: true
+                            }, function () {
+                                $rootScope.isRefresh = true;
+                                if (!$rootScope.$$phase) {
+                                    $rootScope.$apply();
+                                }
+                            });
                         } else {
-                            $log.log('新建权限类型配置失败.');
+                            swal("OMG", "新建权限类型配置失败!", "error");
                         }
                     }, function () {
-                        $log.log('调用新建权限类型配置接口失败.');
+                        swal("OMG", "调用新建权限类型配置接口失败!", "error");
                     });
                 } else if (data === 'alertType') {
                     var param = {
@@ -305,18 +335,29 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'ui-bootstrap-tpls', 'a
                     httpMethod.alertType(param).then(function (rsp) {
                         $log.log('调用修改权限类型配置接口成功.');
                         if (rsp.data) {
-                            $log.log('修改权限类型配置成功.');
+                            swal({
+                                title: "操作成功",
+                                text: "修改权限类型配置成功!",
+                                type: "success",
+                                confirmButtonText: "确定",
+                                showLoaderOnConfirm: true
+                            }, function () {
+                                $rootScope.isRefresh = true;
+                                if (!$rootScope.$$phase) {
+                                    $rootScope.$apply();
+                                }
+                            });
                         } else {
-                            $log.log('修改权限类型配置失败.');
+                            swal("OMG", "修改权限类型配置失败!", "error");
                         }
                     }, function () {
-                        $log.log('调用修改权限类型配置接口失败.');
+                        swal("OMG", "调用修改权限类型配置接口失败!", "error");
                     });
                 }
             }
         }])
         // 分页控制器
-        .controller('paginationCtrl', ['$scope', '$rootScope', '$log', 'httpMethod', function ($scope, $rootScope, $log, httpMethod) {
+        .controller('paginationCtrl', ['$scope', '$rootScope', '$log', function ($scope, $rootScope, $log) {
             $scope.$on('pageChange', function () {
                 $scope.currentPage = 1;
             });
