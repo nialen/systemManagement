@@ -314,8 +314,8 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
              * @param  {[boolean]} chk [是否选中]
              */
             $scope.check = function (val, chk) {
-                var valueOfIndex = '';
-                $scope.deleteDimensionList.length && $scope.deleteDimensionList.map(function (item, index) {
+                var valueOfIndex = '';               
+                $scope.deleteDimensionList.length && $scope.deleteDimensionList.map(function (item, index) {                
                     if (item.privilegeDimensionCd == val.privilegeDimensionCd) {
                         valueOfIndex = index;
                     }

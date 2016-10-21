@@ -71,8 +71,7 @@
                     <tbody>
                     <tr ng-repeat="item in queryTypeResultList">
                         <td>
-                            <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)"
-                                   ng-model="isChecked">
+                            <input type="checkbox" name="checkbox{{$index}}" ng-click="check(item, isChecked)" ng-model="isChecked">
                         </td>
                         <td>
                             <p ng-bind="item.operationSpecTypeCd"></p>

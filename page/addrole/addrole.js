@@ -475,6 +475,4 @@ define(['angular', 'jquery', 'httpConfig', 'sweetalert', 'lodash', 'ui-bootstrap
                 $log.log('Page changed to: ' + $scope.currentPage);
             };
         }])
-
-
 });
