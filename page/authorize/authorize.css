@@ -1,6 +1,6 @@
 .authorize-staff {
 	margin: 10px 20px;
-	padding: 5px 10px 10px;
+	padding: 5px 10px 0px;
 	border: 1px solid #ddd;
 }
 .authorize-staff-title {
@@ -120,6 +120,7 @@
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
 	background-color: #fff;
 	color: #ff8c19;
+	overflow:hidden;
 }
 .nav-pills > li.active > a::after {
 	position: absolute;
@@ -180,7 +181,7 @@
 	font-size: 12px;
 }
 .btn-set {
-	margin-left: 10px;
+	margin-left: 5px;
 	padding-left: 15px;
 	padding-right: 15px;
     background-color: #ffc619;
@@ -245,13 +246,13 @@
 .form-group input[type="text"] {
     width: 100% !important;
     height: 25px;
-    padding: 0 12px;
+    padding: 0 6px;
     line-height:25px;
 }
 .form-group select{
     width: 100% !important;
     height: 25px;
-    padding: 0 12px;
+    padding: 0 6px;
     line-height:25px;
 }
 .form-group textarea {

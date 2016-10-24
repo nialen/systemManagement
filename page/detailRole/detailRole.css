@@ -1,5 +1,5 @@
 .modify-staff {
-    padding: 10px 20px 0;
+    padding: 0 20px;
 }
 
 /* 结果 */
@@ -196,7 +196,7 @@
 }
 
 .result-table table td {
-    padding: 6px !important;
+    padding: 2px !important;
     text-align: center;
 }
 
@@ -299,7 +299,7 @@
 }
 
 .detail-input {
-    height: 28px;
+    height: 25px;
     line-height: 25px;
     border: none;
     border-bottom: 1px solid #ddd;

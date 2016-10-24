@@ -210,6 +210,9 @@
 .accordion-tabs-list:hover {
 	color: #ff8c19;
 }
+.accordion-tabs-list.hover {
+	color: #ff8c19;
+}
 .accordion-tabs-list:last-of-type {
 	margin-bottom: 16px;
 }
@@ -256,8 +259,9 @@
 	height: 32px;
 	padding-left: 1px;
 	background-color: #f7f5f0;
-	border-bottom: 1px solid #ddd;
+	// border-bottom: 1px solid #ddd;
 	overflow: hidden;
+	position: relative;
 }
 .tabs-title ul {
 	width: 9999px;
@@ -275,6 +279,7 @@
 .tabs-title .title.current {
 	color: #4795e7;
 	background: #fff;
+	z-index:1;
 }
 .tabs-title .title-line {
 	position: absolute;
@@ -305,3 +310,16 @@
 .sweet-alert {
     top: 50%;
 }
+.tabs-title .line{
+	position: absolute;
+	width:100%;
+	height:1px;
+	background: #ddd;
+	bottom:0px;
+	left: 0;
+}
+
+
+
+
+

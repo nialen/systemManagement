@@ -217,6 +217,7 @@
 
 .form-group input[type="text"] {
     width: 100% !important;
+    padding:6px;
 }
 
 .form-group select {

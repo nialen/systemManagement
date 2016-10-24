@@ -1,5 +1,5 @@
 .detail-operate {
-    padding: 10px 20px 0;
+    padding: 0 20px;
 }
 
 /* 结果 */
@@ -103,6 +103,8 @@
     font-size: 12px;
     width: 100px !important;
     padding: 0;
+    height:25px;
+    line-height: 25px;
 }
 
 .modal-content {
