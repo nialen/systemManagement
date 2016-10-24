@@ -274,6 +274,7 @@
 }
 .tabs-title .title.current {
 	color: #4795e7;
+	background: #fff;
 }
 .tabs-title .title-line {
 	position: absolute;
